@@ -15,9 +15,9 @@ steps:
   displayName: Install hugo extended
 
 - script: |
-    git checkout master
+    git add
     rm -rf $(blog-repo)/*
-  displayName: Empty blog repo containing old static site
+  displayName: Add submodule to push generated site to
 
 - script: hugo
   displayName: Build static site
