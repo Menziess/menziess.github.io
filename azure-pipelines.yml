@@ -1,0 +1,32 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  user: menziess
+  email: stefan_schenk@hotmail.com
+  blog-repo: menziess.github.io
+
+steps:
+- script: |
+    sudo snap install hugo --channel=extended
+  displayName: Install hugo extended
+
+- script: |
+    git checkout master
+    rm -rf $(blog-repo)/*
+  displayName: Empty blog repo containing old static site
+
+- script: hugo
+  displayName: Build static site
+
+- script: |
+    cd $(blog-repo)
+    echo $(pwd) $(blog-repo)
+    git checkout master
+    git add --all
+    git -c user.name=$(user) -c user.email=$(email) commit -m "commit $(date +"%Y_%m_%d_%I_%M_%p")"
+    git push -f https://$(token):x-oauth-basic@github.com/$(user)/$(blog-repo).git master
+  displayName: Push generated site to github.io repo
