@@ -17,8 +17,7 @@
       <pubDate>Sun, 02 Feb 2020 23:31:52 +0100</pubDate>
       
       <guid>https://menziess.github.io/posts/create-a-static-blog-with-hugo/</guid>
-      <description>This post is just a quick overview of how I created this static blog website using Hugo. I hosted it for free on github pages.
-Install Hugo Depending on your preferred theme, you may have to install a specific version, or the &amp;ldquo;extended&amp;rdquo; version of Hugo.</description>
+      <description>This post is just a quick overview of how I created this static blog website using Hugo. I hosted it for free on github pages. Depending on your preferred theme you may have to install a specific version, or the &amp;ldquo;extended&amp;rdquo; version of Hugo.</description>
     </item>
     
   </channel>
