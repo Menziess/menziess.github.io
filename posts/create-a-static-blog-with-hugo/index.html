@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Create a Static Blog With Hugo - menziess blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://menziess.github.io/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.07dbdb138a32f3472de78a795591268e4374eb745bd395bd5a8d904125a3cb96.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Posts</h4>
+  <ul>
+    
+    <li class="active ">
+      <a href="https://menziess.github.io/posts/create-a-static-blog-with-hugo/">Create a Static Blog With Hugo</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Create a Static Blog With Hugo</h1>
+<div class="content ">
+  <p>This post is just a quick overview of how I created this static blog website using <a href="https://gohugo.io/">Hugo</a>. I hosted it for free on <a href="https://pages.github.com/">github pages</a>.</p>
+<h2 id="install-hugo">Install Hugo</h2>
+<p>Depending on your preferred <a href="https://themes.gohugo.io/hugo-whisper-theme/">theme</a>, you may have to install a specific version, or the &ldquo;extended&rdquo; version of Hugo.</p>
+<p>To install Hugo, follow the official <a href="https://gohugo.io/getting-started/installing/">installation guide</a> and check the hugo version:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo version
+</code></pre></div><h2 id="create-the-site">Create The Site</h2>
+<p>Run the following command to generate a static site:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo new site blog
+</code></pre></div><p>Add your preferred theme:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git submodule add <span class="se">\
+</span><span class="se"></span>  https://github.com/jugglerx/hugo-whisper-theme.git <span class="se">\
+</span><span class="se"></span>  themes/hugo-whisper-theme
+</code></pre></div><p>Run a local server to see what your site looks like:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo server
+</code></pre></div><h2 id="set-up-repositories">Set Up Repositories</h2>
+<p>Create two repositories:</p>
+<ol>
+<li>a private visualstudio repository that contains the Hugo project and the build pipeline that publishes the static files to the github repository</li>
+<li>a public github repository that contains the static website files for hosting: <a href="https://github.com/menziess/menziess.github.io">https://github.com/menziess/menziess.github.io</a></li>
+</ol>
+<p>Create your visualstudio repository and push your Hugo project to it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git remote add origin Menziess@vs-ssh.visualstudio.com:v3/Menziess/blog/blog
+git push -u origin --all
+</code></pre></div><p>Next, modify your <code>config.toml</code> configuration so that the output files are written to a folder that matches your github repository name:</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="nx">baseURL</span> <span class="p">=</span> <span class="s2">&#34;https://menziess.github.io&#34;</span>
+<span class="nx">themesDir</span> <span class="p">=</span> <span class="s2">&#34;themes&#34;</span>
+<span class="nx">languageCode</span> <span class="p">=</span> <span class="s2">&#34;en-us&#34;</span>
+<span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;hugo-whisper-theme&#34;</span>
+<span class="nx">publishdir</span> <span class="p">=</span> <span class="s2">&#34;menziess.github.io&#34;</span> <span class="c"># this should match your github submodule</span>
+</code></pre></div><h2 id="continuous-delivery">Continuous Delivery</h2>
+<p>Finally we&rsquo;ll create a build pipeline that builds the static webiste into the <code>menziess.github.io</code> submodule folder and pushes it to the github repository from where it can be hosted:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">trigger</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- master<span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">pool</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">  </span><span class="k">vmImage</span><span class="p">:</span><span class="w"> </span>ubuntu-latest<span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">variables</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="w">  </span><span class="k">user</span><span class="p">:</span><span class="w"> </span>menziess<span class="w">
+</span><span class="w">  </span><span class="k">email</span><span class="p">:</span><span class="w"> </span>stefan_schenk@hotmail.com<span class="w">
+</span><span class="w">  </span><span class="k">repo</span><span class="p">:</span><span class="w"> </span>menziess.github.io<span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">steps</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">   </span><span class="sd"> </span><span class="sd">sudo snap install hugo --channel=extended</span><span class="w">
+</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Install<span class="w"> </span>hugo<span class="w"> </span>extended<span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">   </span><span class="sd"> </span><span class="sd">git submodule add https://github.com/$(user)/$(repo).git</span><span class="w">
+</span><span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>$(repo)/*<span class="w">
+</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Add<span class="w"> </span>submodule<span class="w"> </span>to<span class="w"> </span>push<span class="w"> </span>generated<span class="w"> </span>site<span class="w"> </span>to<span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span>hugo<span class="w">
+</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Build<span class="w"> </span>static<span class="w"> </span>site<span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">   </span><span class="sd"> </span><span class="sd">cd $(repo)</span><span class="w">
+</span><span class="w">    </span>echo<span class="w"> </span>Changed<span class="w"> </span>directory<span class="w"> </span>to<span class="w"> </span>$(pwd)<span class="w"> </span>in<span class="w"> </span>$(repo)<span class="w">
+</span><span class="w">    </span>git<span class="w"> </span>checkout<span class="w"> </span>master<span class="w">
+</span><span class="w">    </span>git<span class="w"> </span>add<span class="w"> </span>--all<span class="w">
+</span><span class="w">    </span>git<span class="w"> </span>-c<span class="w"> </span>user.name=$(user)<span class="w"> </span>-c<span class="w"> </span>user.email=$(email)<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&#34;commit $(date +&#34;</span>%Y_%m_%d_%I_%M_%p<span class="s2">&#34;)&#34;</span><span class="w">
+</span><span class="w">    </span>git<span class="w"> </span>push<span class="w"> </span>-f<span class="w"> </span>https<span class="p">:</span>//$(token)<span class="p">:</span>x-oauth-basic@github.com/$(user)/$(repo).git<span class="w"> </span>master<span class="w">
+</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Push<span class="w"> </span>generated<span class="w"> </span>site<span class="w"> </span>to<span class="w"> </span>github.io<span class="w">
+</span></code></pre></div><p>Generate a github token <a href="https://github.com/settings/tokens">here</a>, and check the &ldquo;repo&rdquo; boxes, then copy-paste the token to a variable in your build pipeline:</p>
+<!-- raw HTML omitted -->
+<h2 id="publish-your-site">Publish Your Site</h2>
+<p>Create a new post:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo new posts/create-a-static-blog-with-hugo.md
+</code></pre></div><p>Modify the page, and push the changes to trigger a new build.</p>
+<p>After about 30 seconds, your website should be publised: <a href="https://menziess.github.io/">https://menziess.github.io/</a></p>
+<p>Let me know whether it works for you, or whether this setup can be improved in the comments below!</p>
+
+</div>
+
+<br>
+<br>
+
+<div class="content">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "menziess" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://github.com/menziess/">github/menziess</a></li>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/stefanschenk/">in/stefanschenk/</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+  
+  
+  
+    
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157518256-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157518256-1');
+      </script>
+    
+  
+
+
+</body>
+
+</html>
