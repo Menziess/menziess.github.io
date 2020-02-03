@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Overview on menziess blog</title>
-    <link>https://menziess.github.io/posts/</link>
+    <link>https://menziess.github.io/howto/</link>
     <description>Recent content in Overview on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Nov 2018 15:14:39 +1000</lastBuildDate>
     
-	<atom:link href="https://menziess.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://menziess.github.io/howto/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Create a Static Blog With Hugo</title>
-      <link>https://menziess.github.io/posts/create-a-static-blog-with-hugo/</link>
+      <link>https://menziess.github.io/howto/create-a-static-blog-with-hugo/</link>
       <pubDate>Sun, 02 Feb 2020 23:31:52 +0100</pubDate>
       
-      <guid>https://menziess.github.io/posts/create-a-static-blog-with-hugo/</guid>
+      <guid>https://menziess.github.io/howto/create-a-static-blog-with-hugo/</guid>
       <description>This post is just a quick overview of how I created this static blog website using Hugo. I hosted it for free on github pages. Depending on your preferred theme you may have to install a specific version, or the &amp;ldquo;extended&amp;rdquo; version of Hugo.</description>
     </item>
     
