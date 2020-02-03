@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Create a Static Blog With Hugo - menziess blog</title>
+  <title>Create A Free Static Website - menziess blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="icon" href="https://menziess.github.io/favicon.png">
@@ -91,7 +91,7 @@
   <ul>
     
     <li class="active ">
-      <a href="https://menziess.github.io/howto/create-a-static-blog-with-hugo/">Create a Static Blog With Hugo</a>
+      <a href="https://menziess.github.io/howto/create-a-static-blog-with-hugo/">Create A Free Static Website</a>
     </li>
     
   </ul>
@@ -101,9 +101,9 @@
         </div>
         <div class="col-12 col-md-9">
           
-<h1 class="title">Create a Static Blog With Hugo</h1>
+<h1 class="title">Create A Free Static Website</h1>
 <div class="content ">
-  <p>This post is just a quick overview of how I created this static blog website using <a href="https://gohugo.io/">Hugo</a>. I hosted it for free on <a href="https://pages.github.com/">github pages</a>.</p>
+  <p>In this post I will walk you through all the steps that I&rsquo;ve taken to create and publish this static blog website using <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">github pages</a>.</p>
 <h2 id="install-hugo">Install Hugo</h2>
 <p>Depending on your preferred <a href="https://themes.gohugo.io/hugo-whisper-theme/">theme</a>, you may have to install a specific version, or the &ldquo;extended&rdquo; version of Hugo.</p>
 <p>To install Hugo, follow the official <a href="https://gohugo.io/getting-started/installing/">installation guide</a> and check the hugo version:</p>
@@ -126,16 +126,15 @@
 <p>Create your visualstudio repository and push your Hugo project to it:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git remote add origin Menziess@vs-ssh.visualstudio.com:v3/Menziess/blog/blog
 git push -u origin --all
-</code></pre></div><p>Next, modify your <code>config.toml</code> configuration so that the output files are written to a folder that matches your github repository name:</p>
+</code></pre></div><p>Next, modify your <code>config.toml</code> configuration:</p>
 <div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="nx">baseURL</span> <span class="p">=</span> <span class="s2">&#34;https://menziess.github.io&#34;</span>
 <span class="nx">themesDir</span> <span class="p">=</span> <span class="s2">&#34;themes&#34;</span>
 <span class="nx">languageCode</span> <span class="p">=</span> <span class="s2">&#34;en-us&#34;</span>
 <span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;hugo-whisper-theme&#34;</span>
-<span class="nx">publishdir</span> <span class="p">=</span> <span class="s2">&#34;menziess.github.io&#34;</span> <span class="c"># this should match your github submodule</span>
 </code></pre></div><h2 id="continuous-delivery">Continuous Delivery</h2>
 <p>Finally we&rsquo;ll create a build pipeline that builds the static webiste into the <code>menziess.github.io</code> submodule folder and pushes it to the github repository from where it can be hosted:</p>
 <div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">trigger</span><span class="p">:</span><span class="w">
-</span><span class="w"></span>- master<span class="w">
+</span><span class="w"></span><span class="w">  </span>- master<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">pool</span><span class="p">:</span><span class="w">
 </span><span class="w"></span><span class="w">  </span><span class="k">vmImage</span><span class="p">:</span><span class="w"> </span>ubuntu-latest<span class="w">
@@ -146,26 +145,27 @@ git push -u origin --all
 </span><span class="w">  </span><span class="k">repo</span><span class="p">:</span><span class="w"> </span>menziess.github.io<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">steps</span><span class="p">:</span><span class="w">
-</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">   </span><span class="sd"> </span><span class="sd">sudo snap install hugo --channel=extended</span><span class="w">
-</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Install<span class="w"> </span>hugo<span class="w"> </span>extended<span class="w">
+</span><span class="w"></span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">     </span><span class="sd"> </span><span class="sd">sudo snap install hugo --channel=extended</span><span class="w">
+</span><span class="w">    </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Install<span class="w"> </span>hugo<span class="w"> </span>extended<span class="w">
 </span><span class="w">
-</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">   </span><span class="sd"> </span><span class="sd">git submodule add https://github.com/$(user)/$(repo).git</span><span class="w">
-</span><span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>$(repo)/*<span class="w">
-</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Add<span class="w"> </span>submodule<span class="w"> </span>to<span class="w"> </span>push<span class="w"> </span>generated<span class="w"> </span>site<span class="w"> </span>to<span class="w">
+</span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">     </span><span class="sd"> </span><span class="sd">git submodule add https://github.com/$(user)/$(repo).git public</span><span class="w">
+</span><span class="w">      </span>rm<span class="w"> </span>-rf<span class="w"> </span>public/*<span class="w">
+</span><span class="w">    </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Add<span class="w"> </span>submodule<span class="w"> </span>to<span class="w"> </span>push<span class="w"> </span>generated<span class="w"> </span>site<span class="w"> </span>to<span class="w">
 </span><span class="w">
-</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span>hugo<span class="w">
-</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Build<span class="w"> </span>static<span class="w"> </span>site<span class="w">
+</span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span>hugo<span class="w">
+</span><span class="w">    </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Build<span class="w"> </span>static<span class="w"> </span>site<span class="w">
 </span><span class="w">
-</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">   </span><span class="sd"> </span><span class="sd">cd $(repo)</span><span class="w">
-</span><span class="w">    </span>echo<span class="w"> </span>Changed<span class="w"> </span>directory<span class="w"> </span>to<span class="w"> </span>$(pwd)<span class="w"> </span>in<span class="w"> </span>$(repo)<span class="w">
-</span><span class="w">    </span>git<span class="w"> </span>checkout<span class="w"> </span>master<span class="w">
-</span><span class="w">    </span>git<span class="w"> </span>add<span class="w"> </span>--all<span class="w">
-</span><span class="w">    </span>git<span class="w"> </span>-c<span class="w"> </span>user.name=$(user)<span class="w"> </span>-c<span class="w"> </span>user.email=$(email)<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&#34;commit $(date +&#34;</span>%Y_%m_%d_%I_%M_%p<span class="s2">&#34;)&#34;</span><span class="w">
-</span><span class="w">    </span>git<span class="w"> </span>push<span class="w"> </span>-f<span class="w"> </span>https<span class="p">:</span>//$(token)<span class="p">:</span>x-oauth-basic@github.com/$(user)/$(repo).git<span class="w"> </span>master<span class="w">
-</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Push<span class="w"> </span>generated<span class="w"> </span>site<span class="w"> </span>to<span class="w"> </span>github.io<span class="w">
+</span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">     </span><span class="sd"> </span><span class="sd">cd public</span><span class="w">
+</span><span class="w">      </span>echo<span class="w"> </span>Changed<span class="w"> </span>directory<span class="w"> </span>to<span class="w"> </span>$(pwd)<span class="w">
+</span><span class="w">      </span>git<span class="w"> </span>checkout<span class="w"> </span>master<span class="w">
+</span><span class="w">      </span>git<span class="w"> </span>add<span class="w"> </span>--all<span class="w">
+</span><span class="w">      </span>git<span class="w"> </span>-c<span class="w"> </span>user.name=$(user)<span class="w"> </span>-c<span class="w"> </span>user.email=$(email)<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&#34;commit $(date +&#34;</span>%Y_%m_%d_%I_%M_%p<span class="s2">&#34;)&#34;</span><span class="w">
+</span><span class="w">      </span>git<span class="w"> </span>push<span class="w"> </span>-f<span class="w"> </span>https<span class="p">:</span>//$(token)<span class="p">:</span>x-oauth-basic@github.com/$(user)/$(repo).git<span class="w"> </span>master<span class="w">
+</span><span class="w">    </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Push<span class="w"> </span>generated<span class="w"> </span>site<span class="w"> </span>to<span class="w"> </span>github.io<span class="w">
+</span><span class="w">
 </span></code></pre></div><p>Generate a github token <a href="https://github.com/settings/tokens">here</a>, and check the &ldquo;repo&rdquo; boxes, then copy-paste the token to a variable in your build pipeline:</p>
 <p><img src="/create-a-static-blog-with-hugo/variables.png" alt=""></p>
 <h2 id="publish-your-site">Publish Your Site</h2>
