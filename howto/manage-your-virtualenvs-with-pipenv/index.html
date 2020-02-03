@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Manage Your Virtualenvs With Pipenv - menziess blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://menziess.github.io/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.07dbdb138a32f3472de78a795591268e4374eb745bd395bd5a8d904125a3cb96.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-howto">
+      <a href="/howto/">
+        <span>Howto</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-howto">
+      <a href="/howto/">
+        <span>Howto</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Howto</h4>
+  <ul>
+    
+    <li class="active ">
+      <a href="https://menziess.github.io/howto/manage-your-virtualenvs-with-pipenv/">Manage Your Virtualenvs With Pipenv</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage-multiple-python-versions-using-pyenv/">Manage Multiple Python Versions Using Pyenv</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create-a-static-blog-with-hugo/">Create A Free Static Website</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Manage Your Virtualenvs With Pipenv</h1>
+<div class="content anchor-link-enabled">
+  <p>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow.</p>
+<h2 id="managing-python-dependencies">Managing Python Dependencies</h2>
+<p>A virtual environment is an isolated environment in which dependencies for a python project are contained. Why should you care about isolating your project environments?</p>
+<p>When you install a python package, it&rsquo;s installed in a folder called &ldquo;site-packages&rdquo; that is located somewhere on your system depending on your python installation. You can find this directory by running:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">prefix</span>
+</code></pre></div><p>For me, the displayed directory is: <code>'/home/stefan/.pyenv/versions/3.8.0'</code>.</p>
+<p>So when you install a package:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install toolz
+</code></pre></div><p>And then look at it&rsquo;s installation path:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">toolz</span>
+<span class="n">toolz</span><span class="o">.</span><span class="n">__path__</span>
+</code></pre></div><p>You&rsquo;ll find that the installation directory is: <code>['/home/stefan/.pyenv/versions/3.8.0/lib/python3.8/site-packages/toolz-0.10.0-py3.8.egg/toolz']</code>.</p>
+<p>Now, when you&rsquo;re developing multiple projects, you may have to install different versions of the same package, and that&rsquo;s where virtual environments turn out the be very handy.</p>
+<p>There are tons of virtual environment tools out there: venv, virtualenv, conda, pipenv, pyenv-virtualenv, virtualenvwrapper, just to name a few. And in this post we will take a look at Pipenv. In the tutorial that is referenced after you create a new <a href="https://pypi.org/">PyPI</a> account, Pipenv is also used: <a href="https://packaging.python.org/tutorials/managing-dependencies/">tutorial on managing python dependencies</a>.</p>
+<p>The big difference between other virtual environment tools and Pipenv is the <code>Pipfile.lock</code> file that is generated, which makes sure that deterministic builds are produced. When you install dependencies using a <code>requirements.txt</code> file, pip doesn&rsquo;t always produce the same environment. This means that you can&rsquo;t replicate the exact environment you have on your development machine in production (the &ldquo;it works on my machine&rdquo; problem).</p>
+<p>A solution to this problem would be to <code>pip freeze</code> the requirements, which pins down the installed dependencies. But that introduces the problem of having to manually keep the package versions up-to-date, while you shouldn&rsquo;t necessarily care which precise version is installed.</p>
+<h2 id="managing-python-versions">Managing Python Versions</h2>
+<p>Opposed to Pipenv, Pyenv is a tool for managing multiple python installations. Pipenv is capable of using this tool in the background to create and activate virtual environments that require different python versions.</p>
+<p>Take a look at <a href="/howto/manage-multiple-python-versions-using-pyenv">my previous</a> post on how to install and use Pyenv. We will also use Pyenv in this post.</p>
+<h2 id="creating-a-virtual-environment">Creating A Virtual Environment</h2>
+<p>Install <code>Pipenv</code> on your system:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install pipenv
+</code></pre></div><p>Creating a virtual environment is quite easy:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install toolz --python 3.8.0
+</code></pre></div><p>After installing the environment, you have to activate it. You can do this by running the following command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv shell
+</code></pre></div><p>You can see that it simply executes the <code>.venv/bin/activate</code> script that you often run manually in other virtual environment tools.</p>
+<p>To deactivate your virtual environment, run:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">deactivate
+</code></pre></div><p>You can also install development dependencies by using the <code>--dev</code> flag, in which case the dependencies won&rsquo;t be installed in production:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install -d toolz --python 3.8.0
+</code></pre></div><p>We installed a virtual environment that makes use of python version 3.8.0. Pipenv installs packages in <code>~/.local/share/virtualenvs/&lt;your-virtualenv&gt;</code> by default. I prefer to place the folder containing the virtual environment in the project itself. This way you always delete the virtual environment along with your project when you&rsquo;re done. And the python installation can easily be selected in editors using a relative path: <code>./venv/bin/python</code>.</p>
+<p>Remove the virtual environment:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv --rm
+</code></pre></div><p>Then export a variable called <code>PIPENV_VENV_IN_PROJECT</code> to equal <code>1</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">PIPENV_VENV_IN_PROJECT</span><span class="o">=</span><span class="m">1</span>
+</code></pre></div><p>Create the virtual environment again:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install toolz --python 3.8.0
+</code></pre></div><p>A <code>.venv/</code> folder is now created inside your project, alongside the <code>Pipfile</code> and <code>Pipfile.lock</code>:</p>
+<p><img src="/manage-your-virtualenvs-with-pipenv/folder-structure.png" alt=""></p>
+<p>You should never edit the <code>Pipfile.lock</code> file manually. Also, take a look at the hashes. They are used to ensure that you are getting the same package as you did in development.</p>
+<h2 id="how-do-i-switch-to-pipenv">How Do I Switch To Pipenv?</h2>
+<p>If you are already using another virtual environment tool, switching is quite easy. If you run <code>pipenv install</code>, it automatically detects the <code>requirements.txt</code> file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">requirements.txt found, instead of Pipfile! Converting…
+Warning: Your Pipfile now contains pinned versions, if your requirements.txt did.
+We recommend updating your Pipfile to specify the &#34;*&#34; version, instead.
+</code></pre></div><p>Or you can explicitly pass the <code>requirement.txt</code> file as an argument, which may be useful if you have put development dependencies in a separate file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install -r dev-requirements.txt --dev
+</code></pre></div><p>And if you want to switch back to using <code>requirement.txt</code> files, you can run:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv lock -r &gt; requirements.txt
+pipenv lock -r -d &gt; dev-requirements.txt
+</code></pre></div><p>Let me know which virtual environment tool you prefer in the comments below!</p>
+
+</div>
+
+<br>
+<br>
+
+<div class="content">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "menziess" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://github.com/menziess/">github/menziess</a></li>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/stefanschenk/">in/stefanschenk/</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+  
+  
+  
+    
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157518256-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157518256-1');
+      </script>
+    
+  
+
+
+</body>
+
+</html>

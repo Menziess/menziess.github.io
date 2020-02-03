@@ -90,6 +90,14 @@
   <h4>Howto</h4>
   <ul>
     
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage-your-virtualenvs-with-pipenv/">Manage Your Virtualenvs With Pipenv</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage-multiple-python-versions-using-pyenv/">Manage Multiple Python Versions Using Pyenv</a>
+    </li>
+    
     <li class="active ">
       <a href="https://menziess.github.io/howto/create-a-static-blog-with-hugo/">Create A Free Static Website</a>
     </li>
@@ -102,8 +110,8 @@
         <div class="col-12 col-md-9">
           
 <h1 class="title">Create A Free Static Website</h1>
-<div class="content ">
-  <p>In this post I will walk you through all the steps that I&rsquo;ve taken to create and publish this static blog website using <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">github pages</a>.</p>
+<div class="content anchor-link-enabled">
+  <p>In this post I will walk you through all the steps that I&rsquo;ve taken to create and publish this static blog website with <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">github pages</a>.</p>
 <h2 id="install-hugo">Install Hugo</h2>
 <p>Depending on your preferred <a href="https://themes.gohugo.io/hugo-whisper-theme/">theme</a>, you may have to install a specific version, or the &ldquo;extended&rdquo; version of Hugo.</p>
 <p>To install Hugo, follow the official <a href="https://gohugo.io/getting-started/installing/">installation guide</a> and check the hugo version:</p>
@@ -132,7 +140,7 @@ git push -u origin --all
 <span class="nx">languageCode</span> <span class="p">=</span> <span class="s2">&#34;en-us&#34;</span>
 <span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;hugo-whisper-theme&#34;</span>
 </code></pre></div><h2 id="continuous-delivery">Continuous Delivery</h2>
-<p>Finally we&rsquo;ll create a build pipeline that builds the static webiste into the <code>menziess.github.io</code> submodule folder and pushes it to the github repository from where it can be hosted:</p>
+<p>Finally we&rsquo;ll create a build pipeline that builds the static website into the <code>menziess.github.io</code> submodule folder and pushes it to the github repository from where it can be hosted:</p>
 <div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">trigger</span><span class="p">:</span><span class="w">
 </span><span class="w"></span><span class="w">  </span>- master<span class="w">
 </span><span class="w">
@@ -172,7 +180,7 @@ git push -u origin --all
 <p>Create a new post:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo new posts/create-a-static-blog-with-hugo.md
 </code></pre></div><p>Modify the page, and push the changes to trigger a new build.</p>
-<p>After about 30 seconds, your website should be publised: <a href="https://menziess.github.io/">https://menziess.github.io/</a></p>
+<p>After about 30 seconds, your website should be published: <a href="https://menziess.github.io/">https://menziess.github.io/</a></p>
 <p>Let me know whether it works for you, or whether this setup can be improved in the comments below!</p>
 
 </div>
