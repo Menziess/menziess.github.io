@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Manage Your Virtualenvs With Pipenv - menziess blog</title>
+  <title>Manage Your Virtual Environments - menziess blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="icon" href="https://menziess.github.io/favicon.png">
@@ -91,11 +91,11 @@
   <ul>
     
     <li class="active ">
-      <a href="https://menziess.github.io/howto/manage-your-virtualenvs-with-pipenv/">Manage Your Virtualenvs With Pipenv</a>
+      <a href="https://menziess.github.io/howto/manage-your-virtual-environments/">Manage Your Virtual Environments</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/manage-multiple-python-versions-using-pyenv/">Manage Multiple Python Versions Using Pyenv</a>
+      <a href="https://menziess.github.io/howto/switch-between-python-versions/">Switch Between Python Versions</a>
     </li>
     
     <li class="">
@@ -109,7 +109,7 @@
         </div>
         <div class="col-12 col-md-9">
           
-<h1 class="title">Manage Your Virtualenvs With Pipenv</h1>
+<h1 class="title">Manage Your Virtual Environments</h1>
 <div class="content anchor-link-enabled">
   <p>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow.</p>
 <h2 id="managing-python-dependencies">Managing Python Dependencies</h2>
@@ -130,7 +130,7 @@
 <p>A solution to this problem would be to <code>pip freeze</code> the requirements, which pins down the installed dependencies. But that introduces the problem of having to manually keep the package versions up-to-date, while you shouldn&rsquo;t necessarily care which precise version is installed.</p>
 <h2 id="managing-python-versions">Managing Python Versions</h2>
 <p>Opposed to Pipenv, Pyenv is a tool for managing multiple python installations. Pipenv is capable of using this tool in the background to create and activate virtual environments that require different python versions.</p>
-<p>Take a look at <a href="/howto/manage-multiple-python-versions-using-pyenv">my previous</a> post on how to install and use Pyenv. We will also use Pyenv in this post.</p>
+<p>Take a look at <a href="/howto/switch-between-python-versions">my previous</a> post on how to install and use Pyenv. We will also use Pyenv in this post.</p>
 <h2 id="creating-a-virtual-environment">Creating A Virtual Environment</h2>
 <p>Install <code>Pipenv</code> on your system:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install pipenv

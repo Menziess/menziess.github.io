@@ -12,20 +12,20 @@
     
     
     <item>
-      <title>Manage Your Virtualenvs With Pipenv</title>
-      <link>https://menziess.github.io/howto/manage-your-virtualenvs-with-pipenv/</link>
+      <title>Manage Your Virtual Environments</title>
+      <link>https://menziess.github.io/howto/manage-your-virtual-environments/</link>
       <pubDate>Mon, 03 Feb 2020 10:00:13 +0100</pubDate>
       
-      <guid>https://menziess.github.io/howto/manage-your-virtualenvs-with-pipenv/</guid>
+      <guid>https://menziess.github.io/howto/manage-your-virtual-environments/</guid>
       <description>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow. A virtual environment is an isolated environment in which dependencies for a python project are contained.</description>
     </item>
     
     <item>
-      <title>Manage Multiple Python Versions Using Pyenv</title>
-      <link>https://menziess.github.io/howto/manage-multiple-python-versions-using-pyenv/</link>
+      <title>Switch Between Python Versions</title>
+      <link>https://menziess.github.io/howto/switch-between-python-versions/</link>
       <pubDate>Mon, 03 Feb 2020 09:17:11 +0100</pubDate>
       
-      <guid>https://menziess.github.io/howto/manage-multiple-python-versions-using-pyenv/</guid>
+      <guid>https://menziess.github.io/howto/switch-between-python-versions/</guid>
       <description>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv. Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions.</description>
     </item>
     
