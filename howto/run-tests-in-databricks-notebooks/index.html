@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Run Tests in Databricks Notebooks - menziess blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://menziess.github.io/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.07dbdb138a32f3472de78a795591268e4374eb745bd395bd5a8d904125a3cb96.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-howto">
+      <a href="/howto/">
+        <span>Howto</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-howto">
+      <a href="/howto/">
+        <span>Howto</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Howto</h4>
+  <ul>
+    
+    <li class="active ">
+      <a href="https://menziess.github.io/howto/run-tests-in-databricks-notebooks/">Run Tests in Databricks Notebooks</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage-your-virtual-environments/">Manage Your Virtual Environments</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/switch-between-python-versions/">Switch Between Python Versions</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create-a-static-blog-with-hugo/">Create A Free Static Website</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Run Tests in Databricks Notebooks</h1>
+<div class="content anchor-link-enabled">
+  <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user. It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</p>
+<h2 id="something-is-better-than-nothing">Something Is Better Than Nothing</h2>
+<p>The next functions are just a bit of fun, but if you aren&rsquo;t in the process of testing your Databricks notebooks, give it a try:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span><span class="p">:</span>
+    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">An exception that occured during a doctest.</span><span class="s2">&#34;&#34;&#34;</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span> <span class="nf">doctest_exception_on_fail</span><span class="p">(</span><span class="n">function</span><span class="p">)</span><span class="p">:</span>
+    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Run function doctest and see whether 70 *</span><span class="s2">&#39;</span><span class="s2">s were written to stdout.</span><span class="s2">&#39;</span><span class="s2">&#34;&#34;&#34;</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="p">)</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">run_docstring_examples</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="p">:</span><span class="mi">70</span><span class="p">]</span> <span class="o">==</span> <span class="mi">70</span> <span class="o">*</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">*</span><span class="s1">&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">DoctestFailureException</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Doctest failed.</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">doctests</span><span class="p">(</span><span class="o">*</span><span class="n">functions</span><span class="p">)</span><span class="p">:</span>
+    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Run doctest in Databricks.</span><span class="s2">
+</span><span class="s2"></span><span class="s2">
+</span><span class="s2"></span><span class="s2">    Pass functions that are to be tested, or pass nothing to find</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    public functions in the current global symbol table.</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#34;&#34;&#34;</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+
+    <span class="n">globals_copy</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">(</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">functions</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
+            <span class="n">doctest_exception_on_fail</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="p">[</span>
+        <span class="n">doctest_exception_on_fail</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">globals_copy</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">_</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__call__</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__main__</span><span class="s1">&#39;</span>
+    <span class="p">]</span>
+</code></pre></div><p>When we test the noticeably broken function <code>f</code>, an exception is raised:</p>
+<p><img src="/run-tests-in-databricks-notebooks/exception.png" alt=""></p>
+<p>There, we&rsquo;ve done it!</p>
+<h2 id="why-are-databricks-notebooks-hard-to-test">Why Are Databricks Notebooks Hard To Test?</h2>
+<p>Can&rsquo;t we just run pytest, unittest, or doctest in Databricks?</p>
+<p>You could run this piece of code in a Databricks notebook, and it will let you know that it&rsquo;s being executed from <code>/databricks/driver</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">-x</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">.</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">-vv</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">============================= test session starts ==============================
+platform linux -- Python 3.7.3, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /local_disk0/pythonVirtualEnvDirs/virtualEnv-61a202f1-14af-4ea7-8e29-ba1b137b4a5c/bin/python
+cachedir: .pytest_cache
+rootdir: /databricks/driver
+collecting ... collected 0 items
+
+============================ no tests ran in 0.01s =============================
+Out[43]: &lt;ExitCode.NO_TESTS_COLLECTED: 5&gt;
+</code></pre></div><p>In theory it would be possible to put some python test files in this directory. But that doesn&rsquo;t count, as you&rsquo;re not testing your Databricks notebooks. (The folder contains the following:)</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">%sh ls /databricks/driver -a
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">.
+..
+conf
+derby.log
+eventlogs
+ganglia
+logs
+.pytest_cache
+</code></pre></div><p>Databricks notebooks are not just regular <code>.py</code> files, which pytest would be able to find on the filesystem.</p>
+<p>But what about doctest? Execute the following code in your local terminal:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">doctest</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="p">:</span>
+    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    &gt;&gt;&gt; f(1)</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    45</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#34;&#34;&#34;</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">my_module</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">]</span>
+<span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">my_module</span><span class="p">)</span>
+</code></pre></div><p>Now execute the same code in a Databricks notebook.</p>
+<p>It won&rsquo;t work. The documentation of <code>doctest.testmod</code> states the following:</p>
+<blockquote>
+<p>Test examples in docstrings in functions and classes reachable
+from module m (or the current module if m is not supplied), starting
+with m.<strong>doc</strong>.</p>
+</blockquote>
+<p>Apparently the module <code>sys.modules[__name__]</code> is not behaving like a module on Databricks.</p>
+<h2 id="the-right-way-going-forward">The Right Way Going Forward</h2>
+<p>We tested a Databricks notebook. But is this really the way to go?</p>
+<p>The tests are ran when the <code>doctests</code> function is executed (at runtime). This may be halfway through your data processing job, which is not preferable.</p>
+<p>Refactoring Databricks notebooks into python packages, and running the python packages on Databricks, is most likely still the best solution.</p>
+<p>Any better idea&rsquo;s? Let me hear in the comments below!</p>
+
+</div>
+
+<br>
+<br>
+
+<div class="content">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "menziess" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://github.com/menziess/">github/menziess</a></li>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/stefanschenk/">in/stefanschenk/</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+  
+  
+  
+    
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157518256-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157518256-1');
+      </script>
+    
+  
+
+
+</body>
+
+</html>
