@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Test Python Code - menziess blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#603cba">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.911a3dabe3f1362bbfb7fb175d1d596fe91b2f13c812b97856177485f2b3cd42.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-howto">
+      <a href="/howto/">
+        <span>Howto</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-howto">
+      <a href="/howto/">
+        <span>Howto</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Howto</h4>
+  <ul>
+    
+    <li class="active ">
+      <a href="https://menziess.github.io/howto/test/python-code/">Test Python Code</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/test/code-in-databricks-notebooks/">Test Code in Databricks Notebooks</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/a-blog/">Create a Blog</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/package/_python-code/"></a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Test Python Code</h1>
+<div class="content anchor-link-enabled">
+  <p>Writing unit tests should be part an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore. Regression tests are a way to prevent unwanted changes to a working system.</p>
+<p>Tests should be: fast, isolated, repeatable, self-checking (the test itself can check whether it failed or passed), timely (to write the test).</p>
+<h2 id="basic-setup">Basic Setup</h2>
+<p>Let&rsquo;s create a very simple python project, take a look at <a href="/howto/manage-your-virtual-environments">my previous</a> on how to create a virtual environment, then set up the following folder structure:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ tree -a -L <span class="m">2</span>
+.
+├── .venv
+│   └── ...
+├── Pipfile
+├── Pipfile.lock
+├── src
+│   └── demo
+└── tests
+    └── demo
+
+<span class="m">9</span> directories, <span class="m">3</span> files
+</code></pre></div><p>Now we will create a very basic program in the <code>src/demo/</code> folder called <code>main.py</code>, which looks like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">A simple program.</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">say_hello_to</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">World</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">f</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello {name}!</span><span class="s1">&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">__main__</span><span class="s2">&#34;</span><span class="p">:</span>
+
+    <span class="c1"># Ask for forgiveness, not permission</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">your_name</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="n">your_name</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div><p>Run the program to see if it works:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ python src/demo/main.py
+Hello World!
+
+➜ python src/demo/main.py Stefan
+Hello Stefan!
+</code></pre></div><p>Great! Let&rsquo;s proceed and add a few test cases.</p>
+<h2 id="pytest">Pytest</h2>
+<p>Create a python file called <code>test_main.py</code> to the <code>tests/demo/</code> folder that contains the following code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Simple tests for a simple program.</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">say_hello_to</span>
+
+<span class="k">def</span> <span class="nf">test_say_hello_to</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Bob</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello Stefan!</span><span class="s1">&#39;</span>
+</code></pre></div><p>Run the tests to see if they succeed:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ pytest
+...
+E       AssertionError: assert <span class="s1">&#39;Hello Bob!&#39;</span> <span class="o">=</span><span class="o">=</span> <span class="s1">&#39;Hello Stefan!&#39;</span>
+E         - Hello Bob!
+E         + Hello Stefan!
+</code></pre></div><p>The test failed, which is good. Now you are aware that the code is broken before you ship it.</p>
+<blockquote>
+<p><strong>Note</strong> if you are following along, fix the test before you proceed.</p>
+</blockquote>
+<h2 id="doctests">Doctests</h2>
+<p>We have now added proper tests to our code. It is good practice to document your code, and docstrings are a great place to show examples to show other developers how your code should be used and what your intentions are. This is great until you forget to update the docstring after making a change to the code.</p>
+<p>Doctests are a great way to test and prove that the documentation is correct and up-to-date. Let&rsquo;s add a docstring to our function:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">say_hello_to</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">World</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">:</span>
+    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Say hello.</span><span class="s2">
+</span><span class="s2"></span><span class="s2">
+</span><span class="s2"></span><span class="s2">    &gt;&gt;&gt; say_hello_to(</span><span class="s2">&#39;</span><span class="s2">Stefan</span><span class="s2">&#39;</span><span class="s2">)</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#39;</span><span class="s2">Hello Bob!</span><span class="s2">&#39;</span><span class="s2">
+</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#34;&#34;&#34;</span>
+    <span class="k">return</span> <span class="n">f</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello {name}!</span><span class="s1">&#39;</span>
+</code></pre></div><p>Run the doctests using pytest, we&rsquo;ll get an error message as expected:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ pytest --doctest-modules
+...
+<span class="m">009</span>     &gt;&gt;&gt; say_hello_to<span class="o">(</span><span class="s1">&#39;Stefan&#39;</span><span class="o">)</span>
+Expected:
+    <span class="s1">&#39;Hello Bob!&#39;</span>
+Got:
+    <span class="s1">&#39;Hello Stefan!&#39;</span>
+</code></pre></div><p>You can also check whether exceptions are raised as expected (use the wildcard <code>...</code> in the result to capture generic output):</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">
+</span><span class="s2"></span><span class="s2">
+</span><span class="s2"></span><span class="s2">&gt;&gt;&gt; say_hello_to(1, 2) # doctest: +ELLIPSIS</span><span class="s2">
+</span><span class="s2"></span><span class="s2">Traceback (most recent call last):</span><span class="s2">
+</span><span class="s2"></span><span class="s2">...</span><span class="s2">
+</span><span class="s2"></span><span class="s2">TypeError: ... takes from 0 to 1 ... but 2 were given</span><span class="s2">
+</span><span class="s2"></span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h2 id="fixtures">Fixtures</h2>
+<p>Our function accepts a very basic string argument. In some cases you may want to define the data that is used in the tests beforehand. Fixtures are a great way to inject arguments to your functions, making your tests more readable.</p>
+<p>Add a file called <code>conftest.py</code> in the root of your project, and paste the following code inside:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Some data for our tests.</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="kn">from</span> <span class="nn">pytest</span> <span class="kn">import</span> <span class="n">fixture</span>
+
+<span class="nd">@fixture</span>
+<span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Bob</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="p">[</span><span class="p">]</span><span class="p">,</span> <span class="p">(</span><span class="p">)</span>
+</code></pre></div><p>Modify your test files to use this new fixture:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_say_hello_to</span><span class="p">(</span><span class="n">names</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Stefan</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello Stefan!</span><span class="s1">&#39;</span>
+
+    <span class="n">bob</span><span class="p">,</span> <span class="n">empty</span><span class="p">,</span> <span class="n">none</span><span class="p">,</span> <span class="n">integer</span><span class="p">,</span> <span class="n">li</span><span class="p">,</span> <span class="n">tup</span> <span class="o">=</span> <span class="n">names</span>
+
+    <span class="k">assert</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello Bob!</span><span class="s1">&#39;</span>
+    <span class="k">assert</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="n">empty</span><span class="p">)</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello !</span><span class="s1">&#39;</span>
+    <span class="k">assert</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="n">none</span><span class="p">)</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello None!</span><span class="s1">&#39;</span>
+    <span class="k">assert</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello 123!</span><span class="s1">&#39;</span>
+    <span class="k">assert</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="n">li</span><span class="p">)</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello []!</span><span class="s1">&#39;</span>
+    <span class="k">assert</span> <span class="n">say_hello_to</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Hello ()!</span><span class="s1">&#39;</span>
+</code></pre></div><p>You can also use fixtures in doctests!</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">
+</span><span class="s2"></span><span class="s2">
+</span><span class="s2"></span><span class="s2">&gt;&gt;&gt; bob, *_ = get_fixture(</span><span class="s2">&#39;</span><span class="s2">names</span><span class="s2">&#39;</span><span class="s2">)</span><span class="s2">
+</span><span class="s2"></span><span class="s2">&gt;&gt;&gt; bob</span><span class="s2">
+</span><span class="s2"></span><span class="s2">&#39;</span><span class="s2">Bob</span><span class="s2">&#39;</span><span class="s2">
+</span><span class="s2"></span><span class="s2">
+</span><span class="s2"></span><span class="s2">&gt;&gt;&gt; say_hello_to(bob)</span><span class="s2">
+</span><span class="s2"></span><span class="s2">&#39;</span><span class="s2">Hello Bob!</span><span class="s2">&#39;</span><span class="s2">
+</span><span class="s2"></span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div>
+</div>
+
+<br>
+<br>
+
+<div class="content">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "menziess" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://github.com/menziess/">github/menziess</a></li>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/stefanschenk/">in/stefanschenk/</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+  
+  
+  
+    
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157518256-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157518256-1');
+      </script>
+    
+  
+
+
+</body>
+
+</html>
