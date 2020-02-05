@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Create on menziess blog</title>
+    <link>https://menziess.github.io/howto/create/</link>
+    <description>Recent content in Create on menziess blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Nov 2018 15:14:39 +1000</lastBuildDate>
+    
+	<atom:link href="https://menziess.github.io/howto/create/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Create a Blog</title>
+      <link>https://menziess.github.io/howto/create/a-blog/</link>
+      <pubDate>Sun, 02 Feb 2020 23:31:52 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/create/a-blog/</guid>
+      <description>In this post I will walk you through all the steps that I&amp;rsquo;ve taken to create and publish this static blog website using &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; and &lt;a href=&#34;https://pages.github.com/&#34;&gt;github pages&lt;/a&gt;.</description>
+    </item>
+    
+  </channel>
+</rss>

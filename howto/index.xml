@@ -12,42 +12,6 @@
     
     
     <item>
-      <title>Test Code in Databricks Notebooks</title>
-      <link>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</link>
-      <pubDate>Mon, 03 Feb 2020 20:49:01 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</guid>
-      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user. It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</description>
-    </item>
-    
-    <item>
-      <title>Manage Virtual Environments</title>
-      <link>https://menziess.github.io/howto/manage/virtual-environments/</link>
-      <pubDate>Mon, 03 Feb 2020 10:00:13 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/howto/manage/virtual-environments/</guid>
-      <description>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow. A virtual environment is an isolated environment in which dependencies for a python project are contained.</description>
-    </item>
-    
-    <item>
-      <title>Manage Python Versions</title>
-      <link>https://menziess.github.io/howto/manage/python-versions/</link>
-      <pubDate>Mon, 03 Feb 2020 09:17:11 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/howto/manage/python-versions/</guid>
-      <description>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv. Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions.</description>
-    </item>
-    
-    <item>
-      <title>Create a Blog</title>
-      <link>https://menziess.github.io/howto/create/a-blog/</link>
-      <pubDate>Sun, 02 Feb 2020 23:31:52 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/howto/create/a-blog/</guid>
-      <description>In this post I will walk you through all the steps that I&amp;rsquo;ve taken to create and publish this static blog website using &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; and &lt;a href=&#34;https://pages.github.com/&#34;&gt;github pages&lt;/a&gt;.</description>
-    </item>
-    
-    <item>
       <title></title>
       <link>https://menziess.github.io/howto/package/_python-code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
