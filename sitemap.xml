@@ -8,22 +8,22 @@
   </url>
   
   <url>
-    <loc>https://menziess.github.io/howto/databricks/run-tests-in-databricks-notebooks/</loc>
+    <loc>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</loc>
     <lastmod>2020-02-03T20:49:01+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://menziess.github.io/howto/python/manage-your-virtual-environments/</loc>
+    <loc>https://menziess.github.io/howto/manage/virtual-environments/</loc>
     <lastmod>2020-02-03T10:00:13+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://menziess.github.io/howto/python/switch-between-python-versions/</loc>
+    <loc>https://menziess.github.io/howto/manage/python-versions/</loc>
     <lastmod>2020-02-03T09:17:11+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://menziess.github.io/howto/hugo/create-a-static-blog-with-hugo/</loc>
+    <loc>https://menziess.github.io/howto/create/a-blog/</loc>
     <lastmod>2020-02-03T00:00:00+00:00</lastmod>
   </url>
   
@@ -33,7 +33,7 @@
   </url>
   
   <url>
-    <loc>https://menziess.github.io/howto/python/package-python-code/</loc>
+    <loc>https://menziess.github.io/howto/package/_python-code/</loc>
     <priority>0</priority>
   </url>
   

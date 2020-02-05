@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Manage Your Virtual Environments - menziess blog</title>
+  <title>Manage Virtual Environments - menziess blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -97,23 +97,23 @@
   <ul>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/databricks/run-tests-in-databricks-notebooks/">Run Tests in Databricks Notebooks</a>
+      <a href="https://menziess.github.io/howto/test/code-in-databricks-notebooks/">Test Code in Databricks Notebooks</a>
     </li>
     
     <li class="active ">
-      <a href="https://menziess.github.io/howto/python/manage-your-virtual-environments/">Manage Your Virtual Environments</a>
+      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/python/switch-between-python-versions/">Switch Between Python Versions</a>
+      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/hugo/create-a-static-blog-with-hugo/">Create A Free Static Website</a>
+      <a href="https://menziess.github.io/howto/create/a-blog/">Create a Blog</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/python/package-python-code/"></a>
+      <a href="https://menziess.github.io/howto/package/_python-code/"></a>
     </li>
     
   </ul>
@@ -123,7 +123,7 @@
         </div>
         <div class="col-12 col-md-9">
           
-<h1 class="title">Manage Your Virtual Environments</h1>
+<h1 class="title">Manage Virtual Environments</h1>
 <div class="content anchor-link-enabled">
   <p>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow.</p>
 <h2 id="managing-python-dependencies">Managing Python Dependencies</h2>
@@ -144,7 +144,7 @@
 <p>A solution to this problem would be to <code>pip freeze</code> the requirements, which pins down the installed dependencies. But that introduces the problem of having to manually keep the package versions up-to-date, while you shouldn&rsquo;t necessarily care which precise version is installed.</p>
 <h2 id="managing-python-versions">Managing Python Versions</h2>
 <p>Opposed to Pipenv, Pyenv is a tool for managing multiple python installations. Pipenv is capable of using this tool in the background to create and activate virtual environments that require different python versions.</p>
-<p>Take a look at <a href="/howto/switch-between-python-versions">my previous</a> post on how to install and use Pyenv. We will also use Pyenv in this post.</p>
+<p>Take a look at <a href="/howto/manage/python-versions">my previous</a> post on how to install and use Pyenv. We will also use Pyenv in this post.</p>
 <h2 id="creating-a-virtual-environment">Creating A Virtual Environment</h2>
 <p>Install <code>Pipenv</code> on your system:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install pipenv
@@ -165,7 +165,7 @@
 </code></pre></div><p>Create the virtual environment again:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install toolz --python 3.8.0
 </code></pre></div><p>A <code>.venv/</code> folder is now created inside your project, alongside the <code>Pipfile</code> and <code>Pipfile.lock</code>:</p>
-<p><img src="/manage-your-virtualenvs-with-pipenv/folder-structure.png" alt=""></p>
+<p><img src="/manage-virtual-environments/folder-structure.png" alt=""></p>
 <p>You should never edit the <code>Pipfile.lock</code> file manually. Also, take a look at the hashes. They are used to ensure that you are getting the same package as you did in development.</p>
 <h2 id="how-do-i-switch-to-pipenv">How Do I Switch To Pipenv?</h2>
 <p>If you are already using another virtual environment tool, switching is quite easy. If you run <code>pipenv install</code>, it automatically detects the <code>requirements.txt</code> file:</p>
