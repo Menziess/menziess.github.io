@@ -97,19 +97,23 @@
   <ul>
     
     <li class="active ">
-      <a href="https://menziess.github.io/howto/run-tests-in-databricks-notebooks/">Run Tests in Databricks Notebooks</a>
+      <a href="https://menziess.github.io/howto/databricks/run-tests-in-databricks-notebooks/">Run Tests in Databricks Notebooks</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/manage-your-virtual-environments/">Manage Your Virtual Environments</a>
+      <a href="https://menziess.github.io/howto/python/manage-your-virtual-environments/">Manage Your Virtual Environments</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/switch-between-python-versions/">Switch Between Python Versions</a>
+      <a href="https://menziess.github.io/howto/python/switch-between-python-versions/">Switch Between Python Versions</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/create-a-static-blog-with-hugo/">Create A Free Static Website</a>
+      <a href="https://menziess.github.io/howto/hugo/create-a-static-blog-with-hugo/">Create A Free Static Website</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/python/package-python-code/"></a>
     </li>
     
   </ul>
@@ -122,8 +126,8 @@
 <h1 class="title">Run Tests in Databricks Notebooks</h1>
 <div class="content anchor-link-enabled">
   <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user. It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</p>
-<h2 id="something-is-better-than-nothing">Something Is Better Than Nothing</h2>
-<p>The next functions are just a bit of fun, but if you aren&rsquo;t in the process of testing your Databricks notebooks, give it a try:</p>
+<h2 id="a-dirty-solution">A Dirty Solution</h2>
+<p>The next functions are just a bit of fun, but something is better than nothing:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span><span class="p">:</span>
     <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">An exception that occured during a doctest.</span><span class="s2">&#34;&#34;&#34;</span>
     <span class="k">pass</span>
