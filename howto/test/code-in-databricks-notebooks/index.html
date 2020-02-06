@@ -134,7 +134,7 @@
 <p><strong>Note</strong> the code in this post works, but it&rsquo;s not the recommended testing approach, we will cover proper testing in future blog posts.</p>
 </blockquote>
 <h2 id="a-dirty-solution">A Dirty Solution</h2>
-<p>The next functions are just a bit of fun, but something is better than nothing:</p>
+<p>The next functions are just a bit of fun (something is better than nothing):</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span><span class="p">:</span>
     <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">An exception that occured during a doctest.</span><span class="s2">&#34;&#34;&#34;</span>
     <span class="k">pass</span>
@@ -180,8 +180,8 @@
 <p>The <code>doctests</code> function does the following:</p>
 <ol>
 <li>it captures the state of <code>globals()</code> when the function is run</li>
-<li>if functions have manually been passed, they are tested, otherwise any functions are searched for</li>
-<li>any callable object that&rsquo;s not &ldquo;private&rdquo;, and is contained in the <code>__main__</code> execution context, is tested otherwise</li>
+<li>if functions have manually been passed, they are tested;</li>
+<li>otherwise: callable objects that are not &ldquo;private&rdquo;, and are contained in the <code>__main__</code> execution context, are tested</li>
 </ol>
 <p>When we test the noticeably erroneous function <code>f</code>, an exception is raised:</p>
 <p><img src="/images/test-code-in-databricks-notebooks/exception.png" alt=""></p>
@@ -234,7 +234,7 @@ with m.<strong>doc</strong>.</p>
 <h2 id="the-right-way-going-forward">The Right Way Going Forward</h2>
 <p>We tested a Databricks notebook. But is this really the way to go?</p>
 <p>The <code>doctests</code> function is executed, tests are ran (at runtime). This means that you have to run the actual code to verify it&rsquo;s correctness. Tested functions and data processing cells should be logically separated to run tests without side effects. And tests can&rsquo;t be run automatically, meaning that running of the tests &ndash; every time a change is pushed through &ndash; is a manual burden put on developers, instead of an automated process.</p>
-<p>Refactoring Databricks notebooks on which business&rsquo; success depends into python packages, and running the tested python packages on Databricks, is most likely still the best solution.</p>
+<p>Refactoring Databricks notebooks &ndash; on which business&rsquo; success depends &ndash; into python packages, and running the tested python packages on Databricks, is most likely still the best solution.</p>
 <p>Any better idea&rsquo;s? Let me hear in the comments below!</p>
 
 </div>
