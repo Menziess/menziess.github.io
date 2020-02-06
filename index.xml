@@ -17,7 +17,7 @@
       <pubDate>Wed, 05 Feb 2020 09:39:35 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/test/python-code/</guid>
-      <description>Writing unit tests should be part an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</description>
+      <description>Writing unit tests should an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</description>
     </item>
     
     <item>
