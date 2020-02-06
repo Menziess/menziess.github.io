@@ -130,6 +130,9 @@
 <h1 class="title">Test Code in Databricks Notebooks</h1>
 <div class="content anchor-link-enabled">
   <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user. It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</p>
+<blockquote>
+<p><strong>Note</strong> the code in this post works, but it&rsquo;s not the recommended testing approach, we will cover proper testing in future blog posts.</p>
+</blockquote>
 <h2 id="a-dirty-solution">A Dirty Solution</h2>
 <p>The next functions are just a bit of fun, but something is better than nothing:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span><span class="p">:</span>
@@ -169,7 +172,18 @@
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__call__</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__main__</span><span class="s1">&#39;</span>
     <span class="p">]</span>
-</code></pre></div><p>When we test the noticeably broken function <code>f</code>, an exception is raised:</p>
+</code></pre></div><p>The <code>doctest_exception_on_fail</code> function does two things:</p>
+<ol>
+<li><code>run_docstring_examples</code> runs docstests of the passed string, module, function, or class, using the <code>globs</code> (second) argument for execution context</li>
+<li>it clears and reads from stdout to see whether the output starts with 70 asterisks, in which case the doctest has failed and printed out the error</li>
+</ol>
+<p>The <code>doctests</code> function does the following:</p>
+<ol>
+<li>it captures the state of <code>globals()</code> when the function is run</li>
+<li>if functions have manually been passed, they are tested, otherwise any functions are searched for</li>
+<li>any callable object that&rsquo;s not &ldquo;private&rdquo;, and is contained in the <code>__main__</code> execution context, is tested otherwise</li>
+</ol>
+<p>When we test the noticeably erroneous function <code>f</code>, an exception is raised:</p>
 <p><img src="/images/test-code-in-databricks-notebooks/exception.png" alt=""></p>
 <p>There, we&rsquo;ve done it!</p>
 <h2 id="why-are-databricks-notebooks-hard-to-test">Why Are Databricks Notebooks Hard To Test?</h2>
@@ -219,8 +233,8 @@ with m.<strong>doc</strong>.</p>
 <p>Apparently the module <code>sys.modules[__name__]</code> is not behaving like a module on Databricks.</p>
 <h2 id="the-right-way-going-forward">The Right Way Going Forward</h2>
 <p>We tested a Databricks notebook. But is this really the way to go?</p>
-<p>The tests are ran when the <code>doctests</code> function is executed (at runtime). This may be halfway through your data processing job, which is not preferable.</p>
-<p>Refactoring Databricks notebooks into python packages, and running the python packages on Databricks, is most likely still the best solution.</p>
+<p>The <code>doctests</code> function is executed, tests are ran (at runtime). This means that you have to run the actual code to verify it&rsquo;s correctness. Tested functions and data processing cells should be logically separated to run tests without side effects. And tests can&rsquo;t be run automatically, meaning that running of the tests &ndash; every time a change is pushed through &ndash; is a manual burden put on developers, instead of an automated process.</p>
+<p>Refactoring Databricks notebooks on which business&rsquo; success depends into python packages, and running the tested python packages on Databricks, is most likely still the best solution.</p>
 <p>Any better idea&rsquo;s? Let me hear in the comments below!</p>
 
 </div>
