@@ -17,7 +17,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.1c8cd0954877b4ad599b7434ba135206b02a21680bed06889ca3447e4ac16eae.css">
+  <link rel="stylesheet" href="/css/style.min.b7eeae2f99b00044abfed51e37e28c2644317b528f283c0bd72c6613868ed827.css">
   
 
   
@@ -130,9 +130,6 @@
 <h1 class="title">Test Code in Databricks Notebooks</h1>
 <div class="content anchor-link-enabled">
   <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user. It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</p>
-<blockquote>
-<p><strong>Note</strong> the code in this post works, but it&rsquo;s not the recommended testing approach, we will cover proper testing in future blog posts.</p>
-</blockquote>
 <h2 id="a-dirty-solution">A Dirty Solution</h2>
 <p>The next functions are just a bit of fun (something is better than nothing):</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span><span class="p">:</span>

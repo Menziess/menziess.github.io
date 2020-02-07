@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://menziess.github.io/howto/test/</loc>
+    <lastmod>2020-02-05T09:39:35+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://menziess.github.io/howto/</loc>
     <lastmod>2018-11-28T15:14:39+10:00</lastmod>
   </url>

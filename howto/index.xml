@@ -1,33 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Overview on menziess blog</title>
+    <title>How To on menziess blog</title>
     <link>https://menziess.github.io/howto/</link>
-    <description>Recent content in Overview on menziess blog</description>
+    <description>Recent content in How To on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Nov 2018 15:14:39 +1000</lastBuildDate>
     
 	<atom:link href="https://menziess.github.io/howto/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Test Python Code</title>
-      <link>https://menziess.github.io/howto/test/python-code/</link>
-      <pubDate>Wed, 05 Feb 2020 09:39:35 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/howto/test/python-code/</guid>
-      <description>Writing unit tests should an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</description>
-    </item>
-    
-    <item>
-      <title>Test Code in Databricks Notebooks</title>
-      <link>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</link>
-      <pubDate>Mon, 03 Feb 2020 20:49:01 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</guid>
-      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user. It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</description>
-    </item>
     
     <item>
       <title>Manage Virtual Environments</title>
