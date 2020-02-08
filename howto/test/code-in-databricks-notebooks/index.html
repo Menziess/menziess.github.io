@@ -188,7 +188,8 @@
 <p>You could run this piece of code in a Databricks notebook, and it will let you know that it&rsquo;s being executed from <code>/databricks/driver</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">-x</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">.</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">-vv</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">============================= test session starts ==============================
+</code></pre></div><p>Output:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">============================= test session starts ==============================
 platform linux -- Python 3.7.3, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /local_disk0/pythonVirtualEnvDirs/virtualEnv-61a202f1-14af-4ea7-8e29-ba1b137b4a5c/bin/python
 cachedir: .pytest_cache
 rootdir: /databricks/driver
@@ -198,7 +199,8 @@ collecting ... collected 0 items
 Out[43]: &lt;ExitCode.NO_TESTS_COLLECTED: 5&gt;
 </code></pre></div><p>In theory it would be possible to put some python test files in this directory. But that doesn&rsquo;t count, as you&rsquo;re not testing your Databricks notebooks. (The folder contains the following:)</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">%sh ls /databricks/driver -a
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">.
+</code></pre></div><p>Output:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">.
 ..
 conf
 derby.log
@@ -225,7 +227,7 @@ logs
 <blockquote>
 <p>Test examples in docstrings in functions and classes reachable
 from module m (or the current module if m is not supplied), starting
-with m.<strong>doc</strong>.</p>
+with m.__doc__.</p>
 </blockquote>
 <p>Apparently the module <code>sys.modules[__name__]</code> is not behaving like a module on Databricks.</p>
 <h2 id="the-right-way-going-forward">The Right Way Going Forward</h2>
