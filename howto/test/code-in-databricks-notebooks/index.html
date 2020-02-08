@@ -144,9 +144,12 @@
     <span class="n">output</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="p">:</span><span class="mi">70</span><span class="p">]</span> <span class="o">==</span> <span class="mi">70</span> <span class="o">*</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">*</span><span class="s1">&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">DoctestFailureException</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Doctest failed.</span><span class="s1">&#39;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">doctests</span><span class="p">(</span><span class="o">*</span><span class="n">functions</span><span class="p">)</span><span class="p">:</span>
+</code></pre></div><p>The <code>doctest_exception_on_fail</code> function does two things:</p>
+<ol>
+<li><code>run_docstring_examples</code> runs docstests of the passed string, module, function, or class, using the <code>globs</code> (second) argument for execution context</li>
+<li>it clears and reads from stdout to see whether the output starts with 70 asterisks, in which case the doctest has failed and printed out the error</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">doctests</span><span class="p">(</span><span class="o">*</span><span class="n">functions</span><span class="p">)</span><span class="p">:</span>
     <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Run doctest in Databricks.</span><span class="s2">
 </span><span class="s2"></span><span class="s2">
 </span><span class="s2"></span><span class="s2">    Pass functions that are to be tested, or pass nothing to find</span><span class="s2">
@@ -169,12 +172,7 @@
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__call__</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__main__</span><span class="s1">&#39;</span>
     <span class="p">]</span>
-</code></pre></div><p>The <code>doctest_exception_on_fail</code> function does two things:</p>
-<ol>
-<li><code>run_docstring_examples</code> runs docstests of the passed string, module, function, or class, using the <code>globs</code> (second) argument for execution context</li>
-<li>it clears and reads from stdout to see whether the output starts with 70 asterisks, in which case the doctest has failed and printed out the error</li>
-</ol>
-<p>The <code>doctests</code> function does the following:</p>
+</code></pre></div><p>The <code>doctests</code> function does the following:</p>
 <ol>
 <li>it captures the state of <code>globals()</code> when the function is run</li>
 <li>if functions have manually been passed, they are tested;</li>
@@ -186,6 +184,7 @@
 <p>Although this works, it is not the recommended way to test the code you run on Databricks.</p>
 <h2 id="why-are-databricks-notebooks-hard-to-test">Why Are Databricks Notebooks Hard To Test?</h2>
 <p>Can&rsquo;t we just run pytest, unittest, or doctest in Databricks?</p>
+<p>Take a look at <a href="https://menziess.github.io/howto/test/python-code/">how to test python code</a> to see some examples of how to use pytest and doctest.</p>
 <p>You could run this piece of code in a Databricks notebook, and it will let you know that it&rsquo;s being executed from <code>/databricks/driver</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">-x</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">.</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">-vv</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">)</span>
