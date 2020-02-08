@@ -130,7 +130,7 @@
 <h1 class="title">Test Code in Databricks Notebooks</h1>
 <div class="content anchor-link-enabled">
   <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user. It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</p>
-<h2 id="a-dirty-solution">A Dirty Solution</h2>
+<h2 id="one-way-to-run-a-test">One Way to Run a Test</h2>
 <p>The next functions are just a bit of fun (something is better than nothing):</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span><span class="p">:</span>
     <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">An exception that occured during a doctest.</span><span class="s2">&#34;&#34;&#34;</span>
@@ -183,6 +183,7 @@
 <p>When we test the noticeably erroneous function <code>f</code>, an exception is raised:</p>
 <p><img src="/images/test-code-in-databricks-notebooks/exception.png" alt=""></p>
 <p>There, we&rsquo;ve done it!</p>
+<p>Although this works, it is not the recommended way to test the code you run on Databricks.</p>
 <h2 id="why-are-databricks-notebooks-hard-to-test">Why Are Databricks Notebooks Hard To Test?</h2>
 <p>Can&rsquo;t we just run pytest, unittest, or doctest in Databricks?</p>
 <p>You could run this piece of code in a Databricks notebook, and it will let you know that it&rsquo;s being executed from <code>/databricks/driver</code>:</p>
