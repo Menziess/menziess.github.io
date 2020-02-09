@@ -56,14 +56,5 @@
       <description>In this post I will walk you through all the steps that I&amp;rsquo;ve taken to create and publish this static blog website using &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; and &lt;a href=&#34;https://pages.github.com/&#34;&gt;github pages&lt;/a&gt;.</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>https://menziess.github.io/howto/package/_python-code/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://menziess.github.io/howto/package/_python-code/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
