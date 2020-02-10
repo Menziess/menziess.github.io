@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Manage Python Versions - menziess blog</title>
+  <title>Install Windows Subsystem for Linux - menziess blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -112,7 +112,7 @@
   <h4>Howto</h4>
   <ul>
     
-    <li class="">
+    <li class="active ">
       <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">Install Windows Subsystem for Linux</a>
     </li>
     
@@ -128,7 +128,7 @@
       <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
     </li>
     
-    <li class="active ">
+    <li class="">
       <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
     </li>
     
@@ -143,34 +143,36 @@
         </div>
         <div class="col-12 col-md-9">
           
-<h1 class="title">Manage Python Versions</h1>
+<h1 class="title">Install Windows Subsystem for Linux</h1>
 <div class="content anchor-link-enabled">
-  <p>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv.</p>
-<h2 id="why-use-pyenv">Why Use Pyenv?</h2>
-<p>Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions. And in some cases, you may want to run multiple projects that use different python versions at the same time. With Pyenv it is no big deal.</p>
-<h2 id="installing-pyenv">Installing Pyenv</h2>
-<p>The installation process is very straightforward:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">curl https://pyenv.run <span class="p">|</span> bash
-</code></pre></div><p>This will print out the following three lines that you should add to your <code>~/.bashrc</code> or <code>~/.zshrc</code> file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.pyenv/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>
-<span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>pyenv init -<span class="k">)</span><span class="s2">&#34;</span>
-<span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>pyenv virtualenv-init -<span class="k">)</span><span class="s2">&#34;</span>
-</code></pre></div><p>After restarting your shell, you can run Pyenv:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pyenv --help
-</code></pre></div><h2 id="usage">Usage</h2>
-<p>To see which versions are installed, run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ pyenv versions
-  system
-  3.7.5
-* 3.8.0 <span class="o">(</span><span class="nb">set</span> by /home/stefan/.pyenv/version<span class="o">)</span>
-</code></pre></div><p>You can install new python versions using:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pyenv install 3.8.0
-</code></pre></div><p>And you can set the global python version with:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pyenv global 3.8.0
-</code></pre></div><h2 id="uninstalling-pyenv">Uninstalling Pyenv</h2>
-<p>To remove the installation, run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf <span class="k">$(</span>pyenv root<span class="k">)</span>
-</code></pre></div><p>And clean up the lines that you inserted in <code>~/.bashrc</code> or <code>~/.zshrc</code>, in <a href="#installing-pyenv">Installing Pyenv</a>.</p>
+  <p>If you&rsquo;re accustomed to using a unix shell as your command-line interface, you may end up being very unproductive using Windows 10. Microsoft (in collaboration with Canonical) has made a tremendous effort into closing the gap between Linux and Windows developers by creating a kernel compatibility layer based on Ubuntu.</p>
+<p><img src="/images/install-windows-subsystem-for-linux/wsl.png#shadow" alt=""></p>
+<h2 id="installing-ubuntu-in-wsl">Installing Ubuntu in WSL</h2>
+<p>The process is quite simple if you&rsquo;re not dealing with corporate restrictions:</p>
+<ol>
+<li>Press the <code>Win + S</code> button, and search for <code>features</code>, then select <code>Turn Windows features on or off</code>.</li>
+<li>Scroll all the way down, and enable <code>Windows Subsystem for Linux</code>.</li>
+<li>Reboot your system.</li>
+<li>Open the Microsoft Store by pressing <code>Win + S</code> and searching for &ldquo;store&rdquo;.</li>
+<li>In the search bar of Microsoft Store, search for &ldquo;Ubuntu&rdquo;, select the first result, and click &ldquo;Install&rdquo;.</li>
+</ol>
+<h2 id="installing--ubuntu-in-wsl-under-corporate-restrictions">Installing  Ubuntu in WSL under Corporate Restrictions</h2>
+<ol>
+<li>Press <code>Win + S</code>, search for <code>powershell</code> and run <code>Windows Powershell</code> as administrator (right click and &ldquo;Run as administrator&rdquo;).</li>
+<li>Run the following code:
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Enable-WindowsOptionalFeature</span> <span class="n">-Online</span> <span class="n">-FeatureName</span> <span class="n">Microsoft</span><span class="n">-Windows</span><span class="n">-Subsystem</span><span class="n">-Linux</span>
+</code></pre></div></li>
+<li>Reboot your system.</li>
+<li>In a normal powershell window, and download the Ubuntu distribution like so:
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="n">https</span><span class="err">:</span><span class="p">/</span><span class="p">/</span><span class="n">aka</span><span class="p">.</span><span class="n">ms</span><span class="p">/</span><span class="n">wsl</span><span class="n">-ubuntu</span><span class="p">-</span><span class="n">1804</span> <span class="n">-OutFile</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="n">appx</span> <span class="n">-UseBasicParsing</span>
+</code></pre></div></li>
+<li>Rename and extract the downloaded files:
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Rename-Item</span> <span class="p">~</span><span class="p">/</span><span class="n">Ubuntu</span><span class="p">.</span><span class="n">appx</span> <span class="p">~</span><span class="p">/</span><span class="n">Ubuntu</span><span class="p">.</span><span class="n">zip</span>
+<span class="nb">Expand-Archive</span> <span class="p">~</span><span class="p">/</span><span class="n">Ubuntu</span><span class="p">.</span><span class="n">zip</span> <span class="p">~</span><span class="p">/</span><span class="n">Ubuntu</span>
+</code></pre></div></li>
+<li>Type <code>explorer</code> in powershell, and run the executable by double clicking <code>ubuntu1804.exe</code>.</li>
+<li>At this point you will have the same installation, but potentially without network access. In order to fix this, take a look at <a href="https://github.com/Menziess/WSL-Being-Productive-Under-Corporate-Restrictive-Policy">this</a> repository.</li>
+</ol>
 
 </div>
 

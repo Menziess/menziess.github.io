@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Install Windows Subsystem for Linux</title>
+      <link>https://menziess.github.io/howto/install/windows-subsystem-for-linux/</link>
+      <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/install/windows-subsystem-for-linux/</guid>
+      <description>If you&amp;rsquo;re accustomed to using a unix shell as your command-line interface, you may end up being very unproductive using Windows 10. Microsoft (in collaboration with Canonical) has made a tremendous effort into closing the gap between Linux and Windows developers by creating a kernel compatibility layer based on Ubuntu.</description>
+    </item>
+    
+    <item>
       <title>Test Python Code</title>
       <link>https://menziess.github.io/howto/test/python-code/</link>
       <pubDate>Wed, 05 Feb 2020 09:39:35 +0100</pubDate>
