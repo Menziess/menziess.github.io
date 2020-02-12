@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Package Python Code</title>
+      <link>https://menziess.github.io/howto/package/python-code/</link>
+      <pubDate>Tue, 11 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/package/python-code/</guid>
+      <description>Why should you care about creating packages?
+ packages are easy to install (pip install demo). packages simplify development (pip install -e . installs your package and keeps it up-to-date). packages are easy to run and test (from demo.</description>
+    </item>
+    
+    <item>
       <title>Install Windows Subsystem for Linux</title>
       <link>https://menziess.github.io/howto/install/windows-subsystem-for-linux/</link>
       <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>

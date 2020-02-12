@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Package Python Code - menziess blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#603cba">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  
+  
+    
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157518256-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157518256-1');
+      </script>
+    
+  
+
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.15c046140bc9745abd383fe0117e635c66ed04c90728d961c1e01fac3504636e.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/howto/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/howto/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Howto</h4>
+  <ul>
+    
+    <li class="active ">
+      <a href="https://menziess.github.io/howto/package/python-code/">Package Python Code</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/">Enhance Your Python-vscode Workflow</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">Install Windows Subsystem for Linux</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/test/python-code/">Test Python Code</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/test/code-in-databricks-notebooks/">Test Code in Databricks Notebooks</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/a-blog/">Create a Blog</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Package Python Code</h1>
+<div class="content anchor-link-enabled">
+  <p>Why should you care about creating packages?</p>
+<ul>
+<li>packages are easy to install (<code>pip install demo</code>).</li>
+<li>packages simplify development (<code>pip install -e .</code> installs your package and keeps it up-to-date).</li>
+<li>packages are easy to run and test (<code>from demo.main import say_hello_to</code>, then test the function).</li>
+<li>packages are easy to version, avoiding breaking dependant&rsquo;s code (<code>pip install demo==1.0.3</code>).</li>
+</ul>
+<p>Library vs Package vs Module:</p>
+<ul>
+<li><strong>Module</strong>: a <code>.py</code> file containing functions that belong together</li>
+<li><strong>Package</strong>: a collection of modules that is distributable</li>
+<li><strong>Library</strong>: a package that is a not context aware</li>
+</ul>
+<p>Packaging python code is quite easy, you require a single <code>setup.py</code> script to package in several distribution formats.</p>
+<h2 id="topics">Topics</h2>
+<ol>
+<li><a href="#1-packaging-setup">Packaging Setup</a></li>
+<li><a href="#2-documentation">Documentation</a></li>
+<li><a href="#3-secrets">Secrets</a></li>
+</ol>
+<!-- raw HTML omitted -->
+<h2 id="1-packaging-setup">1. Packaging Setup</h2>
+<p>Let&rsquo;s assume that we have the following folder structure (from <a href="https://menziess.github.io/howto/test/python-code/">this earlier post</a>), and <a href="https://menziess.github.io/howto/manage/virtual-environments/">virtual environment</a> set up:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ tree -a -L <span class="m">2</span>
+.
+├── .venv
+│   └── ...
+├── Pipfile
+├── Pipfile.lock
+├── src
+│   └── demo
+└── tests
+    └── demo
+
+<span class="m">9</span> directories, <span class="m">3</span> files
+</code></pre></div><p>Create a <code>setup.py</code> file in the root directory that we will use to define the way we&rsquo;d like to package our code, containing the following code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Setup.py script for packaging project.</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="k">def</span> <span class="nf">read_pipenv_dependencies</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="p">:</span>
+    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Get default dependencies from Pipfile.lock.</span><span class="s2">&#34;&#34;&#34;</span>
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">lockfile</span><span class="p">:</span>
+        <span class="n">lockjson</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">lockfile</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">dependency</span> <span class="k">for</span> <span class="n">dependency</span> <span class="ow">in</span> <span class="n">lockjson</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">default</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">]</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__main__</span><span class="s1">&#39;</span><span class="p">:</span>
+    <span class="n">setup</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">demo</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">PACKAGE_VERSION</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">0.0.dev0</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span>
+        <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="p">:</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">src</span><span class="s1">&#39;</span><span class="p">}</span><span class="p">,</span>
+        <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">src</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span>
+            <span class="sa"></span><span class="s1">&#39;</span><span class="s1">demo*</span><span class="s1">&#39;</span>
+        <span class="p">]</span><span class="p">)</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">A demo package.</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+            <span class="o">*</span><span class="n">read_pipenv_dependencies</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Pipfile.lock</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+</code></pre></div><p>You can now call this script to package your code in several ways:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">python setup.py develop <span class="c1"># don&#39;t generate anything, just install locally</span>
+python setup.py bdist_egg <span class="c1"># generate egg distribution, doesn&#39;t include dependencies</span>
+python setup.py bdist_wheel <span class="c1"># generate versioned wheel, includes dependencies</span>
+python setup.py sdist --formats<span class="o">=</span>zip,gztar,bztar,ztar,tar <span class="c1"># source code</span>
+</code></pre></div><p>Run the first one in the list above. When it succeeds, you will be able to import your code as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">say_hello_to</span>
+</code></pre></div><p>Now that we were able to install the project, we should take a closer look at the arguments that we pass to the <code>setuptools.setup</code> function:</p>
+<ol>
+<li><code>name</code>: the name of your package</li>
+<li><code>version</code>: every change to your code should yield a different package version, or else developers may install the same package version that&rsquo;s suddenly behaving differently, breaking their code</li>
+<li><code>packages</code>: a list of paths of all your python files</li>
+<li><code>install_requires</code>: a list of package names and versions (just as in a <code>requirements.txt</code> file)</li>
+</ol>
+<p>You can see that I wrote a simple function <code>read_pipenv_dependencies</code> to read the non-dev dependencies from the <code>Pipfile.lock</code>. Now I won&rsquo;t have to specify dependencies manually. I also use <code>os.getenv</code> to read in an environment variable to determine the package version, which are nice sagues to the next topics.</p>
+<h2 id="2-documentation">2. Documentation</h2>
+<p>Just as I read in the <code>Pipfile.lock</code> to specify my dependencies, I can also read in a <code>README.md</code> file to display useful documentation as the <code>long_description</code>. More information about this can be read on <a href="https://packaging.python.org/guides/making-a-pypi-friendly-readme/">packaging.python.org</a>.</p>
+<p>In addition you can create a proper documentation web page using <code>readthedocs</code> and <code>shinx</code>. Create a folder for your documentation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">mkdir docs
+</code></pre></div><p>Install sphinx:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pipenv install -d sphinx
+</code></pre></div><p>Run the quickstart to generate the source directory for your documentation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">sphinx-quickstart
+</code></pre></div><p>Now you can start populating the <code>docs/index.rst</code> file with your documentation. Learn more about automating this process on <a href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">sphinx-doc.org</a>.</p>
+<h2 id="3-secrets">3. Secrets</h2>
+<p>In the <code>setup.py</code> file, I also use an environment variable containing the desired package version.</p>
+<p>Your python applications may depend on additional environment variables that are available in production (a secret token for example). It is nice to set these variables in your local dev environment for testing.</p>
+<p>When you are collaborating on a project, you may want to exclude files and folders from your commits:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">.venv/ <span class="c1"># your virtual environment is pretty huge</span>
+.vscode/ <span class="c1"># you may want to share debug configurations sometimes</span>
+.mypy_cache/
+.pytest_cache/
+__pycache__/
+dist/ <span class="c1"># keep distributions from being committed</span>
+/build/
+junit/
+*.egg-info
+</code></pre></div><p>It&rsquo;s good practice to keep secrets out of your remote repository as well, regardless of the level of viewability that you have on the repository. You can create a <code>.env.example</code> that other developers can copy as a template, without sharing the secret values themselves:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">echo</span> <span class="s1">&#39;SECRET=&#39;</span> &gt;&gt; .env.example
+</code></pre></div><p>In your personal<code>.env</code> file, you can fill in the secret values:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">echo</span> <span class="s1">&#39;SECRET=P@ssW0rd4&#39;</span> &gt;&gt; .env
+<span class="nb">echo</span> <span class="s1">&#39;.env&#39;</span> &gt;&gt; .gitignore <span class="c1"># prevent secrets from being committed</span>
+</code></pre></div><p>If you are using <code>pipenv</code>, your environment variables are <a href="https://pipenv.readthedocs.io/en/latest/advanced/#automatic-loading-of-env">automatically loaded</a>.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+</div>
+
+<br>
+<br>
+
+<div class="content">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "menziess" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://github.com/menziess/">github/menziess</a></li>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/stefanschenk/">in/stefanschenk/</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+</body>
+
+</html>
