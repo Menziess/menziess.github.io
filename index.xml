@@ -36,7 +36,8 @@
       <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/install/windows-subsystem-for-linux/</guid>
-      <description>If you&amp;rsquo;re accustomed to using a unix shell as your command-line interface, you may end up being very unproductive using Windows 10. Microsoft (in collaboration with Canonical) has made a tremendous effort into closing the gap between Linux and Windows developers by creating a kernel compatibility layer based on Ubuntu.</description>
+      <description>If you&amp;rsquo;re accustomed to using a unix shell as your command-line interface, you may end up being very unproductive using Windows 10.
+Microsoft (in collaboration with Canonical) has made a tremendous effort into closing the gap between Linux and Windows developers by creating a kernel compatibility layer based on Ubuntu.</description>
     </item>
     
     <item>
@@ -54,7 +55,8 @@
       <pubDate>Mon, 03 Feb 2020 20:49:01 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</guid>
-      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user. It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</description>
+      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user.
+⟶ It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</description>
     </item>
     
     <item>

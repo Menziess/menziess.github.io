@@ -167,14 +167,14 @@
 <li><strong>Package</strong>: a collection of modules that is distributable</li>
 <li><strong>Library</strong>: a package that is a not context aware</li>
 </ul>
+<p><img src="/images/logo/artifact.png#logo" alt=""></p>
 <p>Packaging python code is quite easy, you require a single <code>setup.py</code> script to package in several distribution formats.</p>
 <h2 id="topics">Topics</h2>
 <ol>
 <li><a href="#1-packaging-setup">Packaging Setup</a></li>
 <li><a href="#2-documentation">Documentation</a></li>
-<li><a href="#3-secrets">Secrets</a></li>
+<li><a href="#3-handling-secrets">Handling Secrets</a></li>
 </ol>
-<!-- raw HTML omitted -->
 <h2 id="1-packaging-setup">1. Packaging Setup</h2>
 <p>Let&rsquo;s assume that we have the following folder structure (from <a href="https://menziess.github.io/howto/test/python-code/">this earlier post</a>), and <a href="https://menziess.github.io/howto/manage/virtual-environments/">virtual environment</a> set up:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ tree -a -L <span class="m">2</span>
@@ -243,10 +243,9 @@ python setup.py sdist --formats<span class="o">=</span>zip,gztar,bztar,ztar,tar 
 </code></pre></div><p>Run the quickstart to generate the source directory for your documentation:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">sphinx-quickstart
 </code></pre></div><p>Now you can start populating the <code>docs/index.rst</code> file with your documentation. Learn more about automating this process on <a href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">sphinx-doc.org</a>.</p>
-<h2 id="3-secrets">3. Secrets</h2>
-<p>In the <code>setup.py</code> file, I also use an environment variable containing the desired package version.</p>
-<p>Your python applications may depend on additional environment variables that are available in production (a secret token for example). It is nice to set these variables in your local dev environment for testing.</p>
-<p>When you are collaborating on a project, you may want to exclude files and folders from your commits:</p>
+<h2 id="3-handling-secrets">3. Handling Secrets</h2>
+<p>In the <code>setup.py</code> file, I&rsquo;m using an environment variable containing the desired package version. Your python application may depend on additional environment variables, which you may not want to share with others (secret tokens for example).</p>
+<p>This is an example of a basic <code>.gitignore</code> file, specifying the files and folders you want to keep out of your remote repository:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">.venv/ <span class="c1"># your virtual environment is pretty huge</span>
 .vscode/ <span class="c1"># you may want to share debug configurations sometimes</span>
 .mypy_cache/
@@ -256,14 +255,14 @@ dist/ <span class="c1"># keep distributions from being committed</span>
 /build/
 junit/
 *.egg-info
-</code></pre></div><p>It&rsquo;s good practice to keep secrets out of your remote repository as well, regardless of the level of viewability that you have on the repository. You can create a <code>.env.example</code> that other developers can copy as a template, without sharing the secret values themselves:</p>
+.env <span class="c1"># contains your secrets</span>
+</code></pre></div><p>How do your colleagues know which environment variables are expected when the <code>.env</code> file is not included as an example?
+You can create a <code>.env.example</code> that other developers can copy as a template, without sharing the secret values themselves:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">echo</span> <span class="s1">&#39;SECRET=&#39;</span> &gt;&gt; .env.example
 </code></pre></div><p>In your personal<code>.env</code> file, you can fill in the secret values:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">echo</span> <span class="s1">&#39;SECRET=P@ssW0rd4&#39;</span> &gt;&gt; .env
 <span class="nb">echo</span> <span class="s1">&#39;.env&#39;</span> &gt;&gt; .gitignore <span class="c1"># prevent secrets from being committed</span>
 </code></pre></div><p>If you are using <code>pipenv</code>, your environment variables are <a href="https://pipenv.readthedocs.io/en/latest/advanced/#automatic-loading-of-env">automatically loaded</a>.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
 
 </div>
 

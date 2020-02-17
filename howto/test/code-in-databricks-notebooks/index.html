@@ -154,7 +154,9 @@
           
 <h1 class="title">Test Code in Databricks Notebooks</h1>
 <div class="content anchor-link-enabled">
-  <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user. It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</p>
+  <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user.</p>
+<p><img src="/images/logo/testing.png#logo" alt=""> ⟶ <img src="/images/logo/databricks.png#logo" alt=""></p>
+<p>It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</p>
 <h2 id="one-way-to-run-a-test">One Way to Run a Test</h2>
 <p>The next functions are just a bit of fun (something is better than nothing):</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span><span class="p">:</span>

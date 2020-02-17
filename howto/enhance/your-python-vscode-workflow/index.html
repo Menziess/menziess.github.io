@@ -155,12 +155,20 @@
 <h1 class="title">Enhance Your Python-vscode Workflow</h1>
 <div class="content anchor-link-enabled">
   <p>This post covers my personal workflow for python projects, using Visual Studio Code along with some other tools. A good workflow saves time and allows you to focus on the problem at hand, instead of tasks that make you feel like a robot (machines are good for that).</p>
-<p>Install <code>vscode</code>, and follow the following topics to set up your development environment.</p>
+<p><img src="/images/logo/vscode.png#logo" alt=""></p>
+<p>Install <code>vscode</code>, and follow the topics below to set up your development environment.</p>
 <h2 id="topics">Topics</h2>
 <ol>
 <li><a href="#1-remote---wsl">Remote - WSL</a></li>
 <li><a href="#2-virtual-environment">Virtual Environment</a></li>
-<li><a href="#3-python-extension">Python Extension</a></li>
+<li><a href="#3-python-extension">Python Extension</a>
+<ul>
+<li><a href="#debugger">Debugger</a></li>
+<li><a href="#jupyter">Jupyter</a></li>
+<li><a href="#testing-and-linting">Testing-and-Linting</a></li>
+</ul>
+</li>
+<li><a href="#4-editorconfig">Editorconfig</a></li>
 </ol>
 <h2 id="1-remote---wsl">1. Remote - WSL</h2>
 <p>I prefer using a unix shell as my command-line interface. Luckily, Microsoft has implemented a great tool that allows developers to run linux distributions natively on Windows. Here&rsquo;s a small guide on how to <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">install Ubuntu on Windows</a>.</p>
@@ -233,10 +241,9 @@
 <span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
 </code></pre></div><p>For example, here I&rsquo;m installing my source code in <code>develop</code> mode, and I import my installed source code into my notebook using autoreload:</p>
 <p><img src="/images/enhance-your-python-vscode-workflow/autoreload.png" alt=""></p>
-<p>If this doesn&rsquo;t work for you, you may have to install your python project. You may have noticed the extra file <code>setup.py</code> in the root of the project folder. To install the project, you must run this file like so:</p>
+<p>If this doesn&rsquo;t work for you, you may have to install your python project. You may have noticed the extra file <a href="https://menziess.github.io/howto/package/python-code/"><code>setup.py</code></a> in the root of the project folder. To install the project, you must run this file like so:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip install -e . <span class="c1"># about the same as `python setup.py develop`</span>
-</code></pre></div><!-- raw HTML omitted -->
-<h3 id="testing-and-linting">Testing and Linting</h3>
+</code></pre></div><h3 id="testing-and-linting">Testing and Linting</h3>
 <p>Although the python extension has a linter included, you can also define your default linting and testing frameworks in vscode settings. After installing the desired frameworks:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pipenv install -d mypy autopep8 <span class="se">\
 </span><span class="se"></span>  flake8 pytest bandit pydocstyle
@@ -278,7 +285,23 @@
 </code></pre></div><p>You can run tests from the Test sidebar:</p>
 <p><img src="/images/enhance-your-python-vscode-workflow/tests.png" alt=""></p>
 <p>Learn more about <a href="https://menziess.github.io/howto/test/python-code/">testing python code</a> in my previous post.</p>
+<h2 id="4-editorconfig">4. Editorconfig</h2>
+<p>Finally, you can install the <a href="https://editorconfig.org/">editorconfig</a> extension for vscode.</p>
+<p>When you&rsquo;re collaborating with other developers, who use other editors and settings, you may run into the problem of having different line endings, and other idea&rsquo;s about using tabs or spaces.</p>
+<p>Adding a <code>.editorconfig</code> file to your projects root folder can make it really easy to prevent differences in editor configurations:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">root = true
 
+[*]
+charset = utf-8
+indent_style = spaces
+indent_size = 2
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.py]
+indent_size = 4
+</code></pre></div>
 </div>
 
 <br>
