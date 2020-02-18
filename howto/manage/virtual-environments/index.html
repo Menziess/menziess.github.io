@@ -160,7 +160,15 @@
 <div class="content anchor-link-enabled">
   <p>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow.</p>
 <p><img src="/images/logo/python.png#logo" alt=""></p>
-<h2 id="managing-python-dependencies">Managing Python Dependencies</h2>
+<h2 id="topics">Topics</h2>
+<ol>
+<li><a href="#1-managing-python-dependencies">Managing Python Dependencies</a></li>
+<li><a href="#2-managing-python-versions">Managing Python Versions</a></li>
+<li><a href="#3-creating-a-virtual-environment">Creating A Virtual Environment</a></li>
+<li><a href="#4-handling-secrets">Handling Secrets</a></li>
+<li><a href="#5-switching-to-pipenv">Switching to Pipenv</a></li>
+</ol>
+<h2 id="1-managing-python-dependencies">1. Managing Python Dependencies</h2>
 <p>A virtual environment is an isolated environment in which dependencies for a python project are contained. Why should you care about isolating your project environments?</p>
 <p>When you install a python package, it&rsquo;s installed in a folder called &ldquo;site-packages&rdquo; that is located somewhere on your system depending on your python installation. You can find this directory by running:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
@@ -176,10 +184,10 @@
 <p>There are tons of virtual environment tools out there: venv, virtualenv, conda, pipenv, pyenv-virtualenv, virtualenvwrapper, just to name a few. And in this post we will take a look at Pipenv. In the tutorial that is referenced after you create a new <a href="https://pypi.org/">PyPI</a> account, Pipenv is also used: <a href="https://packaging.python.org/tutorials/managing-dependencies/">tutorial on managing python dependencies</a>.</p>
 <p>The big difference between other virtual environment tools and Pipenv is the <code>Pipfile.lock</code> file that is generated, which makes sure that deterministic builds are produced. When you install dependencies using a <code>requirements.txt</code> file, pip doesn&rsquo;t always produce the same environment. This means that you can&rsquo;t replicate the exact environment you have on your development machine in production (the &ldquo;it works on my machine&rdquo; problem).</p>
 <p>A solution to this problem would be to <code>pip freeze</code> the requirements, which pins down the installed dependencies. But that introduces the problem of having to manually keep the package versions up-to-date, while you shouldn&rsquo;t necessarily care which precise version is installed.</p>
-<h2 id="managing-python-versions">Managing Python Versions</h2>
+<h2 id="2-managing-python-versions">2. Managing Python Versions</h2>
 <p>Opposed to Pipenv, Pyenv is a tool for managing multiple python installations. Pipenv is capable of using this tool in the background to create and activate virtual environments that require different python versions.</p>
 <p>Take a look at my previous post on <a href="https://menziess.github.io/howto/manage/python-versions/">how to install and use Pyenv</a>. We will also use Pyenv in this post.</p>
-<h2 id="creating-a-virtual-environment">Creating A Virtual Environment</h2>
+<h2 id="3-creating-a-virtual-environment">3. Creating A Virtual Environment</h2>
 <p>Install <code>Pipenv</code> on your system:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install pipenv
 </code></pre></div><p>Creating a virtual environment is quite easy:</p>
@@ -200,8 +208,28 @@
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install toolz --python 3.8.0
 </code></pre></div><p>A <code>.venv/</code> folder is now created inside your project, alongside the <code>Pipfile</code> and <code>Pipfile.lock</code>:</p>
 <p><img src="/images/manage-virtual-environments/folder-structure.png" alt=""></p>
-<p>You should never edit the <code>Pipfile.lock</code> file manually. Also, take a look at the hashes. They are used to ensure that you are getting the same package as you did in development.</p>
-<h2 id="how-do-i-switch-to-pipenv">How Do I Switch To Pipenv?</h2>
+<p>You should never edit the <code>Pipfile.lock</code> file manually. Also, take a look at the hashes. They are ensuring the exact same installation and version on other machines.</p>
+<h2 id="4-handling-secrets">4. Handling Secrets</h2>
+<p>Your python application may depend on environment variables, which you may not want to share with others (secret tokens for example). This is an example of a basic <code>.gitignore</code> file, specifying the files and folders you want to keep out of your remote repository:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">.venv/ <span class="c1"># your virtual environment is pretty huge</span>
+.vscode/ <span class="c1"># you may want to share debug configurations sometimes</span>
+.mypy_cache/
+.pytest_cache/
+__pycache__/
+*.egg-info
+.env <span class="c1"># contains your secrets</span>
+</code></pre></div><p>How do your colleagues know which environment variables are expected when the <code>.env</code> file is not included as an example?
+You can create a <code>.env.example</code> that other developers can copy as a template, without sharing the secret values themselves:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">echo</span> <span class="s1">&#39;SECRET=&#39;</span> &gt;&gt; .env.example
+</code></pre></div><p>In your personal<code>.env</code> file, you can fill in the secret values:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">echo</span> <span class="s1">&#39;SECRET=P@ssW0rd4&#39;</span> &gt;&gt; .env
+<span class="nb">echo</span> <span class="s1">&#39;.env&#39;</span> &gt;&gt; .gitignore <span class="c1"># prevent secrets from being committed</span>
+</code></pre></div><p>If you are using <code>pipenv</code>, your environment variables are <a href="https://pipenv.readthedocs.io/en/latest/advanced/#automatic-loading-of-env">automatically loaded</a>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ pipenv shell
+Loading .env environment variables…
+Launching subshell in virtual environment…
+ . /c/Users/StefanSchenk/Desktop/demo-project/.venv/bin/activate
+</code></pre></div><h2 id="5-switching-to-pipenv">5. Switching to Pipenv</h2>
 <p>If you are already using another virtual environment tool, switching is quite easy. If you run <code>pipenv install</code>, it automatically detects the <code>requirements.txt</code> file:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">requirements.txt found, instead of Pipfile! Converting…
 Warning: Your Pipfile now contains pinned versions, if your requirements.txt did.
