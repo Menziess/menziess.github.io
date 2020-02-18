@@ -175,11 +175,11 @@ pip install databricks-connect<span class="o">=</span><span class="o">=</span>6.
     <img src="/images/install-databricks-connect/switching.png"/> 
 </figure>
 
-<p>We&rsquo;ll have to set up our <code>~/databricks-connect</code> file once, containing our cluster information. Create and copy a token in your user settings in your Databricks workspace, then configure databricks-connect on your machine:</p>
+<p>We&rsquo;ll have to set up our <code>~/databricks-connect</code> file once, containing our cluster information. Create and copy a token in your user settings in your Databricks workspace, then run <code>databricks-connect configure</code> on your machine:</p>
 <p><img src="/images/install-databricks-connect/user-settings.png#small" alt=""></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">databricks-connect configure
-</code></pre></div><p>You&rsquo;ll need some information that you&rsquo;ll find in the address bar when you visit your cluster page:</p>
+<p>You&rsquo;ll need some information that you&rsquo;ll find in the address bar when you visit your cluster page:</p>
 <p><img src="/images/install-databricks-connect/cluster-info.png" alt=""></p>
+<p>When you&rsquo;ve filled in the information, you can run <code>databricks-connect configure</code> again to verify:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ databricks-connect configure
 The current configuration is:
 * Databricks Host: https://westeurope.azuredatabricks.net/
@@ -187,10 +187,7 @@ The current configuration is:
 * Cluster ID: 0214-195926-aptin821
 * Org ID: <span class="m">3892784943666666</span>
 * Port: <span class="m">8787</span>
-</code></pre></div><p>Finally, test the installation, and run pyspark from your terminal:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">databricks-connect <span class="nb">test</span>
-pyspark
-</code></pre></div><p>You&rsquo;ll hopefully see something along the lines of:</p>
+</code></pre></div><p>Run <code>databricks-connect test</code> to test your installation. You&rsquo;ll hopefully see something along the lines of:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ databricks-connect <span class="nb">test</span>
 * PySpark is installed at /c/projects/demo-project/.venv/lib/python3.7/site-packages/pyspark
 * Checking SPARK_HOME
@@ -225,8 +222,9 @@ View job details at https://westeurope.azuredatabricks.net/?o<span class="o">=</
 * All tests passed.
 </code></pre></div><p>If you follow the link, you&rsquo;ll see the db-connect executions as a result:</p>
 <p><img src="/images/install-databricks-connect/sparkui.png#shadow" alt=""></p>
-<p>That&rsquo;s it, you can now start developing spark apps using your favorite IDE / environment while using powerful clusters and big data!</p>
-
+<p>Finally, run pyspark from your terminal, and start developing spark apps using your favorite IDE / environment while using powerful clusters and big data!</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pyspark
+</code></pre></div>
 </div>
 
 <br>
