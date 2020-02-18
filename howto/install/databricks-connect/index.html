@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Install databricks-connect - menziess blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msvalidate.01" content="DF64D3472558D82FA059638FC476FF14">
+  <meta name="msapplication-TileColor" content="#603cba">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  
+  
+    
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157518256-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157518256-1');
+      </script>
+    
+  
+
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.faaf027401ce3f388e938b61a944a5aad959cd237787945f71d20941323d9c39.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/howto/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://menziess.github.io"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/howto/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Howto</h4>
+  <ul>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/">Enhance Your Python-vscode Workflow</a>
+    </li>
+    
+    <li class="active ">
+      <a href="https://menziess.github.io/howto/install/databricks-connect/">Install databricks-connect</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">Install Windows Subsystem for Linux</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/test/python-code/">Test Python Code</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/test/code-in-databricks-notebooks/">Test Code in Databricks Notebooks</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/a-blog/">Create a Blog</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Install databricks-connect</h1>
+<div class="content anchor-link-enabled">
+  <p>Databricks-connect allows you to connect your favorite IDE to your Databricks cluster.</p>
+<p><img src="/images/logo/vscode.png#logo" alt=""> ⟶ <img src="/images/logo/databricks.png#logo" alt=""></p>
+<p>Visit your Databricks cluster page, and verify that your cluster supports python3, then add the following lines to the Spark Config:</p>
+<ul>
+<li><code>spark.databricks.service.server.enabled true # required with Runtime version 5.3 or below</code></li>
+<li><code>spark.databricks.service.port 8787</code></li>
+</ul>
+<p>Install Java on your local machine:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">apt install openjdk-8-jdk
+</code></pre></div><p>Uninstall any pyspark versions, and install databricks-connect using the regular <code>pip</code> commands, preventing any changes to be recorded to your virtual environment (prevents mutations to <code>Pipfile</code> and <code>Pipfile.lock</code>):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip uninstall pyspark
+pip install databricks-connect<span class="o">=</span><span class="o">=</span>6.2.* <span class="c1"># this version should match your Databricks Runtime Version</span>
+</code></pre></div><p>If you want to switch back to <code>pyspark</code>, simply do the exact opposite:</p>
+<figure>
+    <img src="/images/install-databricks-connect/switching.png"/> 
+</figure>
+
+<p>We&rsquo;ll have to set up our <code>~/databricks-connect</code> file once, containing our cluster information. Create and copy a token in your user settings in your Databricks workspace, then configure databricks-connect on your machine:</p>
+<p><img src="/images/install-databricks-connect/user-settings.png#small" alt=""></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">databricks-connect configure
+</code></pre></div><p>You&rsquo;ll need some information that you&rsquo;ll find in the address bar when you visit your cluster page:</p>
+<p><img src="/images/install-databricks-connect/cluster-info.png" alt=""></p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ databricks-connect configure
+The current configuration is:
+* Databricks Host: https://westeurope.azuredatabricks.net/
+* Databricks Token: dapi5c376de3a2a54a2b03016c8c3b123456
+* Cluster ID: 0214-195926-aptin821
+* Org ID: <span class="m">3892784943666666</span>
+* Port: <span class="m">8787</span>
+</code></pre></div><p>Finally, test the installation, and run pyspark from your terminal:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">databricks-connect <span class="nb">test</span>
+pyspark
+</code></pre></div><p>You&rsquo;ll hopefully see something along the lines of:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ databricks-connect <span class="nb">test</span>
+* PySpark is installed at /c/projects/demo-project/.venv/lib/python3.7/site-packages/pyspark
+* Checking SPARK_HOME
+* Checking java version
+openjdk version <span class="s2">&#34;1.8.0_242&#34;</span>
+OpenJDK Runtime Environment <span class="o">(</span>build 1.8.0_242-8u242-b08-0ubuntu3~18.04-b08<span class="o">)</span>
+OpenJDK 64-Bit Server VM <span class="o">(</span>build 25.242-b08, mixed mode<span class="o">)</span>
+* Testing scala <span class="nb">command</span>
+20/02/18 08:08:32 WARN Utils: Your hostname, ANL-SS14 resolves to a loopback address: 127.0.1.1<span class="p">;</span> using 172.17.254.209 instead <span class="o">(</span>on interface eth1<span class="o">)</span>
+20/02/18 08:08:32 WARN Utils: Set SPARK_LOCAL_IP <span class="k">if</span> you need to <span class="nb">bind</span> to another address
+20/02/18 08:08:34 WARN NativeCodeLoader: Unable to load native-hadoop library <span class="k">for</span> your platform... using builtin-java classes where applicable
+Using Spark<span class="s1">&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
+</span><span class="s1">Setting default log level to &#34;WARN&#34;.
+</span><span class="s1">To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+</span><span class="s1">20/02/18 08:08:49 WARN MetricsSystem: Using default name SparkStatusTracker for source because neither spark.metrics.namespace nor spark.app.id is set.
+</span><span class="s1">20/02/18 08:09:08 WARN SparkClientManager: Cluster 0214-195926-aptin821 in state TERMINATED, waiting for it to start running...
+</span><span class="s1">      ____              __
+</span><span class="s1">     / __/__  ___ _____/ /__
+</span><span class="s1">    _\ \/ _ \/ _ `/ __/  &#39;</span>_/
+   /___/ .__/<span class="se">\_</span>,_/_/ /_/<span class="se">\_</span><span class="se">\ </span>  version 2.4.5-SNAPSHOT
+      /_/
+
+Using Scala version 2.11.12 <span class="o">(</span>OpenJDK 64-Bit Server VM, Java 1.8.0_242<span class="o">)</span>
+Type in expressions to have them evaluated.
+Type :help <span class="k">for</span> more information
+...
+* Testing python <span class="nb">command</span>
+View job details at https://westeurope.azuredatabricks.net/?o<span class="o">=</span>3892784943666666#/setting/clusters/0214-195926-aptin821/sparkUi
+...
+* Testing dbutils.fs
+...
+* All tests passed.
+</code></pre></div><p>If you follow the link, you&rsquo;ll see the db-connect executions as a result:</p>
+<p><img src="/images/install-databricks-connect/sparkui.png#shadow" alt=""></p>
+<p>That&rsquo;s it, you can now start developing spark apps using your favorite IDE / environment while using powerful clusters and big data!</p>
+
+</div>
+
+<br>
+<br>
+
+<div class="content">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "menziess" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://github.com/menziess/">github/menziess</a></li>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/stefanschenk/">in/stefanschenk/</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+</body>
+
+</html>

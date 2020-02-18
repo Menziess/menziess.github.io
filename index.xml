@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>Package Python Code</title>
-      <link>https://menziess.github.io/howto/package/python-code/</link>
+      <title>Create Python Packages</title>
+      <link>https://menziess.github.io/howto/create/python-packages/</link>
       <pubDate>Tue, 11 Feb 2020 07:15:38 +0100</pubDate>
       
-      <guid>https://menziess.github.io/howto/package/python-code/</guid>
+      <guid>https://menziess.github.io/howto/create/python-packages/</guid>
       <description>Why should you care about creating packages?
  packages are easy to install (pip install demo). packages simplify development (pip install -e . installs your package and keeps it up-to-date). packages are easy to run and test (from demo.</description>
     </item>
@@ -28,6 +28,16 @@
       
       <guid>https://menziess.github.io/howto/enhance/your-python-vscode-workflow/</guid>
       <description>This post covers my personal workflow for python projects, using Visual Studio Code along with some other tools. A good workflow saves time and allows you to focus on the problem at hand, instead of tasks that make you feel like a robot (machines are good for that).</description>
+    </item>
+    
+    <item>
+      <title>Install databricks-connect</title>
+      <link>https://menziess.github.io/howto/install/databricks-connect/</link>
+      <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/install/databricks-connect/</guid>
+      <description>Databricks-connect allows you to connect your favorite IDE to your Databricks cluster.
+⟶ Visit your Databricks cluster page, and verify that your cluster supports python3, then add the following lines to the Spark Config:</description>
     </item>
     
     <item>
