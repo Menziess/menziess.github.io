@@ -251,7 +251,8 @@
 <p>Although the python extension has a linter included, you can also define your default linting and testing frameworks in vscode settings. After installing the desired frameworks:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pipenv install -d mypy autopep8 <span class="se">\
 </span><span class="se"></span>  flake8 pytest bandit pydocstyle
-</code></pre></div><p>These settings can be overridden by workspace settings per project.</p>
+</code></pre></div><p>You can also use these tools in your terminal, learn more about it <a href="https://menziess.github.io/howto/create/python-packages/">here</a>.</p>
+<p>The settings of vscode can be overridden by workspace settings per project.</p>
 <div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
   <span class="nt">&#34;python.autoComplete.addBrackets&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="nt">&#34;python.formatting.provider&#34;</span><span class="p">:</span> <span class="s2">&#34;autopep8&#34;</span><span class="p">,</span>
