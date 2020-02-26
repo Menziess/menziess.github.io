@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.faaf027401ce3f388e938b61a944a5aad959cd237787945f71d20941323d9c39.css">
+  <link rel="stylesheet" href="/css/style.min.10fc0a733e9865979e8549b0d2709ceceffc819756ba0cc5626392b213536c72.css">
   
 
   
@@ -176,11 +176,11 @@
 <ol>
 <li>Press <code>Win + S</code>, search for <code>powershell</code> and run <code>Windows Powershell</code> as administrator (right click and &ldquo;Run as administrator&rdquo;).</li>
 <li>Run the following code:
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Enable-WindowsOptionalFeature</span> <span class="n">-Online</span> <span class="n">-FeatureName</span> <span class="n">Microsoft</span><span class="n">-Windows</span><span class="n">-Subsystem</span><span class="n">-Linux</span>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Enable-WindowsOptionalFeature</span> <span class="n">-Online</span> <span class="n">-FeatureName</span> <span class="n">Microsoft-Windows-Subsystem-Linux</span>
 </code></pre></div></li>
 <li>Reboot your system.</li>
 <li>In a normal powershell window, and download the Ubuntu distribution like so:
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">&#34;</span><span class="s2">https://aka.ms/wsl-ubuntu-1804</span><span class="s2">&#34;</span> <span class="n">-OutFile</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="n">appx</span> <span class="n">-UseBasicParsing</span>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">&#34;https://aka.ms/wsl-ubuntu-1804&#34;</span> <span class="n">-OutFile</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="n">appx</span> <span class="n">-UseBasicParsing</span>
 </code></pre></div></li>
 <li>Rename and extract the downloaded files:
 <div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Rename-Item</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="n">appx</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="n">zip</span>

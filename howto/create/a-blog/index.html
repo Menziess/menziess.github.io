@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.faaf027401ce3f388e938b61a944a5aad959cd237787945f71d20941323d9c39.css">
+  <link rel="stylesheet" href="/css/style.min.10fc0a733e9865979e8549b0d2709ceceffc819756ba0cc5626392b213536c72.css">
   
 
   
@@ -190,23 +190,23 @@ git push -u origin --all
 </code></pre></div><h2 id="continuous-delivery">Continuous Delivery</h2>
 <p>Finally we&rsquo;ll create a build pipeline that builds the static website into the <code>menziess.github.io</code> submodule folder and pushes it to the github repository from where it can be hosted:</p>
 <div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">trigger</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">  </span>- master<span class="w">
+</span><span class="w">  </span>- master<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">pool</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">  </span><span class="k">vmImage</span><span class="p">:</span><span class="w"> </span>ubuntu-latest<span class="w">
+</span><span class="w">  </span><span class="k">vmImage</span><span class="p">:</span><span class="w"> </span>ubuntu-latest<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">variables</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">  </span><span class="k">user</span><span class="p">:</span><span class="w"> </span>menziess<span class="w">
+</span><span class="w">  </span><span class="k">user</span><span class="p">:</span><span class="w"> </span>menziess<span class="w">
 </span><span class="w">  </span><span class="k">email</span><span class="p">:</span><span class="w"> </span>stefan_schenk@hotmail.com<span class="w">
 </span><span class="w">  </span><span class="k">repo</span><span class="p">:</span><span class="w"> </span>menziess.github.io<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">steps</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">     </span><span class="sd"> </span><span class="sd">sudo snap install hugo --channel=extended</span><span class="w">
+</span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">      sudo snap install hugo --channel=extended</span><span class="w">
 </span><span class="w">    </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Install<span class="w"> </span>hugo<span class="w"> </span>extended<span class="w">
 </span><span class="w">
 </span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">     </span><span class="sd"> </span><span class="sd">git submodule add https://github.com/$(user)/$(repo).git public</span><span class="w">
+</span><span class="sd">      git submodule add https://github.com/$(user)/$(repo).git public</span><span class="w">
 </span><span class="w">      </span>rm<span class="w"> </span>-rf<span class="w"> </span>public/*<span class="w">
 </span><span class="w">    </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Add<span class="w"> </span>submodule<span class="w"> </span>to<span class="w"> </span>push<span class="w"> </span>generated<span class="w"> </span>site<span class="w"> </span>to<span class="w">
 </span><span class="w">
@@ -214,7 +214,7 @@ git push -u origin --all
 </span><span class="w">    </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Build<span class="w"> </span>static<span class="w"> </span>site<span class="w">
 </span><span class="w">
 </span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">     </span><span class="sd"> </span><span class="sd">cd public</span><span class="w">
+</span><span class="sd">      cd public</span><span class="w">
 </span><span class="w">      </span>echo<span class="w"> </span>Changed<span class="w"> </span>directory<span class="w"> </span>to<span class="w"> </span>$(pwd)<span class="w">
 </span><span class="w">      </span>git<span class="w"> </span>checkout<span class="w"> </span>master<span class="w">
 </span><span class="w">      </span>git<span class="w"> </span>add<span class="w"> </span>--all<span class="w">

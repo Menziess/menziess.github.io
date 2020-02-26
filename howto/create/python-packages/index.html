@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.faaf027401ce3f388e938b61a944a5aad959cd237787945f71d20941323d9c39.css">
+  <link rel="stylesheet" href="/css/style.min.10fc0a733e9865979e8549b0d2709ceceffc819756ba0cc5626392b213536c72.css">
   
 
   
@@ -198,7 +198,7 @@
 
 <span class="m">9</span> directories, <span class="m">3</span> files
 </code></pre></div><p>Create a <code>setup.py</code> file in the root directory that we will use to define the way we&rsquo;d like to package our code, containing the following code:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Setup.py script for packaging project.</span><span class="s2">&#34;&#34;&#34;</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;Setup.py script for packaging project.&#34;&#34;&#34;</span>
 
 <span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
 
@@ -206,25 +206,25 @@
 <span class="kn">import</span> <span class="nn">os</span>
 
 
-<span class="k">def</span> <span class="nf">read_pipenv_dependencies</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="p">:</span>
-    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Get default dependencies from Pipfile.lock.</span><span class="s2">&#34;&#34;&#34;</span>
-    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">read_pipenv_dependencies</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Get default dependencies from Pipfile.lock.&#34;&#34;&#34;</span>
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="n">fname</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">lockfile</span><span class="p">:</span>
         <span class="n">lockjson</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">lockfile</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">dependency</span> <span class="k">for</span> <span class="n">dependency</span> <span class="ow">in</span> <span class="n">lockjson</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">default</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">dependency</span> <span class="k">for</span> <span class="n">dependency</span> <span class="ow">in</span> <span class="n">lockjson</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)]</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__main__</span><span class="s1">&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">setup</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">demo</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="n">version</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">PACKAGE_VERSION</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">0.0.dev0</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span>
-        <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="p">:</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">src</span><span class="s1">&#39;</span><span class="p">}</span><span class="p">,</span>
-        <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">src</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span>
-            <span class="sa"></span><span class="s1">&#39;</span><span class="s1">demo*</span><span class="s1">&#39;</span>
-        <span class="p">]</span><span class="p">)</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">A demo package.</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;demo&#39;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PACKAGE_VERSION&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0.dev0&#39;</span><span class="p">),</span>
+        <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="s1">&#39;src&#39;</span><span class="p">},</span>
+        <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span>
+            <span class="s1">&#39;demo*&#39;</span>
+        <span class="p">]),</span>
+        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;A demo package.&#39;</span><span class="p">,</span>
         <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
-            <span class="o">*</span><span class="n">read_pipenv_dependencies</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Pipfile.lock</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span>
+            <span class="o">*</span><span class="n">read_pipenv_dependencies</span><span class="p">(</span><span class="s1">&#39;Pipfile.lock&#39;</span><span class="p">),</span>
         <span class="p">]</span>
     <span class="p">)</span>
 </code></pre></div><p>You can now call this script to package your code in several ways:</p>
@@ -299,24 +299,24 @@ pip install *.whl
 </code></pre></div><h2 id="6-include-config-files">6. Include Config Files</h2>
 <p>It&rsquo;s also possible to add data to your package by adding the following lines to your <code>setup.py</code> script:</p>
 <p><strong>Note:</strong> This may not work on distributed systems (such as Databricks).</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__main__</span><span class="s1">&#39;</span><span class="p">:</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">setup</span><span class="p">(</span>
         <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
-            <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">data</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">data/my-config.json</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">)</span>
+            <span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;data/my-config.json&#39;</span><span class="p">])</span>
         <span class="p">]</span>
     <span class="p">)</span>
 </code></pre></div><p>You&rsquo;ll then be able to read the file by using this function:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_cfg_file</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">foldername</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-</span><span class="o">&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Get config file.</span><span class="s2">
-</span><span class="s2"></span><span class="s2">
-</span><span class="s2"></span><span class="s2">    Using </span><span class="s2">&#39;</span><span class="s2">data_files</span><span class="s2">&#39;</span><span class="s2"> property from setup.py script.</span><span class="s2">
-</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#34;&#34;&#34;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">foldername</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Foldername must be string.</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">foldername</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">/</span><span class="s1">&#39;</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Foldername must not start with </span><span class="se">\&#39;</span><span class="s1">/</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Filename must be string.</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_cfg_file</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">foldername</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="s2">&#34;&#34;&#34;Get config file.
+</span><span class="s2">
+</span><span class="s2">    Using &#39;data_files&#39; property from setup.py script.
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">foldername</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Foldername must be string.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">foldername</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Foldername must not start with </span><span class="se">\&#39;</span><span class="s1">/</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Filename must be string.&#39;</span><span class="p">)</span>
 
     <span class="c1"># Will first try to read file from installed location</span>
     <span class="c1"># this only applies for .whl installations</span>
@@ -329,20 +329,20 @@ pip install *.whl
         <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">foldername</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</code></pre></div><p>Try it out by performing the steps in paragraph <a href="#5-installing-wheel">5. Installing wheel</a> again.</p>
+</code></pre></div><p>If you create a wheel again, and install it in a virtual environment in a new folder, without copying the data file, you should be able to access the data by executing the function above.</p>
 <h2 id="7-devops">7. DevOps</h2>
 <p>As part of our packaging process, we want to integrate changes from many contributors, and automate as many repetitive processes that are required to successfully release a new version.</p>
 <p>For this example we&rsquo;ll use Azure DevOps, where the following pipeline will be triggered on <code>git tags</code> as well as the <code>master</code> branch.</p>
 <p>Have a look, and we&rsquo;ll discuss the various stages and tasks afterwards:</p>
 <div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">resources</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">  </span>- <span class="k">repo</span><span class="p">:</span><span class="w"> </span>self<span class="w">
+</span><span class="w">  </span>- <span class="k">repo</span><span class="p">:</span><span class="w"> </span>self<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">trigger</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">  </span>- master<span class="w">
+</span><span class="w">  </span>- master<span class="w">
 </span><span class="w">  </span>- refs/tags/v*<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">variables</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">  </span><span class="k">python.version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.7&#34;</span><span class="w">
+</span><span class="w">  </span><span class="k">python.version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.7&#34;</span><span class="w">
 </span><span class="w">  </span><span class="k">project</span><span class="p">:</span><span class="w"> </span>demo<span class="w">
 </span><span class="w">  </span><span class="k">feed</span><span class="p">:</span><span class="w"> </span>demo<span class="w">
 </span><span class="w">  </span><span class="k">major_minor</span><span class="p">:</span><span class="w"> </span>$<span class="p">[</span>format(<span class="s1">&#39;{0:yy}.{0:MM}&#39;</span><span class="p">,</span><span class="w"> </span>pipeline.startTime)<span class="p">]</span><span class="w">
@@ -351,15 +351,15 @@ pip install *.whl
 </span><span class="w">  </span><span class="k">fallback_tag</span><span class="p">:</span><span class="w"> </span>$(major_minor).dev$(patch)<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">stages</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">  </span>- <span class="k">stage</span><span class="p">:</span><span class="w"> </span>Test<span class="w">
+</span><span class="w">  </span>- <span class="k">stage</span><span class="p">:</span><span class="w"> </span>Test<span class="w">
 </span><span class="w">    </span><span class="k">jobs</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">      </span>- <span class="k">job</span><span class="p">:</span><span class="w"> </span>Test<span class="w">
+</span><span class="w">      </span>- <span class="k">job</span><span class="p">:</span><span class="w"> </span>Test<span class="w">
 </span><span class="w">        </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Test<span class="w">
 </span><span class="w">        </span><span class="k">steps</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">          </span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>UsePythonVersion@<span class="m">0</span><span class="w">
+</span><span class="w">          </span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>UsePythonVersion@<span class="m">0</span><span class="w">
 </span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Use Python $(python.version)&#34;</span><span class="w">
 </span><span class="w">            </span><span class="k">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">              </span><span class="k">versionSpec</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;$(python.version)&#34;</span><span class="w">
+</span><span class="w">              </span><span class="k">versionSpec</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;$(python.version)&#34;</span><span class="w">
 </span><span class="w">
 </span><span class="w">          </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pipenv<span class="w"> </span><span class="cp">&amp;&amp;</span><span class="w"> </span>pipenv<span class="w"> </span>install<span class="w"> </span>-d<span class="w"> </span>--system<span class="w"> </span>--deploy<span class="w"> </span>--ignore-pipfile<span class="w">
 </span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Install dependencies&#34;</span><span class="w">
@@ -374,32 +374,32 @@ pip install *.whl
 </span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Publish Test Results junit/*&#34;</span><span class="w">
 </span><span class="w">            </span><span class="k">condition</span><span class="p">:</span><span class="w"> </span>always()<span class="w">
 </span><span class="w">            </span><span class="k">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">              </span><span class="k">testResultsFiles</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;junit/*&#34;</span><span class="w">
+</span><span class="w">              </span><span class="k">testResultsFiles</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;junit/*&#34;</span><span class="w">
 </span><span class="w">              </span><span class="k">testRunTitle</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Python $(python.version)&#34;</span><span class="w">
 </span><span class="w">
 </span><span class="w">  </span>- <span class="k">stage</span><span class="p">:</span><span class="w"> </span>Build<span class="w">
 </span><span class="w">    </span><span class="k">dependsOn</span><span class="p">:</span><span class="w"> </span>Test<span class="w">
 </span><span class="w">    </span><span class="k">jobs</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">      </span>- <span class="k">job</span><span class="p">:</span><span class="w"> </span>Build<span class="w">
+</span><span class="w">      </span>- <span class="k">job</span><span class="p">:</span><span class="w"> </span>Build<span class="w">
 </span><span class="w">        </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Build<span class="w">
 </span><span class="w">        </span><span class="k">steps</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">          </span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>UsePythonVersion@<span class="m">0</span><span class="w">
+</span><span class="w">          </span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>UsePythonVersion@<span class="m">0</span><span class="w">
 </span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Use Python $(python.version)&#34;</span><span class="w">
 </span><span class="w">            </span><span class="k">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">              </span><span class="k">versionSpec</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;$(python.version)&#34;</span><span class="w">
+</span><span class="w">              </span><span class="k">versionSpec</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;$(python.version)&#34;</span><span class="w">
 </span><span class="w">
 </span><span class="w">          </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;pip install wheel twine&#34;</span><span class="w">
 </span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Wheel and Twine&#34;</span><span class="w">
 </span><span class="w">
 </span><span class="w">          </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">             </span><span class="sd"> </span><span class="sd"># Get version from git tag (v1.0.0) -&gt; (1.0.0)</span><span class="w">
+</span><span class="sd">              # Get version from git tag (v1.0.0) -&gt; (1.0.0)</span><span class="w">
 </span><span class="w">              </span>git_tag=`git<span class="w"> </span>describe<span class="w"> </span>--abbrev=<span class="m">0</span><span class="w"> </span>--tags<span class="w"> </span>|<span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39;v&#39;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">2</span>`<span class="w">
 </span><span class="w">              </span>echo<span class="w"> </span><span class="s2">&#34;##vso[task.setvariable variable=git_tag]$git_tag&#34;</span><span class="w">
 </span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Set<span class="w"> </span>GIT_TAG<span class="w"> </span>variable<span class="w"> </span>if<span class="w"> </span>tag<span class="w"> </span>is<span class="w"> </span>pushed<span class="w">
-</span><span class="w">            </span><span class="k">condition</span><span class="p">:</span><span class="w"> </span>contains(variables<span class="p">[</span><span class="s1">&#39;Build.SourceBranch&#39;</span><span class="p">]</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;refs/tags/v&#39;</span>)<span class="w">
+</span><span class="w">            </span><span class="k">condition</span><span class="p">:</span><span class="w"> </span>contains(variables<span class="p">[</span><span class="s1">&#39;Build.SourceBranch&#39;</span><span class="p">],</span><span class="w"> </span><span class="s1">&#39;refs/tags/v&#39;</span>)<span class="w">
 </span><span class="w">
 </span><span class="w">          </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">             </span><span class="sd"> </span><span class="sd"># Get variables that are shared across jobs</span><span class="w">
+</span><span class="sd">              # Get variables that are shared across jobs</span><span class="w">
 </span><span class="w">              </span>GIT_TAG=$(git_tag)<span class="w">
 </span><span class="w">              </span>FALLBACK_TAG=$(fallback_tag)<span class="w">
 </span><span class="w">              </span><span class="k">echo GIT TAG: $GIT_TAG, FALLBACK_TAG</span><span class="p">:</span><span class="w"> </span>$FALLBACK_TAG<span class="w">
@@ -415,7 +415,7 @@ pip install *.whl
 </span><span class="w">          </span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>CopyFiles@<span class="m">2</span><span class="w">
 </span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Copy<span class="w"> </span>dist<span class="w"> </span>files<span class="w">
 </span><span class="w">            </span><span class="k">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">              </span><span class="k">sourceFolder</span><span class="p">:</span><span class="w"> </span>dist/<span class="w">
+</span><span class="w">              </span><span class="k">sourceFolder</span><span class="p">:</span><span class="w"> </span>dist/<span class="w">
 </span><span class="w">              </span><span class="k">contents</span><span class="p">:</span><span class="w"> </span>demo<span class="cp">*.whl</span><span class="w">
 </span><span class="w">              </span><span class="k">targetFolder</span><span class="p">:</span><span class="w"> </span>$(Build.ArtifactStagingDirectory)<span class="w">
 </span><span class="w">              </span><span class="k">flattenFolders</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -423,15 +423,15 @@ pip install *.whl
 </span><span class="w">          </span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>PublishBuildArtifacts@<span class="m">1</span><span class="w">
 </span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>PublishArtifact<span class="w">
 </span><span class="w">            </span><span class="k">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">              </span><span class="k">pathtoPublish</span><span class="p">:</span><span class="w"> </span>$(Build.ArtifactStagingDirectory)<span class="w">
+</span><span class="w">              </span><span class="k">pathtoPublish</span><span class="p">:</span><span class="w"> </span>$(Build.ArtifactStagingDirectory)<span class="w">
 </span><span class="w">              </span><span class="k">ArtifactName</span><span class="p">:</span><span class="w"> </span>demo.whl<span class="w">
 </span><span class="w">
 </span><span class="w">          </span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>TwineAuthenticate@<span class="m">1</span><span class="w">
 </span><span class="w">            </span><span class="k">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">              </span><span class="k">artifactFeed</span><span class="p">:</span><span class="w"> </span>$(project)/$(feed)<span class="w">
+</span><span class="w">              </span><span class="k">artifactFeed</span><span class="p">:</span><span class="w"> </span>$(project)/$(feed)<span class="w">
 </span><span class="w">
 </span><span class="w">          </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">             </span><span class="sd"> </span><span class="sd">twine upload -r $(feed) --config-file $(PYPIRC_PATH) dist/*</span><span class="w">
+</span><span class="sd">              twine upload -r $(feed) --config-file $(PYPIRC_PATH) dist/*</span><span class="w">
 </span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>PublishFeed<span class="w">
 </span></code></pre></div><p>In the <code>Test</code> stage we install the project in the pipeline container, without creating a virtual environment. We then run the <code>make lint</code> and <code>make test</code> commands, just like you would on your machine.</p>
 <p>In the <code>Build</code> stage we will try to extract the package version from a git tag, and we construct a fallback package version. We run the <code>python setup.py bdist_wheel</code> command to build a wheel, knowing that our package version environment variable is set. Finally, we publish the artifact to Azure DevOps artifacts, and (optionally) to our feed.</p>
@@ -441,7 +441,7 @@ pip install *.whl
   <span class="n">stefanschenk</span>
 
 <span class="p">[</span><span class="n">stefanschenk</span><span class="p">]</span>
-<span class="n">Repository</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">/</span><span class="o">/</span><span class="n">pkgs</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">azure</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">stefanschenk</span><span class="o">/</span><span class="n">_packaging</span><span class="o">/</span><span class="n">stefanschenk</span><span class="o">/</span><span class="n">pypi</span><span class="o">/</span><span class="n">upload</span>
+<span class="n">Repository</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pkgs</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">azure</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">stefanschenk</span><span class="o">/</span><span class="n">_packaging</span><span class="o">/</span><span class="n">stefanschenk</span><span class="o">/</span><span class="n">pypi</span><span class="o">/</span><span class="n">upload</span>
 </code></pre></div>
 </div>
 

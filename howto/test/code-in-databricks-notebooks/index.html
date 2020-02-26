@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.faaf027401ce3f388e938b61a944a5aad959cd237787945f71d20941323d9c39.css">
+  <link rel="stylesheet" href="/css/style.min.10fc0a733e9865979e8549b0d2709ceceffc819756ba0cc5626392b213536c72.css">
   
 
   
@@ -163,33 +163,33 @@
 <p>It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</p>
 <h2 id="one-way-to-run-a-test">One Way to Run a Test</h2>
 <p>The next functions are just a bit of fun (something is better than nothing):</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span><span class="p">:</span>
-    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">An exception that occured during a doctest.</span><span class="s2">&#34;&#34;&#34;</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;An exception that occured during a doctest.&#34;&#34;&#34;</span>
     <span class="k">pass</span>
 
 
-<span class="k">def</span> <span class="nf">doctest_exception_on_fail</span><span class="p">(</span><span class="n">function</span><span class="p">)</span><span class="p">:</span>
-    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Run function doctest and see whether 70 *</span><span class="s2">&#39;</span><span class="s2">s were written to stdout.</span><span class="s2">&#34;&#34;&#34;</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="p">)</span>
-    <span class="n">doctest</span><span class="o">.</span><span class="n">run_docstring_examples</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="p">:</span><span class="mi">70</span><span class="p">]</span> <span class="o">==</span> <span class="mi">70</span> <span class="o">*</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">*</span><span class="s1">&#39;</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">DoctestFailureException</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Doctest failed.</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">doctest_exception_on_fail</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Run function doctest and see whether 70 *&#39;s were written to stdout.&#34;&#34;&#34;</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">run_docstring_examples</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">output</span><span class="p">[:</span><span class="mi">70</span><span class="p">]</span> <span class="o">==</span> <span class="mi">70</span> <span class="o">*</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">DoctestFailureException</span><span class="p">(</span><span class="s1">&#39;Doctest failed.&#39;</span><span class="p">)</span>
 </code></pre></div><p>The <code>doctest_exception_on_fail</code> function does two things:</p>
 <ol>
 <li><code>run_docstring_examples</code> runs docstests of the passed string, module, function, or class, using the <code>globs</code> (second) argument for execution context</li>
 <li>it clears and reads from stdout to see whether the output starts with 70 asterisks, in which case the doctest has failed and printed out the error</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">doctests</span><span class="p">(</span><span class="o">*</span><span class="n">functions</span><span class="p">)</span><span class="p">:</span>
-    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">Run doctest in Databricks.</span><span class="s2">
-</span><span class="s2"></span><span class="s2">
-</span><span class="s2"></span><span class="s2">    Pass functions that are to be tested, or pass nothing to find</span><span class="s2">
-</span><span class="s2"></span><span class="s2">    public functions in the current global symbol table.</span><span class="s2">
-</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#34;&#34;&#34;</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">doctests</span><span class="p">(</span><span class="o">*</span><span class="n">functions</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Run doctest in Databricks.
+</span><span class="s2">
+</span><span class="s2">    Pass functions that are to be tested, or pass nothing to find
+</span><span class="s2">    public functions in the current global symbol table.
+</span><span class="s2">    &#34;&#34;&#34;</span>
     <span class="kn">import</span> <span class="nn">doctest</span>
     <span class="kn">import</span> <span class="nn">sys</span>
 
-    <span class="n">globals_copy</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">(</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="p">)</span>
+    <span class="n">globals_copy</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">functions</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
@@ -198,10 +198,10 @@
 
     <span class="p">[</span>
         <span class="n">doctest_exception_on_fail</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">globals_copy</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">_</span><span class="s1">&#39;</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__call__</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">__main__</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">globals_copy</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;_&#39;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__call__&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span>
     <span class="p">]</span>
 </code></pre></div><p>The <code>doctests</code> function does the following:</p>
 <ol>
@@ -218,7 +218,7 @@
 <p>Take a look at <a href="https://menziess.github.io/howto/test/python-code/">how to test python code</a> to see some examples of how to use pytest and doctest.</p>
 <p>You could run this piece of code in a Databricks notebook, and it will let you know that it&rsquo;s being executed from <code>/databricks/driver</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">-x</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">.</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">-vv</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">)</span>
+<span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s2">&#34;-x&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span> <span class="s2">&#34;-vv&#34;</span><span class="p">])</span>
 </code></pre></div><p>Output:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">============================= test session starts ==============================
 platform linux -- Python 3.7.3, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /local_disk0/pythonVirtualEnvDirs/virtualEnv-61a202f1-14af-4ea7-8e29-ba1b137b4a5c/bin/python
@@ -244,11 +244,11 @@ logs
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">doctest</span>
 
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="p">:</span>
-    <span class="sa"></span><span class="s2">&#34;&#34;&#34;</span><span class="s2">
-</span><span class="s2"></span><span class="s2">    &gt;&gt;&gt; f(1)</span><span class="s2">
-</span><span class="s2"></span><span class="s2">    45</span><span class="s2">
-</span><span class="s2"></span><span class="s2">    </span><span class="s2">&#34;&#34;&#34;</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    &gt;&gt;&gt; f(1)
+</span><span class="s2">    45
+</span><span class="s2">    &#34;&#34;&#34;</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 
 <span class="n">my_module</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">]</span>
