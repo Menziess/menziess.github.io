@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Create Python Packages - menziess blog</title>
+  <title>Enhance Your Databricks Workflow - menziess blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Lora:400,700|Fira+Code:300,400&display=swap" as="font">
@@ -114,7 +114,7 @@
   <h4>Howto</h4>
   <ul>
     
-    <li class="active ">
+    <li class="">
       <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
     </li>
     
@@ -134,7 +134,7 @@
       <a href="https://menziess.github.io/howto/test/python-code/">Test Python Code</a>
     </li>
     
-    <li class="">
+    <li class="active ">
       <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">Enhance Your Databricks Workflow</a>
     </li>
     
@@ -161,48 +161,106 @@
         </div>
         <div class="col-12 col-md-9">
           
-<h1 class="title">Create Python Packages</h1>
+<h1 class="title">Enhance Your Databricks Workflow</h1>
 <div class="content anchor-link-enabled">
-  <p>Why should you care about creating packages?</p>
-<ul>
-<li>packages are easy to install (<code>pip install demo</code>).</li>
-<li>packages simplify development (<code>pip install -e .</code> installs your package and keeps it up-to-date).</li>
-<li>packages are easy to run and test (<code>from demo.main import say_hello_to</code>, then test the function).</li>
-<li>packages are easy to version, avoiding breaking dependant&rsquo;s code (<code>pip install demo==1.0.3</code>).</li>
-</ul>
-<p>Library vs Package vs Module:</p>
-<ul>
-<li><strong>Module</strong>: a <code>.py</code> file containing functions that belong together</li>
-<li><strong>Package</strong>: a collection of modules that is distributable</li>
-<li><strong>Library</strong>: a package that is a not context aware</li>
-</ul>
-<p><img src="/images/logo/artifact.png#logo" alt=""></p>
-<p>Packaging python code is quite easy, you require a single <code>setup.py</code> script to package in several distribution formats.</p>
+  <p>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now <strong>lint</strong>, <strong>test</strong>, and <strong>package</strong> the code that you want to run on Databricks more easily:</p>
+<p><img src="/images/enhance-your-databricks-workflow/databricks-connect.png" alt=""></p>
+<p>By applying ci-cd practices you can <strong>continuously deliver</strong> and install versioned packages of your python code on your Databricks cluster:</p>
+<p><img src="/images/enhance-your-databricks-workflow/overview.png" alt=""></p>
+<p>All you need is <code>vscode</code>, a <code>databricks workspace</code>, a <code>storage account</code>, and <code>data factory</code> to follow along with this post.</p>
 <h2 id="topics">Topics</h2>
 <ol>
-<li><a href="#1-packaging-setup">Packaging Setup</a></li>
-<li><a href="#2-documentation">Documentation</a></li>
-<li><a href="#3-linting-and-testing">Linting and Testing</a></li>
-<li><a href="#4-makefile">Makefile</a></li>
-<li><a href="#5-installing-wheel">Installing wheel</a></li>
-<li><a href="#6-include-config-files">Include Config Files</a></li>
-<li><a href="#7-devops">DevOps</a></li>
+<li><a href="#1-local-setup">Local Setup</a></li>
+<li><a href="#2-remote-setup">Remote Setup</a></li>
+<li><a href="#3-package-the-spark-app">Package the Spark App</a></li>
+<li><a href="#4-test-the-spark-app">Test the Spark App</a></li>
+<li><a href="#5-build-the-artifact">Build the Artifact</a></li>
+<li><a href="#6-copy-the-package-to-dbfs">Copy the Package to DBFS</a></li>
+<li><a href="#7-run-the-package-on-databricks-using-data-factory">Run the Package on Databricks Using Data Factory</a></li>
+<li><a href="#6-limitations">Limitations</a></li>
 </ol>
-<h2 id="1-packaging-setup">1. Packaging Setup</h2>
-<p>Let&rsquo;s assume that we have the following folder structure (from <a href="https://menziess.github.io/howto/test/python-code/">this earlier post</a>), and <a href="https://menziess.github.io/howto/manage/virtual-environments/">virtual environment</a> set up:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ tree -a -L <span class="m">2</span>
-.
-├── .venv
-│   └── ...
-├── Pipfile
-├── Pipfile.lock
-├── src
-│   └── demo
-└── tests
-    └── demo
+<h2 id="1-local-setup">1. Local Setup</h2>
+<p><img src="/images/logo/vscode.png#logo" alt=""> ⟶ <img src="/images/logo/python.png#logo" alt=""></p>
+<p>Let&rsquo;s create a small example spark app.</p>
+<p>Create a project folder <code>demo-project</code> and install pyspark inside a new <a href="https://menziess.github.io/howto/manage/virtual-environments/">virtual environment</a>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">mkdir demo-project <span class="o">&amp;&amp;</span> <span class="nb">cd</span> demo-project
+pipenv install pyspark --python 3.
+pipenv shell
+</code></pre></div><p>Create a sample data file <code>mnt/demo/sampledata.csv</code> containing:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">id, firstname, lastname
+1, Stefan, Schenk
+</code></pre></div><p>Create a python file <code>src/demo/main.py</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="m">9</span> directories, <span class="m">3</span> files
-</code></pre></div><p>Create a <code>setup.py</code> file in the root directory that we will use to define the way we&rsquo;d like to package our code, containing the following code:</p>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">sf</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Read in data, add a column `added_column`.&#34;&#34;&#34;</span>
+    <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+        <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;inferSchema&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;added_column&#39;</span><span class="p">,</span> <span class="n">sf</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">main</span><span class="p">(</span><span class="s1">&#39;mnt/demo/*.csv&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div><p>Run the script to see if it works:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ python src/demo/main.py 🐌🚬😁🤦‍♂️
++---+----------+----------+------------+
+<span class="p">|</span> id<span class="p">|</span> firstname<span class="p">|</span>  lastname<span class="p">|</span>added_column<span class="p">|</span>
++---+----------+----------+------------+
+<span class="p">|</span>  1<span class="p">|</span>    Stefan<span class="p">|</span>    Schenk<span class="p">|</span>   🐌🚬😁🤦‍♂️<span class="p">|</span>
++---+----------+----------+------------+
+</code></pre></div><p>It&rsquo;s quite basic, but it&rsquo;s good to start small.</p>
+<h2 id="2-remote-setup">2. Remote Setup</h2>
+<p><img src="/images/logo/python.png#logo" alt=""> ⟶ <img src="/images/logo/databricks.png#logo" alt=""></p>
+<p>From here on, we will make things more interesting.</p>
+<ol>
+<li>
+<p>Install <a href="https://menziess.github.io/howto/install/databricks-connect/">databricks-connect</a> in your virtual environment.</p>
+</li>
+<li>
+<p>Create a new blob container in your storage account named <code>demo</code>, and upload the <code>mnt/demo/sampledata.csv</code> file.</p>
+</li>
+<li>
+<p>Use this utility <a href="https://gist.github.com/Menziess/e2fe3708e74e14885d83e9bd56cd5284#file-create_databricks_mount-py">notebook</a> to mount the demo container in your databricks workspace.</p>
+</li>
+<li>
+<p>Run the following code in a notebook cell to see if you can list the data file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">%fs ls mnt/demo
+</code></pre></div></li>
+</ol>
+<p>Run your python script again (this time it should run on Databricks):</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">➜ python src/demo/main.py 🐌🚬😁🙋
+20/02/26 23:49:32 WARN Utils: Your hostname, ANL-SS14 resolves to a loopback address: 127.0.1.1; using 172.17.160.1 instead (on interface eth1)
+20/02/26 23:49:32 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+20/02/26 23:49:33 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to &#34;WARN&#34;.
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+20/02/26 23:49:35 WARN MetricsSystem: Using default name SparkStatusTracker for source because neither spark.metrics.namespace nor spark.app.id is set.
+View job details at https://westeurope.azuredatabricks.net/?o=3892784943666666#/setting/clusters/0214-195926-aptin821/sparkUi
++---+----------+----------+------------+
+| id| firstname|  lastname|added_column|
++---+----------+----------+------------+
+|  1|    Stefan|    Schenk|   🐌🚬😁🙋|
++---+----------+----------+------------+
+</code></pre></div><p>Cool, we just ran the same code on data in the cloud, using a powerful cluster.</p>
+<p>Switch back to using regular <code>pyspark</code>, so we can swiftly develop locally.</p>
+<h2 id="3-package-the-spark-app">3. Package the Spark App</h2>
+<p><img src="/images/logo/python.png#logo#s" alt=""> ⟶ <img src="/images/logo/devops.png#logo" alt=""></p>
+<p>Our next step is to make our python code packageable, so that we can easily install and run it somewhere else.</p>
+<ol>
+<li>
+<p>Create an empty <code>__init__.py</code> file in your <code>src/demo/</code> folder.</p>
+</li>
+<li>
+<p>Create a <code>setup.py</code> file in your root directory:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;Setup.py script for packaging project.&#34;&#34;&#34;</span>
 
 <span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
@@ -232,113 +290,77 @@
             <span class="o">*</span><span class="n">read_pipenv_dependencies</span><span class="p">(</span><span class="s1">&#39;Pipfile.lock&#39;</span><span class="p">),</span>
         <span class="p">]</span>
     <span class="p">)</span>
-</code></pre></div><p>You can now call this script to package your code in several ways:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">python setup.py develop <span class="c1"># don&#39;t generate anything, just install locally</span>
-python setup.py bdist_egg <span class="c1"># generate egg distribution, doesn&#39;t include dependencies</span>
-python setup.py bdist_wheel <span class="c1"># generate versioned wheel, includes dependencies</span>
-python setup.py sdist --formats<span class="o">=</span>zip,gztar,bztar,ztar,tar <span class="c1"># source code</span>
-</code></pre></div><p>Run the first one in the list above. When it succeeds, you will be able to import your code as follows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">say_hello_to</span>
-</code></pre></div><p>Now that we were able to install the project, we should take a closer look at the arguments that we pass to the <code>setuptools.setup</code> function:</p>
-<ol>
-<li><code>name</code>: the name of your package</li>
-<li><code>version</code>: every change to your code should yield a different package version, or else developers may install the same package version that&rsquo;s suddenly behaving differently, breaking their code</li>
-<li><code>packages</code>: a list of paths of all your python files</li>
-<li><code>install_requires</code>: a list of package names and versions (just as in a <code>requirements.txt</code> file)</li>
+</code></pre></div><p>Read more about these <code>__init__.py</code> and <code>setup.py</code> scripts <a href="https://menziess.github.io/howto/create/python-packages/#1-packaging-setup">here</a>.</p>
+</li>
+<li>
+<p>Install your code as an &ldquo;editable&rdquo; package in your virtual environment:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip install -e .
+</code></pre></div><p>This means that whenever you edit your python files, the installed package will include the changes, making development easier.</p>
+<p>You will now be able to import from your package:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ python
+Python 3.7.5 <span class="o">(</span>default, Dec  <span class="m">3</span> 2019, 12:09:43<span class="o">)</span>
+<span class="o">[</span>GCC 7.4.0<span class="o">]</span> on linux
+Type <span class="s2">&#34;help&#34;</span>, <span class="s2">&#34;copyright&#34;</span>, <span class="s2">&#34;credits&#34;</span> or <span class="s2">&#34;license&#34;</span> <span class="k">for</span> more information.
+&gt;&gt;&gt; from demo.main import main
+&gt;&gt;&gt; main
+&lt;<span class="k">function</span> main at 0x7f086af5cc20&gt;
+</code></pre></div></li>
+<li>
+<p>Build a distributable wheel &ndash; using the same script &ndash; by running:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">python setup.py bdist_wheel
+</code></pre></div><p>A <code>dist/</code> folder will have appeared, containing the <code>.whl</code> distribution.</p>
+</li>
 </ol>
-<p>You can see that I wrote a simple function <code>read_pipenv_dependencies</code> to read the non-dev dependencies from the <code>Pipfile.lock</code>. Now I won&rsquo;t have to specify dependencies manually. I also use <code>os.getenv</code> to read in an environment variable to determine the package version, which are nice sagues to the next topics.</p>
-<h2 id="2-documentation">2. Documentation</h2>
-<p>Just as I read in the <code>Pipfile.lock</code> to specify my dependencies, I can also read in a <code>README.md</code> file to display useful documentation as the <code>long_description</code>. More information about this can be read on <a href="https://packaging.python.org/guides/making-a-pypi-friendly-readme/">packaging.python.org</a>.</p>
-<p>In addition you can create a proper documentation web page using <code>readthedocs</code> and <code>shinx</code>. Create a folder for your documentation:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">mkdir docs
-</code></pre></div><p>Install sphinx:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pipenv install -d sphinx
-</code></pre></div><p>Run the quickstart to generate the source directory for your documentation:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">sphinx-quickstart
-</code></pre></div><p>Now you can start populating the <code>docs/index.rst</code> file with your documentation. Learn more about automating this process on <a href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">sphinx-doc.org</a>.</p>
-<h2 id="3-linting-and-testing">3. Linting and Testing</h2>
-<p>As part of your packaging process, you&rsquo;d want to apply some static code analyses, linting, and testing.</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pipenv install -d mypy autopep8 <span class="se">\
-</span><span class="se"></span>  flake8 pytest bandit pydocstyle
-</code></pre></div><p>Preferably, you&rsquo;d run a command to verify the code style, run some tests and checks before you push your commits to the remote repository, and cause a build pipeline to fail if the tests don&rsquo;t pass.</p>
-<h2 id="4-makefile">4. Makefile</h2>
-<p>As we&rsquo;re rapidly introducing new commands that are part of packaging our specific project, it is useful to record common commands. Most build automation tools (such as Gradle or npm) provide this feature by default.</p>
-<p>Make is a tool to organize code compilation, traditionally used in c-oriented projects. But it can be used to run any other command.</p>
-<p>By default, when you run <code>make</code>, it executes the first command in the list, in the example below it will execute <code>make help</code> and print out the contents of the Makefile.</p>
-<p>If we run <code>make test</code>, it will first run <code>make dev</code>, as it&rsquo;s stated as a dependency in the Makefile:</p>
-<div class="highlight"><pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nf">help</span><span class="o">:</span>
-	@echo <span class="s2">&#34;Tasks in \033[1;32mdemo\033[0m:&#34;</span>
-	@cat Makefile
+<p>We will utilize this packaging capability in our build pipeline, to create a new artifact whenever we push new changes to the repository.</p>
+<h2 id="4-test-the-spark-app">4. Test the Spark App</h2>
+<p><img src="/images/logo/testing.png#logo" alt=""></p>
+<p>But before we build anything, we want to make sure that our code-style is acceptable, and that new changes have not broken any existing code.</p>
+<ol>
+<li>
+<p>Create a new python file <code>tests/demo/test_main.py</code> containing the following code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;Test main module.&#34;&#34;&#34;</span>
 
-<span class="nf">lint</span><span class="o">:</span>
-	mypy src --ignore-missing-imports
-	flake8 src --ignore<span class="o">=</span><span class="k">$(</span>shell cat .flakeignore<span class="k">)</span>
+<span class="kn">from</span> <span class="nn">python_package.main</span> <span class="kn">import</span> <span class="n">main</span>
 
-<span class="nf">dev</span><span class="o">:</span>
-	pip install -e .
 
-<span class="nf">test</span><span class="o">:</span> <span class="n">dev</span>
-	pytest --doctest-modules --junitxml<span class="o">=</span>junit/test-results.xml
-	bandit -r src -f xml -o junit/security.xml <span class="o">||</span> <span class="nb">true</span>
-
-<span class="nf">build</span><span class="o">:</span> <span class="n">clean</span>
-	pip install wheel
-	python setup.py bdist_wheel
-
-<span class="nf">clean</span><span class="o">:</span>
-	@rm -rf .pytest_cache/ .mypy_cache/ junit/ build/ dist/
-	@find . -not -path <span class="s1">&#39;./.venv*&#39;</span> -path <span class="s1">&#39;*/__pycache__*&#39;</span> -delete
-	@find . -not -path <span class="s1">&#39;./.venv*&#39;</span> -path <span class="s1">&#39;*/*.egg-info*&#39;</span> -delete
-</code></pre></div><p>Now, as you can see, it&rsquo;s quite easy for new developers to contribute to the project. They now have a nice overview of common commands, for example to build a wheel: <code>make build</code>.</p>
-<h2 id="5-installing-wheel">5. Installing wheel</h2>
-<p>When you run <code>make build</code>, it will use the <code>setup.py</code> file to create a wheel distribution. You&rsquo;ll find a <code>.whl</code> file in the <code>dist/</code> folder, having <code>0.0.dev0</code> in the name. You can now specify an environment variable to change the version of the wheel:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">export</span> <span class="nv">PACKAGE_VERSION</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span>
-make build
-ls dist
-</code></pre></div><p>Having the wheel, you can create a new folder, somewhere on your desktop, copy the wheel into it, and install it using:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">mkdir test-whl <span class="o">&amp;&amp;</span> <span class="nb">cd</span> test-whl
-pipenv shell
-pip install *.whl
-</code></pre></div><p>Print out the installed packages:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip list
-</code></pre></div><h2 id="6-include-config-files">6. Include Config Files</h2>
-<p>It&rsquo;s also possible to add data to your package by adding the following lines to your <code>setup.py</code> script:</p>
-<p><strong>Note:</strong> This may not work on distributed systems (such as Databricks).</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">setup</span><span class="p">(</span>
-        <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
-            <span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;data/my-config.json&#39;</span><span class="p">])</span>
-        <span class="p">]</span>
-    <span class="p">)</span>
-</code></pre></div><p>You&rsquo;ll then be able to read the file by using this function:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_cfg_file</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">foldername</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="s2">&#34;&#34;&#34;Get config file.
-</span><span class="s2">
-</span><span class="s2">    Using &#39;data_files&#39; property from setup.py script.
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">foldername</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Foldername must be string.&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">foldername</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Foldername must not start with </span><span class="se">\&#39;</span><span class="s1">/</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Filename must be string.&#39;</span><span class="p">)</span>
-
-    <span class="c1"># Will first try to read file from installed location</span>
-    <span class="c1"># this only applies for .whl installations</span>
-    <span class="c1"># Otherwise it will read file directly</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span> <span class="n">foldername</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">FileNotFoundError</span><span class="p">:</span>
-        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">foldername</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</code></pre></div><p>If you create a wheel again, and install it in a virtual environment in a new folder, without copying the data file, you should be able to access the data by executing the function above.</p>
-<h2 id="7-devops">7. DevOps</h2>
-<p>As part of our packaging process, we want to integrate changes from many contributors, and automate as many repetitive processes that are required to successfully release a new version.</p>
-<p>For this example we&rsquo;ll use Azure DevOps, where the following pipeline will be triggered on <code>git tags</code> as well as the <code>master</code> branch.</p>
-<p>Have a look, and we&rsquo;ll discuss the various stages and tasks afterwards:</p>
+<span class="k">def</span> <span class="nf">test_main</span><span class="p">():</span>
+    <span class="s2">&#34;&#34;&#34;Test whether main function works.&#34;&#34;&#34;</span>
+    <span class="n">expected_value</span> <span class="o">=</span> <span class="s1">&#39;(╯°□°）╯︵ ┻━┻)&#39;</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span>
+        <span class="n">row</span><span class="o">.</span><span class="n">added_column</span> <span class="o">==</span> <span class="n">expected_value</span>
+        <span class="k">for</span> <span class="n">row</span>
+        <span class="ow">in</span> <span class="p">(</span>
+            <span class="n">main</span><span class="p">(</span><span class="s1">&#39;mnt/demo/*.csv&#39;</span><span class="p">,</span> <span class="n">expected_value</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;added_column&#39;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+        <span class="p">)</span>
+    <span class="p">])</span>
+</code></pre></div></li>
+<li>
+<p>Run the test:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pytest
+</code></pre></div></li>
+</ol>
+<p>By running the test we have verified that every single row had the value <code>(╯°□°）╯︵ ┻━┻)</code> in the column called <code>added_column</code>. If someone accidentally modified the code, the tests (that we will run in our build pipeline) will fail, ensuring that the broken code never reaches production.</p>
+<p>You would also be able to add something called <code>doctests</code> to your functions as examples for fellow developers who make use of your functions (<a href="https://menziess.github.io/howto/test/python-code/#doctests">example</a>).</p>
+<p>In addition to tests, you should make sure that the code style is acceptable by running a linter over your code.</p>
+<ol>
+<li>
+<p>Install the python vscode extension, and set up <code>mypy</code> and <code>flake8</code> for <code>vscode</code> to highlight code-style issues (<a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/#testing-and-linting">example</a>).</p>
+</li>
+<li>
+<p>Run the following commands to analyze your code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">mypy src --ignore-missing-imports
+flake8 src
+</code></pre></div><p>We will also run these commands in our build pipeline, any errors will cause the pipeline to fail until the code has been cleaned up again.</p>
+</li>
+</ol>
+<p>Everything seems ready to be shipped to production.</p>
+<h2 id="5-build-the-artifact">5. Build the Artifact</h2>
+<p><img src="/images/logo/artifact.png#logo" alt=""></p>
+<p>We will now start applying ci-cd practices to continuously release our code onto Databricks.</p>
+<p>We&rsquo;ll automate the process of testing and building our final package by using an Azure DevOps pipeline (<a href="https://menziess.github.io/howto/create/python-packages/#7-devops">example</a>).</p>
+<p>Create a file <code>azure-pipelines.yml</code> in your root directory:</p>
 <div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">resources</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span>- <span class="k">repo</span><span class="p">:</span><span class="w"> </span>self<span class="w">
 </span><span class="w">
@@ -348,8 +370,6 @@ pip install *.whl
 </span><span class="w">
 </span><span class="w"></span><span class="k">variables</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span><span class="k">python.version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.7&#34;</span><span class="w">
-</span><span class="w">  </span><span class="k">project</span><span class="p">:</span><span class="w"> </span>demo<span class="w">
-</span><span class="w">  </span><span class="k">feed</span><span class="p">:</span><span class="w"> </span>demo<span class="w">
 </span><span class="w">  </span><span class="k">major_minor</span><span class="p">:</span><span class="w"> </span>$<span class="p">[</span>format(<span class="s1">&#39;{0:yy}.{0:MM}&#39;</span><span class="p">,</span><span class="w"> </span>pipeline.startTime)<span class="p">]</span><span class="w">
 </span><span class="w">  </span><span class="k">counter_unique_key</span><span class="p">:</span><span class="w"> </span>$<span class="p">[</span>format(<span class="s1">&#39;{0}.demo&#39;</span><span class="p">,</span><span class="w"> </span>variables.major_minor)<span class="p">]</span><span class="w">
 </span><span class="w">  </span><span class="k">patch</span><span class="p">:</span><span class="w"> </span>$<span class="p">[</span>counter(variables.counter_unique_key<span class="p">,</span><span class="w"> </span><span class="m">0</span>)<span class="p">]</span><span class="w">
@@ -393,8 +413,8 @@ pip install *.whl
 </span><span class="w">            </span><span class="k">inputs</span><span class="p">:</span><span class="w">
 </span><span class="w">              </span><span class="k">versionSpec</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;$(python.version)&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w">          </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;pip install wheel twine&#34;</span><span class="w">
-</span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Wheel and Twine&#34;</span><span class="w">
+</span><span class="w">          </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;pip install wheel&#34;</span><span class="w">
+</span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Wheel&#34;</span><span class="w">
 </span><span class="w">
 </span><span class="w">          </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
 </span><span class="sd">              # Get version from git tag (v1.0.0) -&gt; (1.0.0)</span><span class="w">
@@ -430,24 +450,85 @@ pip install *.whl
 </span><span class="w">            </span><span class="k">inputs</span><span class="p">:</span><span class="w">
 </span><span class="w">              </span><span class="k">pathtoPublish</span><span class="p">:</span><span class="w"> </span>$(Build.ArtifactStagingDirectory)<span class="w">
 </span><span class="w">              </span><span class="k">ArtifactName</span><span class="p">:</span><span class="w"> </span>demo.whl<span class="w">
-</span><span class="w">
-</span><span class="w">          </span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>TwineAuthenticate@<span class="m">1</span><span class="w">
-</span><span class="w">            </span><span class="k">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">              </span><span class="k">artifactFeed</span><span class="p">:</span><span class="w"> </span>$(project)/$(feed)<span class="w">
-</span><span class="w">
-</span><span class="w">          </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">              twine upload -r $(feed) --config-file $(PYPIRC_PATH) dist/*</span><span class="w">
-</span><span class="w">            </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>PublishFeed<span class="w">
-</span></code></pre></div><p>In the <code>Test</code> stage we install the project in the pipeline container, without creating a virtual environment. We then run the <code>make lint</code> and <code>make test</code> commands, just like you would on your machine.</p>
-<p>In the <code>Build</code> stage we will try to extract the package version from a git tag, and we construct a fallback package version. We run the <code>python setup.py bdist_wheel</code> command to build a wheel, knowing that our package version environment variable is set. Finally, we publish the artifact to Azure DevOps artifacts, and (optionally) to our feed.</p>
-<p>You&rsquo;ll need a <code>.pypirc</code> file to publish your package to a feed, you can copy the contents after creating a feed in Azure DevOps, which looks something like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">distutils</span><span class="p">]</span>
-<span class="n">Index</span><span class="o">-</span><span class="n">servers</span> <span class="o">=</span>
-  <span class="n">stefanschenk</span>
+</span></code></pre></div><p>When you scan through the file, you&rsquo;ll see some commands that are called using a <code>Makefile</code>, add this file to your root directory:</p>
+<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">lint</span><span class="o">:</span>
+	mypy src --ignore-missing-imports
+	flake8 src --ignore<span class="o">=</span><span class="k">$(</span>shell cat .flakeignore<span class="k">)</span>
 
-<span class="p">[</span><span class="n">stefanschenk</span><span class="p">]</span>
-<span class="n">Repository</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pkgs</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">azure</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">stefanschenk</span><span class="o">/</span><span class="n">_packaging</span><span class="o">/</span><span class="n">stefanschenk</span><span class="o">/</span><span class="n">pypi</span><span class="o">/</span><span class="n">upload</span>
-</code></pre></div>
+<span class="nf">def</span><span class="o">:</span>
+	pip install -e .
+
+<span class="nf">test</span><span class="o">:</span> <span class="n">dev</span>
+	pytest --doctest-modules --junitxml<span class="o">=</span>junit/test-results.xml
+	bandit -r src -f xml -o junit/security.xml <span class="o">||</span> <span class="nb">true</span>
+</code></pre></div><p>Create a new repository <a href="https://dev.azure.com/">here</a>, then commit and push your code.</p>
+<p>In Azure DevOps create a new build pipeline, select your <code>azure-pipelines.yml</code> file, and click &ldquo;Run&rdquo;. If everything goes well, an artifact will be created:</p>
+<p><img src="/images/enhance-your-databricks-workflow/build-succeeded.png#large" alt=""></p>
+<h2 id="6-copy-the-package-to-dbfs">6. Copy the Package to DBFS</h2>
+<p><img src="/images/logo/releases.png#logo" alt=""> ⟶ <img src="/images/logo/databricks.png#logo" alt=""></p>
+<p>Next, create a new release pipeline in Azure DevOps. Choose to start with an &ldquo;Empty job&rdquo;.</p>
+<ol>
+<li>
+<p>In the artifacts section, add your demo build.</p>
+</li>
+<li>
+<p>Click on the small bolt icon, and enable continuous-deployments. As a filter include the <code>master</code> branch.</p>
+<p><img src="/images/enhance-your-databricks-workflow/cd.png#large#shadow" alt=""></p>
+</li>
+<li>
+<p>In the first stage, add a new task by searching for &ldquo;Databricks files to DBFS&rdquo;, you may have to install this task from the marketplace. Enter the following values:</p>
+<p><img src="/images/enhance-your-databricks-workflow/stage.png#large#shadow" alt=""></p>
+</li>
+<li>
+<p>Finally, create a new Databricks token, and add it to a variable in your release pipeline:</p>
+<p><img src="/images/enhance-your-databricks-workflow/token.png#large#shadow" alt=""></p>
+</li>
+<li>
+<p>Trigger the release pipeline, and take a look inside your <code>/libraries</code> folder on DBFS, you should see your package there:</p>
+<p><img src="/images/enhance-your-databricks-workflow/dbfs.png#medium#shadow" alt=""></p>
+</li>
+</ol>
+<p>Whenever the package has successfully been built, this release is triggered, which will copy the artifact to DBFS, where Databricks notebooks will be able to pick it up and install it.</p>
+<h2 id="7-run-the-package-on-databricks-using-data-factory">7. Run the Package on Databricks Using Data Factory</h2>
+<p><img src="/images/logo/databricks.png#logo" alt=""> ⟵ <img src="/images/logo/datafactory.png#logo" alt=""></p>
+<p>As our orchestration tool, we&rsquo;ll use Data Factory. We&rsquo;ll be able to pass the dependencies and arguments to our Databricks notebook, which then runs our package.</p>
+<ol>
+<li>
+<p>Create a &ldquo;runner&rdquo; notebook that takes two arguments: <code>filepath</code> and <code>value</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Databricks notebook source</span>
+<span class="c1"># MAGIC %md # Runner</span>
+
+<span class="c1"># COMMAND ----------</span>
+
+<span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;filepath&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filepath&#39;</span><span class="p">)</span>
+
+<span class="c1"># COMMAND ----------</span>
+
+<span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+
+<span class="c1"># COMMAND ----------</span>
+
+<span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">main</span>
+
+<span class="n">main</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></li>
+<li>
+<p>In Data Factory, create a new &ldquo;compute&rdquo; Databricks Linked Service:</p>
+<p><img src="/images/enhance-your-databricks-workflow/linked-service.png#large#shadow" alt=""></p>
+</li>
+<li>
+<p>Create a new pipeline, and add a Databricks activity. Add the path to your package as a <code>wheel</code> library, and provide the required arguments:</p>
+<p><img src="/images/enhance-your-databricks-workflow/pipeline.png#shadow" alt=""></p>
+</li>
+<li>
+<p>Press &ldquo;Debug&rdquo;, and hover over the job run in the Output tab. Then click on the glasses icon, and click on the link that takes you to the Databricks job run.</p>
+<p><img src="/images/enhance-your-databricks-workflow/result.png#large#shadow" alt=""></p>
+</li>
+</ol>
+<p>And that&rsquo;s it! Let me hear your feedback in the comments below 😃👍🐌🎈.</p>
+
 </div>
 
 <br>
