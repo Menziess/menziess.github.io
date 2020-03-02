@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Enhance Your Databricks Workflow</title>
+      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
+      <pubDate>Sun, 01 Mar 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
+      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
+    </item>
+    
+    <item>
       <title>Create Python Packages</title>
       <link>https://menziess.github.io/howto/create/python-packages/</link>
       <pubDate>Tue, 11 Feb 2020 07:15:38 +0100</pubDate>
@@ -57,15 +66,6 @@ Microsoft (in collaboration with Canonical) has made a tremendous effort into cl
       
       <guid>https://menziess.github.io/howto/test/python-code/</guid>
       <description>Writing unit tests should an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</description>
-    </item>
-    
-    <item>
-      <title>Enhance Your Databricks Workflow</title>
-      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
-      <pubDate>Wed, 05 Feb 2020 07:15:38 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
-      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
     </item>
     
     <item>

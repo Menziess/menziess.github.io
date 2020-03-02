@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Enhance Your Databricks Workflow</title>
+      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
+      <pubDate>Sun, 01 Mar 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
+      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
+    </item>
+    
+    <item>
       <title>Create Python Packages</title>
       <link>https://menziess.github.io/howto/create/python-packages/</link>
       <pubDate>Tue, 11 Feb 2020 07:15:38 +0100</pubDate>
@@ -19,6 +28,15 @@
       <guid>https://menziess.github.io/howto/create/python-packages/</guid>
       <description>Why should you care about creating packages?
  packages are easy to install (pip install demo). packages simplify development (pip install -e . installs your package and keeps it up-to-date). packages are easy to run and test (from demo.</description>
+    </item>
+    
+    <item>
+      <title>Enhance Your Python-vscode Workflow</title>
+      <link>https://menziess.github.io/howto/enhance/your-python-vscode-workflow/</link>
+      <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/enhance/your-python-vscode-workflow/</guid>
+      <description>This post covers my personal workflow for python projects, using Visual Studio Code along with some other tools. A good workflow saves time and allows you to focus on the problem at hand, instead of tasks that make you feel like a robot (machines are good for that).</description>
     </item>
     
     <item>
@@ -39,6 +57,25 @@
       <guid>https://menziess.github.io/howto/install/windows-subsystem-for-linux/</guid>
       <description>If you&amp;rsquo;re accustomed to using a unix shell as your command-line interface, you may end up being very unproductive using Windows 10.
 Microsoft (in collaboration with Canonical) has made a tremendous effort into closing the gap between Linux and Windows developers by creating a kernel compatibility layer based on Ubuntu.</description>
+    </item>
+    
+    <item>
+      <title>Test Python Code</title>
+      <link>https://menziess.github.io/howto/test/python-code/</link>
+      <pubDate>Wed, 05 Feb 2020 09:39:35 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/test/python-code/</guid>
+      <description>Writing unit tests should an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</description>
+    </item>
+    
+    <item>
+      <title>Test Code in Databricks Notebooks</title>
+      <link>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</link>
+      <pubDate>Mon, 03 Feb 2020 20:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</guid>
+      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user.
+⟶ It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</description>
     </item>
     
     <item>
