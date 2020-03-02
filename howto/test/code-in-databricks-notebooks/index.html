@@ -163,11 +163,11 @@
           
 <h1 class="title">Test Code in Databricks Notebooks</h1>
 <div class="content anchor-link-enabled">
-  <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user.</p>
+  <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user. It would be best to properly package and test your code before you run it in production on Databricks clusters, like <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">this</a>.</p>
 <p><img src="/images/logo/testing.png#logo" alt=""> ⟶ <img src="/images/logo/databricks.png#logo" alt=""></p>
-<p>It is often the case that the testing part of these spark applications is neglected because Databricks notebooks are intrinsically hard to test, as convenient as they may be.</p>
+<p>But if there&rsquo;s no time to set up proper package testing, there&rsquo;s always the hacker way of running tests right inside of Databricks notebooks.</p>
 <h2 id="one-way-to-run-a-test">One Way to Run a Test</h2>
-<p>The next functions are just a bit of fun (something is better than nothing):</p>
+<p>We will need a function to actually run the doctests for a given function, and raise an exception when a test fails:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;An exception that occured during a doctest.&#34;&#34;&#34;</span>
     <span class="k">pass</span>
@@ -180,11 +180,12 @@
     <span class="n">output</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">output</span><span class="p">[:</span><span class="mi">70</span><span class="p">]</span> <span class="o">==</span> <span class="mi">70</span> <span class="o">*</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">DoctestFailureException</span><span class="p">(</span><span class="s1">&#39;Doctest failed.&#39;</span><span class="p">)</span>
-</code></pre></div><p>The <code>doctest_exception_on_fail</code> function does two things:</p>
+</code></pre></div><p>The function does two things:</p>
 <ol>
 <li><code>run_docstring_examples</code> runs docstests of the passed string, module, function, or class, using the <code>globs</code> (second) argument for execution context</li>
 <li>it clears and reads from stdout to see whether the output starts with 70 asterisks, in which case the doctest has failed and printed out the error</li>
 </ol>
+<p>Next, we will also need to be able to find all functions within the scope of a notebook:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">doctests</span><span class="p">(</span><span class="o">*</span><span class="n">functions</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;Run doctest in Databricks.
 </span><span class="s2">
@@ -220,7 +221,7 @@
 <p>Although this works, it is not the recommended way to test the code you run on Databricks.</p>
 <h2 id="why-are-databricks-notebooks-hard-to-test">Why Are Databricks Notebooks Hard To Test?</h2>
 <p>Can&rsquo;t we just run pytest, unittest, or doctest in Databricks?</p>
-<p>Take a look at <a href="https://menziess.github.io/howto/test/python-code/">how to test python code</a> to see some examples of how to use pytest and doctest.</p>
+<p>Take a look at <a href="https://menziess.github.io/howto/test/python-code/#doctests">how to test python code</a> to see some examples of how to use pytest and doctest.</p>
 <p>You could run this piece of code in a Databricks notebook, and it will let you know that it&rsquo;s being executed from <code>/databricks/driver</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s2">&#34;-x&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span> <span class="s2">&#34;-vv&#34;</span><span class="p">])</span>
