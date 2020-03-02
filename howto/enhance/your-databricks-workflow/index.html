@@ -177,7 +177,6 @@
 <li><a href="#5-build-the-artifact">Build the Artifact</a></li>
 <li><a href="#6-copy-the-package-to-dbfs">Copy the Package to DBFS</a></li>
 <li><a href="#7-run-the-package-on-databricks-using-data-factory">Run the Package on Databricks Using Data Factory</a></li>
-<li><a href="#6-limitations">Limitations</a></li>
 </ol>
 <h2 id="1-local-setup">1. Local Setup</h2>
 <p><img src="/images/logo/vscode.png#logo" alt=""> ⟶ <img src="/images/logo/python.png#logo" alt=""></p>
@@ -455,7 +454,7 @@ flake8 src
 	mypy src --ignore-missing-imports
 	flake8 src --ignore<span class="o">=</span><span class="k">$(</span>shell cat .flakeignore<span class="k">)</span>
 
-<span class="nf">def</span><span class="o">:</span>
+<span class="nf">dev</span><span class="o">:</span>
 	pip install -e .
 
 <span class="nf">test</span><span class="o">:</span> <span class="n">dev</span>
