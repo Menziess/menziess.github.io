@@ -324,7 +324,7 @@ Type <span class="s2">&#34;help&#34;</span>, <span class="s2">&#34;copyright&#34
 
 <span class="k">def</span> <span class="nf">test_main</span><span class="p">():</span>
     <span class="s2">&#34;&#34;&#34;Test whether main function works.&#34;&#34;&#34;</span>
-    <span class="n">expected_value</span> <span class="o">=</span> <span class="s1">&#39;(╯°□°）╯︵ ┻━┻)&#39;</span>
+    <span class="n">expected_value</span> <span class="o">=</span> <span class="s1">&#39;👍🤞👌🐌&#39;</span>
     <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span>
         <span class="n">row</span><span class="o">.</span><span class="n">added_column</span> <span class="o">==</span> <span class="n">expected_value</span>
         <span class="k">for</span> <span class="n">row</span>
@@ -340,7 +340,7 @@ Type <span class="s2">&#34;help&#34;</span>, <span class="s2">&#34;copyright&#34
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pytest
 </code></pre></div></li>
 </ol>
-<p>By running the test we have verified that every single row had the value <code>(╯°□°）╯︵ ┻━┻)</code> in the column called <code>added_column</code>. If someone accidentally modified the code, the tests (that we will run in our build pipeline) will fail, ensuring that the broken code never reaches production.</p>
+<p>By running the test we have verified that every single row had the value <code>👍🤞👌🐌</code> in the column called <code>added_column</code>. If someone accidentally modified the code, the tests (that we will run in our build pipeline) will fail, ensuring that the broken code never reaches production.</p>
 <p>You would also be able to add something called <code>doctests</code> to your functions as examples for fellow developers who make use of your functions (<a href="https://menziess.github.io/howto/test/python-code/#doctests">example</a>).</p>
 <p>In addition to tests, you should make sure that the code style is acceptable by running a linter over your code.</p>
 <ol>
