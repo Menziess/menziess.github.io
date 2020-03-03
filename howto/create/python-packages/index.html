@@ -189,7 +189,7 @@
 <li><a href="#7-devops">DevOps</a></li>
 </ol>
 <h2 id="1-packaging-setup">1. Packaging Setup</h2>
-<p>Let&rsquo;s assume that we have the following folder structure (from <a href="https://menziess.github.io/howto/test/python-code/">this earlier post</a>), and <a href="https://menziess.github.io/howto/manage/virtual-environments/">virtual environment</a> set up:</p>
+<p>Let&rsquo;s use the folder structure from an <a href="https://menziess.github.io/howto/test/python-code/">earlier post</a>, and create a <a href="https://menziess.github.io/howto/manage/virtual-environments/">virtual environment</a> in it:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ tree -a -L <span class="m">2</span>
 .
 ├── .venv
@@ -198,8 +198,10 @@
 ├── Pipfile.lock
 ├── src
 │   └── demo
+│       └── main.py
 └── tests
     └── demo
+        └── ...
 
 <span class="m">9</span> directories, <span class="m">3</span> files
 </code></pre></div><p>Create a <code>setup.py</code> file in the root directory that we will use to define the way we&rsquo;d like to package our code, containing the following code:</p>
@@ -239,7 +241,10 @@ python setup.py bdist_wheel <span class="c1"># generate versioned wheel, include
 python setup.py sdist --formats<span class="o">=</span>zip,gztar,bztar,ztar,tar <span class="c1"># source code</span>
 </code></pre></div><p>Run the first one in the list above. When it succeeds, you will be able to import your code as follows:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">say_hello_to</span>
-</code></pre></div><p>Now that we were able to install the project, we should take a closer look at the arguments that we pass to the <code>setuptools.setup</code> function:</p>
+</code></pre></div><blockquote>
+<p><strong>Note</strong> if you are receiving &ldquo;No module named demo&hellip;&quot;, you&rsquo;ll need to add an empty <code>__init__.py</code> file in all folders you want to import from. In our example, that only includes the <code>demo</code> folder. You can read more about these <code>__init__.py</code> files <a href="https://docs.python.org/3/reference/import.html#regular-packages">here</a>.</p>
+</blockquote>
+<p>Now that we were able to install the project, we should take a closer look at the arguments that we pass to the <code>setuptools.setup</code> function:</p>
 <ol>
 <li><code>name</code>: the name of your package</li>
 <li><code>version</code>: every change to your code should yield a different package version, or else developers may install the same package version that&rsquo;s suddenly behaving differently, breaking their code</li>
