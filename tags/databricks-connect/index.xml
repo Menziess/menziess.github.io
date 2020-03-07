@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>databricks-connect on menziess blog</title>
+    <link>https://menziess.github.io/tags/databricks-connect/</link>
+    <description>Recent content in databricks-connect on menziess blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Mar 2020 07:15:38 +0100</lastBuildDate>
+    
+	<atom:link href="https://menziess.github.io/tags/databricks-connect/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Enhance Your Databricks Workflow</title>
+      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
+      <pubDate>Sun, 01 Mar 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
+      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
+    </item>
+    
+    <item>
+      <title>Install databricks-connect</title>
+      <link>https://menziess.github.io/howto/install/databricks-connect/</link>
+      <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/install/databricks-connect/</guid>
+      <description>Databricks-connect allows you to connect your favorite IDE to your Databricks cluster.
+⟶ Visit your Databricks cluster page, and verify that your cluster supports python3, then add the following lines to the Spark Config:</description>
+    </item>
+    
+  </channel>
+</rss>

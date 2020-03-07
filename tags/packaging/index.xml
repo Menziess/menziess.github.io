@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>packaging on menziess blog</title>
+    <link>https://menziess.github.io/tags/packaging/</link>
+    <description>Recent content in packaging on menziess blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Mar 2020 07:15:38 +0100</lastBuildDate>
+    
+	<atom:link href="https://menziess.github.io/tags/packaging/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Enhance Your Databricks Workflow</title>
+      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
+      <pubDate>Sun, 01 Mar 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
+      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
+    </item>
+    
+    <item>
+      <title>Create Python Packages</title>
+      <link>https://menziess.github.io/howto/create/python-packages/</link>
+      <pubDate>Tue, 11 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/create/python-packages/</guid>
+      <description>Why should you care about creating packages?
+ packages are easy to install (pip install demo). packages simplify development (pip install -e . installs your package and keeps it up-to-date). packages are easy to run and test (from demo.</description>
+    </item>
+    
+  </channel>
+</rss>

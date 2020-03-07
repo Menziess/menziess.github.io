@@ -13,7 +13,32 @@
   </url>
   
   <url>
+    <loc>https://menziess.github.io/tags/databricks-connect/</loc>
+    <lastmod>2020-03-01T07:15:38+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/tags/devops/</loc>
+    <lastmod>2020-03-01T07:15:38+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://menziess.github.io/howto/enhance/your-databricks-workflow/</loc>
+    <lastmod>2020-03-01T07:15:38+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/tags/packaging/</loc>
+    <lastmod>2020-03-01T07:15:38+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/tags/testing/</loc>
+    <lastmod>2020-03-01T07:15:38+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/tags/workflow/</loc>
     <lastmod>2020-03-01T07:15:38+01:00</lastmod>
   </url>
   
@@ -38,6 +63,11 @@
   </url>
   
   <url>
+    <loc>https://menziess.github.io/tags/wsl/</loc>
+    <lastmod>2020-02-10T07:15:38+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://menziess.github.io/howto/test/python-code/</loc>
     <lastmod>2020-02-05T09:39:35+01:00</lastmod>
   </url>
@@ -49,6 +79,11 @@
   
   <url>
     <loc>https://menziess.github.io/howto/manage/virtual-environments/</loc>
+    <lastmod>2020-02-03T10:00:13+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/tags/virtualenv/</loc>
     <lastmod>2020-02-03T10:00:13+01:00</lastmod>
   </url>
   

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>testing on menziess blog</title>
+    <link>https://menziess.github.io/tags/testing/</link>
+    <description>Recent content in testing on menziess blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Mar 2020 07:15:38 +0100</lastBuildDate>
+    
+	<atom:link href="https://menziess.github.io/tags/testing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Enhance Your Databricks Workflow</title>
+      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
+      <pubDate>Sun, 01 Mar 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
+      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
+    </item>
+    
+    <item>
+      <title>Test Python Code</title>
+      <link>https://menziess.github.io/howto/test/python-code/</link>
+      <pubDate>Wed, 05 Feb 2020 09:39:35 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/test/python-code/</guid>
+      <description>Writing unit tests should an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</description>
+    </item>
+    
+    <item>
+      <title>Test Code in Databricks Notebooks</title>
+      <link>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</link>
+      <pubDate>Mon, 03 Feb 2020 20:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</guid>
+      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user. It would be best to properly package and test your code before you run it in production on Databricks clusters, like this.</description>
+    </item>
+    
+  </channel>
+</rss>
