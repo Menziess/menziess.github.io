@@ -35,7 +35,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.676a0d7cbbbf9fb4fa445352576dcb287a4a119915f64cff2cf9e80dff15083d.css">
+  <link rel="stylesheet" href="/css/style.min.bde6d1db08692310275946e7269603ae48007b370d4aabc986f63e2649d2d64a.css">
   
 
   
@@ -180,7 +180,7 @@
         <div class="col-12 col-md-9">
           
 <h1 class="title">Enhance Your Python-vscode Workflow</h1>
-<div class="content anchor-link-enabled">
+<div class="pb-2 content anchor-link-enabled">
   <p>This post covers my personal workflow for python projects, using Visual Studio Code along with some other tools. A good workflow saves time and allows you to focus on the problem at hand, instead of tasks that make you feel like a robot (machines are good for that).</p>
 <p><img src="/images/logo/vscode.png#logo" alt=""></p>
 <p>Install <code>vscode</code>, and follow the topics below to set up your development environment.</p>
@@ -204,6 +204,7 @@
   <span class="nt">&#34;terminal.integrated.shell.windows&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\sysnative\\bash.exe&#34;</span>
 <span class="p">}</span>
 </code></pre></div><p>When you open a project folder, you can install the <strong>Remote-WSL</strong> extension to use WSL as your development environment. After installing the extension, open the command palette with <code>ctrl + shift + P</code> and select <code>Remote-WSL: Reopen folder in WSL</code>:</p>
+<div >
 <div class="embed-responsive">
   <video
     loop
@@ -212,11 +213,13 @@
     playsInline
     style="background-color: black;"
     onloadedmetadata="this.muted = true"
-    class="embed-responsive-item"
-  >
-    <source src="/videos/wsl-extension.mp4" type='video/mp4'>
+    class="embed-responsive-item">
+    <source
+      src='/videos/wsl-extension.mp4'
+      type='video/mp4'>
     <p>HTML5 video's are not supported on your device.</p>
   </video>
+</div>
 </div>
 
 <p>When you open the terminal using <code>ctrl + `</code>, you should see your bash shell by default.</p>
@@ -232,6 +235,7 @@
 <p>To be able to properly use vscode for python development, you should install the <code>Python</code> extension in vscode. Press <code>ctrl + shift + X</code> to open the extensions tab, and search for &ldquo;Python&rdquo;.</p>
 <h3 id="debugger">Debugger</h3>
 <p>The python extension has a debugger built right in. You can activate the debugger by pressing <code>F5</code>. I normally prefer to set up a <code>.vscode/launch.json</code> file with different debug configurations, but just testing a file will do for now:</p>
+<div >
 <div class="embed-responsive">
   <video
     loop
@@ -240,11 +244,13 @@
     playsInline
     style="background-color: black;"
     onloadedmetadata="this.muted = true"
-    class="embed-responsive-item"
-  >
-    <source src="/videos/debugger.mp4" type='video/mp4'>
+    class="embed-responsive-item">
+    <source
+      src='/videos/debugger.mp4'
+      type='video/mp4'>
     <p>HTML5 video's are not supported on your device.</p>
   </video>
+</div>
 </div>
 
 <p>As you can see, you can watch and modify variables on the fly. You can also stop code execution upon triggering an expression by adding one in the Watch pane, for example:</p>
@@ -332,8 +338,6 @@ indent_size = 4
 </code></pre></div>
 </div>
 
-<br>
-
 <div class="content">
   
   <span class="post-meta">
@@ -401,6 +405,9 @@ indent_size = 4
   
   <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
   
+
+  
+
 
 </body>
 
