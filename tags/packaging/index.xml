@@ -26,8 +26,7 @@
       <pubDate>Tue, 11 Feb 2020 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/create/python-packages/</guid>
-      <description>Why should you care about creating packages?
- packages are easy to install (pip install demo). packages simplify development (pip install -e . installs your package and keeps it up-to-date). packages are easy to run and test (from demo.</description>
+      <description>Why should you care about creating packages? Packages are easy to install (&lt;code&gt;pip install demo&lt;/code&gt;). Packages simplify development (&lt;code&gt;pip install -e .&lt;/code&gt; installs your package and keeps it up-to-date during development). Packages are easy to run and test &amp;hellip;</description>
     </item>
     
   </channel>
