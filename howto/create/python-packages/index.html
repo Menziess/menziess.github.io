@@ -260,7 +260,7 @@ python setup.py sdist --formats<span class="o">=</span>zip,gztar,bztar,ztar,tar 
 </code></pre></div><p>Run the first one in the list above. When it succeeds, you will be able to import your code as follows:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">say_hello_to</span>
 </code></pre></div><blockquote>
-<p><strong>Note</strong> if you are receiving &ldquo;No module named demo&hellip;&quot;, you&rsquo;ll need to add an empty <code>__init__.py</code> file in all folders you want to import from. In our example, that only includes the <code>demo</code> folder. You can read more about these <code>__init__.py</code> files <a href="https://docs.python.org/3/reference/import.html#regular-packages">here</a>.</p>
+<p><strong>Note:</strong> if you are receiving &ldquo;No module named demo&hellip;&quot;, you&rsquo;ll need to add an empty <code>__init__.py</code> file in all folders you want to import from. In our example, that only includes the <code>demo</code> folder. You can read more about these <code>__init__.py</code> files <a href="https://docs.python.org/3/reference/import.html#regular-packages">here</a>.</p>
 </blockquote>
 <p>Now that we were able to install the project, we should take a closer look at the arguments that we pass to the <code>setuptools.setup</code> function:</p>
 <ol>
@@ -326,7 +326,9 @@ pip install *.whl
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip list
 </code></pre></div><h2 id="6-include-config-files">6. Include Config Files</h2>
 <p>It&rsquo;s also possible to add data to your package by adding the following lines to your <code>setup.py</code> script:</p>
+<blockquote>
 <p><strong>Note:</strong> This may not work on distributed systems (such as Databricks).</p>
+</blockquote>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">setup</span><span class="p">(</span>
         <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
