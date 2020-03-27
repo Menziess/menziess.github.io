@@ -73,7 +73,7 @@ Microsoft (in collaboration with Canonical) has made a tremendous effort into cl
       <pubDate>Mon, 03 Feb 2020 20:49:01 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</guid>
-      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user. This post merely a demonstration of how to run a test in a notebook. For proper testing see: &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;enhance your databricks workflow&lt;/a&gt;.</description>
+      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user. It is advised to properly test your software: &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;enhance your databricks workflow&lt;/a&gt;. But if there is no time to set up proper package testing, there is always the hacker way of running tests right inside of Databricks notebooks.</description>
     </item>
     
     <item>

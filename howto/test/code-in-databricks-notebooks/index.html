@@ -181,12 +181,9 @@
           
 <h1 class="title">Test Code in Databricks Notebooks</h1>
 <div class="pb-2 content anchor-link-enabled">
-  <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user.</p>
+  <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user. It is advised to properly test your software: <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">enhance your databricks workflow</a>.</p>
 <p><img src="/images/logo/testing.png#logo" alt=""> ⟶ <img src="/images/logo/databricks.png#logo" alt=""></p>
 <p>But if there&rsquo;s no time to set up proper package testing, there&rsquo;s always the hacker way of running tests right inside of Databricks notebooks.</p>
-<blockquote>
-<p><strong>Note:</strong> this post merely demonstrates how to run a test in a notebook, this is not the preferred way of testing code, please see <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">enhance your databricks workflow</a> for proper testing.</p>
-</blockquote>
 <h2 id="one-way-to-run-a-test">One Way to Run a Test</h2>
 <p>We will need a function to actually run the doctests for a given function, and raise an exception when a test fails:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
