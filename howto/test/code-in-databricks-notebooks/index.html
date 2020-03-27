@@ -236,10 +236,9 @@
 <p>When we test the noticeably erroneous function <code>f</code>, an exception is raised:</p>
 <p><img src="/images/test-code-in-databricks-notebooks/exception.png#large#shadow" alt=""></p>
 <p>There, we&rsquo;ve done it!</p>
-<p>Although this works, it is not the recommended way to test the code you run on Databricks.</p>
+<p>Although this works, it is <a href="#the-right-way-going-forward">the right way going forward</a> when it comes to testing code that you run on Databricks.</p>
 <h2 id="why-are-databricks-notebooks-hard-to-test">Why Are Databricks Notebooks Hard To Test?</h2>
-<p>Can&rsquo;t we just run pytest, unittest, or doctest in Databricks?</p>
-<p>Take a look at <a href="https://menziess.github.io/howto/test/python-code/#doctests">how to test python code</a> to see some examples of how to use pytest and doctest.</p>
+<p>Can&rsquo;t we just run <a href="https://menziess.github.io/howto/test/python-code/#pytest">pytest</a>, unittest, or <a href="https://menziess.github.io/howto/test/python-code/#doctests">doctest</a> in Databricks?</p>
 <p>You could run this piece of code in a Databricks notebook, and it will let you know that it&rsquo;s being executed from <code>/databricks/driver</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s2">&#34;-x&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span> <span class="s2">&#34;-vv&#34;</span><span class="p">])</span>
