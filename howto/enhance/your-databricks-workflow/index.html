@@ -184,7 +184,7 @@
   <p>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now <strong>lint</strong>, <strong>test</strong>, and <strong>package</strong> the code that you want to run on Databricks more easily:</p>
 <p><img src="/images/enhance-your-databricks-workflow/databricks-connect.png" alt=""></p>
 <p>By applying ci-cd practices you can <strong>continuously deliver</strong> and install versioned packages of your python code on your Databricks cluster:</p>
-<p><img src="/images/enhance-your-databricks-workflow/overview.png" alt=""></p>
+<p><img src="/images/enhance-your-databricks-workflow/databricks-workflow.png" alt=""></p>
 <p>All you need is <code>vscode</code>, a <code>databricks workspace</code>, a <code>storage account</code>, and <code>data factory</code> to follow along with this post.</p>
 <h2 id="topics">Topics</h2>
 <ol>
@@ -331,7 +331,7 @@ Type <span class="s2">&#34;help&#34;</span>, <span class="s2">&#34;copyright&#34
 <p>We will utilize this packaging capability in our build pipeline, to create a new artifact whenever we push new changes to the repository.</p>
 <h2 id="4-test-the-spark-app">4. Test the Spark App</h2>
 <p><img src="/images/logo/testing.png#logo" alt=""></p>
-<p>But before we build anything, we want to make sure that our code-style is acceptable, and that new changes have not broken any existing code.</p>
+<p>But before we build anything, we want to make sure that our code-style is acceptable, and that new changes have not broken any existing code. Testing should be part of your databricks workflow.</p>
 <ol>
 <li>
 <p>Create a new python file <code>tests/demo/test_main.py</code> containing the following code:</p>
