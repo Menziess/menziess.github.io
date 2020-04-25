@@ -201,7 +201,7 @@
         <span class="k">raise</span> <span class="n">DoctestFailureException</span><span class="p">(</span><span class="s1">&#39;Doctest failed.&#39;</span><span class="p">)</span>
 </code></pre></div><p>The function does two things:</p>
 <ul>
-<li><code>run_docstring_examples</code> allows you to pass functions in a given [execution context](<a href="https://docs.python.org/2/library/doctest">https://docs.python.org/2/library/doctest</a>. html#what-s-the-execution-context), and run doctest on the docstring of that function.</li>
+<li><code>run_docstring_examples</code> allows you to pass functions in a given <a href="https://docs.python.org/2/library/doctest.html#what-s-the-execution-context">execution context</a>, and run doctest on the docstring of that function.</li>
 <li>Secondly, we read the potential error from standard output by performing a check whether 70 asterisk characters have been printed (as would be the case when an exception is raised):</li>
 </ul>
 <p>We can apply <code>doctest_exception_on_fail</code> on a subset of functions in our notebook:</p>
