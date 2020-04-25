@@ -181,11 +181,12 @@
           
 <h1 class="title">Test Code in Databricks Notebooks</h1>
 <div class="pb-2 content anchor-link-enabled">
-  <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user. It is advised to properly test the code you run on databricks, <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">like this</a>.</p>
+  <p>Companies hire developers to write spark applications &ndash; using expensive Databricks clusters &ndash; transforming and delivering business-critical data to the end user.</p>
+<p><strong>Update:</strong> It is advised to properly test the code you run on databricks, <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">like this</a>.</p>
 <p><img src="/images/logo/testing.png#logo" alt=""> ⟶ <img src="/images/logo/databricks.png#logo" alt=""></p>
 <p>But if there&rsquo;s no time to set up proper package testing, there&rsquo;s always the hacker way of running tests right inside of Databricks notebooks.</p>
 <h2 id="one-way-to-run-a-test">One Way to Run a Test</h2>
-<p>We will need a function to actually run the doctests for a given function, and raise an exception when a test fails:</p>
+<p>How can you raise exceptions in databricks notebooks? And how can you test functions in databricks notebooks?</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;An exception that occured during a doctest.&#34;&#34;&#34;</span>
     <span class="k">pass</span>
@@ -199,11 +200,11 @@
     <span class="k">if</span> <span class="n">output</span><span class="p">[:</span><span class="mi">70</span><span class="p">]</span> <span class="o">==</span> <span class="mi">70</span> <span class="o">*</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">DoctestFailureException</span><span class="p">(</span><span class="s1">&#39;Doctest failed.&#39;</span><span class="p">)</span>
 </code></pre></div><p>The function does two things:</p>
-<ol>
-<li><code>run_docstring_examples</code> runs docstests of the passed string, module, function, or class, using the <code>globs</code> (second) argument for execution context</li>
-<li>it clears and reads from stdout to see whether the output starts with 70 asterisks, in which case the doctest has failed and printed out the error</li>
-</ol>
-<p>Next, we will also need to be able to find all functions within the scope of a notebook:</p>
+<ul>
+<li><code>run_docstring_examples</code> allows you to pass functions in a given [execution context](<a href="https://docs.python.org/2/library/doctest">https://docs.python.org/2/library/doctest</a>. html#what-s-the-execution-context), and run doctest on the docstring of that function.</li>
+<li>Secondly, we read the potential error from standard output by performing a check whether 70 asterisk characters have been printed (as would be the case when an exception is raised):</li>
+</ul>
+<p>We can apply <code>doctest_exception_on_fail</code> on a subset of functions in our notebook:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">doctests</span><span class="p">(</span><span class="o">*</span><span class="n">functions</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;Run doctest in Databricks.
 </span><span class="s2">
@@ -229,9 +230,9 @@
     <span class="p">]</span>
 </code></pre></div><p>The <code>doctests</code> function does the following:</p>
 <ol>
-<li>it captures the state of <code>globals()</code> when the function is run</li>
+<li>it captures the state of <code>globals()</code> when the function is run.</li>
 <li>if functions have manually been passed, they are tested;</li>
-<li>otherwise: callable objects that are not &ldquo;private&rdquo;, and are contained in the <code>__main__</code> execution context, are tested</li>
+<li>otherwise: callable objects that are not &ldquo;private&rdquo;, and are contained in the <code>__main__</code> execution context, are tested.</li>
 </ol>
 <p>When we test the noticeably erroneous function <code>f</code>, an exception is raised:</p>
 <p><img src="/images/test-code-in-databricks-notebooks/exception.png#large#shadow" alt=""></p>
