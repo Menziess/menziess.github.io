@@ -232,7 +232,7 @@
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">last</span><span class="p">()</span>  <span class="c1"># 2</span>
 <span class="n">last</span><span class="p">()</span>  <span class="c1"># 1</span>
 <span class="n">l</span>       <span class="c1"># []</span>
-</code></pre></div><p>It returns a different value each time we call <code>last()</code>. And on top of that, it happily removes all elements from our original list as a side effect. The function is absolutely <strong>impure</strong>!</p>
+</code></pre></div><p>It returns a different value each time we call <code>last()</code>. And on top of that, it removes all elements from our original list as a side effect. The function is absolutely <strong>impure</strong>!</p>
 <p>An arguably better way to implement the same function would be, as a mathematical function:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 
@@ -250,7 +250,7 @@ We can say that pure functions are <strong>referentially transparent</strong>:</
 <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">last</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">last</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>  <span class="c1"># True</span>
 </code></pre></div><p>We can safely replace all expressions <code>last(l)</code> with the output value, without changing the program&rsquo;s behavior. But beware, this only holds if our list <code>l</code> is not <strong>mutated</strong> behind our backs!</p>
-<p>If all functions involved in an expression are pure functions, and the arguments to the functions are <strong>immutable</strong>, then the expression is said to be referentially transparent.</p>
+<p>If all functions involved in an expression are pure functions, and the arguments to the functions are <strong>immutable</strong>, then the entire expression is said to be referentially transparent.</p>
 <h2 id="2-immutability">2. Immutability</h2>
 <p>Another cornerstone of Functional Programming is <strong>immutability</strong>. As our pure functions are deterministic, we may memoize the result for a given input value. But if our function accepts a mutable list <code>l</code> as an argument twice, how do we know that <code>l</code> is the same thing the second time around? It could&rsquo;ve changed in the meantime:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
