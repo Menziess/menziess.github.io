@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Use Functional Programming In Python - menziess blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Lora:400,700|Fira+Code:300,400">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msvalidate.01" content="DF64D3472558D82FA059638FC476FF14">
+  <meta name="msapplication-TileColor" content="#603cba">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  
+  
+    
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157518256-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157518256-1');
+      </script>
+    
+  
+
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.f9914e35727660e7509c3288c2988addb8b47fae3590399138cccc8980a683a8.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/howto/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-tags">
+      <a href="/tags/">
+        <span>Tags</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://menziess.github.io/howto"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://menziess.github.io/howto"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/howto/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-tags">
+      <a href="/tags/">
+        <span>Tags</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Howto</h4>
+
+  
+  <ul>
+    
+    <li class="active ">
+      <a href="https://menziess.github.io/howto/use/functional-programming-in-python/">Use Functional Programming In Python</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">Enhance Your Databricks Workflow</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/">Enhance Your Python-vscode Workflow</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/install/databricks-connect/">Install databricks-connect</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">Install Windows Subsystem for Linux</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/test/python-code/">Test Python Code</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/test/code-in-databricks-notebooks/">Test Code in Databricks Notebooks</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/a-blog/">Create a Blog</a>
+    </li>
+    
+  </ul>
+  
+
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Use Functional Programming In Python</h1>
+<div class="pb-2 content anchor-link-enabled">
+  <p>$\huge \lambda$</p>
+<p>Consider the following code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>  <span class="c1"># Your math teacher would be very angry</span>
+</code></pre></div><p>In elementary school, your teacher would tell you that $1 + 1 = 2$, and $2 \neq 2 \times 2$.</p>
+<p>Reassigning values is common practice in the world of programming. And as we try to build solutions that are easy to change, somewhere in the depths of our program&rsquo;s structure we may observe some unexpected behavior:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">multiply_by_two</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 4</span>
+</code></pre></div><p>Quite strange. As we dig deeper, the strange behavior can be traced back to <code>multiply_by_two</code> &ndash; which seems to be reaching out to the global variable <code>x</code> &ndash; the one we had just updated:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Somewhere deep down in our program</span>
+<span class="k">def</span> <span class="nf">multiply_by_two</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+</code></pre></div><p>And now the function returns <code>4</code> rather than <code>2</code>.</p>
+<p>For you as a developer, mutations and unreliable functions may result in many hours of debugging, many context switches, and a heavy cognitive load.</p>
+<p>In this post we will have a look at how Functional Programming &ndash; a paradigm that relies on <strong>pure functions</strong> and <strong>immutable data</strong> &ndash; can really make your code more robust, and a lot easier to reason about.</p>
+<h2 id="topics">Topics</h2>
+<ol>
+<li><a href="#1-purity">Purity</a></li>
+<li><a href="#2-immutability">Immutability</a></li>
+<li><a href="#3-complexity">Complexity</a></li>
+<li><a href="#4-iteration">Iteration</a></li>
+</ol>
+<h2 id="1-purity">1. Purity</h2>
+<p>Functions that are <strong>deterministic</strong> and don&rsquo;t have <strong>side effects</strong>, are called &ldquo;pure functions&rdquo;.</p>
+<p>Pure functions are mathematical functions:</p>
+<p><a href="https://www.mathsisfun.com/sets/function.html"><img src="/images/manage-side-effects/function-sets.svg" alt=""></a></p>
+<p>They associate each element of a set with exactly one element of another set (possibly the same set). Let&rsquo;s have a look at this example:</p>
+<p>$$f(x) = x^x$$</p>
+<p>This function $f$ associates the input $2$ with the output $4$, that&rsquo;s the only thing it does, and this association is always the same:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="n">x</span>
+
+<span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 4</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 4</span>
+</code></pre></div><p>Why does this matter?</p>
+<p>It matters because these properties make the functions: cacheable, self documenting, testable, trivial to parallelize, and most importantly; reasonable.</p>
+<p>It literally tells you what the function is operating on. And it guarantees that you&rsquo;ll get a predictable answer. This makes the function very easy to use, and allows you to reason about the function locally. Let&rsquo;s demonstrate the difference with a small example.</p>
+<p>Here&rsquo;s a function that gives us the last element of a list:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">last</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="n">last</span><span class="p">()</span>  <span class="c1"># 3</span>
+</code></pre></div><p>This function works perfectly fine, but look what happens if we call it a second time:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">last</span><span class="p">()</span>  <span class="c1"># 2</span>
+<span class="n">last</span><span class="p">()</span>  <span class="c1"># 1</span>
+<span class="n">l</span>       <span class="c1"># []</span>
+</code></pre></div><p>It returns a different value each time we call <code>last()</code>. And on top of that, it happily removes all elements from our original list as a side effect. The function is absolutely <strong>impure</strong>!</p>
+<p>An arguably better way to implement the same function would be, as a mathematical function:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">last</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">last</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  <span class="c1"># 3</span>
+</code></pre></div><p>We can safely call this function numerous times with the guarantee that we obtain the exact same result as before:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">last</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  <span class="c1"># 3</span>
+<span class="n">l</span>        <span class="c1"># [1, 2, 3]</span>
+</code></pre></div><p>And as you can see: no side effects; our original list is left untouched.
+We can say that pure functions are <strong>referentially transparent</strong>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="n">l</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">last</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">last</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>  <span class="c1"># True</span>
+</code></pre></div><p>We can safely replace all expressions <code>last(l)</code> with the output value, without changing the program&rsquo;s behavior. But beware, this only holds if our list <code>l</code> is not <strong>mutated</strong> behind our backs!</p>
+<p>If all functions involved in an expression are pure functions, and the arguments to the functions are <strong>immutable</strong>, then the expression is said to be referentially transparent.</p>
+<h2 id="2-immutability">2. Immutability</h2>
+<p>Another cornerstone of Functional Programming is <strong>immutability</strong>. As our pure functions are deterministic, we may memoize the result for a given input value. But if our function accepts a mutable list <code>l</code> as an argument twice, how do we know that <code>l</code> is the same thing the second time around? It could&rsquo;ve changed in the meantime:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">last</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">last</span>
+
+<span class="n">last</span> <span class="o">=</span> <span class="n">outer</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</code></pre></div><p>Imagine that we have two threads in our program, and one of them calls a function <code>last</code>, passing a list <code>l</code> as an argument. Then in another thread, we mutate the list. What would happen to the return value of <code>last</code>?</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">last</span><span class="p">()</span>        <span class="c1"># 3</span>
+
+<span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="n">l</span>             <span class="c1"># [1, 2, 45]</span>
+
+<span class="n">last</span><span class="p">()</span>        <span class="c1"># 45</span>
+</code></pre></div><p>The argument just points to a location in memory, and the value in that location has changed. Even the purest function can&rsquo;t promise you anything if the arguments that are passed are mutable. Instead, we could make our list immutable. This can be achieved by <a href="https://www.python.org/dev/peps/pep-0351/">freezing</a>, or by converting to any immutable built-in data structure, such as: <code>int</code>, <code>bool</code>, <code>float</code>, <code>str</code>, <code>tuple</code>, or <code>frozenset</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="n">t</span>             <span class="c1"># (1, 2, 3)</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">45</span>     <span class="c1"># TypeError: &#39;tuple&#39; object does not support item assignment</span>
+</code></pre></div><p><strong>Memoization</strong> conceptually only works if the arguments to a function are &ldquo;hashable&rdquo;. In python that means that the argument object has a dunder method <code>__hash__</code> that helps us figure out whether the object is still the same. All immutable built-in python objects are hashable:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="nb">hash</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>                           <span class="c1"># 529344067295497451</span>
+
+<span class="n">dictionary</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">dictionary</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;This is a tuple&#39;</span>
+<span class="n">dictionary</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;This is a list&#39;</span>  <span class="c1"># TypeError: unhashable type: &#39;list&#39;</span>
+</code></pre></div><p>Now that we&rsquo;ve converted our list into a tuple, we&rsquo;re be able to apply memoization:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># from functools import lru_cache &lt;- what you&#39;d normally import</span>
+<span class="k">def</span> <span class="nf">lru_cache</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Memoize (just for showcase).&#34;&#34;&#34;</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())))</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+            <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">inner</span>
+</code></pre></div><p>Let&rsquo;s see this in action:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="nd">@lru_cache</span>    <span class="c1"># decorate our `last` function</span>
+<span class="k">def</span> <span class="nf">last</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># let&#39;s pretend that our computer is doing stuff</span>
+    <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div><p>When we call the function twice:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">last</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>       <span class="c1"># ... 3 (after 2 seconds)</span>
+<span class="n">last</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>       <span class="c1"># 3 (instantly)</span>
+</code></pre></div><p>As you can see, the second time we call <code>last</code>, passing the same immutable value <code>t</code>, we receive the cached result, rather than recomputing the result all over.</p>
+<h2 id="3-complexity">3. Complexity</h2>
+<p>At this point you may be wondering: these things are all very nice, but how do we build big complex programs using functions? Why do we need functions anyway? Can&rsquo;t we just write one big program? Loops, if statements, and assignments.</p>
+<blockquote>
+<p>We really need functions, so that we can structure our program, decompose and recompose it. ~<a href="https://youtu.be/gHiyzctYqZ0?t=237">Bartosz Milewski</a></p>
+</blockquote>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>In order to do that, we need a language that supports first-class functions, so we can store them in variables and pass them around.</p>
+<p>Here we call <code>outer</code> with the argument <code>10</code>, it returns a function <code>inner</code> along with an environment, and we store that in variable <code>f</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">inner</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">outer</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div><p>This is called a <strong>closure</strong>, capturing the local free variable <code>a</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># In python you can inspect the closure</span>
+<span class="n">f</span><span class="o">.</span><span class="vm">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cell_contents</span>  <span class="c1"># 10 (this is our `a`)</span>
+</code></pre></div><p>And finally, we can use our <code>inner</code> function, by calling <code>f</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 15</span>
+</code></pre></div><p>The term &ldquo;first class&rdquo; is closely related to &ldquo;higher order&rdquo;, which is more of a mathematical term to denote that an individual function operates on functions.</p>
+<p>We can generalize this concept, and take existing functions, apply <strong>currying</strong> and <strong>function composition</strong> to create brand new ones. The cell below will give you an idea of how curry is implemented, but it is advised to use functional library like <code>toolz</code> instead:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># from toolz import curry &lt;- what you&#39;d normally import</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span><span class="p">,</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">search</span>
+
+<span class="k">def</span> <span class="nf">curry</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Curry (just for showcase).&#34;&#34;&#34;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="s1">&#39;[\w]?missing \d required positional&#39;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)):</span>
+                <span class="k">raise</span>
+            <span class="k">return</span> <span class="n">wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">curry</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">inner</span>
+</code></pre></div><p>The term &ldquo;currying&rdquo; is a reference to logician Haskell Curry.</p>
+<p>Using the function above, we can create curried functions, with which we can create new functions by passing less arguments than the function actually requires:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@curry</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">add_three</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># our new function</span>
+
+<span class="n">add_three</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 5</span>
+</code></pre></div><p>As you can see, we receive a new function if we don&rsquo;t pass all the required arguments. But if the last argument is supplied, the function is evaluated:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@curry</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+
+<span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># 6</span>
+<span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 6</span>
+<span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># 6</span>
+<span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 6</span>
+</code></pre></div><p>Besides currying, function composition is an operation that takes two functions $f$ and $g$ and produces a function $h$ such that $h(x) = g(f(x))$. Bear in mind that the types, domains and codomains of the arguments and return values must line up, so that $f:X\rightarrow Y$ and $g:Y\rightarrow Z$ are composed into a function $h:X\rightarrow Z$.</p>
+<p>Here&rsquo;s a helper function that allows us to compose multiple functions at once:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># from toolz import compose &lt;- what you&#39;d normally import</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="o">*</span><span class="n">fs</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Compose (just for showcase).&#34;&#34;&#34;</span>
+    <span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">compose2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">g</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">compose2</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">identity</span><span class="p">)</span>
+</code></pre></div><p>Let&rsquo;s create the composition $g$ after $f$, also denoted as $g \circ f$:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+</code></pre></div><p>And our happy new pure function $h$ is born:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 0.5</span>
+<span class="n">h</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 100.5</span>
+</code></pre></div><p>We can combine these techniques to make very specific complex functions:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">sub</span> <span class="o">=</span> <span class="n">curry</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">)</span>
+
+<span class="n">snakecase</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">),</span>
+                    <span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^A-Za-z_]+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+                    <span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">)</span>
+
+<span class="n">snakecase</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>  <span class="c1"># hello_world</span>
+</code></pre></div><p>Awesome right?</p>
+<h2 id="4-iteration">4. Iteration</h2>
+<p>Pure functional languages don&rsquo;t support control flow such as for and while loops. Instead, iteration is achieved via recursion.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fibo</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">fibo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">fibo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 8</span>
+</code></pre></div><p>Not all languages support tail call optimization:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">fibo</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>  <span class="c1"># RecursionError: maximum recursion depth exceeded in comparison</span>
+</code></pre></div><p>Each function call creates a stack frame, and it is destroyed whenever when the function exits or raises an exception. Or, until you reach the recursion limit:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">()</span>  <span class="c1"># 3000</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">2147483647</span><span class="p">)</span>
+
+<span class="n">fibo</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>            <span class="c1"># [1]    3288 segmentation fault (core dumped)  python</span>
+</code></pre></div><p>Our stack is overflowing!</p>
+<p>Some languages recycle the current execution frame whenever a <a href="https://en.wikipedia.org/wiki/Tail_call">tail call</a> is made. Guido van Rossum (author of python) <a href="http://neopythonic.blogspot.com/2009/04/final-words-on-tail-calls.html">tried to explain</a> the reason why python doesn&rsquo;t have tail call optimization.</p>
+<p>However, if you&rsquo;re really persistent, you can <a href="https://stackoverflow.com/a/18506625/2366726">implement it yourself</a>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bet</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Y-combinator, thanks to baruchel.
+</span><span class="s2">
+</span><span class="s2">    See: https://github.com/baruchel/tco
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">))(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span>
+          <span class="n">f</span><span class="p">(</span><span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">y</span><span class="p">(</span><span class="n">y</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">))))(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">b</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">while</span> <span class="nb">callable</span><span class="p">(</span><span class="n">out</span><span class="p">):</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">out</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<span class="nd">@bet</span>
+<span class="k">def</span> <span class="nf">fibo</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">y</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inner</span>
+
+<span class="n">fibo</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>  <span class="c1"># 316047687386689873445841912205309135498634108...</span>
+</code></pre></div><p>We&rsquo;ve only scratched the surface, but I hope you feel inspired to further investigate this subject!</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+</div>
+
+<div class="content">
+  
+  <span class="post-meta">
+    
+      <a href="/tags/functional-programming">#functional programming</a>&nbsp;
+    
+  </span>
+  <br>
+  <br>
+
+
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "menziess" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://github.com/menziess/">github/menziess</a></li>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/stefanschenk/">in/stefanschenk/</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+  
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="/js/mathjax-config.js"></script>
+
+
+
+</body>
+
+</html>
