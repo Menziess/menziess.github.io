@@ -185,47 +185,62 @@
           
 <h1 class="title">Create a Blog</h1>
 <div class="pb-2 content anchor-link-enabled">
-  <p>In this post I will walk you through all the steps that I&rsquo;ve taken to create and publish this static blog website with <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">github pages</a>.</p>
+  <p>In this post we&rsquo;ll create a static website with <a href="https://gohugo.io/">Hugo</a>, push our project to <a href="https://dev.azure.com/">Azure Repo&rsquo;s</a>, build and release the site to <a href="https://pages.github.com/">Github Pages</a> using Azure DevOps.</p>
 <p><img src="/images/logo/hugo.png#logo" alt=""></p>
 <h2 id="install-hugo">Install Hugo</h2>
-<p>Depending on your preferred <a href="https://themes.gohugo.io/hugo-whisper-theme/">theme</a>, you may have to install a specific version, or the &ldquo;extended&rdquo; version of Hugo.</p>
+<p>Depending on your preferred <a href="https://themes.gohugo.io/">theme</a>, you may have to install a specific version, or the &ldquo;extended&rdquo; version of Hugo.</p>
 <p>To install Hugo, follow the official <a href="https://gohugo.io/getting-started/installing/">installation guide</a> and check the hugo version:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo version
-</code></pre></div><h2 id="create-the-site">Create The Site</h2>
-<p>Run the following command to generate a static site:</p>
+</code></pre></div><h2 id="create-your-site">Create Your Site</h2>
+<p>Run the following commands to create a new site, using the <code>ananke</code> theme:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo new site blog
-</code></pre></div><p>Add your preferred theme:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git submodule add <span class="se">\
-</span><span class="se"></span>  https://github.com/jugglerx/hugo-whisper-theme.git <span class="se">\
-</span><span class="se"></span>  themes/hugo-whisper-theme
-</code></pre></div><p>Run a local server to see what your site looks like:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo server
-</code></pre></div><h2 id="set-up-repositories">Set Up Repositories</h2>
-<p>Create two repositories:</p>
-<ol>
-<li>a private visualstudio repository that contains the Hugo project and the build pipeline that publishes the static files to the github repository</li>
-<li>a public github repository that contains the static website files for hosting: <a href="https://github.com/menziess/menziess.github.io">https://github.com/menziess/menziess.github.io</a></li>
-</ol>
-<p>Create your visualstudio repository and push your Hugo project to it:</p>
+<span class="nb">cd</span> blog
+git init
+git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
+<span class="nb">echo</span> <span class="s1">&#39;theme = &#34;ananke&#34;&#39;</span> &gt;&gt; config.toml
+hugo new posts/my-first-post.md
+<span class="nb">echo</span> <span class="s1">&#39;resources/_gen/&#39;</span> &gt;&gt; .gitignore
+<span class="nb">echo</span> <span class="s1">&#39;public/&#39;</span> &gt;&gt; .gitignore
+</code></pre></div><p>Your project structure will look as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ tree -a -L <span class="m">1</span>
+.
+├── .git
+├── .gitignore
+├── .gitmodules
+├── archetypes
+├── config.toml
+├── content
+├── data
+├── layouts
+├── resources
+├── static
+└── themes
+
+<span class="m">8</span> directories, <span class="m">2</span> files
+</code></pre></div><p>Run a local server to see your website at <a href="http://127.0.0.1:1313/">http://localhost:1313/</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo server -D
+</code></pre></div><h2 id="push-project-to-azure-repos">Push Project to Azure Repo&rsquo;s</h2>
+<p>Log in at Azure DevOps <a href="https://go.microsoft.com/fwlink/?LinkId=2014881&amp;campaign=acom~azure~devops~services~main~hero&amp;githubsi=true">here</a>, and create a new repository:</p>
+<p><img src="/images/create-a-blog/how-to-create-a-new-repository-azure-devops.png#medium#shadow" alt=""></p>
+<p>Copy the <strong>SSH</strong> command that <strong>&ldquo;pushes an existing repository from command line&rdquo;</strong>, and execute it in the root of your hugo project:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git remote add origin Menziess@vs-ssh.visualstudio.com:v3/Menziess/blog/blog
 git push -u origin --all
-</code></pre></div><p>Next, modify your <code>config.toml</code> configuration:</p>
+</code></pre></div><h2 id="hosting-the-website">Hosting the Website</h2>
+<p>We&rsquo;ll need another repository (at Github) to host our static webpages.</p>
+<p>Log in at Github <a href="https://github.com/new">here</a>, and create a public repository named <code>username.github.io</code>, where <code>username</code> is your Github username:</p>
+<p><img src="/images/create-a-blog/repo-name.png#small" alt=""></p>
+<p>It&rsquo;s Menziess in my case, we&rsquo;ll use that as an example. Your site will be available at a similar url: <a href="https://menziess.github.io">https://menziess.github.io</a>. Initially you will receive a 404 error when you visit the page.</p>
+<p>Update the base url of the <code>config.toml</code> file in your hugo project:</p>
 <div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="nx">baseURL</span> <span class="p">=</span> <span class="s2">&#34;https://menziess.github.io&#34;</span>
-<span class="nx">themesDir</span> <span class="p">=</span> <span class="s2">&#34;themes&#34;</span>
-<span class="nx">languageCode</span> <span class="p">=</span> <span class="s2">&#34;en-us&#34;</span>
-<span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;hugo-whisper-theme&#34;</span>
 </code></pre></div><h2 id="continuous-delivery">Continuous Delivery</h2>
-<p>Finally we&rsquo;ll create a build pipeline that builds the static website into the <code>menziess.github.io</code> submodule folder and pushes it to the github repository from where it can be hosted:</p>
+<p>Finally, in your Azure repository, create a build pipeline by clicking on &ldquo;<strong>Set up build</strong>&quot;. It will be used to publish your site whenever you push any changes to the <code>master</code> branch:</p>
+<p><img src="/images/create-a-blog/set-up-build-pipeline-azure-devops.png#large#shadow" alt=""></p>
+<p>Select &ldquo;<strong>Starter pipeline</strong>&quot;, and copy paste the following code:</p>
 <div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">trigger</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span>- master<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">pool</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span><span class="k">vmImage</span><span class="p">:</span><span class="w"> </span>ubuntu-latest<span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">variables</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">user</span><span class="p">:</span><span class="w"> </span>menziess<span class="w">
-</span><span class="w">  </span><span class="k">email</span><span class="p">:</span><span class="w"> </span>stefan_schenk@hotmail.com<span class="w">
-</span><span class="w">  </span><span class="k">repo</span><span class="p">:</span><span class="w"> </span>menziess.github.io<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">steps</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
@@ -248,15 +263,20 @@ git push -u origin --all
 </span><span class="w">      </span>git<span class="w"> </span>-c<span class="w"> </span>user.name=$(user)<span class="w"> </span>-c<span class="w"> </span>user.email=$(email)<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&#34;commit $(date +&#34;</span>%Y_%m_%d_%I_%M_%p<span class="s2">&#34;)&#34;</span><span class="w">
 </span><span class="w">      </span>git<span class="w"> </span>push<span class="w"> </span>-f<span class="w"> </span>https<span class="p">:</span>//$(token)<span class="p">:</span>x-oauth-basic@github.com/$(user)/$(repo).git<span class="w"> </span>master<span class="w">
 </span><span class="w">    </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Push<span class="w"> </span>generated<span class="w"> </span>site<span class="w"> </span>to<span class="w"> </span>github.io<span class="w">
-</span><span class="w">
-</span></code></pre></div><p>Generate a github token <a href="https://github.com/settings/tokens">here</a>, and check the &ldquo;repo&rdquo; boxes, then copy-paste the token to a variable in your build pipeline:</p>
+</span></code></pre></div><p>Next, visit your github tokens page <a href="https://github.com/settings/tokens">here</a>, and generate a github token.
+Make sure you check the &ldquo;repo&rdquo; box, and copy the token:</p>
+<p><img src="/images/create-a-blog/new-github-token.png#large#shadow" alt=""></p>
+<p>Go back to your Azure build pipeline and click on &ldquo;<strong>Variables</strong>&quot;. Create a new variable called <code>token</code>, and paste your github token in the value field. Also make sure to tick the &ldquo;<strong>Keep this value secret</strong>&rdquo; box:</p>
 <p><img src="/images/create-a-blog/variables.png#medium#shadow" alt=""></p>
-<h2 id="publish-your-site">Publish Your Site</h2>
-<p>Create a new post:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo new posts/create-a-blog.md
-</code></pre></div><p>Modify the page, and push the changes to trigger a new build.</p>
-<p>After about 30 seconds, your website should be published: <a href="https://menziess.github.io/">https://menziess.github.io/</a></p>
-<p>Let me know whether it works for you, or whether this setup can be improved in the comments below!</p>
+<p>Create three additional variables:</p>
+<ol>
+<li><strong>user:</strong> your github username (menziess)</li>
+<li><strong>email:</strong> your email address used for signing up at Github (<a href="mailto:menziess@email.com">menziess@email.com</a>)</li>
+<li><strong>repo:</strong> your repo url without <em>https://</em> (menziess.github.io)</li>
+</ol>
+<p>Now &ldquo;<strong>Save and run</strong>&rdquo; the pipeline, and commit the newly created yml pipeline directly to the master branch.</p>
+<p>After about 30 seconds, the website should be published: <a href="https://menziess.github.io/">https://menziess.github.io/</a></p>
+<p>Make sure to leave a message below if you face any issues!</p>
 
 </div>
 
