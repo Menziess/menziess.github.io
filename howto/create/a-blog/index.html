@@ -198,9 +198,11 @@
 git init
 git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
 <span class="nb">echo</span> <span class="s1">&#39;theme = &#34;ananke&#34;&#39;</span> &gt;&gt; config.toml
-hugo new posts/my-first-post.md
 <span class="nb">echo</span> <span class="s1">&#39;resources/_gen/&#39;</span> &gt;&gt; .gitignore
 <span class="nb">echo</span> <span class="s1">&#39;public/&#39;</span> &gt;&gt; .gitignore
+hugo new posts/my-first-post.md
+git add .
+git commit -m <span class="s2">&#34;Created new website&#34;</span>
 </code></pre></div><p>Your project structure will look as follows:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ tree -a -L <span class="m">1</span>
 .
@@ -216,11 +218,11 @@ hugo new posts/my-first-post.md
 ├── static
 └── themes
 
-<span class="m">8</span> directories, <span class="m">2</span> files
+<span class="m">8</span> directories, <span class="m">3</span> files
 </code></pre></div><p>Run a local server to see your website at <a href="http://127.0.0.1:1313/">http://localhost:1313/</a>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">hugo server -D
 </code></pre></div><h2 id="push-project-to-azure-repos">Push Project to Azure Repo&rsquo;s</h2>
-<p>Log in at Azure DevOps <a href="https://go.microsoft.com/fwlink/?LinkId=2014881&amp;campaign=acom~azure~devops~services~main~hero&amp;githubsi=true">here</a>, and create a new repository:</p>
+<p>Log in at Azure DevOps <a href="https://go.microsoft.com/fwlink/?LinkId=2014881&amp;campaign=acom~azure~devops~services~main~hero&amp;githubsi=true">here</a>, create a new repository within a project:</p>
 <p><img src="/images/create-a-blog/how-to-create-a-new-repository-azure-devops.png#medium#shadow" alt=""></p>
 <p>Copy the <strong>SSH</strong> command that <strong>&ldquo;pushes an existing repository from command line&rdquo;</strong>, and execute it in the root of your hugo project:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git remote add origin Menziess@vs-ssh.visualstudio.com:v3/Menziess/blog/blog
@@ -229,7 +231,7 @@ git push -u origin --all
 <p>We&rsquo;ll need another repository (at Github) to host our static webpages.</p>
 <p>Log in at Github <a href="https://github.com/new">here</a>, and create a public repository named <code>username.github.io</code>, where <code>username</code> is your Github username:</p>
 <p><img src="/images/create-a-blog/repo-name.png#small" alt=""></p>
-<p>It&rsquo;s Menziess in my case, we&rsquo;ll use that as an example. Your site will be available at a similar url: <a href="https://menziess.github.io">https://menziess.github.io</a>. Initially you will receive a 404 error when you visit the page.</p>
+<p>It&rsquo;s <code>menziess.github.io</code> in my case, we&rsquo;ll use that as an example. You&rsquo;ll notice that the domain of this blog is exactly the same as my repository name. Initially you will receive a 404 error when you visit your page, as the Github pages repository is still empty.</p>
 <p>Update the base url of the <code>config.toml</code> file in your hugo project:</p>
 <div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="nx">baseURL</span> <span class="p">=</span> <span class="s2">&#34;https://menziess.github.io&#34;</span>
 </code></pre></div><h2 id="continuous-delivery">Continuous Delivery</h2>
@@ -243,6 +245,9 @@ git push -u origin --all
 </span><span class="w">  </span><span class="k">vmImage</span><span class="p">:</span><span class="w"> </span>ubuntu-latest<span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="k">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="k">checkout</span><span class="p">:</span><span class="w"> </span>self<span class="w">
+</span><span class="w">    </span><span class="k">submodules</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">
 </span><span class="w">  </span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
 </span><span class="sd">      sudo snap install hugo --channel=extended</span><span class="w">
 </span><span class="w">    </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span>Install<span class="w"> </span>hugo<span class="w"> </span>extended<span class="w">
@@ -275,6 +280,7 @@ Make sure you check the &ldquo;repo&rdquo; box, and copy the token:</p>
 <li><strong>repo:</strong> your repo url without <em>https://</em> (menziess.github.io)</li>
 </ol>
 <p>Now &ldquo;<strong>Save and run</strong>&rdquo; the pipeline, and commit the newly created yml pipeline directly to the master branch.</p>
+<p>There&rsquo;s a <a href="https://stackoverflow.com/questions/11577147/how-to-fix-http-404-on-github-pages">known issue</a> that prevents the page from being published if you&rsquo;ve pushed the website in a single commit. Simply make a small modification in one of the files in the github repository (using the github web editor), and commit directly to the master branch.</p>
 <p>After about 30 seconds, the website should be published: <a href="https://menziess.github.io/">https://menziess.github.io/</a></p>
 <p>Make sure to leave a message below if you face any issues!</p>
 
