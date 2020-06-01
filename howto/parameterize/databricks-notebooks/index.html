@@ -189,7 +189,7 @@
           
 <h1 class="title">Parameterize Databricks Notebooks</h1>
 <div class="pb-2 content anchor-link-enabled">
-  <p>A databricks notebook that has <code>datetime.now()</code> in one of its cells, will most likely yield a different outcome every time it is run. For example: when you read in data from today&rsquo;s partition (june 1st) using the timestamp &ndash; but the notebook fails halfway through &ndash; you won&rsquo;t be able to restart the same job the next day (june 2nd). As it will not read from the same partition.</p>
+  <p>A databricks notebook that has <code>datetime.now()</code> in one of its cells, will most likely behave differently when it&rsquo;s run again at a later point in time. For example: when you read in data from today&rsquo;s partition (june 1st) using the datetime &ndash; but the notebook fails halfway through &ndash; you wouldn&rsquo;t be able to restart the same job on june 2nd and assume that it will read from the same partition.</p>
 <p><img src="/images/logo/databricks.png#logo" alt=""></p>
 <p>If we borrow the concept of <a href="https://menziess.github.io/howto/use/functional-programming-in-python/#1-purity">purity</a> from Functional Programming, and apply it to our notebook, we would simply pass any state to the notebook via parameters. And additionally we&rsquo;d make sure that our notebook:</p>
 <ol>

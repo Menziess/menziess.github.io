@@ -17,7 +17,7 @@
       <pubDate>Mon, 01 Jun 2020 20:49:01 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/parameterize/databricks-notebooks/</guid>
-      <description>A databricks notebook that has datetime.now() in one of its cells, will most likely yield a different outcome every time it is run. For example: when you read in data from today&amp;rsquo;s partition (june 1st) using the timestamp &amp;ndash; but the notebook fails halfway through &amp;ndash; you won&amp;rsquo;t be able to restart the same job the next day (june 2nd).</description>
+      <description>A databricks notebook that has datetime.now() in one of its cells, will most likely behave differently when it&amp;rsquo;s run again at a later point in time. For example: when you read in data from today&amp;rsquo;s partition (june 1st) using the datetime &amp;ndash; but the notebook fails halfway through &amp;ndash; you wouldn&amp;rsquo;t be able to restart the same job on june 2nd and assume that it will read from the same partition.</description>
     </item>
     
     <item>
