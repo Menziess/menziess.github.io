@@ -6,10 +6,19 @@
     <description>Recent content in workflow on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Mar 2020 07:15:38 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2020 20:49:01 +0100</lastBuildDate>
     
 	<atom:link href="https://menziess.github.io/tags/workflow/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Parameterize Databricks Notebooks</title>
+      <link>https://menziess.github.io/howto/parameterize/databricks-notebooks/</link>
+      <pubDate>Mon, 01 Jun 2020 20:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/parameterize/databricks-notebooks/</guid>
+      <description>A databricks notebook that has datetime.now() in one of its cells, will most likely yield a different outcome every time it is run. For example: when you read in data from today&amp;rsquo;s partition (june 1st) using the timestamp &amp;ndash; but the notebook fails halfway through &amp;ndash; you won&amp;rsquo;t be able to restart the same job the next day (june 2nd).</description>
+    </item>
     
     <item>
       <title>Enhance Your Databricks Workflow</title>

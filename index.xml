@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Parameterize Databricks Notebooks</title>
+      <link>https://menziess.github.io/howto/parameterize/databricks-notebooks/</link>
+      <pubDate>Mon, 01 Jun 2020 20:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/parameterize/databricks-notebooks/</guid>
+      <description>A databricks notebook that has datetime.now() in one of its cells, will most likely yield a different outcome every time it is run. For example: when you read in data from today&amp;rsquo;s partition (june 1st) using the timestamp &amp;ndash; but the notebook fails halfway through &amp;ndash; you won&amp;rsquo;t be able to restart the same job the next day (june 2nd).</description>
+    </item>
+    
+    <item>
       <title>Use Functional Programming In Python</title>
       <link>https://menziess.github.io/howto/use/functional-programming-in-python/</link>
       <pubDate>Wed, 29 Apr 2020 00:00:00 +0100</pubDate>
