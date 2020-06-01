@@ -35,7 +35,7 @@
       <pubDate>Sun, 02 Feb 2020 23:31:52 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/create/a-blog/</guid>
-      <description>In this post we&amp;rsquo;ll create a static website with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, push our project to &lt;a href=&#34;https://dev.azure.com/&#34;&gt;Azure Repo&amp;rsquo;s&lt;/a&gt;, build and release the site to &lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt; using Azure DevOps.</description>
+      <description>In this post we&amp;rsquo;ll create a free static website with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, push our project to &lt;a href=&#34;https://dev.azure.com/&#34;&gt;Azure Repo&amp;rsquo;s&lt;/a&gt;, build and release the site to &lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt; using Azure DevOps.</description>
     </item>
     
   </channel>
