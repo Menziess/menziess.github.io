@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Run Databricks Notebooks from DevOps</title>
+      <link>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</link>
+      <pubDate>Tue, 02 Jun 2020 02:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</guid>
+      <description>Python &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;packages&lt;/a&gt; are easy to test in isolation. But what if packaging your code is not an option, and you do want to automatically verify that your code actually works, you could run your databricks notebook from Azure DevOps directly using the databricks-cli.</description>
+    </item>
+    
+    <item>
       <title>Parameterize Databricks Notebooks</title>
       <link>https://menziess.github.io/howto/parameterize/databricks-notebooks/</link>
       <pubDate>Mon, 01 Jun 2020 20:49:01 +0100</pubDate>

@@ -13,6 +13,21 @@
   </url>
   
   <url>
+    <loc>https://menziess.github.io/tags/devops/</loc>
+    <lastmod>2020-06-02T02:49:01+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</loc>
+    <lastmod>2020-06-02T02:49:01+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/tags/testing/</loc>
+    <lastmod>2020-06-02T02:49:01+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://menziess.github.io/howto/parameterize/databricks-notebooks/</loc>
     <lastmod>2020-06-01T20:49:01+01:00</lastmod>
   </url>
@@ -38,22 +53,12 @@
   </url>
   
   <url>
-    <loc>https://menziess.github.io/tags/devops/</loc>
-    <lastmod>2020-03-01T07:15:38+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://menziess.github.io/howto/enhance/your-databricks-workflow/</loc>
     <lastmod>2020-03-01T07:15:38+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://menziess.github.io/tags/packaging/</loc>
-    <lastmod>2020-03-01T07:15:38+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://menziess.github.io/tags/testing/</loc>
     <lastmod>2020-03-01T07:15:38+01:00</lastmod>
   </url>
   

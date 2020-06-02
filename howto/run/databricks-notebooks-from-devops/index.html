@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Run Databricks Notebooks from DevOps - menziess blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Lora:400,700|Fira+Code:300,400">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msvalidate.01" content="DF64D3472558D82FA059638FC476FF14">
+  <meta name="msapplication-TileColor" content="#603cba">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  
+  
+    
+      
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157518256-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157518256-1');
+      </script>
+    
+  
+
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.f9914e35727660e7509c3288c2988addb8b47fae3590399138cccc8980a683a8.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/howto/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-tags">
+      <a href="/tags/">
+        <span>Tags</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://menziess.github.io/howto"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://menziess.github.io/howto"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/howto/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-tags">
+      <a href="/tags/">
+        <span>Tags</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Howto</h4>
+
+  
+  <ul>
+    
+    <li class="active ">
+      <a href="https://menziess.github.io/howto/run/databricks-notebooks-from-devops/">Run Databricks Notebooks from DevOps</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/parameterize/databricks-notebooks/">Parameterize Databricks Notebooks</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/use/functional-programming-in-python/">Use Functional Programming In Python</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">Enhance Your Databricks Workflow</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/">Enhance Your Python-vscode Workflow</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/install/databricks-connect/">Install databricks-connect</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">Install Windows Subsystem for Linux</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/test/python-code/">Test Python Code</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/test/code-in-databricks-notebooks/">Test Code in Databricks Notebooks</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/a-blog/">Create a Blog</a>
+    </li>
+    
+  </ul>
+  
+
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Run Databricks Notebooks from DevOps</h1>
+<div class="pb-2 content anchor-link-enabled">
+  <p>Why would you do such a thing?</p>
+<p>Python <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">packages</a> are easy to test in isolation. But what if packaging your code is not an option, and you do want to automatically verify that your code actually works, you could run your databricks notebook from Azure DevOps directly using the <strong>databricks-cli</strong>.</p>
+<p>It&rsquo;s important to know whether your notebook has particular side effects, in which case it is advised to <a href="https://menziess.github.io/howto/parameterize/databricks-notebooks/">parameterize the notebook</a> so that the output or side effect can be controlled to a certain extent.</p>
+<p><img src="/images/logo/testing.png#logo" alt=""> ⟶ <img src="/images/logo/databricks.png#logo" alt=""></p>
+<h2 id="our-plan">Our Plan</h2>
+<ol>
+<li>Create a <code>samplefile.csv</code></li>
+<li>Let our <code>notebook.py</code> read and transform the <code>samplefile.csv</code> file into an output file</li>
+<li>Create a <code>tests.py</code> notebook that triggers the first notebook, performing some checks on the output data</li>
+<li>Copy data and notebooks, then run the <code>tests.py</code> notebook in a databricks workspace</li>
+</ol>
+<h2 id="our-notebooks--data">Our Notebooks &amp; Data</h2>
+<p>Create the following project structure:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ tree -a -L <span class="m">2</span>
+.
+├── tmp
+│   └── demo
+│       └── sampledata.csv
+└── src
+    ├── notebook.py
+    └── tests.py
+
+<span class="m">3</span> directories, <span class="m">3</span> files
+</code></pre></div><p>Here&rsquo;s the minimum amount of data that we provide to our notebook:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ cat tmp/demo/sampledata.csv
+id,firstname,lastname
+1,Stefan,Schenk
+</code></pre></div><p>Here&rsquo;s our notebook that concatenates the columns <code>firstname</code> and <code>lastname</code> to produce a column <code>fullname</code>, and writes it to a temporary output folder:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Databricks notebook source</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">f</span>
+
+<span class="c1"># COMMAND ----------</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s1">&#39;tmp/demo&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># COMMAND ----------</span>
+
+<span class="p">(</span>
+  <span class="n">df</span>
+  <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;fullname&#39;</span><span class="p">,</span>
+              <span class="n">f</span><span class="o">.</span><span class="n">format_string</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;firstname&#39;</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;lastname&#39;</span><span class="p">)))</span>
+  <span class="o">.</span><span class="n">write</span>
+  <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s1">&#39;overwrite&#39;</span><span class="p">)</span>
+  <span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s1">&#39;tmp/demo-output&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div><p>Our <code>tests.py</code> notebook, that runs the <code>notebook.py</code> and performs some checks on the output data:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Databricks notebook source</span>
+<span class="c1"># MAGIC %run /Shared/tmp/notebook</span>
+
+<span class="c1"># COMMAND ----------</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s1">&#39;tmp/demo-output&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># COMMAND ----------</span>
+
+<span class="k">assert</span> <span class="n">df</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">.</span><span class="n">asDict</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span>
+  <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;firstname&#39;</span><span class="p">:</span> <span class="s1">&#39;Stefan&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;lastname&#39;</span><span class="p">:</span> <span class="s1">&#39;Schenk&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;fullname&#39;</span><span class="p">:</span> <span class="s1">&#39;Stefan Schenk&#39;</span>
+<span class="p">}</span>
+</code></pre></div><p>Finally, we need a DevOps pipeline that copies the data and notebook to a databricks workspace.</p>
+<h2 id="devops">DevOps</h2>
+<p>Create a new <code>azure-pipelines.yml</code> file, then copy and paste the following code block:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="k">repo</span><span class="p">:</span><span class="w"> </span>self<span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">trigger</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- master<span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">variables</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">databricks-host</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;https://westeurope.azuredatabricks.net&#39;</span><span class="w">
+</span><span class="w">  </span><span class="k">notebook-folder</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/Shared/tmp/&#39;</span><span class="w">
+</span><span class="w">  </span><span class="k">cluster-id</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0406-071753-quell501&#39;</span><span class="w">
+</span><span class="w">  </span><span class="k">notebook-name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;tests&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">steps</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>UsePythonVersion@<span class="m">0</span><span class="w">
+</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Use Python 3.x&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">    pip install databricks-cli</span><span class="w">
+</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install databricks-cli&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">   databricks fs cp mnt/demo/ dbfs:/tmp/demo --recursive --overwrite</span><span class="w">
+</span><span class="w">
+</span><span class="w">   </span>databricks<span class="w"> </span>workspace<span class="w"> </span>import_dir<span class="w"> </span>src/<span class="w"> </span>$(notebook-folder)<span class="w"> </span>-o<span class="w">
+</span><span class="w">
+</span><span class="w">   </span>JOB_ID=$(databricks<span class="w"> </span>jobs<span class="w"> </span>create<span class="w"> </span>--json<span class="w"> </span><span class="s1">&#39;{
+</span><span class="s1">     &#34;name&#34;: &#34;Testrun&#34;,
+</span><span class="s1">     &#34;existing_cluster_id&#34;: &#34;$(cluster-id)&#34;,
+</span><span class="s1">     &#34;timeout_seconds&#34;: 3600,
+</span><span class="s1">     &#34;max_retries&#34;: 1,
+</span><span class="s1">     &#34;notebook_task&#34;: {
+</span><span class="s1">       &#34;notebook_path&#34;: &#34;$(notebook-folder)$(notebook-name)&#34;,
+</span><span class="s1">       &#34;base_parameters&#34;: {}
+</span><span class="s1">     }
+</span><span class="s1">   }&#39;</span><span class="w"> </span>|<span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.job_id&#39;</span>)<span class="w">
+</span><span class="w">
+</span><span class="w">   </span>RUN_ID=$(databricks<span class="w"> </span>jobs<span class="w"> </span>run-now<span class="w"> </span>--job-id<span class="w"> </span>$JOB_ID<span class="w"> </span>|<span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.run_id&#39;</span>)<span class="w">
+</span><span class="w">
+</span><span class="w">   </span>job_status=<span class="s2">&#34;PENDING&#34;</span><span class="w">
+</span><span class="w">   </span>while<span class="w"> </span><span class="p">[</span><span class="w"> </span>$job_status<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;RUNNING&#34;</span><span class="w"> </span><span class="p">]</span><span class="w"> </span>||<span class="w"> </span><span class="p">[</span><span class="w"> </span>$job_status<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;PENDING&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="w">   </span>do<span class="w">
+</span><span class="w">     </span>sleep<span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">     </span>job_status=$(databricks<span class="w"> </span>runs<span class="w"> </span>get<span class="w"> </span>--run-id<span class="w"> </span>$RUN_ID<span class="w"> </span>|<span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.state.life_cycle_state&#39;</span>)<span class="w">
+</span><span class="w">     </span>echo<span class="w"> </span>Status<span class="w"> </span>$job_status<span class="w">
+</span><span class="w">   </span>done<span class="w">
+</span><span class="w">
+</span><span class="w">   </span>RESULT=$(databricks<span class="w"> </span>runs<span class="w"> </span>get-output<span class="w"> </span>--run-id<span class="w"> </span>$RUN_ID)<span class="w">
+</span><span class="w">
+</span><span class="w">   </span>RESULT_STATE=$(echo<span class="w"> </span>$RESULT<span class="w"> </span>|<span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.metadata.state.result_state&#39;</span>)<span class="w">
+</span><span class="w">   </span>RESULT_MESSAGE=$(echo<span class="w"> </span>$RESULT<span class="w"> </span>|<span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.metadata.state.state_message&#39;</span>)<span class="w">
+</span><span class="w">   </span>if<span class="w"> </span><span class="p">[</span><span class="w"> </span>$RESULT_STATE<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;FAILED&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="w">   </span>then<span class="w">
+</span><span class="w">     </span>echo<span class="w"> </span><span class="s2">&#34;##vso[task.logissue type=error;]$RESULT_MESSAGE&#34;</span><span class="w">
+</span><span class="w">     </span>echo<span class="w"> </span><span class="s2">&#34;##vso[task.complete result=Failed;done=true;]$RESULT_MESSAGE&#34;</span><span class="w">
+</span><span class="w">   </span>fi<span class="w">
+</span><span class="w">
+</span><span class="w">   </span>echo<span class="w"> </span>$RESULT<span class="w"> </span>|<span class="w"> </span>jq<span class="w"> </span>.<span class="w">
+</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Run Databricks Notebook&#39;</span><span class="w">
+</span><span class="w">  </span><span class="k">env</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">DATABRICKS_TOKEN</span><span class="p">:</span><span class="w"> </span>$(databricks-token)<span class="w">
+</span><span class="w">    </span><span class="k">DATABRICKS_HOST</span><span class="p">:</span><span class="w"> </span>$(databricks-host)<span class="w">
+</span></code></pre></div><p>In Azure DevOps, create a new pipeline from this yml file after committing and pushing it to your repository. Then continue to create a new <a href="https://docs.databricks.com/dev-tools/api/latest/authentication.html">databricks token</a>, and add it as a secret variable called <code>databricks-token</code> to the build pipeline.</p>
+<p>The pipeline looks complicated, but it&rsquo;s just a collection of databricks-cli commands:</p>
+<ol>
+<li>Copy our test data to our databricks workspace</li>
+<li>Copy our notebooks</li>
+<li>Create a databricks job</li>
+<li>Trigger a run, storing the <code>RUN_ID</code></li>
+<li>Wait until the run is finished</li>
+<li>Fetch the results and check whether the run state was <code>FAILED</code></li>
+</ol>
+<h2 id="running-the-pipeline">Running the Pipeline</h2>
+<p>The output will look something like this:</p>
+<p><img src="/images/run-databricks-notebooks-from-devops/run-databricks-notebook-from-azure-devops-pipeline.png#large#shadow" alt=""></p>
+<p>If you scroll all the way down to the bottom, there&rsquo;s a run link, which takes you to the databricks run:</p>
+<p><img src="/images/run-databricks-notebooks-from-devops/databricks-job-run.png#large#shadow" alt=""></p>
+<p>And that&rsquo;s it!</p>
+
+</div>
+
+<div class="content">
+  
+  <span class="post-meta">
+    
+      <a href="/tags/testing">#testing</a>&nbsp;
+    
+      <a href="/tags/devops">#devops</a>&nbsp;
+    
+  </span>
+  <br>
+  <br>
+
+
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "menziess" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  
+
+</div>
+
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://github.com/menziess/">github/menziess</a></li>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/stefanschenk/">in/stefanschenk/</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+</body>
+
+</html>
