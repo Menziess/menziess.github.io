@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Parameterize Databricks Notebooks - menziess blog</title>
+  <title>Run GUI Apps With Docker - menziess blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Lora:400,700|Fira+Code:300,400">
@@ -130,7 +130,7 @@
   
   <ul>
     
-    <li class="">
+    <li class="active ">
       <a href="https://menziess.github.io/howto/run/gui-apps-with-docker/">Run GUI Apps With Docker</a>
     </li>
     
@@ -138,7 +138,7 @@
       <a href="https://menziess.github.io/howto/run/databricks-notebooks-from-devops/">Run Databricks Notebooks from DevOps</a>
     </li>
     
-    <li class="active ">
+    <li class="">
       <a href="https://menziess.github.io/howto/parameterize/databricks-notebooks/">Parameterize Databricks Notebooks</a>
     </li>
     
@@ -195,36 +195,36 @@
         </div>
         <div class="col-12 col-md-9">
           
-<h1 class="title">Parameterize Databricks Notebooks</h1>
+<h1 class="title">Run GUI Apps With Docker</h1>
 <div class="pb-2 content anchor-link-enabled">
-  <p>A databricks notebook that has <code>datetime.now()</code> in one of its cells, will most likely behave differently when it&rsquo;s run again at a later point in time. For example: when you read in data from today&rsquo;s partition (june 1st) using the datetime &ndash; but the notebook fails halfway through &ndash; you wouldn&rsquo;t be able to restart the same job on june 2nd and assume that it will read from the same partition.</p>
-<p><img src="/images/logo/databricks.png#logo" alt=""></p>
-<p>If we borrow the concept of <a href="https://menziess.github.io/howto/use/functional-programming-in-python/#1-purity">purity</a> from Functional Programming, and apply it to our notebook, we would simply pass any state to the notebook via parameters. And additionally we&rsquo;d make sure that our notebook:</p>
-<ol>
-<li>is <strong>deterministic</strong></li>
-<li>has no <strong>side effects</strong></li>
-</ol>
-<h2 id="parameterizing">Parameterizing</h2>
-<p>Arguments can be accepted in databricks notebooks using widgets.</p>
-<p>We can replace our non-deterministic <code>datetime.now()</code> expression with the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
-
-<span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;process_datetime&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</code></pre></div><p>In a next cell, we can read the argument from the widget:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">process_datetime</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span>
-    <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;process_datetime&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
-</code></pre></div><p>Assuming you&rsquo;ve passed the value <code>2020-06-01</code> as an argument during a notebook run, the <code>process_datetime</code> variable will contain a <code>datetime.datetime</code> value:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">process_datetime</span><span class="p">)</span>  <span class="c1"># 2020-06-01 00:00:00</span>
-</code></pre></div><h2 id="orchestration">Orchestration</h2>
-<p>Using the databricks-cli in this example, you can pass parameters as a json string:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">databricks <span class="nb">jobs</span> run-now <span class="se">\
-</span><span class="se"></span>--job-id <span class="m">123</span> <span class="se">\
-</span><span class="se"></span>--notebook-params <span class="s1">&#39;{&#34;process_datetime&#34;: &#34;2020-06-01&#34;}&#39;</span>
-</code></pre></div><p>We&rsquo;ve made sure that no matter when you run the notebook, you have full control over the partition (june 1st) it will read from.</p>
-<h2 id="widgets">Widgets</h2>
-<p>The full list of available widgets is always available by running <code>dbutils.widgets.help()</code> in a python cell:</p>
-<p><img src="/images/parameterize-databricks-notebooks/dbutils-widgets-help.png#large#shadow" alt=""></p>
+  <p>For different reasons it may be useful to run dockerized GUI apps. For me, the reason was: stress testing a web app&rsquo;s javascript logic by keeping 200+ browser tabs open for a long period of time.</p>
+<p><img src="/images/logo/docker.png#logo" alt=""></p>
+<p>I prefer to keep useful tools in a place I can directly find and use them.</p>
+<p>Create a new shell script: <code>/usr/local/bin/docker-gui</code> and grant all execute permissions:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">echo</span> <span class="s1">&#39;xhost +si:localuser:root\ndocker run -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --tmpfs /dev/shm &#34;${@}&#34;&#39;</span> <span class="p">|</span> sudo tee /usr/local/bin/docker-gui
+sudo chmod a+x /usr/local/bin/docker-gui
+</code></pre></div><p>Now test your new script by running:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">docker-gui jessfrez/firefox
+</code></pre></div><p>You should see a new firefox window pop up:</p>
+<p><img src="/images/run-gui-apps-with-docker/firefox-in-docker-with-gui.png#shadow" alt=""></p>
+<p>This is a very basic example of running a GUI app, using <a href="https://askubuntu.com/a/7885">X</a>.</p>
+<p>I encourage you to look at this nice collection of <a href="https://github.com/jessfraz/dockerfiles">commonly used apps</a> containerized, by jessfraz.</p>
+<h2 id="running-a-gui-app-in-the-background">Running a GUI App in the Background</h2>
+<p>For my web app testing, this was not sufficient.</p>
+<p>I wanted to run many containers, each running a web browser, hosted on a large kubernetes cluster. But our <code>docker-gui</code> passes a <code>DISPLAY</code> environment variable, which is used to send keyboard, mouse, and screen information to the server program (X server). Our kubernetes cluster will not have a display screen to render the browser, so this approach did not work out for me.</p>
+<p>I discovered this interesting docker image, containing an operating system with full-fledged UI that is served at <a href="http://localhost:6080">localhost:6080</a>, and has firefox installed by default.</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">docker run -d --rm --name gui <span class="se">\
+</span><span class="se"></span>  -p 6080:80 -p 5900:5900 <span class="se">\
+</span><span class="se"></span>  dorowu/ubuntu-desktop-lxde-vnc:bionic
+</code></pre></div><p>You can either choose to open or completely ignore the ui, and firefox will still run and render web pages in the background:</p>
+<p><img src="/images/run-gui-apps-with-docker/desktop.png#shadow" alt=""></p>
+<p>With docker it&rsquo;s possible to make and save changes that have been made to a container to a new layer, as a docker image, by using using <code>docker commit</code> command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">docker commit <span class="c1"># [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span>
+</code></pre></div><p>I want to run firefox, opening a specific webpage, whenever the container starts. By attaching vscode to the running container (using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">docker extension</a> for vscode), you can modify files inside the container:</p>
+<p><img src="/images/run-gui-apps-with-docker/supervisord.png#shadow" alt=""></p>
+<p>The <code>supervisord.conf</code> file determines which programs run at startup, so I added firefox, with my desired webpage url.</p>
+<p>Finally, I committed the change, and tagged a new docker image, which I can now run on my kubernetes cluster to open as many browser tabs with my testing website as I want.</p>
+<p>I still feel that there&rsquo;s a huge overhead to this approach, so if you find a better solution to this problem, please let me know in the comments below!</p>
 
 </div>
 
@@ -232,7 +232,9 @@
   
   <span class="post-meta">
     
-      <a href="/tags/workflow">#workflow</a>&nbsp;
+      <a href="/tags/run">#run</a>&nbsp;
+    
+      <a href="/tags/docker">#docker</a>&nbsp;
     
   </span>
   <br>

@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Run GUI Apps With Docker</title>
+      <link>https://menziess.github.io/howto/run/gui-apps-with-docker/</link>
+      <pubDate>Fri, 10 Jul 2020 02:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/run/gui-apps-with-docker/</guid>
+      <description>For different reasons it may be useful to run dockerized GUI apps. For me, the reason was: stress testing a web app&amp;rsquo;s javascript logic by keeping 200+ browser tabs open for a long period of time.</description>
+    </item>
+    
+    <item>
       <title>Run Databricks Notebooks from DevOps</title>
       <link>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</link>
       <pubDate>Tue, 02 Jun 2020 02:49:01 +0100</pubDate>

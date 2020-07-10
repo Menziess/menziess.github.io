@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on menziess blog</title>
+    <link>https://menziess.github.io/tags/docker/</link>
+    <description>Recent content in docker on menziess blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Jul 2020 02:49:01 +0100</lastBuildDate>
+    
+	<atom:link href="https://menziess.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Run GUI Apps With Docker</title>
+      <link>https://menziess.github.io/howto/run/gui-apps-with-docker/</link>
+      <pubDate>Fri, 10 Jul 2020 02:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/run/gui-apps-with-docker/</guid>
+      <description>For different reasons it may be useful to run dockerized GUI apps. For me, the reason was: stress testing a web app&amp;rsquo;s javascript logic by keeping 200+ browser tabs open for a long period of time.</description>
+    </item>
+    
+  </channel>
+</rss>
