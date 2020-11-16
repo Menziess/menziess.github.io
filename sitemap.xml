@@ -13,17 +13,27 @@
   </url>
   
   <url>
+    <loc>https://menziess.github.io/howto/install/python-packages-on-azure-synapse/</loc>
+    <lastmod>2020-11-16T07:17:38+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/tags/packaging/</loc>
+    <lastmod>2020-11-16T07:17:38+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/tags/synapse/</loc>
+    <lastmod>2020-11-16T07:17:38+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://menziess.github.io/tags/databricks/</loc>
     <lastmod>2020-11-16T07:15:38+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://menziess.github.io/howto/install/python-packages-on-databricks/</loc>
-    <lastmod>2020-11-16T07:15:38+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://menziess.github.io/tags/packaging/</loc>
     <lastmod>2020-11-16T07:15:38+01:00</lastmod>
   </url>
   

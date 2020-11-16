@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Install Python Packages on Azure Synapse</title>
+      <link>https://menziess.github.io/howto/install/python-packages-on-azure-synapse/</link>
+      <pubDate>Mon, 16 Nov 2020 07:17:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/install/python-packages-on-azure-synapse/</guid>
+      <description>This post will be very similar to the last one. But this time, we&amp;rsquo;ll release our python package to Azure Synapse instead of Databricks. In order to unit test Synapse Notebooks, you&amp;rsquo;ll have to jump through all sorts of hoops.</description>
+    </item>
+    
+    <item>
       <title>Install Python Packages on Databricks</title>
       <link>https://menziess.github.io/howto/install/python-packages-on-databricks/</link>
       <pubDate>Mon, 16 Nov 2020 07:15:38 +0100</pubDate>
