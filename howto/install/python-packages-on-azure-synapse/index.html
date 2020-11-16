@@ -218,7 +218,7 @@
 <p><img src="/images/install-python-packages-on-azure-synapse/no-spark-pools.png#shadow" alt=""></p>
 <p>You can provide a <code>requirements.txt</code> file during, or after pool creation.</p>
 <p><img src="/images/install-python-packages-on-azure-synapse/requirements-txt.png#shadow" alt=""></p>
-<p>In order to install a custom package, you&rsquo;ll need to upload the wheel file into the linked storage account. In order to upload something, you will need a &ldquo;<em>Storage Blob Data Contributor</em>&rdquo; role assigned to your account. Alternatively, you can use the old <code>--auth-mode key</code> option.</p>
+<p>To install custom packages, you simply upload the wheel file into the linked storage account, at a particular location. You will need a &ldquo;<em>Storage Blob Data Contributor</em>&rdquo; role assigned to your account to copy files to your storage using the azure cli (alternatively, you can use the old <code>--auth-mode key</code> option).</p>
 <p>Insert the following snippet at the top of your <code>Makefile</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">.EXPORT_ALL_VARIABLES</span><span class="o">:</span>
 
@@ -244,9 +244,9 @@
 ...
 ➜ ls dist
 demo-0.0.dev0-py3-none-any.whl
-</code></pre></div><p>Finally, run the new <code>make install-package-synapse</code> command in your terminal, and restart the spark pool.</p>
+</code></pre></div><p>Finally, run the new <code>make install-package-synapse</code> command in your terminal to copy the wheel file, and restart the spark pool in synapse.</p>
 <p><img src="/images/install-python-packages-on-azure-synapse/hello.png#shadow" alt=""></p>
-<p>Adding the copy command to a DevOps release pipeline should be your final step, to automatically roll out new versions of your package.</p>
+<p>By adding the copy command to a DevOps release pipeline, you can automatically roll out new (tested) versions of your packaged code, and use them in your Synapse Notebooks.</p>
 
 </div>
 
