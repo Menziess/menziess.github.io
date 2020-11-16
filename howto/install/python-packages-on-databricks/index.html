@@ -219,7 +219,7 @@
 	@echo Installing <span class="s1">&#39;dist/${WHEELNAME}&#39;</span> on databricks...
 	databricks fs cp dist/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> dbfs:/libraries/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> --overwrite
 	databricks libraries install --whl dbfs:/libraries/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> --cluster-id <span class="si">${</span><span class="nv">CLUSTERID</span><span class="si">}</span>
-</code></pre></div><p>Run <code>make build</code> in your terminal. Confirm that the file <code>dist/demo-0.0.dev0-py3-none-any.whl</code> has been created:</p>
+</code></pre></div><p>Run the <code>make build</code> command in your terminal. Confirm that the file <code>dist/demo-0.0.dev0-py3-none-any.whl</code> has been created:</p>
 <div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ make build
 ...
 ➜ ls dist
