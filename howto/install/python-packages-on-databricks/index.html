@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Manage Python Versions - menziess blog</title>
+  <title>Install Python Packages on Databricks - menziess blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Lora:400,700|Fira+Code:300,400">
@@ -132,7 +132,7 @@
   
   <ul>
     
-    <li class="">
+    <li class="active ">
       <a href="https://menziess.github.io/howto/install/python-packages-on-databricks/">Install Python Packages on Databricks</a>
     </li>
     
@@ -184,7 +184,7 @@
       <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
     </li>
     
-    <li class="active ">
+    <li class="">
       <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
     </li>
     
@@ -201,35 +201,43 @@
         </div>
         <div class="col-12 col-md-9">
           
-<h1 class="title">Manage Python Versions</h1>
+<h1 class="title">Install Python Packages on Databricks</h1>
 <div class="pb-2 content anchor-link-enabled">
-  <p>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv.</p>
-<p><img src="/images/logo/python.png#logo" alt=""></p>
-<h2 id="why-use-pyenv">Why Use Pyenv?</h2>
-<p>Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions. And in some cases, you may want to run multiple projects that use different python versions at the same time. With Pyenv it is no big deal.</p>
-<h2 id="installing-pyenv">Installing Pyenv</h2>
-<p>The installation process is very straightforward:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">curl https://pyenv.run <span class="p">|</span> bash
-</code></pre></div><p>This will print out the following three lines that you should add to your <code>~/.bashrc</code> or <code>~/.zshrc</code> file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.pyenv/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>
-<span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>pyenv init -<span class="k">)</span><span class="s2">&#34;</span>
-<span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>pyenv virtualenv-init -<span class="k">)</span><span class="s2">&#34;</span>
-</code></pre></div><p>After restarting your shell, you can run Pyenv:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pyenv --help
-</code></pre></div><h2 id="usage">Usage</h2>
-<p>To see which versions are installed, run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ pyenv versions
-  system
-  3.7.5
-* 3.8.0 <span class="o">(</span><span class="nb">set</span> by /home/stefan/.pyenv/version<span class="o">)</span>
-</code></pre></div><p>You can install new python versions using:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pyenv install 3.8.0
-</code></pre></div><p>And you can set the global python version with:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pyenv global 3.8.0
-</code></pre></div><h2 id="uninstalling-pyenv">Uninstalling Pyenv</h2>
-<p>To remove the installation, run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf <span class="k">$(</span>pyenv root<span class="k">)</span>
-</code></pre></div><p>And clean up the lines that you inserted in <code>~/.bashrc</code> or <code>~/.zshrc</code>, in <a href="#installing-pyenv">Installing Pyenv</a>.</p>
+  <p>Let&rsquo;s use the same basic setup as in <a href="https://menziess.github.io/howto/test/python-code/#basic-setup">test python code</a>, then use our knowledge from <a href="https://menziess.github.io/howto/create/python-packages/">create python packages</a> to convert our code to a package. And finally we will install the package on our Databricks cluster.</p>
+<p><img src="/images/logo/artifact.png#logo" alt=""> ⟶ <img src="/images/logo/databricks.png#logo" alt=""></p>
+<h2 id="basic-setup">Basic Setup</h2>
+<p>Following the previously mentioned posts, we&rsquo;d have a setup that looks like this:</p>
+<p><img src="/images/install-python-packages-on-databricks/basic-setup.png" alt=""></p>
+<h2 id="manual-package-installation">Manual Package Installation</h2>
+<p>Insert the following snippet at the top of your <code>Makefile</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">.EXPORT_ALL_VARIABLES</span><span class="o">:</span>
+
+<span class="nv">WHEELNAME</span><span class="o">=</span>demo-0.0.dev0-py3-none-any.whl
+<span class="nv">CLUSTERID</span><span class="o">=</span>0123-456789-moose123  <span class="c1"># update this line to match your cluster id</span>
+</code></pre></div><p>And append this snippet at the end of your <code>Makefile</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">install-package-databricks</span><span class="o">:</span>
+	@echo Installing <span class="s1">&#39;dist/${WHEELNAME}&#39;</span> on databricks...
+	databricks fs cp dist/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> dbfs:/libraries/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> --overwrite
+	databricks libraries install --whl dbfs:/libraries/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> --cluster-id <span class="si">${</span><span class="nv">CLUSTERID</span><span class="si">}</span>
+</code></pre></div><p>Run <code>make build</code> in your terminal. Confirm that the file <code>dist/demo-0.0.dev0-py3-none-any.whl</code> has been created:</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ make build
+...
+➜ ls dist
+demo-0.0.dev0-py3-none-any.whl
+</code></pre></div><p>Finally, run the new <code>make install-package-databricks</code> command in your terminal.</p>
+<blockquote>
+<p><strong>Note</strong> if you see the error: <em>databricks command not found</em>, it means that you haven&rsquo;t installed the databricks cli yet. Open a new terminal, and make sure that you&rsquo;re NOT inside a virtual environment. Run <code>pip3 install databricks-cli</code>, to install the cli tool globally.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong> if you see the error: <em>Error: InvalidConfigurationError: You haven&rsquo;t configured the CLI yet!</em>, it means that you need to run <code>databricks configure --token</code> command. In your Databricks workspace, under User Settings, generate a new Access Token. Paste the token into your terminal after running the previous command.</p>
+</blockquote>
+<p>Browse to your cluster libraries page, you should see that the package is being installed:</p>
+<p><img src="/images/install-python-packages-on-databricks/installing.png#shadow" alt=""></p>
+<h2 id="devops-package-installation">DevOps Package Installation</h2>
+<p>Follow section <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/#5-build-the-artifact">5. build the artifact</a> and <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/#6-copy-the-package-to-dbfs">6. copy package to dbfs</a> of <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">my previous post</a> to create a build and release pipeline in Azure DevOps, in order to automate the manual steps that we&rsquo;ve just taken.</p>
+<h2 id="running-the-package-on-databricks">Running the Package on Databricks</h2>
+<p>After installing, make sure that your package works. For me it does 👌</p>
+<p><img src="/images/install-python-packages-on-databricks/running.png#shadow" alt=""></p>
 
 </div>
 
@@ -237,7 +245,9 @@
   
   <span class="post-meta">
     
-      <a href="/tags/virtualenv">#virtualenv</a>&nbsp;
+      <a href="/tags/databricks">#databricks</a>&nbsp;
+    
+      <a href="/tags/packaging">#packaging</a>&nbsp;
     
   </span>
   <br>

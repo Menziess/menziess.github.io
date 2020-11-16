@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Install Python Packages on Databricks</title>
+      <link>https://menziess.github.io/howto/install/python-packages-on-databricks/</link>
+      <pubDate>Mon, 16 Nov 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/install/python-packages-on-databricks/</guid>
+      <description>Let&amp;rsquo;s use the same basic setup as in test python code, then use our knowledge from create python packages to convert our code to a package. And finally we will install the package on our Databricks cluster.</description>
+    </item>
+    
+    <item>
       <title>Run GUI Apps With Docker</title>
       <link>https://menziess.github.io/howto/run/gui-apps-with-docker/</link>
       <pubDate>Fri, 10 Jul 2020 02:49:01 +0100</pubDate>
