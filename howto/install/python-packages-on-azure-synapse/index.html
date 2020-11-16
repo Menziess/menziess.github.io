@@ -224,9 +224,9 @@
 
 <span class="nv">WHEELNAME</span><span class="o">=</span>demo-0.0.dev0-py3-none-any.whl
 
-<span class="nv">SYNAPSE_SA_NAME</span><span class="o">=</span>psyopstorage
-<span class="nv">SYNAPSE_CONTAINER_NAME</span><span class="o">=</span>psyopsfiles
-<span class="nv">SYNAPSE_WORKSPACE_NAME</span><span class="o">=</span>psyops
+<span class="nv">SYNAPSE_SA_NAME</span><span class="o">=</span>mystorageaccount
+<span class="nv">SYNAPSE_CONTAINER_NAME</span><span class="o">=</span>mycontainer
+<span class="nv">SYNAPSE_WORKSPACE_NAME</span><span class="o">=</span>myworkspace
 <span class="nv">SYNAPSE_SPARKPOOL_NAME</span><span class="o">=</span>guiltyspark
 <span class="nv">SYNAPSE_PACKAGE_PATH</span><span class="o">=</span>synapse/workspaces/<span class="si">${</span><span class="nv">SYNAPSE_WORKSPACE_NAME</span><span class="si">}</span>/sparkpools/<span class="si">${</span><span class="nv">SYNAPSE_SPARKPOOL_NAME</span><span class="si">}</span>/libraries/python/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span>
 </code></pre></div><p>And append this snippet at the end of your <code>Makefile</code>:</p>
