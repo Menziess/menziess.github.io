@@ -300,7 +300,23 @@ pipenv lock -r -d &gt; dev-requirements.txt
   <br>
 
 
-  <script src="//ap.lijit.com/www/delivery/fpi.js?z=836913&width=320&height=50"></script>
+  <iframe
+	src="https://viewm.moonicorn.network/#%7B%22options%22%3A%7B%22publisherAddr%22%3A%220xb2936805cFBa2d4d9E98B94A53Bb835F918339Fd%22%2C%22whitelistedTokens%22%3A%5B%220x6B175474E89094C44Da98b954EedeAC495271d0F%22%5D%2C%22whitelistedType%22%3A%22legacy_250x250%22%2C%22randomize%22%3Atrue%2C%22targeting%22%3A%5B%5D%2C%22width%22%3A%22250%22%2C%22height%22%3A%22250%22%2C%22minPerImpression%22%3A%220%22%2C%22fallbackUnit%22%3Anull%2C%22marketSlot%22%3A%22QmaNyq3Ayp7o7Umoi2PLLf8B8RwY5jMCtjxVUF69fUG9cG%22%7D%7D"
+	width="250"
+	height="250"
+	scrolling="no"
+	frameborder="0"
+	style="border: 0;"
+	onload="window.addEventListener('message', function(ev) {
+		if (ev.data.hasOwnProperty('adexHeight') && ('https://viewm.moonicorn.network' === ev.origin)) {
+			for (let f of document.getElementsByTagName('iframe')) {
+				if (f.contentWindow === ev.source) {
+					f.height = ev.data.adexHeight;
+				}
+			}
+		}
+	}, false)"
+></iframe>
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
