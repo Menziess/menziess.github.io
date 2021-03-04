@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Install Python Packages From Azure DevOps</title>
+      <link>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</link>
+      <pubDate>Thu, 04 Mar 2021 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</guid>
+      <description>Python Package Index &lt;a href=&#34;https://pypi.org&#34;&gt;pypi.org&lt;/a&gt; is not the only source for downloading python packages. It&amp;rsquo;s possible to host your own package index.</description>
+    </item>
+    
+    <item>
       <title>Install Python Packages on Azure Synapse</title>
       <link>https://menziess.github.io/howto/install/python-packages-on-azure-synapse/</link>
       <pubDate>Mon, 16 Nov 2020 07:17:38 +0100</pubDate>

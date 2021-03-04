@@ -12,6 +12,24 @@
     
     
     <item>
+      <title>devops</title>
+      <link>https://menziess.github.io/tags/devops/</link>
+      <pubDate>Thu, 04 Mar 2021 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>virtualenv</title>
+      <link>https://menziess.github.io/tags/virtualenv/</link>
+      <pubDate>Thu, 04 Mar 2021 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/tags/virtualenv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>packaging</title>
       <link>https://menziess.github.io/tags/packaging/</link>
       <pubDate>Mon, 16 Nov 2020 07:17:38 +0100</pubDate>
@@ -44,15 +62,6 @@
       <pubDate>Fri, 10 Jul 2020 02:49:01 +0100</pubDate>
       
       <guid>https://menziess.github.io/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>devops</title>
-      <link>https://menziess.github.io/tags/devops/</link>
-      <pubDate>Tue, 02 Jun 2020 02:49:01 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/tags/devops/</guid>
       <description></description>
     </item>
     
@@ -107,15 +116,6 @@
       <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/tags/wsl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>virtualenv</title>
-      <link>https://menziess.github.io/tags/virtualenv/</link>
-      <pubDate>Mon, 03 Feb 2020 10:00:13 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/tags/virtualenv/</guid>
       <description></description>
     </item>
     

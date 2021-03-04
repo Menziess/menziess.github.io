@@ -13,6 +13,21 @@
   </url>
   
   <url>
+    <loc>https://menziess.github.io/tags/devops/</loc>
+    <lastmod>2021-03-04T07:15:38+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</loc>
+    <lastmod>2021-03-04T07:15:38+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://menziess.github.io/tags/virtualenv/</loc>
+    <lastmod>2021-03-04T07:15:38+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://menziess.github.io/howto/install/python-packages-on-azure-synapse/</loc>
     <lastmod>2020-11-16T07:17:38+01:00</lastmod>
   </url>
@@ -45,11 +60,6 @@
   <url>
     <loc>https://menziess.github.io/howto/run/gui-apps-with-docker/</loc>
     <lastmod>2020-07-10T02:49:01+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://menziess.github.io/tags/devops/</loc>
-    <lastmod>2020-06-02T02:49:01+01:00</lastmod>
   </url>
   
   <url>
@@ -134,11 +144,6 @@
   
   <url>
     <loc>https://menziess.github.io/howto/manage/virtual-environments/</loc>
-    <lastmod>2020-02-03T10:00:13+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://menziess.github.io/tags/virtualenv/</loc>
     <lastmod>2020-02-03T10:00:13+01:00</lastmod>
   </url>
   
