@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Use Key Vault Secrets In Data Factory</title>
+      <link>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</guid>
+      <description>Sometimes it&amp;rsquo;s useful to get your key vault secret in a Data Factory pipeline (in a secure way).</description>
+    </item>
+    
+    <item>
       <title>Install Python Packages From Azure DevOps</title>
       <link>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</link>
       <pubDate>Thu, 04 Mar 2021 07:15:38 +0100</pubDate>
