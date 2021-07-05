@@ -216,7 +216,7 @@
 <ul>
 <li>packages are easy to install (<code>pip install demo</code>).</li>
 <li>packages simplify development (<code>pip install -e .</code> installs your package and keeps it up-to-date during development).</li>
-<li>packages are easy to run and test (<code>from demo.main import say_hello_to</code>, then test the function).</li>
+<li>packages are easy to run and test (<code>from demo.main import say_hello</code>, then test the function).</li>
 <li>packages are easy to version, avoiding breaking dependant&rsquo;s code (<code>pip install demo==1.0.3</code>).</li>
 </ul>
 <p>Library vs Package vs Module:</p>
@@ -239,6 +239,8 @@
 </ol>
 <h2 id="1-packaging-setup">1. Packaging Setup</h2>
 <p>Let&rsquo;s use the folder structure from an <a href="https://menziess.github.io/howto/test/python-code/">earlier post</a>, and create a <a href="https://menziess.github.io/howto/manage/virtual-environments/">virtual environment</a> in it:</p>
+<p><a href="https://github.com/Menziess/python-packaging/tree/barebones"><img src="https://img.shields.io/badge/demo-barebones-green" alt="github"></a>
+<a href="https://replit.com/@Menziess/barebones"><img src="https://repl.it/badge/github/menziess/barebones" alt="Run on Repl.it"></a></p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ tree -a -L <span class="m">2</span>
 .
 ├── .venv
@@ -289,7 +291,7 @@ python setup.py bdist_egg <span class="c1"># generate egg distribution, doesn&#3
 python setup.py bdist_wheel <span class="c1"># generate versioned wheel, includes dependencies</span>
 python setup.py sdist --formats<span class="o">=</span>zip,gztar,bztar,ztar,tar <span class="c1"># source code</span>
 </code></pre></div><p>Run the first one in the list above. When it succeeds, you will be able to import your code as follows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">say_hello_to</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">say_hello</span>
 </code></pre></div><blockquote>
 <p><strong>Note:</strong> if you are receiving &ldquo;No module named demo&hellip;&quot;, you&rsquo;ll need to add an empty <code>__init__.py</code> file in all folders you want to import from. In our example, that only includes the <code>demo</code> folder. You can read more about these <code>__init__.py</code> files <a href="https://docs.python.org/3/reference/import.html#regular-packages">here</a>.</p>
 </blockquote>
