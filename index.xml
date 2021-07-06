@@ -12,6 +12,18 @@
     
     
     <item>
+      <title>Create Python Executables</title>
+      <link>https://menziess.github.io/howto/create/python-executables/</link>
+      <pubDate>Tue, 06 Jul 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/create/python-executables/</guid>
+      <description>⟶ Basic Setup Let&amp;rsquo;s again start with our favorite barebones setup:
+ 
+Pyinstaller Install pyinstaller globally, or as a dev dependency within your virtualenv:
+sudo -H pip install pyinstaller # or pipenv install -d pyinstaller Add the following command to your Makefile:</description>
+    </item>
+    
+    <item>
       <title>Use Key Vault Secrets In Data Factory</title>
       <link>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</link>
       <pubDate>Thu, 01 Jul 2021 00:00:00 +0100</pubDate>

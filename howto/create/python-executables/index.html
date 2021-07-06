@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Install Python Packages on Azure Synapse - menziess blog</title>
+  <title>Create Python Executables - menziess blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Lora:400,700|Fira+Code:300,400">
@@ -129,7 +129,7 @@
   
   <ul>
     
-    <li class="">
+    <li class="active ">
       <a href="https://menziess.github.io/howto/create/python-executables/">Create Python Executables</a>
     </li>
     
@@ -141,7 +141,7 @@
       <a href="https://menziess.github.io/howto/install/python-packages-from-azure-devops/">Install Python Packages From Azure DevOps</a>
     </li>
     
-    <li class="active ">
+    <li class="">
       <a href="https://menziess.github.io/howto/install/python-packages-on-azure-synapse/">Install Python Packages on Azure Synapse</a>
     </li>
     
@@ -214,60 +214,48 @@
         </div>
         <div class="col-12 col-md-9">
           
-<h1 class="title">Install Python Packages on Azure Synapse</h1>
+<h1 class="title">Create Python Executables</h1>
 <div class="pb-2 content anchor-link-enabled">
-  <p>This post will be very similar to the last one. But this time, we&rsquo;ll release our python package to Azure Synapse instead of Databricks. In order to unit test Synapse Notebooks, you&rsquo;ll have to jump through all sorts of hoops. Why don&rsquo;t we run our unit tests outside of Synapse, where unit tests are supposed to run (in our DevOps pipeline), and release a tested version of our code right after?</p>
-<p>Let&rsquo;s use the same basic setup as in <a href="https://menziess.github.io/howto/test/python-code/#basic-setup">test python code</a>, then use our knowledge from <a href="https://menziess.github.io/howto/create/python-packages/">create python packages</a> to convert our code to a package. And finally we will install the package on our Apache Spark pool.</p>
-<p><img src="/images/logo/artifact.png#logo" alt=""> ⟶ <img src="/images/logo/synapse.png#logo" alt=""></p>
+  <p><img src="/images/logo/python.png#logo" alt=""> ⟶ <img src="/images/logo/exe.png#logo" alt=""></p>
 <h2 id="basic-setup">Basic Setup</h2>
-<p>Following the previously mentioned posts, we&rsquo;d have a setup that looks like this:</p>
+<p>Let&rsquo;s again start with our favorite barebones setup:</p>
 <p><a href="https://github.com/Menziess/python-packaging/tree/barebones"><img src="https://img.shields.io/badge/demo-barebones-green" alt="github"></a>
 <a href="https://replit.com/@Menziess/barebones"><img src="https://repl.it/badge/github/menziess/barebones" alt="Run on Repl.it"></a></p>
 <p><img src="/images/install-python-packages-on-databricks/basic-setup.png" alt=""></p>
-<h2 id="manual-package-installation">Manual Package Installation</h2>
-<p>In order to run PySpark (Python) cells in Synapse Notebooks, you need to have an Apache Spark pool attached:</p>
-<p><img src="/images/install-python-packages-on-azure-synapse/no-spark-pools.png#shadow" alt=""></p>
-<p>You can provide a <code>requirements.txt</code> file during, or after pool creation.</p>
-<p><img src="/images/install-python-packages-on-azure-synapse/requirements-txt.png#shadow" alt=""></p>
-<p>To install custom packages, you simply upload the wheel file into the linked storage account, at a particular location. You will need a &ldquo;<em>Storage Blob Data Contributor</em>&rdquo; role assigned to your account to copy files to your storage using the azure cli (alternatively, you can use the old <code>--auth-mode key</code> option).</p>
-<p>Insert the following snippet at the top of your <code>Makefile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">.EXPORT_ALL_VARIABLES</span><span class="o">:</span>
+<h2 id="pyinstaller">Pyinstaller</h2>
+<p>Install pyinstaller globally, or as a dev dependency within your virtualenv:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo -H pip install pyinstaller
+<span class="c1"># or</span>
+pipenv install -d pyinstaller
+</code></pre></div><p>Add the following command to your <code>Makefile</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">installable</span><span class="o">:</span> <span class="n">dev</span>
+	pyinstaller -D -F -n demo.exe -c src/demo/main.py --icon<span class="o">=</span>res/icon.ico
+</code></pre></div><p>Create an icon by converting your favorite image into a .ico file using <a href="https://icoconvert.com">icoconvert</a>, then place it in a folder called <code>/res</code>. And finally run:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">make installable
+</code></pre></div><p>The <code>-D</code> and <code>-F</code> flag are passed to create one directory, and a one-file bundle respectively.</p>
+<p>Your executable should be placed in the dist folder.</p>
+<p><img src="/images/create-python-executables/folder.png" alt=""></p>
+<h2 id="errors">Errors</h2>
+<p>Pyenv users may be required to build their python installation with the <code>--enable-shared</code> flag:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">...
+INFO: Python library not in binary dependencies. Doing additional searching...
+Traceback (most recent call last):
+	...
+</code></pre></div><p>Simply run:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Get numerical portion of python version</span>
+<span class="nv">PYTHON_VERSION</span><span class="o">=</span><span class="k">$(</span>python --version <span class="p">|</span> cut -c8-<span class="k">)</span>
 
-<span class="nv">WHEELNAME</span><span class="o">=</span>demo-0.0.dev0-py3-none-any.whl
-
-<span class="nv">SYNAPSE_SA_NAME</span><span class="o">=</span>mystorageaccount
-<span class="nv">SYNAPSE_CONTAINER_NAME</span><span class="o">=</span>mycontainer
-<span class="nv">SYNAPSE_WORKSPACE_NAME</span><span class="o">=</span>myworkspace
-<span class="nv">SYNAPSE_SPARKPOOL_NAME</span><span class="o">=</span>guiltyspark
-<span class="nv">SYNAPSE_PACKAGE_PATH</span><span class="o">=</span>synapse/workspaces/<span class="si">${</span><span class="nv">SYNAPSE_WORKSPACE_NAME</span><span class="si">}</span>/sparkpools/<span class="si">${</span><span class="nv">SYNAPSE_SPARKPOOL_NAME</span><span class="si">}</span>/libraries/python/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span>
-</code></pre></div><p>And append this snippet at the end of your <code>Makefile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">install-package-synapse</span><span class="o">:</span>
-	@echo Installing <span class="s1">&#39;dist/${WHEELNAME}&#39;</span> on azure synapse...
-	az storage fs file upload <span class="se">\
-</span><span class="se"></span>		-s dist/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> <span class="se">\
-</span><span class="se"></span>		-p <span class="si">${</span><span class="nv">SYNAPSE_PACKAGE_PATH</span><span class="si">}</span> <span class="se">\
-</span><span class="se"></span>		-f <span class="si">${</span><span class="nv">SYNAPSE_CONTAINER_NAME</span><span class="si">}</span> <span class="se">\
-</span><span class="se"></span>		--account-name <span class="si">${</span><span class="nv">SYNAPSE_SA_NAME</span><span class="si">}</span> <span class="se">\
-</span><span class="se"></span>		--auth-mode login <span class="se">\
-</span><span class="se"></span>		--overwrite
-</code></pre></div><p>Run the <code>make build</code> command in your terminal. Confirm that the file <code>dist/demo-0.0.dev0-py3-none-any.whl</code> has been created:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ make build
-...
-➜ ls dist
-demo-0.0.dev0-py3-none-any.whl
-</code></pre></div><p>Finally, run the new <code>make install-package-synapse</code> command in your terminal to copy the wheel file, and restart the spark pool in synapse.</p>
-<p><img src="/images/install-python-packages-on-azure-synapse/hello.png#shadow" alt=""></p>
-<p>By adding the copy command to a DevOps release pipeline, you can automatically roll out new (tested) versions of your packaged code, and use them in your Synapse Notebooks.</p>
+<span class="c1"># Uninstall and install python using pyenv</span>
+pyenv uninstall <span class="nv">$PYTHON_VERSION</span>
+env <span class="nv">PYTHON_CONFIGURE_OPTS</span><span class="o">=</span><span class="s2">&#34;--enable-shared&#34;</span> pyenv install <span class="nv">$PYTHON_VERSION</span>
+</code></pre></div><p><a href="https://github.com/pyenv/pyenv/wiki#how-to-build-cpython-with---enable-shared">https://github.com/pyenv/pyenv/wiki#how-to-build-cpython-with---enable-shared</a></p>
+<p>If you face any other errors, feel free to leave a comment below 👇, and we&rsquo;ll sort it out.</p>
 
 </div>
 
 <div class="content">
   
   <span class="post-meta">
-    
-      <a href="/tags/synapse">#synapse</a>&nbsp;
-    
-      <a href="/tags/packaging">#packaging</a>&nbsp;
     
       <a href="/tags/python">#python</a>&nbsp;
     
