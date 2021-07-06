@@ -17,10 +17,7 @@
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/create/python-executables/</guid>
-      <description>⟶ Basic Setup Let&amp;rsquo;s again start with our favorite barebones setup:
- 
-Pyinstaller Install pyinstaller globally, or as a dev dependency within your virtualenv:
-sudo -H pip install pyinstaller # or pipenv install -d pyinstaller Add the following command to your Makefile:</description>
+      <description>When you want to share your software with a non-developer, or you want to run a comprehensive python project without having to bother with the setup, executables are quite useful. And it only takes about 5 minutes to get it done.</description>
     </item>
     
     <item>
