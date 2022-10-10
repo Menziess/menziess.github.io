@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Manage Kafka Streams</title>
+      <link>https://menziess.github.io/howto/manage/kafka-streams/</link>
+      <pubDate>Mon, 10 Oct 2022 01:01:01 +0200</pubDate>
+      
+      <guid>https://menziess.github.io/howto/manage/kafka-streams/</guid>
+      <description>Processing messages from Kafka is relatively easy, but common errors can easily be avoided by having a better understanding of how Kafka works internally. We&amp;rsquo;ll process messages from the start of the topic, and see how Kafka handles offsets step by step.</description>
+    </item>
+    
+    <item>
       <title>Create Python Executables</title>
       <link>https://menziess.github.io/howto/create/python-executables/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0100</pubDate>
