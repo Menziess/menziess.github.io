@@ -309,8 +309,8 @@
 </code></pre></div><p>This time you will see the message in the output:</p>
 <div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">ConsumerRecord</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test&#39;</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span> <span class="n">offset</span><span class="o">=</span><span class="mi">1</span> <span class="n">timestamp</span><span class="o">=</span><span class="mf">1665395214.</span><span class="o">..</span> <span class="n">timestamp_type</span><span class="o">=</span><span class="mi">0</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span> <span class="n">value</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;456&#39;</span> <span class="n">headers</span><span class="o">=</span><span class="p">[]</span> <span class="n">checksum</span><span class="o">=</span><span class="bp">None</span> <span class="n">serialized_key_size</span><span class="o">=-</span><span class="mi">1</span> <span class="n">serialized_value_size</span><span class="o">=</span><span class="mi">3</span> <span class="n">serialized_header_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div><p>Now change the code to:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">c</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># offset zero</span>
-<span class="n">c</span><span class="o">.</span><span class="n">seek_to_beginning</span><span class="p">()</span>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">c</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>               <span class="c1"># triggers creation of consumer group</span>
+<span class="n">c</span><span class="o">.</span><span class="n">seek_to_beginning</span><span class="p">()</span>  <span class="c1"># moves to beginning of the topic</span>
 
 <span class="k">try</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
@@ -336,8 +336,8 @@
 <div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">start_at_beginning</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="k">if</span> <span class="n">start_at_beginning</span><span class="p">:</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># offset zero</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">seek_to_beginning</span><span class="p">()</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>               <span class="c1"># triggers creation of consumer group</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">seek_to_beginning</span><span class="p">()</span>  <span class="c1"># moves to beginning of the topic</span>
 
 <span class="k">try</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
