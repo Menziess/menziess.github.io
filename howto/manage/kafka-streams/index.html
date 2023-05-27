@@ -129,6 +129,10 @@
   
   <ul>
     
+    <li class="">
+      <a href="https://menziess.github.io/howto/use/snapstream/">Use Snapstream</a>
+    </li>
+    
     <li class="active ">
       <a href="https://menziess.github.io/howto/manage/kafka-streams/">Manage Kafka Streams</a>
     </li>
@@ -233,7 +237,7 @@
 </span><span class="w">
 </span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span><span class="k">zookeeper</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>confluentinc/cp-zookeeper<span class="p">:</span><span class="m">7.0.1</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>confluentinc/cp-zookeeper<span class="w">
 </span><span class="w">    </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>zookeeper<span class="w">
 </span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>zookeeper<span class="w">
 </span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
@@ -243,7 +247,7 @@
 </span><span class="w">      </span><span class="k">ZOOKEEPER_TICK_TIME</span><span class="p">:</span><span class="w"> </span><span class="m">2000</span><span class="w">
 </span><span class="w">
 </span><span class="w">  </span><span class="k">broker</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>confluentinc/cp-kafka<span class="p">:</span><span class="m">7.0.1</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>confluentinc/cp-kafka<span class="w">
 </span><span class="w">    </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>broker<span class="w">
 </span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>broker<span class="w">
 </span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
@@ -271,7 +275,7 @@
 </span><span class="w">      </span><span class="k">interval</span><span class="p">:</span><span class="w"> </span>5s<span class="w">
 </span><span class="w">      </span><span class="k">timeout</span><span class="p">:</span><span class="w"> </span>10s<span class="w">
 </span><span class="w">      </span><span class="k">retries</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="w">
-</span></code></pre></div><p>Spin up your kafka cluster:</p>
+</span></code></pre></div><p>Spin up your Kafka cluster:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose up
 </code></pre></div><p>Create two jupyter notebooks: <code>producer.ipynb</code> and <code>consumer.ipynb</code>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="c1"># producer.ipynb</span>
@@ -290,6 +294,7 @@
     <span class="s1">&#39;bootstrap_servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:29091&#39;</span><span class="p">,</span>
     <span class="s1">&#39;security_protocol&#39;</span><span class="p">:</span> <span class="s1">&#39;PLAINTEXT&#39;</span><span class="p">,</span>
     <span class="c1"># &#39;group_id&#39;: &#39;test&#39;,</span>
+    <span class="c1"># &#39;auto_offset_reset&#39;: &#39;earliest&#39;,</span>
 <span class="p">}</span>
 
 <span class="n">c</span> <span class="o">=</span> <span class="n">KafkaConsumer</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
@@ -331,8 +336,8 @@
 <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
   <span class="k">pass</span>
 </code></pre></div><p>Again, there is no output data.</p>
-<p>Because this is a new consumer group, there&rsquo;s no offset stored, so it starts at the last offset (this is the case with this library: <code>kafka-python</code>).</p>
-<p>It is up to the programmer (you) to decide whether to start reading from the beginning (offset 0) or from the end of the topic, or at a specific offset.</p>
+<p>Because this is a new consumer group, there&rsquo;s no offset stored, so it starts at the &ldquo;latest&rdquo; offset by default (this is the case for this library: <code>kafka-python</code>).</p>
+<p>This can be changed by setting the <code>auto_offset_reset</code> configuration property to &ldquo;earliest&rdquo;. Other than that, it&rsquo;s possible to manually select the starting offset regardless of whether the consumer group offset was stored or not:</p>
 <div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">start_at_beginning</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="k">if</span> <span class="n">start_at_beginning</span><span class="p">:</span>
@@ -345,7 +350,7 @@
 <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
   <span class="k">pass</span>
 </code></pre></div><h2 id="admin-client">Admin Client</h2>
-<p>It&rsquo;s possible to figure out whether a consumer group exists, which offset it&rsquo;s reading from (per partition). Create a new notebook called <code>admin.ipynb</code>:</p>
+<p>It&rsquo;s also possible to figure out whether a consumer group exists, which offset it&rsquo;s reading from (per partition). Create a new notebook called <code>admin.ipynb</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaAdminClient</span>
 
 <span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
@@ -386,9 +391,7 @@
   <span class="k">pass</span>
 </code></pre></div><p>As you can see, we commit <a href="https://kafka-python.readthedocs.io/en/master/apidoc/KafkaConsumer.html#kafka.KafkaConsumer.commit">the next offset</a> rather than the current one.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>We learned how to a consumer handles offsets by default. And we learned how to read messages from the start of a topic.</p>
-<p>We also know how to create and manage existing consumer groups, and use them to continue processing messages where our application left off, and to manually specify which messages have succesfully been processed.</p>
-<p>The example code that we wrote can easily be expanded upon, or incorporated into a bigger application.</p>
+<p>This article introduced key concepts for Kafka consumers and message processing. We covered handling offsets, reading messages from the start of a topic, creating and managing consumer groups, and manual message tracking. The provided example code offers a practical demonstration that can be expanded upon for larger applications. By grasping these concepts, you can enhance your Kafka consumer&rsquo;s efficiency and reliability in processing messages from topics.</p>
 
 </div>
 
