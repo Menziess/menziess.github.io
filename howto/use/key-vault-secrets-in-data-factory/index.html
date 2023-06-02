@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -260,12 +260,12 @@
 <p>Pass the name of your Key Vault, and the name of the secret you&rsquo;d like to read.</p>
 <p><img src="/images/use-key-vault-secrets-in-data-factory/keyvault.png#shadow" alt=""></p>
 <p>When you inspect the activity output, it merely states:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;SecureOutput&#34;</span><span class="p">:</span> <span class="s2">&#34;**********&#34;</span>
-<span class="p">}</span>
-</code></pre></div><p>To use the secret in your pipeline, enter the following in the dynamic content of your activity:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">@<span class="o">{</span>activity<span class="o">(</span><span class="s1">&#39;Get Secret&#39;</span><span class="o">)</span>.output.value<span class="o">}</span>
-</code></pre></div><p>At the time of writing it is not possible to get the &ldquo;Execute Pipeline&rdquo; activity output information, except for the run id (which you can use to fetch the pipeline run information from the Azure API). Still, I like to have a full-fledged utility pipeline available that I can just copy and use whenever I need it, and run whenever I don&rsquo;t understand it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;SecureOutput&#34;</span><span class="p">:</span> <span class="s2">&#34;**********&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>To use the secret in your pipeline, enter the following in the dynamic content of your activity:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">@<span class="o">{</span>activity<span class="o">(</span><span class="s1">&#39;Get Secret&#39;</span><span class="o">)</span>.output.value<span class="o">}</span>
+</span></span></code></pre></div><p>At the time of writing it is not possible to get the &ldquo;Execute Pipeline&rdquo; activity output information, except for the run id (which you can use to fetch the pipeline run information from the Azure API). Still, I like to have a full-fledged utility pipeline available that I can just copy and use whenever I need it, and run whenever I don&rsquo;t understand it.</p>
 
 </div>
 
@@ -284,7 +284,7 @@
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -354,7 +354,7 @@
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

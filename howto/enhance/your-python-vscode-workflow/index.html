@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -243,10 +243,10 @@
 <h2 id="1-remote---wsl">1. Remote - WSL</h2>
 <p>I prefer using a unix shell as my command-line interface. Luckily, Microsoft has implemented a great tool that allows developers to run linux distributions natively on Windows. Here&rsquo;s a small guide on how to <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">install Ubuntu on Windows</a>.</p>
 <p>Assuming you have already installed vscode, you can select <code>bash</code> as your default terminal by adding the following line to your vscode settings:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&#34;terminal.integrated.shell.windows&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\sysnative\\bash.exe&#34;</span>
-<span class="p">}</span>
-</code></pre></div><p>When you open a project folder, you can install the <strong>Remote-WSL</strong> extension to use WSL as your development environment. After installing the extension, open the command palette with <code>ctrl + shift + P</code> and select <code>Remote-WSL: Reopen folder in WSL</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;terminal.integrated.shell.windows&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\sysnative\\bash.exe&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>When you open a project folder, you can install the <strong>Remote-WSL</strong> extension to use WSL as your development environment. After installing the extension, open the command palette with <code>ctrl + shift + P</code> and select <code>Remote-WSL: Reopen folder in WSL</code>:</p>
 <div >
 <div class="embed-responsive">
   <video
@@ -268,12 +268,12 @@
 <p>When you open the terminal using <code>ctrl + `</code>, you should see your bash shell by default.</p>
 <h2 id="2-virtual-environment">2. Virtual Environment</h2>
 <p>Create a new folder called &ldquo;demo&rdquo;, and open it in vscode:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">code demo <span class="c1"># if this doesn&#39;t work, open vscode manually and run `shift + ctrl + P`, then run &#34;Shell Command: Install &#39;code&#39; command in PATH&#34;</span>
-</code></pre></div><p>Use this <a href="https://menziess.github.io/howto/manage/virtual-environments/">guide</a> to create a virtual environment inside the demo folder. A folder called <code>demo/.venv/</code> will be created, containing all dependencies and the python interpreter for the virtual environment, which can be referenced by setting a relative path in your vscode settings:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&#34;python.pythonPath&#34;</span><span class="p">:</span> <span class="s2">&#34;.venv/bin/python&#34;</span>
-<span class="p">}</span>
-</code></pre></div><p>The next time you start up vscode in this folder, it should automatically activate your virtual environment, and select the right interpreter.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">code demo <span class="c1"># if this doesn&#39;t work, open vscode manually and run `shift + ctrl + P`, then run &#34;Shell Command: Install &#39;code&#39; command in PATH&#34;</span>
+</span></span></code></pre></div><p>Use this <a href="https://menziess.github.io/howto/manage/virtual-environments/">guide</a> to create a virtual environment inside the demo folder. A folder called <code>demo/.venv/</code> will be created, containing all dependencies and the python interpreter for the virtual environment, which can be referenced by setting a relative path in your vscode settings:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.pythonPath&#34;</span><span class="p">:</span> <span class="s2">&#34;.venv/bin/python&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The next time you start up vscode in this folder, it should automatically activate your virtual environment, and select the right interpreter.</p>
 <h2 id="3-python-extension">3. Python Extension</h2>
 <p>To be able to properly use vscode for python development, you should install the <code>Python</code> extension in vscode. Press <code>ctrl + shift + X</code> to open the extensions tab, and search for &ldquo;Python&rdquo;.</p>
 <h3 id="debugger">Debugger</h3>
@@ -297,88 +297,88 @@
 </div>
 
 <p>As you can see, you can watch and modify variables on the fly. You can also stop code execution upon triggering an expression by adding one in the Watch pane, for example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">isinstance</span><span class="p">(</span><span class="n">your_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="c1"># when &#39;your_name&#39; becomes type &#39;str&#39;, the debugger will stop execution</span>
-</code></pre></div><p>The debugger makes your life much easier, allowing you to inspect objects and modify variables to discover edge-cases more easily.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">isinstance</span><span class="p">(</span><span class="n">your_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="c1"># when &#39;your_name&#39; becomes type &#39;str&#39;, the debugger will stop execution</span>
+</span></span></code></pre></div><p>The debugger makes your life much easier, allowing you to inspect objects and modify variables to discover edge-cases more easily.</p>
 <h3 id="jupyter">Jupyter</h3>
 <p>The python extension also has jupyter support built-in.</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">mkdir notebooks <span class="o">&amp;&amp;</span> touch notebooks/notebook.ipynb
-</code></pre></div><p>When you click on the notebook, it will open:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">mkdir notebooks <span class="o">&amp;&amp;</span> touch notebooks/notebook.ipynb
+</span></span></code></pre></div><p>When you click on the notebook, it will open:</p>
 <p><img src="/images/enhance-your-python-vscode-workflow/jupyter.png" alt=""></p>
 <p>It&rsquo;s quite useful when you want to read the notebooks, but if you want to run cells, you need to have <code>jupyter</code> installed:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pipenv install -d jupyter
-</code></pre></div><p>I&rsquo;ll have to mention one useful feature called <code>autoreload</code>, which allows you to automatically reimport modules in your notebook as you change them:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Load the autoreload extension</span>
-<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
-
-<span class="c1"># Autoreload reloads modules before executing code</span>
-<span class="c1"># 0: disable</span>
-<span class="c1"># 1: reload modules imported with %aimport</span>
-<span class="c1"># 2: reload all modules, except those excluded by %aimport</span>
-<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
-</code></pre></div><p>For example, here I&rsquo;m installing my source code in <code>develop</code> mode, and I import my installed source code into my notebook using autoreload:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">pipenv install -d jupyter
+</span></span></code></pre></div><p>I&rsquo;ll have to mention one useful feature called <code>autoreload</code>, which allows you to automatically reimport modules in your notebook as you change them:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Load the autoreload extension</span>
+</span></span><span class="line"><span class="cl"><span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Autoreload reloads modules before executing code</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0: disable</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1: reload modules imported with %aimport</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2: reload all modules, except those excluded by %aimport</span>
+</span></span><span class="line"><span class="cl"><span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+</span></span></code></pre></div><p>For example, here I&rsquo;m installing my source code in <code>develop</code> mode, and I import my installed source code into my notebook using autoreload:</p>
 <p><img src="/images/enhance-your-python-vscode-workflow/autoreload.png" alt=""></p>
 <p>If this doesn&rsquo;t work for you, you may have to install your python project. You may have noticed the extra file <a href="https://menziess.github.io/howto/create/python-packages/"><code>setup.py</code></a> in the root of the project folder. To install the project, you must run this file like so:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip install -e . <span class="c1"># about the same as `python setup.py develop`</span>
-</code></pre></div><h3 id="testing-and-linting">Testing and Linting</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">pip install -e . <span class="c1"># about the same as `python setup.py develop`</span>
+</span></span></code></pre></div><h3 id="testing-and-linting">Testing and Linting</h3>
 <p>Although the python extension has a linter included, you can also define your default linting and testing frameworks in vscode settings. After installing the desired frameworks:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pipenv install -d mypy autopep8 <span class="se">\
-</span><span class="se"></span>  flake8 pytest bandit pydocstyle
-</code></pre></div><p>You can also use these tools in your terminal, learn more about it <a href="https://menziess.github.io/howto/create/python-packages/">here</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">pipenv install -d mypy autopep8 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  flake8 pytest bandit pydocstyle
+</span></span></code></pre></div><p>You can also use these tools in your terminal, learn more about it <a href="https://menziess.github.io/howto/create/python-packages/">here</a>.</p>
 <p>The settings of vscode can be overridden by workspace settings per project.</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&#34;python.autoComplete.addBrackets&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="nt">&#34;python.formatting.provider&#34;</span><span class="p">:</span> <span class="s2">&#34;autopep8&#34;</span><span class="p">,</span>
-  <span class="nt">&#34;python.jediEnabled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="nt">&#34;python.linting.mypyEnabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="nt">&#34;python.linting.flake8Enabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="nt">&#34;python.linting.pylintEnabled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="nt">&#34;python.linting.pydocstyleEnabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="nt">&#34;python.testing.unittestEnabled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="nt">&#34;python.testing.nosetestsEnabled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="nt">&#34;python.testing.pytestEnabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="nt">&#34;python.testing.pytestArgs&#34;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&#34;tests&#34;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div><p>Some of these frameworks produce temporary folders, which can clutter your file explorer, and slow down file indexing. You can disable indexing for these files by passing a glob pattern to the <code>files.watcherExclude</code> field.</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&#34;files.watcherExclude&#34;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&#34;**/build/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/dist/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/.ipynb_checkpoints/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/*.egg-info/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/.pytest_cache/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/__pycache__/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/.mypy_cache/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/.venv/**&#34;</span><span class="p">:</span> <span class="kc">true</span>
-  <span class="p">},</span>
-  <span class="nt">&#34;files.exclude&#34;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&#34;**/.pytest_cache/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/.mypy_cache/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/__pycache__/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;**/*.egg-info/**&#34;</span><span class="p">:</span> <span class="kc">true</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><p>You can run tests from the Test sidebar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.autoComplete.addBrackets&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.formatting.provider&#34;</span><span class="p">:</span> <span class="s2">&#34;autopep8&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.jediEnabled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.linting.mypyEnabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.linting.flake8Enabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.linting.pylintEnabled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.linting.pydocstyleEnabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.testing.unittestEnabled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.testing.nosetestsEnabled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.testing.pytestEnabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;python.testing.pytestArgs&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;tests&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Some of these frameworks produce temporary folders, which can clutter your file explorer, and slow down file indexing. You can disable indexing for these files by passing a glob pattern to the <code>files.watcherExclude</code> field.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;files.watcherExclude&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/build/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/dist/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/.ipynb_checkpoints/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/*.egg-info/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/.pytest_cache/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/__pycache__/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/.mypy_cache/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/.venv/**&#34;</span><span class="p">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;files.exclude&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/.pytest_cache/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/.mypy_cache/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/__pycache__/**&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;**/*.egg-info/**&#34;</span><span class="p">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>You can run tests from the Test sidebar:</p>
 <p><img src="/images/enhance-your-python-vscode-workflow/tests.png" alt=""></p>
 <p>Learn more about <a href="https://menziess.github.io/howto/test/python-code/">testing python code</a> in my previous post.</p>
 <h2 id="4-editorconfig">4. Editorconfig</h2>
 <p>Finally, you can install the <a href="https://editorconfig.org/">editorconfig</a> extension for vscode.</p>
 <p>When you&rsquo;re collaborating with other developers, who use other editors and settings, you may run into the problem of having different line endings, and other idea&rsquo;s about using tabs or spaces.</p>
 <p>Adding a <code>.editorconfig</code> file to your projects root folder can make it really easy to prevent differences in editor configurations:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">root = true
-
-[*]
-charset = utf-8
-indent_style = spaces
-indent_size = 2
-end_of_line = lf
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-[*.py]
-indent_size = 4
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="na">root</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">[*]</span>
+</span></span><span class="line"><span class="cl"><span class="na">charset</span> <span class="o">=</span> <span class="s">utf-8</span>
+</span></span><span class="line"><span class="cl"><span class="na">indent_style</span> <span class="o">=</span> <span class="s">spaces</span>
+</span></span><span class="line"><span class="cl"><span class="na">indent_size</span> <span class="o">=</span> <span class="s">2</span>
+</span></span><span class="line"><span class="cl"><span class="na">end_of_line</span> <span class="o">=</span> <span class="s">lf</span>
+</span></span><span class="line"><span class="cl"><span class="na">trim_trailing_whitespace</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">insert_final_newline</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">[*.py]</span>
+</span></span><span class="line"><span class="cl"><span class="na">indent_size</span> <span class="o">=</span> <span class="s">4</span>
+</span></span></code></pre></div>
 </div>
 
 <div class="content">
@@ -398,7 +398,7 @@ indent_size = 4
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -468,7 +468,7 @@ indent_size = 4
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

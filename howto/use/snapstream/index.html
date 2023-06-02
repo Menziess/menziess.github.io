@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -225,7 +225,7 @@
 <h1 class="title">Use Snapstream</h1>
 <div class="pb-2 content anchor-link-enabled">
   <p>One of the more challenging aspects I encountered while working with stream processing was the task of performing near-merge or as-of joins on Kafka streams.</p>
-<p>Especially when topics exist on multiple kafka clusters, ruling out the option to connect and subscribe to multiple topics using a single consumer.</p>
+<p>Especially when topics exist on multiple Kafka clusters, ruling out the option to connect and subscribe to multiple topics using a single consumer.</p>
 <p><img src="/images/logo/snapstream.png#logo" alt=""> ⟶ <img src="/images/logo/kafka.png#logo" alt=""></p>
 <h2 id="arbitrary-stateful-operations">Arbitrary Stateful Operations</h2>
 <p>Some frameworks seem promising at first, mentioning &ldquo;joining or merging&rdquo; of event streams in the documentation. Or declaring support for arbitrary operations.</p>
@@ -238,9 +238,9 @@
 <p>As a consequence, the functionalities that support arbitrary stateful operations (like nearby joining of topics) were implemented in-house.</p>
 <p>The reusable data-flow model was open-sourced under the name <a href="https://github.com/Menziess/snapstream">Snapstream</a>.</p>
 <h2 id="snapstream">Snapstream</h2>
-<p>If you want to follow along, run a kafka broker as shown in the <a href="https://menziess.github.io/howto/manage/kafka-streams/#basic-setup">previous post</a>, and install snapstream:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">pip install snapstream
-</code></pre></div><p>The basic concepts are:</p>
+<p>If you want to follow along, run a Kafka broker as shown in the <a href="https://menziess.github.io/howto/manage/kafka-streams/#basic-setup">previous post</a>, and install snapstream:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">pip install snapstream
+</span></span></code></pre></div><p>The basic concepts are:</p>
 <ol>
 <li>Each data source is an iterable</li>
 <li>Each sink is a callable</li>
@@ -252,83 +252,143 @@
 <h3 id="state-store">State Store</h3>
 <p>When the processing logic of your stream solely relies on the message itself, without requiring any additional data, it is referred to as &ldquo;stateless processing&rdquo;.</p>
 <p>Any other type of processing usually involves caching and retrieving state. RocksDB is a popular state store that&rsquo;s used in Spark, KsqlDB, Faust and other popular frameworks (including Snapstream). We can use <a href="https://snapstream.readthedocs.io/en/0.0.5/examples.html#cache">snapstream.Cache</a> to persist any type of data:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">snapstream</span> <span class="kn">import</span> <span class="n">Cache</span>
-
-<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">)</span>
-
-<span class="c1"># value &#39;🏆&#39; is stored under the key &#39;prize&#39;</span>
-<span class="n">cache</span><span class="p">(</span><span class="s1">&#39;prize&#39;</span><span class="p">,</span> <span class="s1">&#39;🏆&#39;</span><span class="p">)</span>
-</code></pre></div><p>Cache is also callable, so we can use it as our sink.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">snapstream</span> <span class="kn">import</span> <span class="n">Cache</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># value &#39;🏆&#39; is stored under the key &#39;prize&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">cache</span><span class="p">(</span><span class="s1">&#39;prize&#39;</span><span class="p">,</span> <span class="s1">&#39;🏆&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Cache is also callable, so we can use it as our sink.</p>
 <h3 id="nearby-join">Nearby Join</h3>
 <p>At this point, we&rsquo;re ready to perform some type of arbitrary operation on our data:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
-
-<span class="n">weather_messages</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;🌞&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;⛅&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;🌧&#39;</span><span class="p">},</span>
-<span class="p">]</span>
-
-<span class="n">activity_messages</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;swimming&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;walking home&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;shopping&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;eating lunch&#39;</span><span class="p">},</span>
-<span class="p">]</span>
-</code></pre></div><p>Let&rsquo;s try and figure out the weather at the time of each activity:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
-
-<span class="kn">from</span> <span class="nn">snapstream</span> <span class="kn">import</span> <span class="n">Cache</span><span class="p">,</span> <span class="n">snap</span><span class="p">,</span> <span class="n">stream</span>
-
-<span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">)</span>
-
-
-<span class="nd">@snap</span><span class="p">((</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">weather_messages</span><span class="p">),</span> <span class="n">sink</span><span class="o">=</span><span class="p">[</span><span class="n">cache</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">handle_weather</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
-    <span class="n">epoch_time</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
-    <span class="k">yield</span> <span class="n">epoch_time</span><span class="p">,</span> <span class="n">val</span>
-
-
-<span class="nd">@snap</span><span class="p">((</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">activity_messages</span><span class="p">),</span> <span class="n">sink</span><span class="o">=</span><span class="p">[</span><span class="k">print</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">handle_activity</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
-    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-    <span class="n">epoch_time</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
-    <span class="n">weather_key</span><span class="p">,</span> <span class="n">weather_value</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">backwards</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">from_key</span><span class="o">=</span><span class="n">epoch_time</span><span class="p">))</span>
-    <span class="k">yield</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span> <span class="n">weather_value</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
-
-
-<span class="n">stream</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="p">(</span><span class="s1">&#39;swimming&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
-<span class="p">(</span><span class="s1">&#39;walking home&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
-<span class="p">(</span><span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;⛅&#39;</span><span class="p">)</span>
-<span class="p">(</span><span class="s1">&#39;eating lunch&#39;</span><span class="p">,</span> <span class="s1">&#39;🌧&#39;</span><span class="p">)</span>
-</code></pre></div><p>What we just did:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">weather_messages</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;🌞&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;⛅&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;🌧&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">activity_messages</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;swimming&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;walking home&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;shopping&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;lunch&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span></code></pre></div><p>Let&rsquo;s try and figure out the weather at the time of each activity:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">snapstream</span> <span class="kn">import</span> <span class="n">Cache</span><span class="p">,</span> <span class="n">snap</span><span class="p">,</span> <span class="n">stream</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">weather_cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s1">&#39;weather&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@snap</span><span class="p">(</span><span class="n">weather_messages</span><span class="p">,</span> <span class="n">sink</span><span class="o">=</span><span class="p">[</span><span class="n">weather_cache</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">handle_weather</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">event_time</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="n">event_time</span><span class="p">,</span> <span class="n">val</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@snap</span><span class="p">(</span><span class="n">activity_messages</span><span class="p">,</span> <span class="n">sink</span><span class="o">=</span><span class="p">[</span><span class="nb">print</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">handle_activity</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">event_time</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">weather</span> <span class="ow">in</span> <span class="n">weather_cache</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">backwards</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">from_key</span><span class="o">=</span><span class="n">event_time</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span> <span class="n">weather</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">stream</span><span class="p">()</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;swimming&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;walking home&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;⛅&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;lunch&#39;</span><span class="p">,</span> <span class="s1">&#39;🌧&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>What we just did:</p>
 <ol>
 <li>We cached weather messages by event time in our <code>handle_weather</code> function</li>
 <li>We looked up the last known (nearest) weather message since time of the activity in our <code>handle_activity</code> function</li>
 </ol>
 <p>Now you might be wondering two things&hellip;</p>
 <h4 id="1-wheres-kafka">1. Where&rsquo;s Kafka?</h4>
-<p>I use generators while trying things out, and then replace them with <code>Topic</code> instances when I&rsquo;m ready to consume real data.</p>
-<p>Here we&rsquo;re reading weather messages from a kafka topic instead:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">snapstream</span> <span class="kn">import</span> <span class="n">Topic</span>
-<span class="kn">from</span> <span class="nn">snapstream.codecs</span> <span class="kn">import</span> <span class="n">JsonCodec</span>
-
-<span class="n">weather_topic</span> <span class="o">=</span> <span class="n">Topic</span><span class="p">(</span><span class="s1">&#39;weather&#39;</span><span class="p">,</span> <span class="p">{</span>
-    <span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:29091&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;auto.offset.reset&#39;</span><span class="p">:</span> <span class="s1">&#39;earliest&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;group.instance.id&#39;</span><span class="p">:</span> <span class="s1">&#39;weather&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="s1">&#39;weather&#39;</span><span class="p">,</span>
-<span class="p">},</span> <span class="n">codec</span><span class="o">=</span><span class="n">JsonCodec</span><span class="p">())</span>
-
-<span class="nd">@snap</span><span class="p">(</span><span class="n">weather_topic</span><span class="p">,</span> <span class="n">sink</span><span class="o">=</span><span class="p">[</span><span class="n">cache</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">handle_weather</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>  <span class="c1"># grab the value from the kafka message</span>
-    <span class="n">epoch_time</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
-    <span class="k">yield</span> <span class="n">epoch_time</span><span class="p">,</span> <span class="n">val</span>
-</code></pre></div><h4 id="2-what-about-watermarking">2. What About Watermarking?</h4>
-<p>In short, when there&rsquo;s a delay between event time and processing time, some mechanism should decide on whether to cut off or wait for late events.</p>
-<p>Snapstream doesn&rsquo;t provide such functionalities out of the box yet, but this post will be updated first thing when it does!</p>
+<p>The generators can easily be replaced with <code>Topic</code> instances:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">snapstream</span> <span class="kn">import</span> <span class="n">Topic</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">snapstream.codecs</span> <span class="kn">import</span> <span class="n">JsonCodec</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">weather_messages</span> <span class="o">=</span> <span class="n">Topic</span><span class="p">(</span><span class="s1">&#39;weather&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:29091&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;auto.offset.reset&#39;</span><span class="p">:</span> <span class="s1">&#39;earliest&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;group.instance.id&#39;</span><span class="p">:</span> <span class="s1">&#39;weather&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="s1">&#39;weather&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="n">codec</span><span class="o">=</span><span class="n">JsonCodec</span><span class="p">())</span>
+</span></span></code></pre></div><p>Change the handler so that it gets the value from the Kafka message object:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="nd">@snap</span><span class="p">(</span><span class="n">weather_messages</span><span class="p">,</span> <span class="n">sink</span><span class="o">=</span><span class="p">[</span><span class="n">weather_cache</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">handle_weather</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>  <span class="c1"># grab the value from the Kafka message</span>
+</span></span><span class="line"><span class="cl">    <span class="n">event_time</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="n">event_time</span><span class="p">,</span> <span class="n">val</span>
+</span></span></code></pre></div><h4 id="2-what-about-late-events">2. What About Late Events?</h4>
+<p>When we move <code>sleep(0.1)</code> from the <code>handle_activity</code> into the <code>handle_weather</code> function, we will cause weather updates to arrive later than activity events.</p>
+<p><img src="/images/use-snapstream/event-process-time.png#medium" alt=""></p>
+<p>Imagine if the &ldquo;Cloudy&rdquo; and &ldquo;Rainy&rdquo; events had a bit of a delay. If we did nothing, we&rsquo;d send out incorrect weather states for the &ldquo;Shopping&rdquo; and &ldquo;Lunch&rdquo; activities:</p>
+<p><img src="/images/use-snapstream/nothing.png#large" alt=""></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;swimming&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;walking home&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>  <span class="c1"># incorrect</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;lunch&#39;</span><span class="p">,</span> <span class="s1">&#39;⛅&#39;</span><span class="p">)</span>     <span class="c1"># incorrect</span>
+</span></span></code></pre></div><p>We could defer processing so that late events can be joined succesfully, which has its <a href="https://www.confluent.io/blog/watermarks-tables-event-time-dataflow-model">downsides</a>:</p>
+<p><img src="/images/use-snapstream/defer.png#large" alt=""></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;swimming&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;walking home&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># defer &#39;shopping&#39; event</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;⛅&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># defer &#39;lunch&#39; event</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;lunch&#39;</span><span class="p">,</span> <span class="s1">&#39;🌧&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Or we could choose to send out revisions on incorrect results, would work great together with Kafka&rsquo;s log compaction:</p>
+<p><img src="/images/use-snapstream/revision.png#large" alt=""></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;swimming&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;walking home&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>  <span class="c1"># incorrect</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;⛅&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;lunch&#39;</span><span class="p">,</span> <span class="s1">&#39;⛅&#39;</span><span class="p">)</span>     <span class="c1"># incorrect</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;lunch&#39;</span><span class="p">,</span> <span class="s1">&#39;🌧&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><h5 id="code">Code</h5>
+<p>Taking this last option as an example, we could implement it using another cache for activities together with python&rsquo;s <code>queue</code> module:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">revisions</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span> <span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</span></span></code></pre></div><p>By storing all activities in a cache, we can look up the ones that need a revision later. We&rsquo;re also &ldquo;snapping&rdquo; the new <code>revisions()</code> iterable to the activity handler function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">activity_cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="s1">&#39;activity&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@snap</span><span class="p">(</span><span class="n">activity_messages</span><span class="p">,</span> <span class="n">revisions</span><span class="p">(),</span> <span class="n">sink</span><span class="o">=</span><span class="p">[</span><span class="n">activity_cache</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">handle_activity</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">event_time</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="n">event_time</span><span class="p">,</span> <span class="n">val</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">weather</span> <span class="ow">in</span> <span class="n">weather_cache</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">backwards</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">from_key</span><span class="o">=</span><span class="n">event_time</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">((</span><span class="n">val</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span> <span class="n">weather</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span>
+</span></span></code></pre></div><p>When a late arriving weather update comes in, we can cache it like normal. In addition, we can find any activities that occured after the weather event time, and put them in the queue:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="nd">@snap</span><span class="p">(</span><span class="n">weather_messages</span><span class="p">,</span> <span class="n">sink</span><span class="o">=</span><span class="p">[</span><span class="n">weather_cache</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">handle_weather</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># cause late events</span>
+</span></span><span class="line"><span class="cl">    <span class="n">event_time</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="n">event_time</span><span class="p">,</span> <span class="n">val</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">activity</span> <span class="ow">in</span> <span class="n">activity_cache</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">from_key</span><span class="o">=</span><span class="n">event_time</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
+</span></span></code></pre></div><p>Kafka handles messages within the same partition in the order in which they arrived. By putting the activities in the queue, the <code>handle_activity</code> function is called with the same activities, but now the correct weather updates will be available in the weather cache:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;swimming&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;walking home&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>  <span class="c1"># incorrect</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;lunch&#39;</span><span class="p">,</span> <span class="s1">&#39;🌞&#39;</span><span class="p">)</span>     <span class="c1"># incorrect</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;⛅&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;lunch&#39;</span><span class="p">,</span> <span class="s1">&#39;⛅&#39;</span><span class="p">)</span>     <span class="c1"># incorrect</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="s1">&#39;lunch&#39;</span><span class="p">,</span> <span class="s1">&#39;🌧&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>There will be trade-offs; with lots of late weather updates there would also be lots of revisions.</p>
 
 </div>
 
@@ -347,7 +407,7 @@
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -417,7 +477,7 @@
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

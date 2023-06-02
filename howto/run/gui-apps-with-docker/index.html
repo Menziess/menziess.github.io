@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -228,11 +228,11 @@
 <p><img src="/images/logo/docker.png#logo" alt=""></p>
 <p>I prefer to keep useful tools in a place I can directly find and use them.</p>
 <p>Create a new shell script: <code>/usr/local/bin/docker-gui</code> and grant all execute permissions:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">echo</span> <span class="s1">&#39;xhost +si:localuser:root\ndocker run -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --tmpfs /dev/shm &#34;${@}&#34;&#39;</span> <span class="p">|</span> sudo tee /usr/local/bin/docker-gui
-sudo chmod a+x /usr/local/bin/docker-gui
-</code></pre></div><p>Now test your new script by running:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">docker-gui jessfrez/firefox
-</code></pre></div><p>You should see a new firefox window pop up:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;xhost +si:localuser:root\ndocker run -it --rm -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --tmpfs /dev/shm &#34;${@}&#34;&#39;</span> <span class="p">|</span> sudo tee /usr/local/bin/docker-gui
+</span></span><span class="line"><span class="cl">sudo chmod a+x /usr/local/bin/docker-gui
+</span></span></code></pre></div><p>Now test your new script by running:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">docker-gui jessfrez/firefox
+</span></span></code></pre></div><p>You should see a new firefox window pop up:</p>
 <p><img src="/images/run-gui-apps-with-docker/firefox-in-docker-with-gui.png#shadow" alt=""></p>
 <p>This is a very basic example of running a GUI app, using <a href="https://askubuntu.com/a/7885">X</a>.</p>
 <p>I encourage you to look at this nice collection of <a href="https://github.com/jessfraz/dockerfiles">commonly used apps</a> containerized, by jessfraz.</p>
@@ -240,14 +240,14 @@ sudo chmod a+x /usr/local/bin/docker-gui
 <p>For my web app testing, this was not sufficient.</p>
 <p>I wanted to run many containers, each running a web browser, hosted on a large kubernetes cluster. But our <code>docker-gui</code> passes a <code>DISPLAY</code> environment variable, which is used to send keyboard, mouse, and screen information to the server program (X server). Our kubernetes cluster will not have a display screen to render the browser, so this approach did not work out for me.</p>
 <p>I discovered this interesting docker image, containing an operating system with full-fledged UI that is served at <a href="http://localhost:6080">localhost:6080</a>, and has firefox installed by default.</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">docker run -d --rm --name gui <span class="se">\
-</span><span class="se"></span>  -p 6080:80 -p 5900:5900 <span class="se">\
-</span><span class="se"></span>  dorowu/ubuntu-desktop-lxde-vnc:bionic
-</code></pre></div><p>You can either choose to open or completely ignore the ui, and firefox will still run and render web pages in the background:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">docker run -d --rm --name gui <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 6080:80 -p 5900:5900 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  dorowu/ubuntu-desktop-lxde-vnc:bionic
+</span></span></code></pre></div><p>You can either choose to open or completely ignore the ui, and firefox will still run and render web pages in the background:</p>
 <p><img src="/images/run-gui-apps-with-docker/desktop.png#shadow" alt=""></p>
 <p>With docker it&rsquo;s possible to make and save changes that have been made to a container to a new layer, as a docker image, by using using <code>docker commit</code> command:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">docker commit <span class="c1"># [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span>
-</code></pre></div><p>I want to run firefox, opening a specific webpage, whenever the container starts. By attaching vscode to the running container (using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">docker extension</a> for vscode), you can modify files inside the container:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">docker commit <span class="c1"># [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span>
+</span></span></code></pre></div><p>I want to run firefox, opening a specific webpage, whenever the container starts. By attaching vscode to the running container (using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">docker extension</a> for vscode), you can modify files inside the container:</p>
 <p><img src="/images/run-gui-apps-with-docker/supervisord.png#shadow" alt=""></p>
 <p>The <code>supervisord.conf</code> file determines which programs run at startup, so I added firefox, with my desired webpage url.</p>
 <p>Finally, I committed the change, and tagged a new docker image, which I can now run on my kubernetes cluster to open as many browser tabs with my testing website as I want.</p>
@@ -268,7 +268,7 @@ sudo chmod a+x /usr/local/bin/docker-gui
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -338,7 +338,7 @@ sudo chmod a+x /usr/local/bin/docker-gui
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

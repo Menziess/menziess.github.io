@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -233,21 +233,21 @@
 <p><img src="/images/install-python-packages-on-databricks/basic-setup.png" alt=""></p>
 <h2 id="manual-package-installation">Manual Package Installation</h2>
 <p>Insert the following snippet at the top of your <code>Makefile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">.EXPORT_ALL_VARIABLES</span><span class="o">:</span>
-
-<span class="nv">WHEELNAME</span><span class="o">=</span>demo-0.0.dev0-py3-none-any.whl
-<span class="nv">CLUSTERID</span><span class="o">=</span>0123-456789-moose123  <span class="c1"># update this line to match your cluster id</span>
-</code></pre></div><p>And append this snippet at the end of your <code>Makefile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">install-package-databricks</span><span class="o">:</span>
-	@echo Installing <span class="s1">&#39;dist/${WHEELNAME}&#39;</span> on databricks...
-	databricks fs cp dist/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> dbfs:/libraries/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> --overwrite
-	databricks libraries install --whl dbfs:/libraries/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> --cluster-id <span class="si">${</span><span class="nv">CLUSTERID</span><span class="si">}</span>
-</code></pre></div><p>Run the <code>make build</code> command in your terminal. Confirm that the file <code>dist/demo-0.0.dev0-py3-none-any.whl</code> has been created:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ make build
-...
-➜ ls dist
-demo-0.0.dev0-py3-none-any.whl
-</code></pre></div><p>Finally, run the new <code>make install-package-databricks</code> command in your terminal.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="line"><span class="cl"><span class="nf">.EXPORT_ALL_VARIABLES</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">WHEELNAME</span><span class="o">=</span>demo-0.0.dev0-py3-none-any.whl
+</span></span><span class="line"><span class="cl"><span class="nv">CLUSTERID</span><span class="o">=</span>0123-456789-moose123  <span class="c1"># update this line to match your cluster id</span>
+</span></span></code></pre></div><p>And append this snippet at the end of your <code>Makefile</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="line"><span class="cl"><span class="nf">install-package-databricks</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	@echo Installing <span class="s1">&#39;dist/${WHEELNAME}&#39;</span> on databricks...
+</span></span><span class="line"><span class="cl">	databricks fs cp dist/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> dbfs:/libraries/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> --overwrite
+</span></span><span class="line"><span class="cl">	databricks libraries install --whl dbfs:/libraries/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> --cluster-id <span class="si">${</span><span class="nv">CLUSTERID</span><span class="si">}</span>
+</span></span></code></pre></div><p>Run the <code>make build</code> command in your terminal. Confirm that the file <code>dist/demo-0.0.dev0-py3-none-any.whl</code> has been created:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">➜ make build
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">➜ ls dist
+</span></span><span class="line"><span class="cl">demo-0.0.dev0-py3-none-any.whl
+</span></span></code></pre></div><p>Finally, run the new <code>make install-package-databricks</code> command in your terminal.</p>
 <blockquote>
 <p><strong>Note</strong> if you see the error: <em>databricks command not found</em>, it means that you haven&rsquo;t installed the databricks cli yet. Open a new terminal, and make sure that you&rsquo;re NOT inside a virtual environment. Run <code>pip3 install databricks-cli</code>, to install the cli tool globally.</p>
 </blockquote>
@@ -281,7 +281,7 @@ demo-0.0.dev0-py3-none-any.whl
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -351,7 +351,7 @@ demo-0.0.dev0-py3-none-any.whl
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

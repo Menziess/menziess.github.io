@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -230,48 +230,48 @@
 <p>But if there&rsquo;s no time to set up proper package testing, there&rsquo;s always the hacker way of running tests right inside of Databricks notebooks.</p>
 <h2 id="one-way-to-run-a-test">One Way to Run a Test</h2>
 <p>How can you raise exceptions in databricks notebooks? And how can you test functions in databricks notebooks?</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;An exception that occured during a doctest.&#34;&#34;&#34;</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span> <span class="nf">doctest_exception_on_fail</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Run function doctest and see whether 70 *&#39;s were written to stdout.&#34;&#34;&#34;</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="n">doctest</span><span class="o">.</span><span class="n">run_docstring_examples</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">output</span><span class="p">[:</span><span class="mi">70</span><span class="p">]</span> <span class="o">==</span> <span class="mi">70</span> <span class="o">*</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">DoctestFailureException</span><span class="p">(</span><span class="s1">&#39;Doctest failed.&#39;</span><span class="p">)</span>
-</code></pre></div><p>The function does two things:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DoctestFailureException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;An exception that occured during a doctest.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">doctest_exception_on_fail</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Run function doctest and see whether 70 *&#39;s were written to stdout.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">doctest</span><span class="o">.</span><span class="n">run_docstring_examples</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">output</span><span class="p">[:</span><span class="mi">70</span><span class="p">]</span> <span class="o">==</span> <span class="mi">70</span> <span class="o">*</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">DoctestFailureException</span><span class="p">(</span><span class="s1">&#39;Doctest failed.&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>The function does two things:</p>
 <ul>
 <li><code>run_docstring_examples</code> allows you to pass functions in a given <a href="https://docs.python.org/2/library/doctest.html#what-s-the-execution-context">execution context</a>, and run doctest on the docstring of that function.</li>
 <li>Secondly, we read the potential error from standard output by performing a check whether 70 asterisk characters have been printed (as would be the case when an exception is raised):</li>
 </ul>
 <p>We can apply <code>doctest_exception_on_fail</code> on a subset of functions in our notebook:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">doctests</span><span class="p">(</span><span class="o">*</span><span class="n">functions</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Run doctest in Databricks.
-</span><span class="s2">
-</span><span class="s2">    Pass functions that are to be tested, or pass nothing to find
-</span><span class="s2">    public functions in the current global symbol table.
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="kn">import</span> <span class="nn">doctest</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-
-    <span class="n">globals_copy</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">functions</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
-            <span class="n">doctest_exception_on_fail</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-        <span class="k">return</span>
-
-    <span class="p">[</span>
-        <span class="n">doctest_exception_on_fail</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">globals_copy</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;_&#39;</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__call__&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span>
-    <span class="p">]</span>
-</code></pre></div><p>The <code>doctests</code> function does the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">doctests</span><span class="p">(</span><span class="o">*</span><span class="n">functions</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Run doctest in Databricks.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Pass functions that are to be tested, or pass nothing to find
+</span></span></span><span class="line"><span class="cl"><span class="s2">    public functions in the current global symbol table.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">import</span> <span class="nn">doctest</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">globals_copy</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">functions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">doctest_exception_on_fail</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="n">doctest_exception_on_fail</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">globals_copy</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;_&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__call__&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span></code></pre></div><p>The <code>doctests</code> function does the following:</p>
 <ol>
 <li>it captures the state of <code>globals()</code> when the function is run.</li>
 <li>if functions have manually been passed, they are tested;</li>
@@ -284,43 +284,43 @@
 <h2 id="why-are-databricks-notebooks-hard-to-test">Why Are Databricks Notebooks Hard To Test?</h2>
 <p>Can&rsquo;t we just run <a href="https://menziess.github.io/howto/test/python-code/#pytest">pytest</a>, unittest, or <a href="https://menziess.github.io/howto/test/python-code/#doctests">doctest</a> in Databricks?</p>
 <p>You could run this piece of code in a Databricks notebook, and it will let you know that it&rsquo;s being executed from <code>/databricks/driver</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s2">&#34;-x&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span> <span class="s2">&#34;-vv&#34;</span><span class="p">])</span>
-</code></pre></div><p>Output:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">============================= test session starts ==============================
-platform linux -- Python 3.7.3, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /local_disk0/pythonVirtualEnvDirs/virtualEnv-61a202f1-14af-4ea7-8e29-ba1b137b4a5c/bin/python
-cachedir: .pytest_cache
-rootdir: /databricks/driver
-collecting ... collected 0 items
-
-============================ no tests ran in 0.01s =============================
-Out[43]: &lt;ExitCode.NO_TESTS_COLLECTED: 5&gt;
-</code></pre></div><p>In theory it would be possible to put some python test files in this directory. But that doesn&rsquo;t count, as you&rsquo;re not testing your Databricks notebooks. (The folder contains the following:)</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">%sh ls /databricks/driver -a
-</code></pre></div><p>Output:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">.
-..
-conf
-derby.log
-eventlogs
-ganglia
-logs
-.pytest_cache
-</code></pre></div><p>Databricks notebooks are not just regular <code>.py</code> files, which pytest would be able to find on the filesystem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pytest</span>
+</span></span><span class="line"><span class="cl"><span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s2">&#34;-x&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span> <span class="s2">&#34;-vv&#34;</span><span class="p">])</span>
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">============================= test session starts ==============================
+</span></span><span class="line"><span class="cl">platform linux -- Python 3.7.3, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /local_disk0/pythonVirtualEnvDirs/virtualEnv-61a202f1-14af-4ea7-8e29-ba1b137b4a5c/bin/python
+</span></span><span class="line"><span class="cl">cachedir: .pytest_cache
+</span></span><span class="line"><span class="cl">rootdir: /databricks/driver
+</span></span><span class="line"><span class="cl">collecting ... collected 0 items
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">============================ no tests ran in 0.01s =============================
+</span></span><span class="line"><span class="cl">Out[43]: &lt;ExitCode.NO_TESTS_COLLECTED: 5&gt;
+</span></span></code></pre></div><p>In theory it would be possible to put some python test files in this directory. But that doesn&rsquo;t count, as you&rsquo;re not testing your Databricks notebooks. (The folder contains the following:)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">%sh ls /databricks/driver -a
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">..
+</span></span><span class="line"><span class="cl">conf
+</span></span><span class="line"><span class="cl">derby.log
+</span></span><span class="line"><span class="cl">eventlogs
+</span></span><span class="line"><span class="cl">ganglia
+</span></span><span class="line"><span class="cl">logs
+</span></span><span class="line"><span class="cl">.pytest_cache
+</span></span></code></pre></div><p>Databricks notebooks are not just regular <code>.py</code> files, which pytest would be able to find on the filesystem.</p>
 <p>But what about doctest? Execute the following code in your local terminal:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">doctest</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    &gt;&gt;&gt; f(1)
-</span><span class="s2">    45
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-
-<span class="n">my_module</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">]</span>
-<span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">my_module</span><span class="p">)</span>
-</code></pre></div><p>Now execute the same code in a Databricks notebook.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">doctest</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &gt;&gt;&gt; f(1)
+</span></span></span><span class="line"><span class="cl"><span class="s2">    45
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">my_module</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">my_module</span><span class="p">)</span>
+</span></span></code></pre></div><p>Now execute the same code in a Databricks notebook.</p>
 <p>It won&rsquo;t work. The documentation of <code>doctest.testmod</code> states the following:</p>
 <blockquote>
 <p>Test examples in docstrings in functions and classes reachable
@@ -351,7 +351,7 @@ with m.__doc__.</p>
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -421,7 +421,7 @@ with m.__doc__.</p>
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

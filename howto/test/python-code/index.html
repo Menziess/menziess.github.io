@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -231,123 +231,123 @@
 <p>Let&rsquo;s create a very simple python project, take a look at my previous post on <a href="/howto/manage/virtual-environments/">how to create a virtual environment</a>, then set up the following folder structure:</p>
 <p><a href="https://github.com/Menziess/python-packaging/tree/barebones"><img src="https://img.shields.io/badge/demo-barebones-green" alt="github"></a>
 <a href="https://replit.com/@Menziess/barebones"><img src="https://repl.it/badge/github/menziess/barebones" alt="Run on Repl.it"></a></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ tree -a -L <span class="m">2</span>
-.
-├── .venv
-│   └── ...
-├── Pipfile
-├── Pipfile.lock
-├── src
-│   └── demo
-│       └── ...
-└── tests
-    └── demo
-        └── ...
-
-
-<span class="m">9</span> directories, <span class="m">3</span> files
-</code></pre></div><p>Now we will create a very basic program in the <code>src/demo/</code> folder called <code>main.py</code>, which looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
-
-
-<span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;Hello {name}!&#39;</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">your_name</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">say_hello</span><span class="p">(</span><span class="n">your_name</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Please enter your name.&#39;</span><span class="p">)</span>
-</code></pre></div><p>Run the program to see if it works:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ python src/demo/main.py
-Please enter your name.
-
-➜ python src/demo/main.py Stefan
-Hello Stefan!
-</code></pre></div><p>Great! Let&rsquo;s proceed and add a few test cases.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ tree -a -L <span class="m">2</span>
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── .venv
+</span></span><span class="line"><span class="cl">│   └── ...
+</span></span><span class="line"><span class="cl">├── Pipfile
+</span></span><span class="line"><span class="cl">├── Pipfile.lock
+</span></span><span class="line"><span class="cl">├── src
+</span></span><span class="line"><span class="cl">│   └── demo
+</span></span><span class="line"><span class="cl">│       └── ...
+</span></span><span class="line"><span class="cl">└── tests
+</span></span><span class="line"><span class="cl">    └── demo
+</span></span><span class="line"><span class="cl">        └── ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">9</span> directories, <span class="m">3</span> files
+</span></span></code></pre></div><p>Now we will create a very basic program in the <code>src/demo/</code> folder called <code>main.py</code>, which looks like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">your_name</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">say_hello</span><span class="p">(</span><span class="n">your_name</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please enter your name.&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Run the program to see if it works:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ python src/demo/main.py
+</span></span><span class="line"><span class="cl">Please enter your name.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">➜ python src/demo/main.py Stefan
+</span></span><span class="line"><span class="cl">Hello Stefan!
+</span></span></code></pre></div><p>Great! Let&rsquo;s proceed and add a few test cases.</p>
 <h2 id="pytest">Pytest</h2>
 <p>Make sure pytest is installed in your virtual environment:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install -d pytest
-</code></pre></div><p>Create a python file called <code>test_main.py</code> to the <code>tests/demo/</code> folder that contains the following code:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">say_hello</span>
-
-<span class="k">def</span> <span class="nf">test_say_hello</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello Stefan!&#39;</span>
-</code></pre></div><blockquote>
-<p><strong>Note</strong> if you are receiving &ldquo;No module named demo&hellip;&quot;, take a look at <a href="https://menziess.github.io/howto/create/python-packages/#1-packaging-setup">packaging python code</a>, and install your project locally, using the <code>pip install -e .</code> command, then run the tests again.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pipenv install -d pytest
+</span></span></code></pre></div><p>Create a python file called <code>test_main.py</code> to the <code>tests/demo/</code> folder that contains the following code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">demo.main</span> <span class="kn">import</span> <span class="n">say_hello</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_say_hello</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello Stefan!&#39;</span>
+</span></span></code></pre></div><blockquote>
+<p><strong>Note</strong> if you are receiving &ldquo;No module named demo&hellip;&rdquo;, take a look at <a href="https://menziess.github.io/howto/create/python-packages/#1-packaging-setup">packaging python code</a>, and install your project locally, using the <code>pip install -e .</code> command, then run the tests again.</p>
 </blockquote>
 <p>Run the tests to see if they succeed:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ pytest
-...
-E       AssertionError: assert <span class="s1">&#39;Hello Bob!&#39;</span> <span class="o">==</span> <span class="s1">&#39;Hello Stefan!&#39;</span>
-E         - Hello Bob!
-E         + Hello Stefan!
-</code></pre></div><p>The test failed, but that&rsquo;s good! Now you are aware that the code is broken before you ship it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ pytest
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">E       AssertionError: assert <span class="s1">&#39;Hello Bob!&#39;</span> <span class="o">==</span> <span class="s1">&#39;Hello Stefan!&#39;</span>
+</span></span><span class="line"><span class="cl">E         - Hello Bob!
+</span></span><span class="line"><span class="cl">E         + Hello Stefan!
+</span></span></code></pre></div><p>The test failed, but that&rsquo;s good! Now you are aware that the code is broken before you ship it.</p>
 <blockquote>
 <p><strong>Note</strong> if you are following along, fix the test before you proceed.</p>
 </blockquote>
 <h2 id="doctests">Doctests</h2>
 <p>We have now added proper tests to our code. It is good practice to document your code, and docstrings are a great place to show examples to show other developers how your code should be used and what your intentions are. This is great until you forget to update the docstring after making a change to the code.</p>
 <p>Doctests are a great way to test and prove that the documentation is correct and up-to-date. Let&rsquo;s add a docstring to our function:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Say hello.
-</span><span class="s2">
-</span><span class="s2">    &gt;&gt;&gt; say_hello(&#39;Stefan&#39;)
-</span><span class="s2">    &#39;Hello Bob!&#39;
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;Hello {name}!&#39;</span>
-</code></pre></div><p>Run the doctests using pytest, we&rsquo;ll get an error message as expected:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">➜ pytest --doctest-modules
-...
-<span class="m">009</span>     &gt;&gt;&gt; say_hello<span class="o">(</span><span class="s1">&#39;Stefan&#39;</span><span class="o">)</span>
-Expected:
-    <span class="s1">&#39;Hello Bob!&#39;</span>
-Got:
-    <span class="s1">&#39;Hello Stefan!&#39;</span>
-</code></pre></div><p>You can also check whether exceptions are raised as expected (use the wildcard <code>...</code> in the result to capture generic output):</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt; say_hello(1, 2) # doctest: +ELLIPSIS
-</span><span class="s2">Traceback (most recent call last):
-</span><span class="s2">...
-</span><span class="s2">TypeError: ... takes from 0 to 1 ... but 2 were given
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div><h2 id="fixtures">Fixtures</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Say hello.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &gt;&gt;&gt; say_hello(&#39;Stefan&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#39;Hello Bob!&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span>
+</span></span></code></pre></div><p>Run the doctests using pytest, we&rsquo;ll get an error message as expected:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ pytest --doctest-modules
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl"><span class="m">009</span>     &gt;&gt;&gt; say_hello<span class="o">(</span><span class="s1">&#39;Stefan&#39;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">Expected:
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Hello Bob!&#39;</span>
+</span></span><span class="line"><span class="cl">Got:
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Hello Stefan!&#39;</span>
+</span></span></code></pre></div><p>You can also check whether exceptions are raised as expected (use the wildcard <code>...</code> in the result to capture generic output):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&gt;&gt;&gt; say_hello(1, 2) # doctest: +ELLIPSIS
+</span></span></span><span class="line"><span class="cl"><span class="s2">Traceback (most recent call last):
+</span></span></span><span class="line"><span class="cl"><span class="s2">...
+</span></span></span><span class="line"><span class="cl"><span class="s2">TypeError: ... takes from 0 to 1 ... but 2 were given
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><h2 id="fixtures">Fixtures</h2>
 <p>Our function accepts a very basic string argument. In some cases you may want to define the data that is used in the tests beforehand. Fixtures are a great way to inject arguments to your functions, making your tests more readable.</p>
 <p>Add a file called <code>conftest.py</code> in the root of your project, and paste the following code inside:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;Some data for our tests.&#34;&#34;&#34;</span>
-
-<span class="kn">from</span> <span class="nn">pytest</span> <span class="kn">import</span> <span class="n">fixture</span>
-
-<span class="nd">@fixture</span>
-<span class="k">def</span> <span class="nf">names</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="p">[],</span> <span class="p">()</span>
-</code></pre></div><p>Modify your test files to use this new fixture:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_say_hello</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="s1">&#39;Stefan&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello Stefan!&#39;</span>
-
-    <span class="n">bob</span><span class="p">,</span> <span class="n">empty</span><span class="p">,</span> <span class="n">none</span><span class="p">,</span> <span class="n">integer</span><span class="p">,</span> <span class="n">li</span><span class="p">,</span> <span class="n">tup</span> <span class="o">=</span> <span class="n">names</span>
-
-    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello Bob!&#39;</span>
-    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">empty</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello !&#39;</span>
-    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">none</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello None!&#39;</span>
-    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello 123!&#39;</span>
-    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">li</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello []!&#39;</span>
-    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello ()!&#39;</span>
-</code></pre></div><p>You can also use fixtures in doctests!</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt; bob, *_ = getfixture(&#39;names&#39;)
-</span><span class="s2">&gt;&gt;&gt; bob
-</span><span class="s2">&#39;Bob&#39;
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt; say_hello(bob)
-</span><span class="s2">&#39;Hello Bob!&#39;
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;Some data for our tests.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pytest</span> <span class="kn">import</span> <span class="n">fixture</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@fixture</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">names</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="p">[],</span> <span class="p">()</span>
+</span></span></code></pre></div><p>Modify your test files to use this new fixture:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_say_hello</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="s1">&#39;Stefan&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello Stefan!&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">bob</span><span class="p">,</span> <span class="n">empty</span><span class="p">,</span> <span class="n">none</span><span class="p">,</span> <span class="n">integer</span><span class="p">,</span> <span class="n">li</span><span class="p">,</span> <span class="n">tup</span> <span class="o">=</span> <span class="n">names</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello Bob!&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">empty</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello !&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">none</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello None!&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello 123!&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">li</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello []!&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Hello ()!&#39;</span>
+</span></span></code></pre></div><p>You can also use fixtures in doctests!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&gt;&gt;&gt; bob, *_ = getfixture(&#39;names&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="s2">&gt;&gt;&gt; bob
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;Bob&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&gt;&gt;&gt; say_hello(bob)
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;Hello Bob!&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></div>
 </div>
 
 <div class="content">
@@ -365,7 +365,7 @@ Got:
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -435,7 +435,7 @@ Got:
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

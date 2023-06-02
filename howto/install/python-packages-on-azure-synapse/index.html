@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -239,31 +239,31 @@
 <p><img src="/images/install-python-packages-on-azure-synapse/requirements-txt.png#shadow" alt=""></p>
 <p>To install custom packages, you simply upload the wheel file into the linked storage account, at a particular location. You will need a &ldquo;<em>Storage Blob Data Contributor</em>&rdquo; role assigned to your account to copy files to your storage using the azure cli (alternatively, you can use the old <code>--auth-mode key</code> option).</p>
 <p>Insert the following snippet at the top of your <code>Makefile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">.EXPORT_ALL_VARIABLES</span><span class="o">:</span>
-
-<span class="nv">WHEELNAME</span><span class="o">=</span>demo-0.0.dev0-py3-none-any.whl
-
-<span class="nv">SYNAPSE_SA_NAME</span><span class="o">=</span>mystorageaccount
-<span class="nv">SYNAPSE_CONTAINER_NAME</span><span class="o">=</span>mycontainer
-<span class="nv">SYNAPSE_WORKSPACE_NAME</span><span class="o">=</span>myworkspace
-<span class="nv">SYNAPSE_SPARKPOOL_NAME</span><span class="o">=</span>guiltyspark
-<span class="nv">SYNAPSE_PACKAGE_PATH</span><span class="o">=</span>synapse/workspaces/<span class="si">${</span><span class="nv">SYNAPSE_WORKSPACE_NAME</span><span class="si">}</span>/sparkpools/<span class="si">${</span><span class="nv">SYNAPSE_SPARKPOOL_NAME</span><span class="si">}</span>/libraries/python/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span>
-</code></pre></div><p>And append this snippet at the end of your <code>Makefile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">install-package-synapse</span><span class="o">:</span>
-	@echo Installing <span class="s1">&#39;dist/${WHEELNAME}&#39;</span> on azure synapse...
-	az storage fs file upload <span class="se">\
-</span><span class="se"></span>		-s dist/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> <span class="se">\
-</span><span class="se"></span>		-p <span class="si">${</span><span class="nv">SYNAPSE_PACKAGE_PATH</span><span class="si">}</span> <span class="se">\
-</span><span class="se"></span>		-f <span class="si">${</span><span class="nv">SYNAPSE_CONTAINER_NAME</span><span class="si">}</span> <span class="se">\
-</span><span class="se"></span>		--account-name <span class="si">${</span><span class="nv">SYNAPSE_SA_NAME</span><span class="si">}</span> <span class="se">\
-</span><span class="se"></span>		--auth-mode login <span class="se">\
-</span><span class="se"></span>		--overwrite
-</code></pre></div><p>Run the <code>make build</code> command in your terminal. Confirm that the file <code>dist/demo-0.0.dev0-py3-none-any.whl</code> has been created:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ make build
-...
-➜ ls dist
-demo-0.0.dev0-py3-none-any.whl
-</code></pre></div><p>Finally, run the new <code>make install-package-synapse</code> command in your terminal to copy the wheel file, and restart the spark pool in synapse.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="line"><span class="cl"><span class="nf">.EXPORT_ALL_VARIABLES</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">WHEELNAME</span><span class="o">=</span>demo-0.0.dev0-py3-none-any.whl
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">SYNAPSE_SA_NAME</span><span class="o">=</span>mystorageaccount
+</span></span><span class="line"><span class="cl"><span class="nv">SYNAPSE_CONTAINER_NAME</span><span class="o">=</span>mycontainer
+</span></span><span class="line"><span class="cl"><span class="nv">SYNAPSE_WORKSPACE_NAME</span><span class="o">=</span>myworkspace
+</span></span><span class="line"><span class="cl"><span class="nv">SYNAPSE_SPARKPOOL_NAME</span><span class="o">=</span>guiltyspark
+</span></span><span class="line"><span class="cl"><span class="nv">SYNAPSE_PACKAGE_PATH</span><span class="o">=</span>synapse/workspaces/<span class="si">${</span><span class="nv">SYNAPSE_WORKSPACE_NAME</span><span class="si">}</span>/sparkpools/<span class="si">${</span><span class="nv">SYNAPSE_SPARKPOOL_NAME</span><span class="si">}</span>/libraries/python/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span>
+</span></span></code></pre></div><p>And append this snippet at the end of your <code>Makefile</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="line"><span class="cl"><span class="nf">install-package-synapse</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	@echo Installing <span class="s1">&#39;dist/${WHEELNAME}&#39;</span> on azure synapse...
+</span></span><span class="line"><span class="cl">	az storage fs file upload <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		-s dist/<span class="si">${</span><span class="nv">WHEELNAME</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		-p <span class="si">${</span><span class="nv">SYNAPSE_PACKAGE_PATH</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		-f <span class="si">${</span><span class="nv">SYNAPSE_CONTAINER_NAME</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		--account-name <span class="si">${</span><span class="nv">SYNAPSE_SA_NAME</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		--auth-mode login <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		--overwrite
+</span></span></code></pre></div><p>Run the <code>make build</code> command in your terminal. Confirm that the file <code>dist/demo-0.0.dev0-py3-none-any.whl</code> has been created:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">➜ make build
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">➜ ls dist
+</span></span><span class="line"><span class="cl">demo-0.0.dev0-py3-none-any.whl
+</span></span></code></pre></div><p>Finally, run the new <code>make install-package-synapse</code> command in your terminal to copy the wheel file, and restart the spark pool in synapse.</p>
 <p><img src="/images/install-python-packages-on-azure-synapse/hello.png#shadow" alt=""></p>
 <p>By adding the copy command to a DevOps release pipeline, you can automatically roll out new (tested) versions of your packaged code, and use them in your Synapse Notebooks.</p>
 
@@ -286,7 +286,7 @@ demo-0.0.dev0-py3-none-any.whl
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -356,7 +356,7 @@ demo-0.0.dev0-py3-none-any.whl
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

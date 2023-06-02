@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -233,31 +233,31 @@
 <p><img src="/images/install-python-packages-on-databricks/basic-setup.png" alt=""></p>
 <h2 id="pyinstaller">Pyinstaller</h2>
 <p>Install pyinstaller globally, or as a dev dependency within your virtualenv:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo -H pip install pyinstaller
-<span class="c1"># or</span>
-pipenv install -d pyinstaller
-</code></pre></div><p>Add the following command to your <code>Makefile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">installable</span><span class="o">:</span> <span class="n">dev</span>
-	pyinstaller -D -F -n demo.exe -c src/demo/main.py --icon<span class="o">=</span>res/icon.ico
-</code></pre></div><p>Create an icon by converting your favorite image into a .ico file using <a href="https://icoconvert.com">icoconvert</a>, then place it in a folder called <code>/res</code>. And finally run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">make installable
-</code></pre></div><p>The <code>-D</code> and <code>-F</code> flag are passed to create one directory, and a one-file bundle respectively.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -H pip install pyinstaller
+</span></span><span class="line"><span class="cl"><span class="c1"># or</span>
+</span></span><span class="line"><span class="cl">pipenv install -d pyinstaller
+</span></span></code></pre></div><p>Add the following command to your <code>Makefile</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="line"><span class="cl"><span class="nf">installable</span><span class="o">:</span> <span class="n">dev</span>
+</span></span><span class="line"><span class="cl">	pyinstaller -D -F -n demo.exe -c src/demo/main.py --icon<span class="o">=</span>res/icon.ico
+</span></span></code></pre></div><p>Create an icon by converting your favorite image into a .ico file using <a href="https://icoconvert.com">icoconvert</a>, then place it in a folder called <code>/res</code>. And finally run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">make installable
+</span></span></code></pre></div><p>The <code>-D</code> and <code>-F</code> flag are passed to create one directory, and a one-file bundle respectively.</p>
 <p>Your executable should be placed in the dist folder.</p>
 <p><img src="/images/create-python-executables/folder.png" alt=""></p>
 <h2 id="errors">Errors</h2>
 <p>Pyenv users may be required to build their python installation with the <code>--enable-shared</code> flag:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">...
-INFO: Python library not in binary dependencies. Doing additional searching...
-Traceback (most recent call last):
-	...
-</code></pre></div><p>Simply run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Get numerical portion of python version</span>
-<span class="nv">PYTHON_VERSION</span><span class="o">=</span><span class="k">$(</span>python --version <span class="p">|</span> cut -c8-<span class="k">)</span>
-
-<span class="c1"># Uninstall and install python using pyenv</span>
-pyenv uninstall <span class="nv">$PYTHON_VERSION</span>
-env <span class="nv">PYTHON_CONFIGURE_OPTS</span><span class="o">=</span><span class="s2">&#34;--enable-shared&#34;</span> pyenv install <span class="nv">$PYTHON_VERSION</span>
-</code></pre></div><p><a href="https://github.com/pyenv/pyenv/wiki#how-to-build-cpython-with---enable-shared">https://github.com/pyenv/pyenv/wiki#how-to-build-cpython-with---enable-shared</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">INFO: Python library not in binary dependencies. Doing additional searching...
+</span></span><span class="line"><span class="cl">Traceback (most recent call last):
+</span></span><span class="line"><span class="cl">	...
+</span></span></code></pre></div><p>Simply run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Get numerical portion of python version</span>
+</span></span><span class="line"><span class="cl"><span class="nv">PYTHON_VERSION</span><span class="o">=</span><span class="k">$(</span>python --version <span class="p">|</span> cut -c8-<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Uninstall and install python using pyenv</span>
+</span></span><span class="line"><span class="cl">pyenv uninstall <span class="nv">$PYTHON_VERSION</span>
+</span></span><span class="line"><span class="cl">env <span class="nv">PYTHON_CONFIGURE_OPTS</span><span class="o">=</span><span class="s2">&#34;--enable-shared&#34;</span> pyenv install <span class="nv">$PYTHON_VERSION</span>
+</span></span></code></pre></div><p><a href="https://github.com/pyenv/pyenv/wiki#how-to-build-cpython-with---enable-shared">https://github.com/pyenv/pyenv/wiki#how-to-build-cpython-with---enable-shared</a></p>
 <p>If you face any other errors, feel free to leave a comment below 👇, and we&rsquo;ll sort it out.</p>
 
 </div>
@@ -275,7 +275,7 @@ env <span class="nv">PYTHON_CONFIGURE_OPTS</span><span class="o">=</span><span c
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -345,7 +345,7 @@ env <span class="nv">PYTHON_CONFIGURE_OPTS</span><span class="o">=</span><span c
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -234,21 +234,21 @@
 <h2 id="parameterizing">Parameterizing</h2>
 <p>Arguments can be accepted in databricks notebooks using widgets.</p>
 <p>We can replace our non-deterministic <code>datetime.now()</code> expression with the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
-
-<span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;process_datetime&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</code></pre></div><p>In a next cell, we can read the argument from the widget:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">process_datetime</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span>
-    <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;process_datetime&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
-</code></pre></div><p>Assuming you&rsquo;ve passed the value <code>2020-06-01</code> as an argument during a notebook run, the <code>process_datetime</code> variable will contain a <code>datetime.datetime</code> value:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">process_datetime</span><span class="p">)</span>  <span class="c1"># 2020-06-01 00:00:00</span>
-</code></pre></div><h2 id="orchestration">Orchestration</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;process_datetime&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>In a next cell, we can read the argument from the widget:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">process_datetime</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;process_datetime&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Assuming you&rsquo;ve passed the value <code>2020-06-01</code> as an argument during a notebook run, the <code>process_datetime</code> variable will contain a <code>datetime.datetime</code> value:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">process_datetime</span><span class="p">)</span>  <span class="c1"># 2020-06-01 00:00:00</span>
+</span></span></code></pre></div><h2 id="orchestration">Orchestration</h2>
 <p>Using the databricks-cli in this example, you can pass parameters as a json string:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">databricks <span class="nb">jobs</span> run-now <span class="se">\
-</span><span class="se"></span>--job-id <span class="m">123</span> <span class="se">\
-</span><span class="se"></span>--notebook-params <span class="s1">&#39;{&#34;process_datetime&#34;: &#34;2020-06-01&#34;}&#39;</span>
-</code></pre></div><p>We&rsquo;ve made sure that no matter when you run the notebook, you have full control over the partition (june 1st) it will read from.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">databricks <span class="nb">jobs</span> run-now <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--job-id <span class="m">123</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--notebook-params <span class="s1">&#39;{&#34;process_datetime&#34;: &#34;2020-06-01&#34;}&#39;</span>
+</span></span></code></pre></div><p>We&rsquo;ve made sure that no matter when you run the notebook, you have full control over the partition (june 1st) it will read from.</p>
 <h2 id="widgets">Widgets</h2>
 <p>The full list of available widgets is always available by running <code>dbutils.widgets.help()</code> in a python cell:</p>
 <p><img src="/images/parameterize-databricks-notebooks/dbutils-widgets-help.png#large#shadow" alt=""></p>
@@ -270,7 +270,7 @@
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -340,7 +340,7 @@
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -242,19 +242,19 @@
 <ol>
 <li>Press <code>Win + S</code>, search for <code>powershell</code> and run <code>Windows Powershell</code> as administrator (right click and &ldquo;Run as administrator&rdquo;).</li>
 <li>Run the following code:
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Enable-WindowsOptionalFeature</span> <span class="n">-Online</span> <span class="n">-FeatureName</span> <span class="n">Microsoft-Windows-Subsystem-Linux</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Enable-WindowsOptionalFeature</span> <span class="n">-Online</span> <span class="n">-FeatureName</span> <span class="nb">Microsoft-Windows</span><span class="n">-Subsystem-Linux</span>
+</span></span></code></pre></div></li>
 <li>Reboot your system.</li>
 <li>In a normal powershell window, and download the Ubuntu distribution like so:
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">&#34;https://aka.ms/wsl-ubuntu-1804&#34;</span> <span class="n">-OutFile</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="n">appx</span> <span class="n">-UseBasicParsing</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">&#34;https://aka.ms/wsl-ubuntu-1804&#34;</span> <span class="n">-OutFile</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="py">appx</span> <span class="n">-UseBasicParsing</span>
+</span></span></code></pre></div></li>
 <li>Rename and extract the downloaded files:
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Rename-Item</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="n">appx</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="n">zip</span>
-<span class="nb">Expand-Archive</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="n">zip</span> <span class="n">Ubuntu</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Rename-Item</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="py">appx</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="py">zip</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Expand-Archive</span> <span class="n">Ubuntu</span><span class="p">.</span><span class="py">zip</span> <span class="n">Ubuntu</span>
+</span></span></code></pre></div></li>
 <li>Open up the Ubuntu folder:
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">explorer</span> <span class="n">Ubuntu</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">explorer</span> <span class="n">Ubuntu</span>
+</span></span></code></pre></div></li>
 <li>Run the executable by double clicking <code>ubuntu1804.exe</code>.</li>
 <li>At this point you will have the same installation, but potentially without network access. In order to fix this, take a look at <a href="https://github.com/Menziess/WSL-Being-Productive-Under-Corporate-Restrictive-Policy">this</a> repository.</li>
 </ol>
@@ -274,7 +274,7 @@
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -344,7 +344,7 @@
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

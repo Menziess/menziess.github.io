@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -228,15 +228,15 @@
 <p><img src="/images/logo/artifact.png#logo" alt=""> ⟶ <img src="/images/logo/python.png#logo#s" alt=""></p>
 <h2 id="a-common-problem">A Common Problem</h2>
 <p>Companies may hinder (knowingly or unknowingly) their employees productivity with restrictive policies and stacked layers of security. A common problem I face is the inability to install python dependencies using <code>pip</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">➜ pip install sklearn
-WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>4, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
-WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>3, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
-WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>2, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
-WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>1, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
-WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>0, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
-ERROR: Could not find a version that satisfies the requirement sklearn <span class="o">(</span>from versions: none<span class="o">)</span>
-ERROR: No matching distribution found <span class="k">for</span> sklearn
-</code></pre></div><p>Solution: <a href="#error">tldr</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">➜ pip install sklearn
+</span></span><span class="line"><span class="cl">WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>4, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
+</span></span><span class="line"><span class="cl">WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>3, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
+</span></span><span class="line"><span class="cl">WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>2, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
+</span></span><span class="line"><span class="cl">WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>1, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
+</span></span><span class="line"><span class="cl">WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>0, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/sklearn/
+</span></span><span class="line"><span class="cl">ERROR: Could not find a version that satisfies the requirement sklearn <span class="o">(</span>from versions: none<span class="o">)</span>
+</span></span><span class="line"><span class="cl">ERROR: No matching distribution found <span class="k">for</span> sklearn
+</span></span></code></pre></div><p>Solution: <a href="#error">tldr</a>.</p>
 <h2 id="and-another-challenge">And Another Challenge</h2>
 <p>Sharing code between different teams and departments in a decoupled but secure and private way.</p>
 <h2 id="the-solution">The Solution</h2>
@@ -251,38 +251,38 @@ ERROR: No matching distribution found <span class="k">for</span> sklearn
 </li>
 <li>
 <p>Install <code>keyring</code> in order to connect to the DevOps feed:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip install keyring artifacts-keyring
-</code></pre></div><p>Got an <a href="#error">error</a>?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">pip install keyring artifacts-keyring
+</span></span></code></pre></div><p>Got an <a href="#error">error</a>?</p>
 </li>
 <li>
 <p>Try and install any package that you need using the feed url:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip install sklearn <span class="se">\
-</span><span class="se"></span>  --index-url https://pkgs.dev.azure.com/&lt;project&gt;/&lt;id&gt;/_packaging/&lt;feed&gt;/pypi/simple/
-</code></pre></div><p>Log in using your Azure DevOps project credentials.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">pip install sklearn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --index-url https://pkgs.dev.azure.com/&lt;project&gt;/&lt;id&gt;/_packaging/&lt;feed&gt;/pypi/simple/
+</span></span></code></pre></div><p>Log in using your Azure DevOps project credentials.</p>
 </li>
 <li>
 <p>Update your <code>pip.ini</code> file to avoid having to pass the index url:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip config -v list
-</code></pre></div><p>Open one of the above ini files, depending on your setup, and enter:</p>
-<div class="highlight"><pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[global]</span>
-<span class="na">index-url</span> <span class="o">=</span> <span class="s">https://pkgs.dev.azure.com/&lt;project&gt;/&lt;id&gt;/_packaging/&lt;feed&gt;/pypi/simple/</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">pip config -v list
+</span></span></code></pre></div><p>Open one of the above ini files, depending on your setup, and enter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[global]</span>
+</span></span><span class="line"><span class="cl"><span class="na">index-url</span> <span class="o">=</span> <span class="s">https://pkgs.dev.azure.com/&lt;project&gt;/&lt;id&gt;/_packaging/&lt;feed&gt;/pypi/simple/</span>
+</span></span></code></pre></div></li>
 </ol>
 <h2 id="creating-and-publishing-packages">Creating and Publishing Packages</h2>
 <p>Have a look at <a href="https://menziess.github.io/howto/create/python-packages/">this post</a> to see how you can create and publish packages to a feed.</p>
 <h2 id="error">Error</h2>
 <p>If you got the following error:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>4, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/keyring/
-</code></pre></div><p>Download <code>keyring</code> and <code>artifacts keyring</code> on a different computer:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip download keyring artifacts-keyring -d dependencies
-ls dependencies
-</code></pre></div><p>Copy over, and install the .whl files on the computer that gives the error:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="nb">cd</span> dependencies
-pip install *.whl
-</code></pre></div><p>Now proceed and install any other dependencies through <a href="#the-solution">our earlier created</a> Azure DevOps Feed:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pip install sklearn <span class="se">\
-</span><span class="se"></span>  --index-url https://pkgs.dev.azure.com/&lt;project&gt;/&lt;id&gt;/_packaging/&lt;feed&gt;/pypi/simple/
-</code></pre></div><p>If you&rsquo;re still stuck, please let me know in the comments below.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">WARNING: Retrying <span class="o">(</span>Retry<span class="o">(</span><span class="nv">total</span><span class="o">=</span>4, <span class="nv">connect</span><span class="o">=</span>None, <span class="nv">read</span><span class="o">=</span>None, <span class="nv">redirect</span><span class="o">=</span>None, <span class="nv">status</span><span class="o">=</span>None<span class="o">))</span> after connection broken by <span class="s1">&#39;ProtocolError(&#39;</span>Connection aborted.<span class="s1">&#39;, ConnectionResetError(10054, &#39;</span>An existing connection was forcibly closed by the remote host<span class="s1">&#39;, None, 10054, None))&#39;</span>: /simple/keyring/
+</span></span></code></pre></div><p>Download <code>keyring</code> and <code>artifacts keyring</code> on a different computer:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">pip download keyring artifacts-keyring -d dependencies
+</span></span><span class="line"><span class="cl">ls dependencies
+</span></span></code></pre></div><p>Copy over, and install the .whl files on the computer that gives the error:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl"><span class="nb">cd</span> dependencies
+</span></span><span class="line"><span class="cl">pip install *.whl
+</span></span></code></pre></div><p>Now proceed and install any other dependencies through <a href="#the-solution">our earlier created</a> Azure DevOps Feed:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">pip install sklearn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --index-url https://pkgs.dev.azure.com/&lt;project&gt;/&lt;id&gt;/_packaging/&lt;feed&gt;/pypi/simple/
+</span></span></code></pre></div><p>If you&rsquo;re still stuck, please let me know in the comments below.</p>
 
 </div>
 
@@ -303,7 +303,7 @@ pip install *.whl
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -373,7 +373,7 @@ pip install *.whl
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

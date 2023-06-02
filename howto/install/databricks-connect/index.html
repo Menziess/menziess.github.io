@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -232,13 +232,12 @@
 <li><code>spark.databricks.service.port 8787</code></li>
 </ul>
 <p>Install Java on your local machine:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">apt install openjdk-8-jdk
-</code></pre></div><p>Uninstall any pyspark versions, and install databricks-connect using the regular <code>pip</code> commands, preventing any changes to be recorded to your virtual environment (prevents mutations to <code>Pipfile</code> and <code>Pipfile.lock</code>):</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip uninstall pyspark
-pip install -U databricks-connect<span class="o">==</span><span class="s2">&#34;6.2.*&#34;</span> <span class="c1"># this version should match your Databricks Runtime Version</span>
-</code></pre></div><p>If you want to switch back to <code>pyspark</code>, simply do the exact opposite:</p>
-<figure>
-    <img src="/images/install-databricks-connect/switching.png"/> 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt install openjdk-8-jdk
+</span></span></code></pre></div><p>Uninstall any pyspark versions, and install databricks-connect using the regular <code>pip</code> commands, preventing any changes to be recorded to your virtual environment (prevents mutations to <code>Pipfile</code> and <code>Pipfile.lock</code>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip uninstall pyspark
+</span></span><span class="line"><span class="cl">pip install -U databricks-connect<span class="o">==</span><span class="s2">&#34;6.2.*&#34;</span> <span class="c1"># this version should match your Databricks Runtime Version</span>
+</span></span></code></pre></div><p>If you want to switch back to <code>pyspark</code>, simply do the exact opposite:</p>
+<figure><img src="/images/install-databricks-connect/switching.png"/>
 </figure>
 
 <p>We&rsquo;ll have to set up our <code>~/databricks-connect</code> file once, containing our cluster information. Create and copy a token in your user settings in your Databricks workspace, then run <code>databricks-connect configure</code> on your machine:</p>
@@ -246,51 +245,51 @@ pip install -U databricks-connect<span class="o">==</span><span class="s2">&#34;
 <p>You&rsquo;ll need some information that you&rsquo;ll find in the address bar when you visit your cluster page:</p>
 <p><img src="/images/install-databricks-connect/cluster-info.png" alt=""></p>
 <p>When you&rsquo;ve filled in the information, you can run <code>databricks-connect configure</code> again to verify:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ databricks-connect configure
-The current configuration is:
-* Databricks Host: https://westeurope.azuredatabricks.net/
-* Databricks Token: dapi5c376de3a2a54a2b03016c8c3b123456
-* Cluster ID: 0214-195926-aptin821
-* Org ID: <span class="m">3892784943666666</span>
-* Port: <span class="m">8787</span>
-</code></pre></div><p>Run <code>databricks-connect test</code> to test your installation. You&rsquo;ll hopefully see something along the lines of:</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">➜ databricks-connect <span class="nb">test</span>
-* PySpark is installed at /c/projects/demo-project/.venv/lib/python3.7/site-packages/pyspark
-* Checking SPARK_HOME
-* Checking java version
-openjdk version <span class="s2">&#34;1.8.0_242&#34;</span>
-OpenJDK Runtime Environment <span class="o">(</span>build 1.8.0_242-8u242-b08-0ubuntu3~18.04-b08<span class="o">)</span>
-OpenJDK 64-Bit Server VM <span class="o">(</span>build 25.242-b08, mixed mode<span class="o">)</span>
-* Testing scala <span class="nb">command</span>
-20/02/18 08:08:32 WARN Utils: Your hostname, ANL-SS14 resolves to a loopback address: 127.0.1.1<span class="p">;</span> using 172.17.254.209 instead <span class="o">(</span>on interface eth1<span class="o">)</span>
-20/02/18 08:08:32 WARN Utils: Set SPARK_LOCAL_IP <span class="k">if</span> you need to <span class="nb">bind</span> to another address
-20/02/18 08:08:34 WARN NativeCodeLoader: Unable to load native-hadoop library <span class="k">for</span> your platform... using builtin-java classes where applicable
-Using Spark<span class="s1">&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
-</span><span class="s1">Setting default log level to &#34;WARN&#34;.
-</span><span class="s1">To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-</span><span class="s1">20/02/18 08:08:49 WARN MetricsSystem: Using default name SparkStatusTracker for source because neither spark.metrics.namespace nor spark.app.id is set.
-</span><span class="s1">20/02/18 08:09:08 WARN SparkClientManager: Cluster 0214-195926-aptin821 in state TERMINATED, waiting for it to start running...
-</span><span class="s1">      ____              __
-</span><span class="s1">     / __/__  ___ _____/ /__
-</span><span class="s1">    _\ \/ _ \/ _ `/ __/  &#39;</span>_/
-   /___/ .__/<span class="se">\_</span>,_/_/ /_/<span class="se">\_\ </span>  version 2.4.5-SNAPSHOT
-      /_/
-
-Using Scala version 2.11.12 <span class="o">(</span>OpenJDK 64-Bit Server VM, Java 1.8.0_242<span class="o">)</span>
-Type in expressions to have them evaluated.
-Type :help <span class="k">for</span> more information
-...
-* Testing python <span class="nb">command</span>
-View job details at https://westeurope.azuredatabricks.net/?o<span class="o">=</span>3892784943666666#/setting/clusters/0214-195926-aptin821/sparkUi
-...
-* Testing dbutils.fs
-...
-* All tests passed.
-</code></pre></div><p>If you follow the link, you&rsquo;ll see the db-connect executions as a result:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">➜ databricks-connect configure
+</span></span><span class="line"><span class="cl">The current configuration is:
+</span></span><span class="line"><span class="cl">* Databricks Host: https://westeurope.azuredatabricks.net/
+</span></span><span class="line"><span class="cl">* Databricks Token: dapi5c376de3a2a54a2b03016c8c3b123456
+</span></span><span class="line"><span class="cl">* Cluster ID: 0214-195926-aptin821
+</span></span><span class="line"><span class="cl">* Org ID: <span class="m">3892784943666666</span>
+</span></span><span class="line"><span class="cl">* Port: <span class="m">8787</span>
+</span></span></code></pre></div><p>Run <code>databricks-connect test</code> to test your installation. You&rsquo;ll hopefully see something along the lines of:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">➜ databricks-connect <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">* PySpark is installed at /c/projects/demo-project/.venv/lib/python3.7/site-packages/pyspark
+</span></span><span class="line"><span class="cl">* Checking SPARK_HOME
+</span></span><span class="line"><span class="cl">* Checking java version
+</span></span><span class="line"><span class="cl">openjdk version <span class="s2">&#34;1.8.0_242&#34;</span>
+</span></span><span class="line"><span class="cl">OpenJDK Runtime Environment <span class="o">(</span>build 1.8.0_242-8u242-b08-0ubuntu3~18.04-b08<span class="o">)</span>
+</span></span><span class="line"><span class="cl">OpenJDK 64-Bit Server VM <span class="o">(</span>build 25.242-b08, mixed mode<span class="o">)</span>
+</span></span><span class="line"><span class="cl">* Testing scala <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">20/02/18 08:08:32 WARN Utils: Your hostname, ANL-SS14 resolves to a loopback address: 127.0.1.1<span class="p">;</span> using 172.17.254.209 instead <span class="o">(</span>on interface eth1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">20/02/18 08:08:32 WARN Utils: Set SPARK_LOCAL_IP <span class="k">if</span> you need to <span class="nb">bind</span> to another address
+</span></span><span class="line"><span class="cl">20/02/18 08:08:34 WARN NativeCodeLoader: Unable to load native-hadoop library <span class="k">for</span> your platform... using builtin-java classes where applicable
+</span></span><span class="line"><span class="cl">Using Spark<span class="s1">&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
+</span></span></span><span class="line"><span class="cl"><span class="s1">Setting default log level to &#34;WARN&#34;.
+</span></span></span><span class="line"><span class="cl"><span class="s1">To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+</span></span></span><span class="line"><span class="cl"><span class="s1">20/02/18 08:08:49 WARN MetricsSystem: Using default name SparkStatusTracker for source because neither spark.metrics.namespace nor spark.app.id is set.
+</span></span></span><span class="line"><span class="cl"><span class="s1">20/02/18 08:09:08 WARN SparkClientManager: Cluster 0214-195926-aptin821 in state TERMINATED, waiting for it to start running...
+</span></span></span><span class="line"><span class="cl"><span class="s1">      ____              __
+</span></span></span><span class="line"><span class="cl"><span class="s1">     / __/__  ___ _____/ /__
+</span></span></span><span class="line"><span class="cl"><span class="s1">    _\ \/ _ \/ _ `/ __/  &#39;</span>_/
+</span></span><span class="line"><span class="cl">   /___/ .__/<span class="se">\_</span>,_/_/ /_/<span class="se">\_\ </span>  version 2.4.5-SNAPSHOT
+</span></span><span class="line"><span class="cl">      /_/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Using Scala version 2.11.12 <span class="o">(</span>OpenJDK 64-Bit Server VM, Java 1.8.0_242<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Type in expressions to have them evaluated.
+</span></span><span class="line"><span class="cl">Type :help <span class="k">for</span> more information
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">* Testing python <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">View job details at https://westeurope.azuredatabricks.net/?o<span class="o">=</span>3892784943666666#/setting/clusters/0214-195926-aptin821/sparkUi
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">* Testing dbutils.fs
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">* All tests passed.
+</span></span></code></pre></div><p>If you follow the link, you&rsquo;ll see the db-connect executions as a result:</p>
 <p><img src="/images/install-databricks-connect/sparkui.png#shadow" alt=""></p>
 <p>Finally, run pyspark from your terminal, and start developing spark apps using your favorite IDE / environment while using powerful clusters and big data!</p>
-<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh">pyspark
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zsh" data-lang="zsh"><span class="line"><span class="cl">pyspark
+</span></span></code></pre></div>
 </div>
 
 <div class="content">
@@ -308,7 +307,7 @@ View job details at https://westeurope.azuredatabricks.net/?o<span class="o">=</
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -378,7 +377,7 @@ View job details at https://westeurope.azuredatabricks.net/?o<span class="o">=</
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>

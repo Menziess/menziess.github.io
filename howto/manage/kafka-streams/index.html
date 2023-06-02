@@ -34,7 +34,7 @@
 
   
   
-  <link rel="stylesheet" href="/css/style.min.5ce3a64371a6d6ad4ae139017128b33f631277a6aa4b592c44b2ce53ca68e5e3.css">
+  <link rel="stylesheet" href="/css/style.min.9c21643cc6c57332a692e0315bd3dfeac490a7cff6488afdb219549c97d4f5d0.css">
   
 
   
@@ -233,163 +233,163 @@
 <li>kafka-python</li>
 </ul>
 <p>Make sure that <code>docker</code> is installed, then create a <code>docker-compose.yml</code> file with the following contents:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.6&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">zookeeper</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>confluentinc/cp-zookeeper<span class="w">
-</span><span class="w">    </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>zookeeper<span class="w">
-</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>zookeeper<span class="w">
-</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="s2">&#34;2181:2181&#34;</span><span class="w">
-</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">ZOOKEEPER_CLIENT_PORT</span><span class="p">:</span><span class="w"> </span><span class="m">2181</span><span class="w">
-</span><span class="w">      </span><span class="k">ZOOKEEPER_TICK_TIME</span><span class="p">:</span><span class="w"> </span><span class="m">2000</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="k">broker</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>confluentinc/cp-kafka<span class="w">
-</span><span class="w">    </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>broker<span class="w">
-</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>broker<span class="w">
-</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- zookeeper<span class="w">
-</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="s2">&#34;29091:29091&#34;</span><span class="w">
-</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">KAFKA_BROKER_ID</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span><span class="w">      </span><span class="k">KAFKA_ZOOKEEPER_CONNECT</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;zookeeper:2181&#34;</span><span class="w">
-</span><span class="w">      </span><span class="k">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span><span class="p">:</span><span class="w"> </span>PLAINTEXT<span class="p">:</span>PLAINTEXT<span class="p">,</span>PLAINTEXT_HOST<span class="p">:</span>PLAINTEXT<span class="w">
-</span><span class="w">      </span><span class="k">KAFKA_ADVERTISED_LISTENERS</span><span class="p">:</span><span class="w"> </span>PLAINTEXT<span class="p">:</span>//broker<span class="p">:</span><span class="m">9091</span><span class="p">,</span>PLAINTEXT_HOST<span class="p">:</span>//localhost<span class="p">:</span><span class="m">29091</span><span class="w">
-</span><span class="w">      </span><span class="k">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span><span class="w">      </span><span class="k">KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
-</span><span class="w">      </span><span class="k">KAFKA_TRANSACTION_STATE_LOG_MIN_ISR</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span><span class="w">      </span><span class="k">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span><span class="w">    </span><span class="k">healthcheck</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">test</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="p">[</span><span class="w">
-</span><span class="w">          </span><span class="s2">&#34;CMD&#34;</span><span class="p">,</span><span class="w">
-</span><span class="w">          </span><span class="s2">&#34;kafka-topics&#34;</span><span class="p">,</span><span class="w">
-</span><span class="w">          </span><span class="s2">&#34;--list&#34;</span><span class="p">,</span><span class="w">
-</span><span class="w">          </span><span class="s2">&#34;--bootstrap-server&#34;</span><span class="p">,</span><span class="w">
-</span><span class="w">          </span><span class="s2">&#34;localhost:9091&#34;</span><span class="p">,</span><span class="w">
-</span><span class="w">        </span><span class="p">]</span><span class="w">
-</span><span class="w">      </span><span class="k">interval</span><span class="p">:</span><span class="w"> </span>5s<span class="w">
-</span><span class="w">      </span><span class="k">timeout</span><span class="p">:</span><span class="w"> </span>10s<span class="w">
-</span><span class="w">      </span><span class="k">retries</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="w">
-</span></code></pre></div><p>Spin up your Kafka cluster:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose up
-</code></pre></div><p>Create two jupyter notebooks: <code>producer.ipynb</code> and <code>consumer.ipynb</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="c1"># producer.ipynb</span>
-<span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaProducer</span>
-
-<span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;bootstrap_servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:29091&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;security_protocol&#39;</span><span class="p">:</span> <span class="s1">&#39;PLAINTEXT&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">p</span> <span class="o">=</span> <span class="n">KafkaProducer</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="c1"># consumer.ipynb</span>
-<span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaConsumer</span>
-
-<span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;bootstrap_servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:29091&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;security_protocol&#39;</span><span class="p">:</span> <span class="s1">&#39;PLAINTEXT&#39;</span><span class="p">,</span>
-    <span class="c1"># &#39;group_id&#39;: &#39;test&#39;,</span>
-    <span class="c1"># &#39;auto_offset_reset&#39;: &#39;earliest&#39;,</span>
-<span class="p">}</span>
-
-<span class="n">c</span> <span class="o">=</span> <span class="n">KafkaConsumer</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
-<span class="n">c</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>  <span class="c1"># subscribing to Kafka topic &#39;test&#39;</span>
-</code></pre></div><h2 id="offsets">Offsets</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.6&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">zookeeper</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">confluentinc/cp-zookeeper</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">zookeeper</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">zookeeper</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;2181:2181&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ZOOKEEPER_CLIENT_PORT</span><span class="p">:</span><span class="w"> </span><span class="m">2181</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ZOOKEEPER_TICK_TIME</span><span class="p">:</span><span class="w"> </span><span class="m">2000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">broker</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">confluentinc/cp-kafka</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">broker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">broker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">zookeeper</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;29091:29091&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">KAFKA_BROKER_ID</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">KAFKA_ZOOKEEPER_CONNECT</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;zookeeper:2181&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span><span class="p">:</span><span class="w"> </span><span class="l">PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">KAFKA_ADVERTISED_LISTENERS</span><span class="p">:</span><span class="w"> </span><span class="l">PLAINTEXT://broker:9091,PLAINTEXT_HOST://localhost:29091</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">KAFKA_TRANSACTION_STATE_LOG_MIN_ISR</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">[</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="s2">&#34;CMD&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="s2">&#34;kafka-topics&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="s2">&#34;--list&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="s2">&#34;--bootstrap-server&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="s2">&#34;localhost:9091&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l">5s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="w">
+</span></span></span></code></pre></div><p>Spin up your Kafka cluster:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker-compose up
+</span></span></code></pre></div><p>Create two jupyter notebooks: <code>producer.ipynb</code> and <code>consumer.ipynb</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># producer.ipynb</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaProducer</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;bootstrap_servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:29091&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;security_protocol&#39;</span><span class="p">:</span> <span class="s1">&#39;PLAINTEXT&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">KafkaProducer</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># consumer.ipynb</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaConsumer</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;bootstrap_servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:29091&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;security_protocol&#39;</span><span class="p">:</span> <span class="s1">&#39;PLAINTEXT&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#39;group_id&#39;: &#39;test&#39;,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#39;auto_offset_reset&#39;: &#39;earliest&#39;,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">KafkaConsumer</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">c</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>  <span class="c1"># subscribing to Kafka topic &#39;test&#39;</span>
+</span></span></code></pre></div><h2 id="offsets">Offsets</h2>
 <p>Let&rsquo;s start sending data, add a cell to <code>producer.ipynb</code> and send one message to Kafka:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;123&#39;</span><span class="p">)</span>  <span class="c1"># Sending message to topic &#39;test&#39;</span>
-</code></pre></div><p>In <code>consumer.ipynb</code> add a cell with the following code to start reading from the <code>test</code> topic:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="k">try</span><span class="p">:</span>
-  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-  <span class="k">pass</span>
-</code></pre></div><p>You&rsquo;ll see zero output messages. That is because our consumer starts reading as of now, and it won&rsquo;t process the messages on the backlog.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;123&#39;</span><span class="p">)</span>  <span class="c1"># Sending message to topic &#39;test&#39;</span>
+</span></span></code></pre></div><p>In <code>consumer.ipynb</code> add a cell with the following code to start reading from the <code>test</code> topic:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">pass</span>
+</span></span></code></pre></div><p>You&rsquo;ll see zero output messages. That is because our consumer starts reading as of now, and it won&rsquo;t process the messages on the backlog.</p>
 <p>Send an additional message in a new cell:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;456&#39;</span><span class="p">)</span>
-</code></pre></div><p>This time you will see the message in the output:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">ConsumerRecord</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test&#39;</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span> <span class="n">offset</span><span class="o">=</span><span class="mi">1</span> <span class="n">timestamp</span><span class="o">=</span><span class="mf">1665395214.</span><span class="o">..</span> <span class="n">timestamp_type</span><span class="o">=</span><span class="mi">0</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span> <span class="n">value</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;456&#39;</span> <span class="n">headers</span><span class="o">=</span><span class="p">[]</span> <span class="n">checksum</span><span class="o">=</span><span class="bp">None</span> <span class="n">serialized_key_size</span><span class="o">=-</span><span class="mi">1</span> <span class="n">serialized_value_size</span><span class="o">=</span><span class="mi">3</span> <span class="n">serialized_header_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-</code></pre></div><p>Now change the code to:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">c</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>               <span class="c1"># triggers creation of consumer group</span>
-<span class="n">c</span><span class="o">.</span><span class="n">seek_to_beginning</span><span class="p">()</span>  <span class="c1"># moves to beginning of the topic</span>
-
-<span class="k">try</span><span class="p">:</span>
-  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-  <span class="k">pass</span>
-</code></pre></div><p>This time you will see both messages:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">ConsumerRecord</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test&#39;</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span> <span class="n">timestamp</span><span class="o">=</span><span class="mf">1665395214.</span><span class="o">..</span> <span class="n">timestamp_type</span><span class="o">=</span><span class="mi">0</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span> <span class="n">value</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;123&#39;</span> <span class="n">headers</span><span class="o">=</span><span class="p">[]</span> <span class="n">checksum</span><span class="o">=</span><span class="bp">None</span> <span class="n">serialized_key_size</span><span class="o">=-</span><span class="mi">1</span> <span class="n">serialized_value_size</span><span class="o">=</span><span class="mi">3</span> <span class="n">serialized_header_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ConsumerRecord</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test&#39;</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span> <span class="n">offset</span><span class="o">=</span><span class="mi">1</span> <span class="n">timestamp</span><span class="o">=</span><span class="mf">1665395214.</span><span class="o">..</span> <span class="n">timestamp_type</span><span class="o">=</span><span class="mi">0</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span> <span class="n">value</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;456&#39;</span> <span class="n">headers</span><span class="o">=</span><span class="p">[]</span> <span class="n">checksum</span><span class="o">=</span><span class="bp">None</span> <span class="n">serialized_key_size</span><span class="o">=-</span><span class="mi">1</span> <span class="n">serialized_value_size</span><span class="o">=</span><span class="mi">3</span> <span class="n">serialized_header_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-</code></pre></div><p>Each message has an offset, we just started reading from offset 0. The offset can be used by the application to continue where it left off after it restarts (or crashes).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;456&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>This time you will see the message in the output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ConsumerRecord</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test&#39;</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span> <span class="n">offset</span><span class="o">=</span><span class="mi">1</span> <span class="n">timestamp</span><span class="o">=</span><span class="mf">1665395214.</span><span class="o">..</span> <span class="n">timestamp_type</span><span class="o">=</span><span class="mi">0</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span> <span class="n">value</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;456&#39;</span> <span class="n">headers</span><span class="o">=</span><span class="p">[]</span> <span class="n">checksum</span><span class="o">=</span><span class="kc">None</span> <span class="n">serialized_key_size</span><span class="o">=-</span><span class="mi">1</span> <span class="n">serialized_value_size</span><span class="o">=</span><span class="mi">3</span> <span class="n">serialized_header_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></div><p>Now change the code to:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">c</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>               <span class="c1"># triggers creation of consumer group</span>
+</span></span><span class="line"><span class="cl"><span class="n">c</span><span class="o">.</span><span class="n">seek_to_beginning</span><span class="p">()</span>  <span class="c1"># moves to beginning of the topic</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">pass</span>
+</span></span></code></pre></div><p>This time you will see both messages:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ConsumerRecord</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test&#39;</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span> <span class="n">timestamp</span><span class="o">=</span><span class="mf">1665395214.</span><span class="o">..</span> <span class="n">timestamp_type</span><span class="o">=</span><span class="mi">0</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span> <span class="n">value</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;123&#39;</span> <span class="n">headers</span><span class="o">=</span><span class="p">[]</span> <span class="n">checksum</span><span class="o">=</span><span class="kc">None</span> <span class="n">serialized_key_size</span><span class="o">=-</span><span class="mi">1</span> <span class="n">serialized_value_size</span><span class="o">=</span><span class="mi">3</span> <span class="n">serialized_header_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ConsumerRecord</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test&#39;</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span> <span class="n">offset</span><span class="o">=</span><span class="mi">1</span> <span class="n">timestamp</span><span class="o">=</span><span class="mf">1665395214.</span><span class="o">..</span> <span class="n">timestamp_type</span><span class="o">=</span><span class="mi">0</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span> <span class="n">value</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;456&#39;</span> <span class="n">headers</span><span class="o">=</span><span class="p">[]</span> <span class="n">checksum</span><span class="o">=</span><span class="kc">None</span> <span class="n">serialized_key_size</span><span class="o">=-</span><span class="mi">1</span> <span class="n">serialized_value_size</span><span class="o">=</span><span class="mi">3</span> <span class="n">serialized_header_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></div><p>Each message has an offset, we just started reading from offset 0. The offset can be used by the application to continue where it left off after it restarts (or crashes).</p>
 <h2 id="consumer-groups">Consumer Groups</h2>
 <p>Kafka stores this offset for you if you provide a (consumer) <code>group_id</code>. Uncomment the line in your consumer config:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="s1">&#39;group_id&#39;</span><span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span>
-</code></pre></div><p>Change your code back to:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="k">try</span><span class="p">:</span>
-  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-  <span class="k">pass</span>
-</code></pre></div><p>Again, there is no output data.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="s1">&#39;group_id&#39;</span><span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span>
+</span></span></code></pre></div><p>Change your code back to:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">pass</span>
+</span></span></code></pre></div><p>Again, there is no output data.</p>
 <p>Because this is a new consumer group, there&rsquo;s no offset stored, so it starts at the &ldquo;latest&rdquo; offset by default (this is the case for this library: <code>kafka-python</code>).</p>
 <p>This can be changed by setting the <code>auto_offset_reset</code> configuration property to &ldquo;earliest&rdquo;. Other than that, it&rsquo;s possible to manually select the starting offset regardless of whether the consumer group offset was stored or not:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">start_at_beginning</span> <span class="o">=</span> <span class="bp">False</span>
-
-<span class="k">if</span> <span class="n">start_at_beginning</span><span class="p">:</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>               <span class="c1"># triggers creation of consumer group</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">seek_to_beginning</span><span class="p">()</span>  <span class="c1"># moves to beginning of the topic</span>
-
-<span class="k">try</span><span class="p">:</span>
-  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-  <span class="k">pass</span>
-</code></pre></div><h2 id="admin-client">Admin Client</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">start_at_beginning</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">start_at_beginning</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">c</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>               <span class="c1"># triggers creation of consumer group</span>
+</span></span><span class="line"><span class="cl">  <span class="n">c</span><span class="o">.</span><span class="n">seek_to_beginning</span><span class="p">()</span>  <span class="c1"># moves to beginning of the topic</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">pass</span>
+</span></span></code></pre></div><h2 id="admin-client">Admin Client</h2>
 <p>It&rsquo;s also possible to figure out whether a consumer group exists, which offset it&rsquo;s reading from (per partition). Create a new notebook called <code>admin.ipynb</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaAdminClient</span>
-
-<span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;bootstrap_servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:29091&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;security_protocol&#39;</span><span class="p">:</span> <span class="s1">&#39;PLAINTEXT&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="n">KafkaAdminClient</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
-</code></pre></div><p>List the consumer groups:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">a</span><span class="o">.</span><span class="n">list_consumer_groups</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="p">[(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;consumer&#39;</span><span class="p">)]</span>  <span class="c1"># consumer group &#39;test&#39; which is a &#39;consumer&#39;</span>
-</code></pre></div><p>You could decide to read from the first available offset (depending on the topic retention period) if the consumer group is new:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="c1"># check whether &#39;test&#39; is not a key of {&#39;test&#39;: &#39;consumer&#39;}</span>
-<span class="c1"># which means that no such consumer group exists</span>
-<span class="n">start_at_beginning</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">list_consumer_groups</span><span class="p">())</span>
-</code></pre></div><p>When the consumer group has been used, you can see which offset it is at:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">a</span><span class="o">.</span><span class="n">list_consumer_group_offsets</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="p">{</span><span class="n">TopicPartition</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span> <span class="n">OffsetAndMetadata</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)}</span>
-</code></pre></div><h2 id="committing-offsets">Committing Offsets</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaAdminClient</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;bootstrap_servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:29091&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;security_protocol&#39;</span><span class="p">:</span> <span class="s1">&#39;PLAINTEXT&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">KafkaAdminClient</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
+</span></span></code></pre></div><p>List the consumer groups:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">a</span><span class="o">.</span><span class="n">list_consumer_groups</span><span class="p">()</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="p">[(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;consumer&#39;</span><span class="p">)]</span>  <span class="c1"># consumer group &#39;test&#39; which is a &#39;consumer&#39;</span>
+</span></span></code></pre></div><p>You could decide to read from the first available offset (depending on the topic retention period) if the consumer group is new:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># check whether &#39;test&#39; is not a key of {&#39;test&#39;: &#39;consumer&#39;}</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># which means that no such consumer group exists</span>
+</span></span><span class="line"><span class="cl"><span class="n">start_at_beginning</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">list_consumer_groups</span><span class="p">())</span>
+</span></span></code></pre></div><p>When the consumer group has been used, you can see which offset it is at:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">a</span><span class="o">.</span><span class="n">list_consumer_group_offsets</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="p">{</span><span class="n">TopicPartition</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span> <span class="n">OffsetAndMetadata</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)}</span>
+</span></span></code></pre></div><h2 id="committing-offsets">Committing Offsets</h2>
 <p>When a message has been received, it is assumed that all previous messages have been processed. By default, the consumer commits the offset to the Kafka cluster.</p>
 <p>How many times the offset is committed depends on the <code>auto_commit_interval_ms</code> property. So if the processed messages have not yet been committed, and the app crashes, it might occur that messages that have already been processed are processed once again (duplicates).</p>
 <p>The alternative would be to disable auto commit <code>enable_auto_commit</code>, and do the committing yourself:</p>
-<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">TopicPartition</span>
-<span class="kn">from</span> <span class="nn">kafka.structs</span> <span class="kn">import</span> <span class="n">OffsetAndMetadata</span>
-
-<span class="c1"># we only have one partition</span>
-<span class="n">partition</span> <span class="o">=</span> <span class="n">TopicPartition</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="k">try</span><span class="p">:</span>
-  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>  <span class="c1"># the message is considered processed</span>
-    <span class="n">next_offset</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># offset of next message the app should consume</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">commit_async</span><span class="p">({</span>
-      <span class="n">partition</span><span class="p">:</span> <span class="n">OffsetAndMetadata</span><span class="p">(</span><span class="n">next_offset</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-    <span class="p">})</span>
-
-<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-  <span class="k">pass</span>
-</code></pre></div><p>As you can see, we commit <a href="https://kafka-python.readthedocs.io/en/master/apidoc/KafkaConsumer.html#kafka.KafkaConsumer.commit">the next offset</a> rather than the current one.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">TopicPartition</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">kafka.structs</span> <span class="kn">import</span> <span class="n">OffsetAndMetadata</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># we only have one partition</span>
+</span></span><span class="line"><span class="cl"><span class="n">partition</span> <span class="o">=</span> <span class="n">TopicPartition</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>  <span class="c1"># the message is considered processed</span>
+</span></span><span class="line"><span class="cl">    <span class="n">next_offset</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># offset of next message the app should consume</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span><span class="o">.</span><span class="n">commit_async</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">      <span class="n">partition</span><span class="p">:</span> <span class="n">OffsetAndMetadata</span><span class="p">(</span><span class="n">next_offset</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">pass</span>
+</span></span></code></pre></div><p>As you can see, we commit <a href="https://kafka-python.readthedocs.io/en/master/apidoc/KafkaConsumer.html#kafka.KafkaConsumer.commit">the next offset</a> rather than the current one.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>This article introduced key concepts for Kafka consumers and message processing. We covered handling offsets, reading messages from the start of a topic, creating and managing consumer groups, and manual message tracking. The provided example code offers a practical demonstration that can be expanded upon for larger applications. By grasping these concepts, you can enhance your Kafka consumer&rsquo;s efficiency and reliability in processing messages from topics.</p>
 
@@ -410,7 +410,7 @@
 
   <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -480,7 +480,7 @@
   
 
   
-  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  <script type="text/javascript" src="/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
   
 
 </body>
