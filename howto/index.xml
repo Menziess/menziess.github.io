@@ -8,63 +8,27 @@
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Nov 2018 15:14:39 +1000</lastBuildDate><atom:link href="https://menziess.github.io/howto/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Create a Blog</title>
-      <link>https://menziess.github.io/howto/create/a-blog/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/create/a-blog/</guid>
-      <description>In this post we&amp;rsquo;ll create a free static website with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, push our project to &lt;a href=&#34;https://dev.azure.com/&#34;&gt;Azure Repo&amp;rsquo;s&lt;/a&gt;, build and release the site to &lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt; using Azure DevOps.</description>
-    </item>
-    
-    <item>
       <title>Create Python Executables</title>
       <link>https://menziess.github.io/howto/create/python-executables/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Tue, 06 Jul 2021 00:00:00 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/create/python-executables/</guid>
       <description>When you want to share your software with a non-developer, or you want to run a comprehensive python project without having to bother with the setup, executables are quite useful. And it only takes about 5 minutes to get it done.</description>
     </item>
     
     <item>
-      <title>Create Python Packages</title>
-      <link>https://menziess.github.io/howto/create/python-packages/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <title>Use Key Vault Secrets In Data Factory</title>
+      <link>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0100</pubDate>
       
-      <guid>https://menziess.github.io/howto/create/python-packages/</guid>
-      <description>Why should you care about creating packages? Packages are easy to install (&lt;code&gt;pip install demo&lt;/code&gt;). Packages simplify development (&lt;code&gt;pip install -e .&lt;/code&gt; installs your package and keeps it up-to-date during development). Packages are easy to run and test &amp;hellip;</description>
-    </item>
-    
-    <item>
-      <title>Enhance Your Databricks Workflow</title>
-      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
-      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
-    </item>
-    
-    <item>
-      <title>Enhance Your Python-vscode Workflow</title>
-      <link>https://menziess.github.io/howto/enhance/your-python-vscode-workflow/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/enhance/your-python-vscode-workflow/</guid>
-      <description>This post covers my personal workflow for python projects, using Visual Studio Code along with some other tools. A good workflow saves time and allows you to focus on the problem at hand, instead of tasks that make you feel like a robot (machines are good for that).</description>
-    </item>
-    
-    <item>
-      <title>Install databricks-connect</title>
-      <link>https://menziess.github.io/howto/install/databricks-connect/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/install/databricks-connect/</guid>
-      <description>Databricks-connect allows you to connect your favorite IDE to your Databricks cluster. Install Java on your local machine. Uninstall any pyspark versions, and install databricks-connect using the regular &lt;code&gt;pip&lt;/code&gt; commands, preventing any changes to be recorded to your virtual environment (prevents mutations to &lt;code&gt;Pipfile&lt;/code&gt; and &lt;code&gt;Pipfile.lock&lt;/code&gt;).</description>
+      <guid>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</guid>
+      <description>Sometimes it&amp;rsquo;s useful to get your key vault secret in a Data Factory pipeline (in a secure way).</description>
     </item>
     
     <item>
       <title>Install Python Packages From Azure DevOps</title>
       <link>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Thu, 04 Mar 2021 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</guid>
       <description>Python Package Index &lt;a href=&#34;https://pypi.org&#34;&gt;pypi.org&lt;/a&gt; is not the only source for downloading python packages. It&amp;rsquo;s possible to host your own package index.</description>
@@ -73,7 +37,7 @@
     <item>
       <title>Install Python Packages on Azure Synapse</title>
       <link>https://menziess.github.io/howto/install/python-packages-on-azure-synapse/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 16 Nov 2020 07:17:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/install/python-packages-on-azure-synapse/</guid>
       <description>This post will be very similar to the last one. But this time, we&amp;rsquo;ll release our python package to Azure Synapse instead of Databricks. In order to unit test Synapse Notebooks, you&amp;rsquo;ll have to jump through all sorts of hoops.</description>
@@ -82,16 +46,88 @@
     <item>
       <title>Install Python Packages on Databricks</title>
       <link>https://menziess.github.io/howto/install/python-packages-on-databricks/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 16 Nov 2020 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/install/python-packages-on-databricks/</guid>
       <description>Let&amp;rsquo;s use the same basic setup as in test python code, then use our knowledge from create python packages to convert our code to a package. And finally we will install the package on our Databricks cluster.</description>
     </item>
     
     <item>
+      <title>Run GUI Apps With Docker</title>
+      <link>https://menziess.github.io/howto/run/gui-apps-with-docker/</link>
+      <pubDate>Fri, 10 Jul 2020 02:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/run/gui-apps-with-docker/</guid>
+      <description>For different reasons it may be useful to run dockerized GUI apps. For me, the reason was: stress testing a web app&amp;rsquo;s javascript logic by keeping 200+ browser tabs open for a long period of time.</description>
+    </item>
+    
+    <item>
+      <title>Run Databricks Notebooks from DevOps</title>
+      <link>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</link>
+      <pubDate>Tue, 02 Jun 2020 02:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</guid>
+      <description>Python &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;packages&lt;/a&gt; are easy to test in isolation. But what if packaging your code is not an option, and you do want to automatically verify that your code actually works, you could run your databricks notebook from Azure DevOps directly using the databricks-cli.</description>
+    </item>
+    
+    <item>
+      <title>Parameterize Databricks Notebooks</title>
+      <link>https://menziess.github.io/howto/parameterize/databricks-notebooks/</link>
+      <pubDate>Mon, 01 Jun 2020 20:49:01 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/parameterize/databricks-notebooks/</guid>
+      <description>A databricks notebook that has datetime.now() in one of its cells, will most likely behave differently when it&amp;rsquo;s run again at a later point in time. For example: when you read in data from today&amp;rsquo;s partition (june 1st) using the datetime &amp;ndash; but the notebook fails halfway through &amp;ndash; you wouldn&amp;rsquo;t be able to restart the same job on june 2nd and assume that it will read from the same partition.</description>
+    </item>
+    
+    <item>
+      <title>Use Functional Programming In Python</title>
+      <link>https://menziess.github.io/howto/use/functional-programming-in-python/</link>
+      <pubDate>Wed, 29 Apr 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/use/functional-programming-in-python/</guid>
+      <description>Although the official python documentation has dedicated an &lt;a href=&#34;https://docs.python.org/3.8/howto/functional.html&#34;&gt;in-depth document on Functional Programming&lt;/a&gt;, the community does not consider FP techniques best practice at all times Popular FP related functions have been moved to &lt;code&gt;functools&lt;/code&gt;. Still, FP concepts can be very helpful, and in this post I will demonstrate some &amp;lsquo;Functional Programming&amp;rsquo;-related concepts, using python.</description>
+    </item>
+    
+    <item>
+      <title>Enhance Your Databricks Workflow</title>
+      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
+      <pubDate>Sun, 01 Mar 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
+      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
+    </item>
+    
+    <item>
+      <title>Create Python Packages</title>
+      <link>https://menziess.github.io/howto/create/python-packages/</link>
+      <pubDate>Tue, 11 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/create/python-packages/</guid>
+      <description>Why should you care about creating packages? Packages are easy to install (&lt;code&gt;pip install demo&lt;/code&gt;). Packages simplify development (&lt;code&gt;pip install -e .&lt;/code&gt; installs your package and keeps it up-to-date during development). Packages are easy to run and test &amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Enhance Your Python-vscode Workflow</title>
+      <link>https://menziess.github.io/howto/enhance/your-python-vscode-workflow/</link>
+      <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/enhance/your-python-vscode-workflow/</guid>
+      <description>This post covers my personal workflow for python projects, using Visual Studio Code along with some other tools. A good workflow saves time and allows you to focus on the problem at hand, instead of tasks that make you feel like a robot (machines are good for that).</description>
+    </item>
+    
+    <item>
+      <title>Install databricks-connect</title>
+      <link>https://menziess.github.io/howto/install/databricks-connect/</link>
+      <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/install/databricks-connect/</guid>
+      <description>Databricks-connect allows you to connect your favorite IDE to your Databricks cluster. Install Java on your local machine. Uninstall any pyspark versions, and install databricks-connect using the regular &lt;code&gt;pip&lt;/code&gt; commands, preventing any changes to be recorded to your virtual environment (prevents mutations to &lt;code&gt;Pipfile&lt;/code&gt; and &lt;code&gt;Pipfile.lock&lt;/code&gt;).</description>
+    </item>
+    
+    <item>
       <title>Install Windows Subsystem for Linux</title>
       <link>https://menziess.github.io/howto/install/windows-subsystem-for-linux/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/install/windows-subsystem-for-linux/</guid>
       <description>If you&amp;rsquo;re accustomed to using a unix shell as your command-line interface, you may end up being very unproductive using Windows 10.
@@ -99,102 +135,48 @@ Microsoft (in collaboration with Canonical) has made a tremendous effort into cl
     </item>
     
     <item>
-      <title>Manage Kafka Streams</title>
-      <link>https://menziess.github.io/howto/manage/kafka-streams/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/manage/kafka-streams/</guid>
-      <description>Processing messages from Kafka is relatively easy, but common errors can easily be avoided by having a better understanding of how Kafka works internally. We&amp;rsquo;ll process messages from the start of the topic, and see how Kafka handles offsets step by step.</description>
-    </item>
-    
-    <item>
-      <title>Manage Python Versions</title>
-      <link>https://menziess.github.io/howto/manage/python-versions/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/manage/python-versions/</guid>
-      <description>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv. Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions.</description>
-    </item>
-    
-    <item>
-      <title>Manage Virtual Environments</title>
-      <link>https://menziess.github.io/howto/manage/virtual-environments/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/manage/virtual-environments/</guid>
-      <description>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow. A virtual environment is an isolated environment in which dependencies for a python project are contained.</description>
-    </item>
-    
-    <item>
-      <title>Parameterize Databricks Notebooks</title>
-      <link>https://menziess.github.io/howto/parameterize/databricks-notebooks/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/parameterize/databricks-notebooks/</guid>
-      <description>A databricks notebook that has datetime.now() in one of its cells, will most likely behave differently when it&amp;rsquo;s run again at a later point in time. For example: when you read in data from today&amp;rsquo;s partition (june 1st) using the datetime &amp;ndash; but the notebook fails halfway through &amp;ndash; you wouldn&amp;rsquo;t be able to restart the same job on june 2nd and assume that it will read from the same partition.</description>
-    </item>
-    
-    <item>
-      <title>Run Databricks Notebooks from DevOps</title>
-      <link>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</guid>
-      <description>Python &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;packages&lt;/a&gt; are easy to test in isolation. But what if packaging your code is not an option, and you do want to automatically verify that your code actually works, you could run your databricks notebook from Azure DevOps directly using the databricks-cli.</description>
-    </item>
-    
-    <item>
-      <title>Run GUI Apps With Docker</title>
-      <link>https://menziess.github.io/howto/run/gui-apps-with-docker/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/run/gui-apps-with-docker/</guid>
-      <description>For different reasons it may be useful to run dockerized GUI apps. For me, the reason was: stress testing a web app&amp;rsquo;s javascript logic by keeping 200+ browser tabs open for a long period of time.</description>
-    </item>
-    
-    <item>
-      <title>Test Code in Databricks Notebooks</title>
-      <link>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</guid>
-      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user. It is advised to properly test your software: &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;enhance your databricks workflow&lt;/a&gt;. But if there is no time to set up proper package testing, there is always the hacker way of running tests right inside of Databricks notebooks.</description>
-    </item>
-    
-    <item>
       <title>Test Python Code</title>
       <link>https://menziess.github.io/howto/test/python-code/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Wed, 05 Feb 2020 09:39:35 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/test/python-code/</guid>
       <description>Writing unit tests should an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</description>
     </item>
     
     <item>
-      <title>Use Functional Programming In Python</title>
-      <link>https://menziess.github.io/howto/use/functional-programming-in-python/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <title>Test Code in Databricks Notebooks</title>
+      <link>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</link>
+      <pubDate>Mon, 03 Feb 2020 20:49:01 +0100</pubDate>
       
-      <guid>https://menziess.github.io/howto/use/functional-programming-in-python/</guid>
-      <description>Although the official python documentation has dedicated an &lt;a href=&#34;https://docs.python.org/3.8/howto/functional.html&#34;&gt;in-depth document on Functional Programming&lt;/a&gt;, the community does not consider FP techniques best practice at all times Popular FP related functions have been moved to &lt;code&gt;functools&lt;/code&gt;. Still, FP concepts can be very helpful, and in this post I will demonstrate some &amp;lsquo;Functional Programming&amp;rsquo;-related concepts, using python.</description>
+      <guid>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</guid>
+      <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user. It is advised to properly test your software: &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;enhance your databricks workflow&lt;/a&gt;. But if there is no time to set up proper package testing, there is always the hacker way of running tests right inside of Databricks notebooks.</description>
     </item>
     
     <item>
-      <title>Use Key Vault Secrets In Data Factory</title>
-      <link>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <title>Manage Virtual Environments</title>
+      <link>https://menziess.github.io/howto/manage/virtual-environments/</link>
+      <pubDate>Mon, 03 Feb 2020 10:00:13 +0100</pubDate>
       
-      <guid>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</guid>
-      <description>Sometimes it&amp;rsquo;s useful to get your key vault secret in a Data Factory pipeline (in a secure way).</description>
+      <guid>https://menziess.github.io/howto/manage/virtual-environments/</guid>
+      <description>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow. A virtual environment is an isolated environment in which dependencies for a python project are contained.</description>
     </item>
     
     <item>
-      <title>Use Snapstream</title>
-      <link>https://menziess.github.io/howto/use/snapstream/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <title>Manage Python Versions</title>
+      <link>https://menziess.github.io/howto/manage/python-versions/</link>
+      <pubDate>Mon, 03 Feb 2020 09:17:11 +0100</pubDate>
       
-      <guid>https://menziess.github.io/howto/use/snapstream/</guid>
-      <description>One of the more challenging aspects I encountered while working with stream processing was the task of performing near-merge or as-of joins on Kafka streams.</description>
+      <guid>https://menziess.github.io/howto/manage/python-versions/</guid>
+      <description>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv. Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions.</description>
+    </item>
+    
+    <item>
+      <title>Create a Blog</title>
+      <link>https://menziess.github.io/howto/create/a-blog/</link>
+      <pubDate>Sun, 02 Feb 2020 23:31:52 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/create/a-blog/</guid>
+      <description>In this post we&amp;rsquo;ll create a free static website with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, push our project to &lt;a href=&#34;https://dev.azure.com/&#34;&gt;Azure Repo&amp;rsquo;s&lt;/a&gt;, build and release the site to &lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt; using Azure DevOps.</description>
     </item>
     
   </channel>

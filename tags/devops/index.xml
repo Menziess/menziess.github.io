@@ -6,38 +6,11 @@
     <description>Recent content in devops on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://menziess.github.io/tags/devops/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Create a Blog</title>
-      <link>https://menziess.github.io/howto/create/a-blog/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/create/a-blog/</guid>
-      <description>In this post we&amp;rsquo;ll create a free static website with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, push our project to &lt;a href=&#34;https://dev.azure.com/&#34;&gt;Azure Repo&amp;rsquo;s&lt;/a&gt;, build and release the site to &lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt; using Azure DevOps.</description>
-    </item>
-    
-    <item>
-      <title>Create Python Packages</title>
-      <link>https://menziess.github.io/howto/create/python-packages/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/create/python-packages/</guid>
-      <description>Why should you care about creating packages? Packages are easy to install (&lt;code&gt;pip install demo&lt;/code&gt;). Packages simplify development (&lt;code&gt;pip install -e .&lt;/code&gt; installs your package and keeps it up-to-date during development). Packages are easy to run and test &amp;hellip;</description>
-    </item>
-    
-    <item>
-      <title>Enhance Your Databricks Workflow</title>
-      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
-      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
-    </item>
-    
+    <lastBuildDate>Thu, 04 Mar 2021 07:15:38 +0100</lastBuildDate><atom:link href="https://menziess.github.io/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Install Python Packages From Azure DevOps</title>
       <link>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Thu, 04 Mar 2021 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</guid>
       <description>Python Package Index &lt;a href=&#34;https://pypi.org&#34;&gt;pypi.org&lt;/a&gt; is not the only source for downloading python packages. It&amp;rsquo;s possible to host your own package index.</description>
@@ -46,10 +19,37 @@
     <item>
       <title>Run Databricks Notebooks from DevOps</title>
       <link>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Tue, 02 Jun 2020 02:49:01 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</guid>
       <description>Python &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;packages&lt;/a&gt; are easy to test in isolation. But what if packaging your code is not an option, and you do want to automatically verify that your code actually works, you could run your databricks notebook from Azure DevOps directly using the databricks-cli.</description>
+    </item>
+    
+    <item>
+      <title>Enhance Your Databricks Workflow</title>
+      <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
+      <pubDate>Sun, 01 Mar 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
+      <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
+    </item>
+    
+    <item>
+      <title>Create Python Packages</title>
+      <link>https://menziess.github.io/howto/create/python-packages/</link>
+      <pubDate>Tue, 11 Feb 2020 07:15:38 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/create/python-packages/</guid>
+      <description>Why should you care about creating packages? Packages are easy to install (&lt;code&gt;pip install demo&lt;/code&gt;). Packages simplify development (&lt;code&gt;pip install -e .&lt;/code&gt; installs your package and keeps it up-to-date during development). Packages are easy to run and test &amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Create a Blog</title>
+      <link>https://menziess.github.io/howto/create/a-blog/</link>
+      <pubDate>Sun, 02 Feb 2020 23:31:52 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/create/a-blog/</guid>
+      <description>In this post we&amp;rsquo;ll create a free static website with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, push our project to &lt;a href=&#34;https://dev.azure.com/&#34;&gt;Azure Repo&amp;rsquo;s&lt;/a&gt;, build and release the site to &lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt; using Azure DevOps.</description>
     </item>
     
   </channel>

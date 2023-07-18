@@ -6,11 +6,11 @@
     <description>Recent content in functional programming on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://menziess.github.io/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Apr 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://menziess.github.io/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Use Functional Programming In Python</title>
       <link>https://menziess.github.io/howto/use/functional-programming-in-python/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Wed, 29 Apr 2020 00:00:00 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/use/functional-programming-in-python/</guid>
       <description>Although the official python documentation has dedicated an &lt;a href=&#34;https://docs.python.org/3.8/howto/functional.html&#34;&gt;in-depth document on Functional Programming&lt;/a&gt;, the community does not consider FP techniques best practice at all times Popular FP related functions have been moved to &lt;code&gt;functools&lt;/code&gt;. Still, FP concepts can be very helpful, and in this post I will demonstrate some &amp;lsquo;Functional Programming&amp;rsquo;-related concepts, using python.</description>

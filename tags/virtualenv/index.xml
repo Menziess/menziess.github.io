@@ -6,32 +6,32 @@
     <description>Recent content in virtualenv on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://menziess.github.io/tags/virtualenv/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Mar 2021 07:15:38 +0100</lastBuildDate><atom:link href="https://menziess.github.io/tags/virtualenv/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Install Python Packages From Azure DevOps</title>
       <link>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Thu, 04 Mar 2021 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/install/python-packages-from-azure-devops/</guid>
       <description>Python Package Index &lt;a href=&#34;https://pypi.org&#34;&gt;pypi.org&lt;/a&gt; is not the only source for downloading python packages. It&amp;rsquo;s possible to host your own package index.</description>
     </item>
     
     <item>
-      <title>Manage Python Versions</title>
-      <link>https://menziess.github.io/howto/manage/python-versions/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://menziess.github.io/howto/manage/python-versions/</guid>
-      <description>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv. Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions.</description>
-    </item>
-    
-    <item>
       <title>Manage Virtual Environments</title>
       <link>https://menziess.github.io/howto/manage/virtual-environments/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 03 Feb 2020 10:00:13 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/manage/virtual-environments/</guid>
       <description>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow. A virtual environment is an isolated environment in which dependencies for a python project are contained.</description>
+    </item>
+    
+    <item>
+      <title>Manage Python Versions</title>
+      <link>https://menziess.github.io/howto/manage/python-versions/</link>
+      <pubDate>Mon, 03 Feb 2020 09:17:11 +0100</pubDate>
+      
+      <guid>https://menziess.github.io/howto/manage/python-versions/</guid>
+      <description>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv. Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions.</description>
     </item>
     
   </channel>

@@ -130,27 +130,11 @@
   <ul>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/create/a-blog/">Create a Blog</a>
-    </li>
-    
-    <li class="">
       <a href="https://menziess.github.io/howto/create/python-executables/">Create Python Executables</a>
     </li>
     
-    <li class="">
-      <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
-    </li>
-    
-    <li class="">
-      <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">Enhance Your Databricks Workflow</a>
-    </li>
-    
-    <li class="">
-      <a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/">Enhance Your Python-vscode Workflow</a>
-    </li>
-    
-    <li class="">
-      <a href="https://menziess.github.io/howto/install/databricks-connect/">Install databricks-connect</a>
+    <li class="active ">
+      <a href="https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/">Use Key Vault Secrets In Data Factory</a>
     </li>
     
     <li class="">
@@ -166,23 +150,7 @@
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">Install Windows Subsystem for Linux</a>
-    </li>
-    
-    <li class="">
-      <a href="https://menziess.github.io/howto/manage/kafka-streams/">Manage Kafka Streams</a>
-    </li>
-    
-    <li class="">
-      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
-    </li>
-    
-    <li class="">
-      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
-    </li>
-    
-    <li class="">
-      <a href="https://menziess.github.io/howto/parameterize/databricks-notebooks/">Parameterize Databricks Notebooks</a>
+      <a href="https://menziess.github.io/howto/run/gui-apps-with-docker/">Run GUI Apps With Docker</a>
     </li>
     
     <li class="">
@@ -190,11 +158,31 @@
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/run/gui-apps-with-docker/">Run GUI Apps With Docker</a>
+      <a href="https://menziess.github.io/howto/parameterize/databricks-notebooks/">Parameterize Databricks Notebooks</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/test/code-in-databricks-notebooks/">Test Code in Databricks Notebooks</a>
+      <a href="https://menziess.github.io/howto/use/functional-programming-in-python/">Use Functional Programming In Python</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">Enhance Your Databricks Workflow</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/">Enhance Your Python-vscode Workflow</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/install/databricks-connect/">Install databricks-connect</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">Install Windows Subsystem for Linux</a>
     </li>
     
     <li class="">
@@ -202,15 +190,19 @@
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/use/functional-programming-in-python/">Use Functional Programming In Python</a>
-    </li>
-    
-    <li class="active ">
-      <a href="https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/">Use Key Vault Secrets In Data Factory</a>
+      <a href="https://menziess.github.io/howto/test/code-in-databricks-notebooks/">Test Code in Databricks Notebooks</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/use/snapstream/">Use Snapstream</a>
+      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/create/a-blog/">Create a Blog</a>
     </li>
     
   </ul>
@@ -230,7 +222,7 @@
 <p>There are two permission models for Azure Key Vault. Depending on the permission model of your Key Vault, execute the following steps:</p>
 <ul>
 <li><strong>Role-based access control model:</strong> in the &ldquo;Access control (IAM)&rdquo; tab, set the built-in role &ldquo;Key Vault Secrets User&rdquo; to your Data Factory to grant reading permissions on secret contents.</li>
-<li><strong>Vault access policy model:</strong> in the &ldquo;Access policies&rdquo; tab, under &ldquo;Secret permissions&rdquo;, select &ldquo;List&rdquo; and &ldquo;Get&rdquo;, then select your Data Factory principal by filling in the Data Factory name in the &ldquo;Select principal&rdquo; section.</li>
+<li><strong>Vault access policy model:</strong>  in the &ldquo;Access policies&rdquo; tab, under &ldquo;Secret permissions&rdquo;, select &ldquo;List&rdquo; and &ldquo;Get&rdquo;, then select your Data Factory principal by filling in the Data Factory name in the &ldquo;Select principal&rdquo; section.</li>
 </ul>
 <h2 id="data-factory-pipeline">Data Factory Pipeline</h2>
 <p>Create a new pipeline called &ldquo;Get Secret&rdquo; and add a web activity with the following properties:</p>
@@ -261,7 +253,7 @@
 <p><img src="/images/use-key-vault-secrets-in-data-factory/keyvault.png#shadow" alt=""></p>
 <p>When you inspect the activity output, it merely states:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;SecureOutput&#34;</span><span class="p">:</span> <span class="s2">&#34;**********&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;SecureOutput&#34;</span><span class="p">:</span> <span class="s2">&#34;**********&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>To use the secret in your pipeline, enter the following in the dynamic content of your activity:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">@<span class="o">{</span>activity<span class="o">(</span><span class="s1">&#39;Get Secret&#39;</span><span class="o">)</span>.output.value<span class="o">}</span>

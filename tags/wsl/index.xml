@@ -6,11 +6,11 @@
     <description>Recent content in wsl on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://menziess.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Feb 2020 07:15:38 +0100</lastBuildDate><atom:link href="https://menziess.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Enhance Your Python-vscode Workflow</title>
       <link>https://menziess.github.io/howto/enhance/your-python-vscode-workflow/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/enhance/your-python-vscode-workflow/</guid>
       <description>This post covers my personal workflow for python projects, using Visual Studio Code along with some other tools. A good workflow saves time and allows you to focus on the problem at hand, instead of tasks that make you feel like a robot (machines are good for that).</description>
@@ -19,7 +19,7 @@
     <item>
       <title>Install Windows Subsystem for Linux</title>
       <link>https://menziess.github.io/howto/install/windows-subsystem-for-linux/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 10 Feb 2020 07:15:38 +0100</pubDate>
       
       <guid>https://menziess.github.io/howto/install/windows-subsystem-for-linux/</guid>
       <description>If you&amp;rsquo;re accustomed to using a unix shell as your command-line interface, you may end up being very unproductive using Windows 10.
