@@ -6,7 +6,25 @@
     <description>Recent content in python on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Jul 2021 00:00:00 +0100</lastBuildDate><atom:link href="https://menziess.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Jul 2023 19:02:01 +0200</lastBuildDate><atom:link href="https://menziess.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Use Snapstream</title>
+      <link>https://menziess.github.io/howto/use/snapstream/</link>
+      <pubDate>Tue, 18 Jul 2023 19:02:01 +0200</pubDate>
+      
+      <guid>https://menziess.github.io/howto/use/snapstream/</guid>
+      <description>One of the more challenging aspects I encountered while working with stream processing was the task of performing near-merge or as-of joins on Kafka streams.</description>
+    </item>
+    
+    <item>
+      <title>Manage Kafka Streams</title>
+      <link>https://menziess.github.io/howto/manage/kafka-streams/</link>
+      <pubDate>Tue, 18 Jul 2023 19:01:01 +0200</pubDate>
+      
+      <guid>https://menziess.github.io/howto/manage/kafka-streams/</guid>
+      <description>Processing messages from Kafka is relatively easy, but common errors can easily be avoided by having a better understanding of how Kafka works internally. We&amp;rsquo;ll process messages from the start of the topic, and see how Kafka handles offsets step by step.</description>
+    </item>
+    
     <item>
       <title>Create Python Executables</title>
       <link>https://menziess.github.io/howto/create/python-executables/</link>
