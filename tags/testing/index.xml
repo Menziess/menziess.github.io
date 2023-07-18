@@ -6,41 +6,41 @@
     <description>Recent content in testing on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 02 Jun 2020 02:49:01 +0100</lastBuildDate><atom:link href="https://menziess.github.io/tags/testing/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Run Databricks Notebooks from DevOps</title>
-      <link>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</link>
-      <pubDate>Tue, 02 Jun 2020 02:49:01 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</guid>
-      <description>Python &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;packages&lt;/a&gt; are easy to test in isolation. But what if packaging your code is not an option, and you do want to automatically verify that your code actually works, you could run your databricks notebook from Azure DevOps directly using the databricks-cli.</description>
-    </item>
-    
+    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://menziess.github.io/tags/testing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Enhance Your Databricks Workflow</title>
       <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
-      <pubDate>Sun, 01 Mar 2020 07:15:38 +0100</pubDate>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
       
       <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
       <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
     </item>
     
     <item>
-      <title>Test Python Code</title>
-      <link>https://menziess.github.io/howto/test/python-code/</link>
-      <pubDate>Wed, 05 Feb 2020 09:39:35 +0100</pubDate>
+      <title>Run Databricks Notebooks from DevOps</title>
+      <link>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</link>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
       
-      <guid>https://menziess.github.io/howto/test/python-code/</guid>
-      <description>Writing unit tests should an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</description>
+      <guid>https://menziess.github.io/howto/run/databricks-notebooks-from-devops/</guid>
+      <description>Python &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;packages&lt;/a&gt; are easy to test in isolation. But what if packaging your code is not an option, and you do want to automatically verify that your code actually works, you could run your databricks notebook from Azure DevOps directly using the databricks-cli.</description>
     </item>
     
     <item>
       <title>Test Code in Databricks Notebooks</title>
       <link>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</link>
-      <pubDate>Mon, 03 Feb 2020 20:49:01 +0100</pubDate>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
       
       <guid>https://menziess.github.io/howto/test/code-in-databricks-notebooks/</guid>
       <description>Companies hire developers to write spark applications &amp;ndash; using expensive Databricks clusters &amp;ndash; transforming and delivering business-critical data to the end user. It is advised to properly test your software: &lt;a href=&#34;https://menziess.github.io/howto/enhance/your-databricks-workflow&#34;&gt;enhance your databricks workflow&lt;/a&gt;. But if there is no time to set up proper package testing, there is always the hacker way of running tests right inside of Databricks notebooks.</description>
+    </item>
+    
+    <item>
+      <title>Test Python Code</title>
+      <link>https://menziess.github.io/howto/test/python-code/</link>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      
+      <guid>https://menziess.github.io/howto/test/python-code/</guid>
+      <description>Writing unit tests should an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</description>
     </item>
     
   </channel>

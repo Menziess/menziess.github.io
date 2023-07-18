@@ -6,23 +6,23 @@
     <description>Recent content in data factory on menziess blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Jul 2021 00:00:00 +0100</lastBuildDate><atom:link href="https://menziess.github.io/tags/data-factory/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Use Key Vault Secrets In Data Factory</title>
-      <link>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</link>
-      <pubDate>Thu, 01 Jul 2021 00:00:00 +0100</pubDate>
-      
-      <guid>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</guid>
-      <description>Sometimes it&amp;rsquo;s useful to get your key vault secret in a Data Factory pipeline (in a secure way).</description>
-    </item>
-    
+    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://menziess.github.io/tags/data-factory/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Enhance Your Databricks Workflow</title>
       <link>https://menziess.github.io/howto/enhance/your-databricks-workflow/</link>
-      <pubDate>Sun, 01 Mar 2020 07:15:38 +0100</pubDate>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
       
       <guid>https://menziess.github.io/howto/enhance/your-databricks-workflow/</guid>
       <description>With databricks-connect you can connect your favorite IDE to your Databricks cluster. This means that you can now lint, test, and package the code that you want to run on Databricks more easily:</description>
+    </item>
+    
+    <item>
+      <title>Use Key Vault Secrets In Data Factory</title>
+      <link>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</link>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0200</pubDate>
+      
+      <guid>https://menziess.github.io/howto/use/key-vault-secrets-in-data-factory/</guid>
+      <description>Sometimes it&amp;rsquo;s useful to get your key vault secret in a Data Factory pipeline (in a secure way).</description>
     </item>
     
   </channel>
