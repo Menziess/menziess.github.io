@@ -283,6 +283,15 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">pool</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;variable-group-name&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">user</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;github-username&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">email</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;github-email&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">repo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;github-repo-name&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">steps</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">checkout</span><span class="p">:</span><span class="w"> </span><span class="l">self</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -305,9 +314,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="sd">      git checkout master
 </span></span></span><span class="line"><span class="cl"><span class="sd">      git add --all
 </span></span></span><span class="line"><span class="cl"><span class="sd">      git -c user.name=$(user) -c user.email=$(email) commit -m &#34;commit $(date +&#34;%Y_%m_%d_%I_%M_%p&#34;)&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sd">      git push -f https://$(token):x-oauth-basic@github.com/$(user)/$(repo).git master</span><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="sd">      git push -f https://x-access-token:$(token)@github.com/$(user)/$(repo).git master</span><span class="w">      
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="l">Push generated site to github.io</span><span class="w">
-</span></span></span></code></pre></div><p>Next, visit your github tokens page <a href="https://github.com/settings/tokens">here</a>, and generate a github token.
+</span></span></span></code></pre></div><p>Next, visit your github tokens page <a href="https://github.com/settings/personal-access-tokens">here</a>, and generate a github token with Contents (r/w).
 Make sure you check the &ldquo;repo&rdquo; box, and copy the token:</p>
 <p><img src="/images/create-a-blog/new-github-token.png#large#shadow" alt=""></p>
 <p>Go back to your Azure build pipeline and click on &ldquo;<strong>Variables</strong>&rdquo;. Create a new variable called <code>token</code>, and paste your github token in the value field. Also make sure to tick the &ldquo;<strong>Keep this value secret</strong>&rdquo; box:</p>
