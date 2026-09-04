@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dotfiles on menziess blog</title>
+    <link>https://menziess.github.io/tags/dotfiles/</link>
+    <description>Recent content in dotfiles on menziess blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 05 Sep 2026 00:00:00 +0200</lastBuildDate><atom:link href="https://menziess.github.io/tags/dotfiles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Manage Multiple AI Tools</title>
+      <link>https://menziess.github.io/howto/manage/multiple-ai-tools/</link>
+      <pubDate>Sat, 05 Sep 2026 00:00:00 +0200</pubDate>
+      
+      <guid>https://menziess.github.io/howto/manage/multiple-ai-tools/</guid>
+      <description>One git-backed dotfiles repo, one install.sh run, and Copilot, Grok, Cursor, Claude, and friends all share the same agent instructions and skills via symlinks — so a new machine is mostly pull + link.</description>
+    </item>
+    
+  </channel>
+</rss>
