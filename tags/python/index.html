@@ -38,6 +38,8 @@
   
 
   
+<link rel="stylesheet" href="/css/post-date.css">
+
 
 </head>
 
@@ -158,11 +160,11 @@
   </li>
   
   <li>
-    <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
+    <a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/">Enhance Your Python-vscode Workflow</a>
   </li>
   
   <li>
-    <a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/">Enhance Your Python-vscode Workflow</a>
+    <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
   </li>
   
   <li>
@@ -170,11 +172,11 @@
   </li>
   
   <li>
-    <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
+    <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
   </li>
   
   <li>
-    <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
+    <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
   </li>
   
   </ul>
@@ -196,6 +198,11 @@
 <div class="summary mb-2">
   
   <h2 class="title-summary"><a href="https://menziess.github.io/howto/use/snapstream/">Use Snapstream</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2023-05-27T14:55:35&#43;02:00">27 May 2023</time>
+  </p>
+  
   <p>One of the more challenging aspects I encountered while working with stream processing was the task of performing near-merge or as-of joins on Kafka streams.</p>
 </div>
 
@@ -203,6 +210,11 @@
 <div class="summary mb-2">
   
   <h2 class="title-summary"><a href="https://menziess.github.io/howto/manage/kafka-streams/">Manage Kafka Streams</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2022-10-10T14:13:52&#43;02:00">10 October 2022</time>
+  </p>
+  
   <p>Processing messages from Kafka is relatively easy, but common errors can easily be avoided by having a better understanding of how Kafka works internally. We&rsquo;ll process messages from the start of the topic, and see how Kafka handles offsets step by step.</p>
 </div>
 
@@ -210,6 +222,11 @@
 <div class="summary mb-2">
   
   <h2 class="title-summary"><a href="https://menziess.github.io/howto/create/python-executables/">Create Python Executables</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2021-07-06T22:59:15&#43;02:00">6 July 2021</time>
+  </p>
+  
   <p>When you want to share your software with a non-developer, or you want to run a comprehensive python project without having to bother with the setup, executables are quite useful. And it only takes about 5 minutes to get it done.</p>
 </div>
 
@@ -217,6 +234,11 @@
 <div class="summary mb-2">
   
   <h2 class="title-summary"><a href="https://menziess.github.io/howto/install/python-packages-from-azure-devops/">Install Python Packages From Azure DevOps</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2021-03-04T08:15:32&#43;01:00">4 March 2021</time>
+  </p>
+  
   <p>Python Package Index <a href="https://pypi.org">pypi.org</a> is not the only source for downloading python packages. It&rsquo;s possible to host your own package index.</p>
 </div>
 
@@ -224,6 +246,11 @@
 <div class="summary mb-2">
   
   <h2 class="title-summary"><a href="https://menziess.github.io/howto/install/python-packages-on-azure-synapse/">Install Python Packages on Azure Synapse</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2020-11-16T12:37:28&#43;01:00">16 November 2020</time>
+  </p>
+  
   <p>This post will be very similar to the last one. But this time, we&rsquo;ll release our python package to Azure Synapse instead of Databricks. In order to unit test Synapse Notebooks, you&rsquo;ll have to jump through all sorts of hoops.</p>
 </div>
 
@@ -231,6 +258,11 @@
 <div class="summary mb-2">
   
   <h2 class="title-summary"><a href="https://menziess.github.io/howto/install/python-packages-on-databricks/">Install Python Packages on Databricks</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2020-11-16T12:37:21&#43;01:00">16 November 2020</time>
+  </p>
+  
   <p>Let&rsquo;s use the same basic setup as in test python code, then use our knowledge from create python packages to convert our code to a package. And finally we will install the package on our Databricks cluster.</p>
 </div>
 
@@ -238,42 +270,72 @@
 <div class="summary mb-2">
   
   <h2 class="title-summary"><a href="https://menziess.github.io/howto/use/functional-programming-in-python/">Use Functional Programming In Python</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2020-03-09T21:20:59&#43;01:00">9 March 2020</time>
+  </p>
+  
   <p>Although the official python documentation has dedicated an <a href="https://docs.python.org/3.8/howto/functional.html">in-depth document on Functional Programming</a>, the community does not consider FP techniques best practice at all times Popular FP related functions have been moved to <code>functools</code>. Still, FP concepts can be very helpful, and in this post I will demonstrate some &lsquo;Functional Programming&rsquo;-related concepts, using python.</p>
 </div>
 
 
 <div class="summary mb-2">
   
-  <h2 class="title-summary"><a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a></h2>
-  <p>Why should you care about creating packages? Packages are easy to install (<code>pip install demo</code>). Packages simplify development (<code>pip install -e .</code> installs your package and keeps it up-to-date during development). Packages are easy to run and test &hellip;</p>
-</div>
-
-
-<div class="summary mb-2">
-  
   <h2 class="title-summary"><a href="https://menziess.github.io/howto/enhance/your-python-vscode-workflow/">Enhance Your Python-vscode Workflow</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2020-02-10T22:47:22&#43;01:00">10 February 2020</time>
+  </p>
+  
   <p>This post covers my personal workflow for python projects, using Visual Studio Code along with some other tools. A good workflow saves time and allows you to focus on the problem at hand, instead of tasks that make you feel like a robot (machines are good for that).</p>
 </div>
 
 
 <div class="summary mb-2">
   
+  <h2 class="title-summary"><a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2020-02-09T22:58:12&#43;01:00">9 February 2020</time>
+  </p>
+  
+  <p>Why should you care about creating packages? Packages are easy to install (<code>pip install demo</code>). Packages simplify development (<code>pip install -e .</code> installs your package and keeps it up-to-date during development). Packages are easy to run and test &hellip;</p>
+</div>
+
+
+<div class="summary mb-2">
+  
   <h2 class="title-summary"><a href="https://menziess.github.io/howto/test/python-code/">Test Python Code</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2020-02-05T07:47:36&#43;01:00">5 February 2020</time>
+  </p>
+  
   <p>Writing unit tests should an integral part of delivering software for every developer. Whenever a piece of code is changed, it has the potential to break all other parts. The broken parts can even be discovered in a far later stage, having caused potential damage that is hard to restore.</p>
 </div>
 
 
 <div class="summary mb-2">
   
-  <h2 class="title-summary"><a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a></h2>
-  <p>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow. A virtual environment is an isolated environment in which dependencies for a python project are contained.</p>
+  <h2 class="title-summary"><a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2020-02-03T12:16:57&#43;01:00">3 February 2020</time>
+  </p>
+  
+  <p>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv. Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions.</p>
 </div>
 
 
 <div class="summary mb-2">
   
-  <h2 class="title-summary"><a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a></h2>
-  <p>This will be a micro-post talking about managing multiple python versions on your machine, using a tool called Pyenv. Depending on your operating system, it may be quite a hassle uninstalling and installing different python versions.</p>
+  <h2 class="title-summary"><a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a></h2>
+  
+  <p class="post-date post-date-summary">
+    <time datetime="2020-02-03T11:25:40&#43;01:00">3 February 2020</time>
+  </p>
+  
+  <p>In this post we will take a look at using Pipenv, a dependency manager for python, to boost your python workflow. A virtual environment is an isolated environment in which dependencies for a python project are contained.</p>
 </div>
 
 

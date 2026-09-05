@@ -38,6 +38,8 @@
   
 
   
+<link rel="stylesheet" href="/css/post-date.css">
+
 
 </head>
 
@@ -178,11 +180,7 @@
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">Enhance Your Databricks Workflow</a>
-    </li>
-    
-    <li class="">
-      <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
+      <a href="https://menziess.github.io/howto/install/databricks-connect/">Install databricks-connect</a>
     </li>
     
     <li class="">
@@ -190,11 +188,15 @@
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/install/databricks-connect/">Install databricks-connect</a>
+      <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">Install Windows Subsystem for Linux</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/install/windows-subsystem-for-linux/">Install Windows Subsystem for Linux</a>
+      <a href="https://menziess.github.io/howto/create/python-packages/">Create Python Packages</a>
+    </li>
+    
+    <li class="">
+      <a href="https://menziess.github.io/howto/enhance/your-databricks-workflow/">Enhance Your Databricks Workflow</a>
     </li>
     
     <li class="">
@@ -206,11 +208,11 @@
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
+      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
     </li>
     
     <li class="">
-      <a href="https://menziess.github.io/howto/manage/python-versions/">Manage Python Versions</a>
+      <a href="https://menziess.github.io/howto/manage/virtual-environments/">Manage Virtual Environments</a>
     </li>
     
     <li class="">
@@ -227,6 +229,11 @@
         <div class="col-12 col-md-9">
           
 <h1 class="title">Parameterize Databricks Notebooks</h1>
+
+<p class="post-date">
+  <time datetime="2020-06-01T23:36:19&#43;02:00">1 June 2020</time>
+</p>
+
 <div class="pb-2 content anchor-link-enabled">
   <p>A databricks notebook that has <code>datetime.now()</code> in one of its cells, will most likely behave differently when it&rsquo;s run again at a later point in time. For example: when you read in data from today&rsquo;s partition (june 1st) using the datetime &ndash; but the notebook fails halfway through &ndash; you wouldn&rsquo;t be able to restart the same job on june 2nd and assume that it will read from the same partition.</p>
 <p><img src="/images/logo/databricks.png#logo" alt=""></p>
