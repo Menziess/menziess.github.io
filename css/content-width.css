@@ -1,0 +1,57 @@
+/* Theme uses html { width: 100vw } which is wider than the visible viewport
+   once a vertical scrollbar appears (~15px). Prefer 100%. */
+html {
+  width: 100% !important;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Flex children default to min-width:auto and won't shrink below content. */
+.row > [class*="col-"] {
+  min-width: 0;
+}
+
+.col-12.col-md-9,
+.col-12.col-md-3 {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.content {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.content .highlight,
+.content pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Theme sets pre code { width: max-content; display: inline-block } which overflows. */
+.content pre code {
+  width: auto !important;
+  max-width: 100%;
+  display: block;
+}
+
+/* Scroll wide markdown tables inside the column. */
+.content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.content table thead,
+.content table tbody {
+  display: table;
+  width: 100%;
+  min-width: 100%;
+}
