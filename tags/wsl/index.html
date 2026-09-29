@@ -226,6 +226,15 @@ Microsoft (in collaboration with Canonical) has made a tremendous effort into cl
 </div>
 
 
+  <script>
+    document.querySelectorAll(".content table").forEach(function (table) {
+      var wrap = document.createElement("div");
+      wrap.className = "table-scroll";
+      table.before(wrap);
+      wrap.appendChild(table);
+    });
+  </script>
+
   
 
   

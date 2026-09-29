@@ -4,6 +4,19 @@
 
 :root {
   color-scheme: light dark;
+  --page-bg: #ffffff;
+  --footer-bg: #f4f5fb;
+}
+
+/* One color for both rubber-band edges. Chrome paints background-color and
+   ignores a gradient. Scroll-linked animations do not run on this root. */
+html {
+  overflow-x: clip !important;
+  background-color: var(--footer-bg) !important;
+}
+
+body.page {
+  background-color: var(--page-bg);
 }
 
 /* Feedback-loop diagram: dark strokes on transparent — give a neutral plate. */
@@ -37,15 +50,27 @@
 
 
 /* Tables (both schemes): outer outline only — no cell grid. */
+/* Frame lives on .table-scroll so a wide table scrolls inside the frame. */
+.table-scroll {
+  max-width: 100%;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  border: 1px solid #c8c8c8;
+  border-radius: 6px;
+}
+
 .content table,
 .content .table {
   background-color: transparent;
-  border: 1px solid #c8c8c8;
-  border-radius: 6px;
+  border: none;
+  border-radius: 0;
   border-collapse: separate;
   border-spacing: 0;
   box-shadow: none;
-  overflow: hidden;
+  overflow: visible;
+  margin-bottom: 0;
 }
 
 .content table th,
@@ -57,11 +82,9 @@
 
 .content table.table-bordered,
 .content .table-bordered {
-  border: 1px solid #c8c8c8;
+  border: none;
 }
 
-/* Extend the footer into the iPhone home-indicator inset.
-   Do not paint html or body: the page stays white; only .sub-footer is #f4f5fb. */
 .sub-footer {
   padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
 }
@@ -73,8 +96,9 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
-    background-color: #000000 !important;
+  :root {
+    --page-bg: #000000;
+    --footer-bg: #16181f;
   }
 
   body,
@@ -86,7 +110,7 @@
 
   .header {
     background-color: #000000;
-    border-bottom: 1px solid #2a2a2a;
+    border-bottom: none;
   }
 
   .footer {
@@ -101,7 +125,7 @@
   }
 
   .sub-footer {
-    background: #000000;
+    background: var(--footer-bg);
   }
 
   .sub-footer .sub-footer-inner ul li,
@@ -214,12 +238,16 @@
   }
 
 
-  /* Tables: dark text/frame overrides (outline already set globally) */
+  .table-scroll {
+    border-color: #3a3a3a;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
   .content table,
   .content .table {
     color: #f2f2f2;
-    border-color: #3a3a3a;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+    border: none;
+    box-shadow: none;
   }
 
   .content table th,
@@ -236,7 +264,7 @@
 
   .content table.table-bordered,
   .content .table-bordered {
-    border-color: #3a3a3a;
+    border: none;
   }
 
   .content table.table-striped tbody tr:nth-of-type(odd),
@@ -244,10 +272,8 @@
     background-color: rgba(255, 255, 255, 0.06);
   }
 
-  /* Beats the light body.page rule above (higher specificity than body/.page). */
-  html,
   body.page {
-    background-color: #000000;
+    background-color: var(--page-bg);
   }
 
   /* Mobile menu panel */

@@ -426,6 +426,15 @@ Make sure you check the &ldquo;repo&rdquo; box, and copy the token:</p>
 </div>
 
 
+  <script>
+    document.querySelectorAll(".content table").forEach(function (table) {
+      var wrap = document.createElement("div");
+      wrap.className = "table-scroll";
+      table.before(wrap);
+      wrap.appendChild(table);
+    });
+  </script>
+
   
 
   

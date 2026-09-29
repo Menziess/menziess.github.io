@@ -3,12 +3,12 @@
 html {
   width: 100% !important;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip !important;
 }
 
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Flex children default to min-width:auto and won't shrink below content. */
@@ -25,9 +25,6 @@ body {
 .content {
   max-width: 100%;
   min-width: 0;
-  /* Scroll here so thead and tbody stay one table (column widths match). */
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .content .highlight,

@@ -590,6 +590,15 @@ We can say that pure functions are <strong>referentially transparent</strong>:</
 </div>
 
 
+  <script>
+    document.querySelectorAll(".content table").forEach(function (table) {
+      var wrap = document.createElement("div");
+      wrap.className = "table-scroll";
+      table.before(wrap);
+      wrap.appendChild(table);
+    });
+  </script>
+
   
 
   
