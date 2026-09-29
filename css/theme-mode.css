@@ -8,11 +8,11 @@
   --footer-bg: #f4f5fb;
 }
 
-/* One color for both rubber-band edges. Chrome paints background-color and
-   ignores a gradient. Scroll-linked animations do not run on this root. */
+/* Chrome paints overscroll from this color. The script in baseof switches it
+   to the footer only while scrolled to the bottom. */
 html {
   overflow-x: clip !important;
-  background-color: var(--footer-bg) !important;
+  background-color: var(--page-bg);
 }
 
 body.page {

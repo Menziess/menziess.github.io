@@ -488,6 +488,17 @@
       table.before(wrap);
       wrap.appendChild(table);
     });
+
+    function paintOverscroll() {
+      var root = document.documentElement;
+      var styles = getComputedStyle(root);
+      var scrollable = root.scrollHeight > window.innerHeight + 1;
+      var atBottom = scrollable && window.scrollY + window.innerHeight >= root.scrollHeight - 2;
+      root.style.backgroundColor = styles.getPropertyValue(atBottom ? "--footer-bg" : "--page-bg").trim();
+    }
+    paintOverscroll();
+    addEventListener("scroll", paintOverscroll, { passive: true });
+    addEventListener("resize", paintOverscroll);
   </script>
 
   
