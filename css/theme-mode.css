@@ -19,15 +19,6 @@ body.page {
   background-color: var(--page-bg);
 }
 
-/* Feedback-loop diagram: dark strokes on transparent — give a neutral plate. */
-.content img[src*="feedback.png"] {
-  background-color: #e8eaed;
-  padding: 0.5rem;
-  border-radius: 6px;
-  border-color: transparent;
-  box-shadow: none;
-}
-
 /* Shared frame for images + code (visible only when border-color is not transparent). */
 .content img,
 .content .highlight,
@@ -211,9 +202,14 @@ body.page {
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
   }
 
+  .content img {
+    background-color: #3a3a3a;
+  }
+
   .content img[src*="#logo"] {
     border-color: transparent;
     box-shadow: none;
+    background-color: transparent;
   }
 
 
