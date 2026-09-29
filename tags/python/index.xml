@@ -8,11 +8,11 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 27 May 2023 14:55:35 +0200</lastBuildDate><atom:link href="https://menziess.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Use Snapstream</title>
-      <link>https://menziess.github.io/howto/use/snapstream/</link>
+      <title>Use Slipstream</title>
+      <link>https://menziess.github.io/howto/use/slipstream/</link>
       <pubDate>Sat, 27 May 2023 14:55:35 +0200</pubDate>
       
-      <guid>https://menziess.github.io/howto/use/snapstream/</guid>
+      <guid>https://menziess.github.io/howto/use/slipstream/</guid>
       <description>One of the more challenging aspects I encountered while working with stream processing was the task of performing near-merge or as-of joins on Kafka streams.</description>
     </item>
     
