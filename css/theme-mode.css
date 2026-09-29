@@ -60,17 +60,8 @@
   border: 1px solid #c8c8c8;
 }
 
-/* iPhone / notch: paint past the home indicator with the footer tone. */
-html {
-  background-color: #f4f5fb;
-}
-
-body.page {
-  background-color: #f4f5fb;
-  min-height: 100dvh;
-  min-height: 100vh;
-}
-
+/* Extend the footer into the iPhone home-indicator inset.
+   Do not paint html or body: the page stays white; only .sub-footer is #f4f5fb. */
 .sub-footer {
   padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
 }
