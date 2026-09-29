@@ -236,72 +236,51 @@
 </p>
 
 <div class="pb-2 content anchor-link-enabled">
-  <p>You install a second AI coding tool, paste the same rules into yet another settings panel, and three weeks later one copy has drifted. Keep instructions, skills, and optional bot roles in <strong>your</strong> git-backed dotfiles, then symlink every tool home at that single source of truth.</p>
-<p>The layout below is a worked example from my private <code>~/dotfiles</code>. Treat the paths and <code>install.sh</code> mapping as a portable pattern to copy into your own repo — private or public — not something to clone from mine.</p>
+  <p>Install a second AI coding tool, paste the same rules into another settings panel, and a few weeks later one copy has drifted.</p>
+<p>Instead, keep instructions, skills, and optional bot roles in a git-backed <code>~/dotfiles</code> repo, then symlink every tool home at that single source of truth.</p>
 <h2 id="topics">Topics</h2>
 <ol>
-<li><a href="#1-why-one-repo-beats-n-config-panels">Why One Repo Beats N Config Panels</a></li>
-<li><a href="#2-what-a-real-layout-contains">What a Real Layout Contains</a></li>
-<li><a href="#3-layers-that-feed-the-hub">Layers That Feed the Hub</a></li>
-<li><a href="#4-per-tool-setup-via-installsh">Per-Tool Setup via <code>install.sh</code></a></li>
-<li><a href="#5-memory-without-stuffing-rules">Memory Without Stuffing Rules</a></li>
-<li><a href="#6-skills-and-agent-workflows">Skills and Agent Workflows</a></li>
-<li><a href="#7-named-bots-and-routines">Named Bots and Routines</a></li>
-<li><a href="#8-bootstrap-your-own-dotfiles">Bootstrap Your Own Dotfiles</a></li>
-<li><a href="#9-edit-once-propagate-everywhere">Edit Once, Propagate Everywhere</a></li>
-<li><a href="#10-new-machine-checklist">New Machine Checklist</a></li>
+<li><a href="#1-one-repo">One Repo</a></li>
+<li><a href="#2-layout">Layout</a></li>
+<li><a href="#3-scopes">Scopes</a></li>
+<li><a href="#4-installer">Installer</a></li>
+<li><a href="#5-memory">Memory</a></li>
+<li><a href="#6-skills">Skills</a></li>
+<li><a href="#7-bots">Bots</a></li>
+<li><a href="#8-bootstrap">Bootstrap</a></li>
+<li><a href="#9-edit-once">Edit Once</a></li>
+<li><a href="#10-new-machine">New Machine</a></li>
 </ol>
-<h2 id="1-why-one-repo-beats-n-config-panels">1. Why One Repo Beats N Config Panels</h2>
-<p>Most agent tools look for instructions under their own home directory — something like <code>~/.grok/</code>, <code>~/.copilot/</code>, <code>~/.cursor/</code>, or <code>~/.claude/</code>. Skills usually live in a <code>skills/</code> folder next to that. If you copy-paste the same markdown into each place, you own N versions of the truth.</p>
-<p>A cleaner pattern:</p>
+<h2 id="1-one-repo">1. One Repo</h2>
+<p>Agent tools look for instructions under a home like <code>~/.grok/</code> or <code>~/.copilot/</code>. Skills usually sit in a <code>skills/</code> folder next to that. Copy-paste the same markdown into each place and you suddenly own N versions of the truth.</p>
+<p>A cleaner approach:</p>
 <ol>
-<li>Put the real files in <code>~/dotfiles</code> (tracked, reviewed, pushable — your repo).</li>
+<li>Put the real files in <code>~/dotfiles</code> (tracked, reviewed, and pushable).</li>
 <li>Point each tool&rsquo;s expected path at those files with symlinks.</li>
-<li>On a fresh laptop: pull or clone <strong>your</strong> repo, run the installer, source your shell helpers.</li>
+<li>On a fresh machine: pull or clone your repo, run the installer, and source your shell helpers.</li>
 </ol>
-<p>The repo holds the canonical files; <code>install.sh</code> creates the symlinks each tool expects. Named bots, scheduled routines, and background workers can live in the same tree so a Bot machine and a laptop share one edit path.</p>
-<h2 id="2-what-a-real-layout-contains">2. What a Real Layout Contains</h2>
-<p>A practical agents-focused tree looks like this (concrete names from my setup — yours can differ):</p>
+<p>Canonical files live in the repo; <code>install.sh</code> creates the symlinks each tool expects. Named bots and scheduled routines can sit in the same tree, so a Bot machine and a laptop share one edit path.</p>
+<h2 id="2-layout">2. Layout</h2>
+<p>Keep agent content under <code>agents/</code>, with the installer beside it:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">~/dotfiles/
-</span></span><span class="line"><span class="cl">  agents/AGENTS.md              # shared always-on instructions (host-blind)
-</span></span><span class="line"><span class="cl">  agents/RULES.md               # edit gate + memory routing (on-demand)
-</span></span><span class="line"><span class="cl">  agents/REVIEW.md              # PR / diff review triggers
-</span></span><span class="line"><span class="cl">  agents/PYTHON.md              # on-demand topic siblings
-</span></span><span class="line"><span class="cl">  agents/STREAMING.md
-</span></span><span class="line"><span class="cl">  agents/DOCS.md
-</span></span><span class="line"><span class="cl">  agents/DATABRICKS.md
-</span></span><span class="line"><span class="cl">  agents/AZURE-DEVOPS.md
-</span></span><span class="line"><span class="cl">  agents/JIRA.md
-</span></span><span class="line"><span class="cl">  agents/hosts/                 # per-product overlays
-</span></span><span class="line"><span class="cl">    copilot.instructions.md
-</span></span><span class="line"><span class="cl">  agents/repos/                 # per-git-remote exceptions (basename.md)
-</span></span><span class="line"><span class="cl">  agents/skills/                # shared skills (each folder has SKILL.md)
-</span></span><span class="line"><span class="cl">    watch-prs/
-</span></span><span class="line"><span class="cl">    watch-slack/
-</span></span><span class="line"><span class="cl">    optimize/
-</span></span><span class="line"><span class="cl">    ho/
-</span></span><span class="line"><span class="cl">    to/
-</span></span><span class="line"><span class="cl">  agents/bots/                  # optional: named bots + routines + workers
-</span></span><span class="line"><span class="cl">    AGENTS.md
-</span></span><span class="line"><span class="cl">    README.md
-</span></span><span class="line"><span class="cl">    general.md
-</span></span><span class="line"><span class="cl">    …
-</span></span><span class="line"><span class="cl">    skills/                     # bot workers (wake scripts, meters, …)
-</span></span><span class="line"><span class="cl">  bash/bash_aliases
-</span></span><span class="line"><span class="cl">  bash/bash_functions           # helpers (e.g. gmem for host memory paths)
-</span></span><span class="line"><span class="cl">  configs/                      # app configs (ghostty, grok, …)
-</span></span><span class="line"><span class="cl">  install.sh                    # symlinks into each tool home
-</span></span></code></pre></div><p>Shared <code>agents/AGENTS.md</code> is <strong>host-blind</strong>: always-on rules that every tool should follow, with no product-specific framing. Product-only lessons live under <code>agents/hosts/</code> as overlays the installer links into that product&rsquo;s expected path. Topic siblings stay on-demand via a short catalog in the global file (name plus load trigger, not a digest of the sibling). Per-remote exceptions live under <code>agents/repos/&lt;basename&gt;.md</code> so one git remote can forbid a branch style or load review notes without polluting the global file.</p>
-<p>Everything AI tools need lives under <code>agents/</code>. Shell helpers and app configs are included so a new machine is not only “agent rules” but a usable shell. Secrets stay out of plaintext git (encrypted or local env files the installer never publishes). Tool-local state — sessions, auth caches — stays outside the repo.</p>
+</span></span><span class="line"><span class="cl">  agents/
+</span></span><span class="line"><span class="cl">    AGENTS.md                        # global always-on instructions
+</span></span><span class="line"><span class="cl">    RULES.md                         # edit gate + memory routing (on demand)
+</span></span><span class="line"><span class="cl">    REVIEW.md                        # topic sibling loaded when needed
+</span></span><span class="line"><span class="cl">    hosts/copilot.instructions.md    # product-only overlay
+</span></span><span class="line"><span class="cl">    skills/watch-prs/SKILL.md        # recurring procedures
+</span></span><span class="line"><span class="cl">    bots/blogger.md                  # optional named roles
+</span></span><span class="line"><span class="cl">  install.sh                         # symlinks into each tool home
+</span></span></code></pre></div><p>Always-on rules live in <code>AGENTS.md</code>. Topic siblings, host overlays, skills, and bots load by scope so that file stays thin. Secrets never enter plaintext git. Tool-local state — sessions, auth caches — stays outside the repo.</p>
 <blockquote>
-<p><strong>Note:</strong> The private clone URL of someone else’s dotfiles is not your bootstrap step. Put the same layout in <strong>your</strong> git-backed <code>~/dotfiles</code>, then point each tool at it with an installer like the one below.</p>
+<p><strong>Note:</strong> Put this layout in <strong>your</strong> git-backed <code>~/dotfiles</code>, then point each tool at it with an installer like the one below.</p>
 </blockquote>
-<h2 id="3-layers-that-feed-the-hub">3. Layers That Feed the Hub</h2>
-<p>Symlinks only help if the content behind them is split by scope. Packing every lesson into the always-on file makes tools ignore it; scattering copies across tool homes brings drift back.</p>
+<h2 id="3-scopes">3. Scopes</h2>
+<p>Symlinks only help if lessons land in the right file. Packing every correction into the always-on file overloads the agent&rsquo;s context, so earlier rules get crowded out and forgotten. Scattering copies across tool homes brings drift back.</p>
 <table>
 <thead>
 <tr>
-<th>Layer</th>
+<th>Scope</th>
 <th>Where it lives</th>
 <th>When it applies</th>
 </tr>
@@ -310,7 +289,7 @@
 <tr>
 <td>Global instructions</td>
 <td><code>agents/AGENTS.md</code></td>
-<td>Always, every repo, every tool (host-blind)</td>
+<td>Always, every repo, every tool</td>
 </tr>
 <tr>
 <td>Edit gate / memory routing</td>
@@ -335,12 +314,12 @@
 <tr>
 <td>Skills</td>
 <td><code>agents/skills/&lt;name&gt;/SKILL.md</code></td>
-<td>Recurring procedures / slash commands</td>
+<td>Recurring procedures</td>
 </tr>
 <tr>
 <td>Named bots</td>
 <td><code>agents/bots/&lt;role&gt;.md</code></td>
-<td>That bot’s host instruction field + routines</td>
+<td>That bot’s instruction field + routines</td>
 </tr>
 <tr>
 <td>Project instructions</td>
@@ -349,10 +328,11 @@
 </tr>
 </tbody>
 </table>
-<p>How-to-work that is always on belongs in the global file. A procedure you want the agent to load next time it does the same job belongs in a skill. Lessons that only make sense for one product belong in <code>agents/hosts/</code>. A fact about one repository belongs in that repository — or in the host’s workspace memory — not in your home rules.</p>
-<p>Keep the global file thin. Prefer <code>Never X — do Y</code>, a concrete check, or a good/bad pair over adjectival vibes. Improve or merge beats append. Gate edits: do not casually grow <code>agents/AGENTS.md</code> from a random chat — load the edit gate first and get explicit approval before changing shared rules.</p>
-<h2 id="4-per-tool-setup-via-installsh">4. Per-Tool Setup via <code>install.sh</code></h2>
-<p>Each tool expects a slightly different filename or skills path. The installer builds a small hub so one host-blind file feeds many names, and optionally links a per-product overlay when that file exists:</p>
+<p>Treat rules as a self-learning loop, not a style guide you rewrite by hand. After a correction, the agent proposes a home and a short lesson, then waits — you approve before anything hits git.</p>
+<p>Take a real correction: &ldquo;this repo uses trunk-based PRs — stop opening long-lived feature branches.&rdquo; That is a fact about one checkout, so it belongs in that project&rsquo;s workspace memory (or that repo&rsquo;s own <code>AGENTS.md</code>), not in the shared always-on file. A cross-tool habit like &ldquo;always name the git remote and branch&rdquo; goes in <code>agents/AGENTS.md</code>. A Copilot-only quirk goes under <code>agents/hosts/</code> and links only into that product. A Monday procedure becomes a skill folder.</p>
+<p>Each approval writes one lesson into one scoped file. Over weeks the hub gets sharper without swelling into a wall of text that crowds out what the agent actually needs.</p>
+<h2 id="4-installer">4. Installer</h2>
+<p>Tools expect slightly different filenames. The installer builds a small hub so one shared file feeds many names:</p>
 <table>
 <thead>
 <tr>
@@ -381,67 +361,16 @@
 <td><code>~/.grok/skills</code></td>
 <td><code>~/dotfiles/agents/skills</code></td>
 </tr>
-<tr>
-<td><code>~/.claude/skills</code></td>
-<td>same skills folder</td>
-</tr>
-<tr>
-<td><code>~/.cursor/skills</code></td>
-<td>same skills folder</td>
-</tr>
-<tr>
-<td><code>~/.copilot/skills</code></td>
-<td>same skills folder</td>
-</tr>
-<tr>
-<td><code>~/.agents/skills/&lt;name&gt;</code></td>
-<td><code>~/dotfiles/agents/skills/&lt;name&gt;</code> (per skill)</td>
-</tr>
 </tbody>
 </table>
-<p>How that plays out per tool:</p>
-<ul>
-<li><strong>Grok</strong> — instructions via <code>~/.grok/Agents.md</code> → hub; skills via <code>~/.grok/skills</code> → the shared tree. Optional: symlink <code>~/dotfiles/configs/grok</code> → <code>~/.grok/config.toml</code> so <code>/settings</code> writes land in git.</li>
-<li><strong>Copilot</strong> — shared rules via <code>~/.copilot/copilot-instructions.md</code> → hub; Copilot-only overlay via <code>~/.copilot/instructions/dotfiles.instructions.md</code> → <code>agents/hosts/copilot.instructions.md</code> (linked when that file is present); skills via <code>~/.copilot/skills</code>.</li>
-<li><strong>Cursor</strong> — skills via <code>~/.cursor/skills</code> → the same tree (Cursor also picks up in-repo <code>AGENTS.md</code> when you open a project).</li>
-<li><strong>Claude</strong> — skills via <code>~/.claude/skills</code> → the same tree.</li>
-</ul>
-<p>So there is one hub file (<code>~/.agents/AGENTS.md</code>) and several tool-specific names that all resolve to it. Host overlays stay separate so product-only guidance never pollutes the shared always-on file. Skills are shared the same way: most agent homes get a directory symlink at the whole <code>agents/skills</code> tree. The <code>~/.agents/skills</code> home is special — it can also hold extras that are not in the repo — so the installer creates a real directory there and links each skill by name instead of replacing the whole folder.</p>
-<p>Non-AI pieces that usually ship with the same installer:</p>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>Points to</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>~/.bash_functions</code></td>
-<td><code>~/dotfiles/bash/bash_functions</code></td>
-</tr>
-<tr>
-<td><code>~/.bash_aliases</code></td>
-<td><code>~/dotfiles/bash/bash_aliases</code></td>
-</tr>
-<tr>
-<td><code>~/.config/ghostty/config.ghostty</code></td>
-<td><code>~/dotfiles/configs/ghostty</code></td>
-</tr>
-<tr>
-<td><code>~/.grok/config.toml</code></td>
-<td><code>~/dotfiles/configs/grok</code></td>
-</tr>
-</tbody>
-</table>
-<p>Verify the instruction chain if you like:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ ls -l ~/.agents/AGENTS.md ~/.grok/Agents.md ~/.copilot/copilot-instructions.md
-</span></span><span class="line"><span class="cl">➜ ls -l ~/.copilot/instructions/dotfiles.instructions.md
-</span></span><span class="line"><span class="cl">➜ ls -l ~/.grok/skills ~/.cursor/skills ~/.claude/skills ~/.copilot/skills
-</span></span></code></pre></div><p>You want every one of those to be a symlink that eventually lands under <code>~/dotfiles/agents/</code>.</p>
-<h2 id="5-memory-without-stuffing-rules">5. Memory Without Stuffing Rules</h2>
-<p>Not everything durable is a rule. Cross-repo process exceptions can graduate into global <code>AGENTS.md</code>. Project facts belong in the host’s workspace memory — not in the always-on file, and not in an invented <code>MEMORY.md</code> next to the work.</p>
-<p>A practical routing table (the edit gate owns the full version):</p>
+<p>Take Grok as the worked example. The installer links <code>~/dotfiles/agents/AGENTS.md</code> into <code>~/.agents/AGENTS.md</code>, then points <code>~/.grok/Agents.md</code> at that hub. Skills follow the same pattern: <code>~/.grok/skills</code> → <code>~/dotfiles/agents/skills</code>. Other agent homes get the same treatment with their own destination names — still one source file.</p>
+<p>When a product needs an overlay, link it only into that product. Copilot&rsquo;s host file, for example, lands at <code>~/.copilot/instructions/dotfiles.instructions.md</code> and never touches the shared hub.</p>
+<p>Verify the chain:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ ls -l ~/.agents/AGENTS.md ~/.grok/Agents.md
+</span></span><span class="line"><span class="cl">➜ ls -l ~/.grok/skills
+</span></span></code></pre></div><p>Every path should be a symlink that eventually lands under <code>~/dotfiles/agents/</code>.</p>
+<h2 id="5-memory">5. Memory</h2>
+<p>Not everything durable is a rule. When a lesson is a fact about what is true — not how to work — it belongs in the host&rsquo;s memory, not in markdown instructions.</p>
 <table>
 <thead>
 <tr>
@@ -472,41 +401,26 @@
 </tr>
 </tbody>
 </table>
-<p>Keep one home per lesson. If it already lived elsewhere, delete the copy. Never retain secrets, ephemeral errors, PR noise, or unchosen ideas in durable memory.</p>
-<p>Shell helpers can still point at whatever path your host actually uses. In my tree, <code>gmem</code> resolves the current product’s workspace memory directory so you can open or inspect it without inventing a second store. Prefer the host’s built-in memory API when the tool has one; the helper is optional navigation, not a parallel database.</p>
-<h2 id="6-skills-and-agent-workflows">6. Skills and Agent Workflows</h2>
-<p>Skills are folders under <code>~/dotfiles/agents/skills/&lt;name&gt;/</code> with a <code>SKILL.md</code> (and optional scripts). They are the right home when the next session should load a procedure — watch PRs, watch Slack, hand work to another agent, optimize a harness’s token cost — anything you would otherwise re-explain every Monday.</p>
-<p>Concrete names from my tree (yours will differ; the pattern is the same):</p>
-<ul>
-<li><code>watch-prs</code> / <code>watch-slack</code> — background watchers with a small contract the agent can read.</li>
-<li><code>optimize</code> — lower price-weighted token cost per completed task without dropping quality (map spend → safe changes → report).</li>
-<li><code>ho</code> / <code>to</code> — write a short per-repo handover brief, then pick it up in another session without replaying investigation.</li>
-</ul>
-<p><code>install.sh</code> links that skills tree into the common agent homes and per-skill into <code>~/.agents/skills/&lt;name&gt;</code>. Add a skill once in <strong>your</strong> repo; re-run the installer; every linked tool sees it.</p>
-<p>Keep the skill focused on the procedure. Cross-cutting always-on exceptions still belong in global <code>AGENTS.md</code>. Durable lessons that are not a procedure belong in memory (previous section), not in the skill body forever.</p>
-<p>Workflow shape in the global file can stay provider-agnostic too: thin <strong>Before / During / After changing code</strong> sections that point at on-demand siblings (<code>REVIEW.md</code>, <code>repos/&lt;basename&gt;.md</code>) instead of embedding every forge CLI in the always-on file.</p>
-<h2 id="7-named-bots-and-routines">7. Named Bots and Routines</h2>
-<p>If your stack supports named agents with an instruction field, scheduled jobs, and webhooks, the same repo can own those roles without pasting host CLI names into every file.</p>
-<p>A portable shape:</p>
+<p>Keep one home per lesson. If it already lived elsewhere, delete the copy. Never retain secrets, ephemeral errors, or unchosen ideas in durable memory.</p>
+<p>Prefer the host&rsquo;s built-in memory API when the tool has one. A shell helper like <code>gmem</code> is optional navigation, not a parallel database.</p>
+<h2 id="6-skills">6. Skills</h2>
+<p>Skills are folders under <code>~/dotfiles/agents/skills/&lt;name&gt;/</code> with a <code>SKILL.md</code>. They are the right home when the next session should load a procedure you would otherwise re-explain every Monday.</p>
+<p>Take <code>watch-prs</code> as the example. The folder holds a small contract the agent can read: which remotes to scan, what counts as actionable, how to report. Drop it once under <code>agents/skills/watch-prs/</code>, re-run <code>install.sh</code>, and every linked tool sees the same skill.</p>
+<p>Keep the skill focused on the procedure. Cross-cutting always-on exceptions still belong in global <code>AGENTS.md</code>. Durable lessons that are not a procedure belong in memory, not in the skill body forever.</p>
+<h2 id="7-bots">7. Bots</h2>
+<p>If your stack supports named agents with an instruction field and scheduled jobs, the same repo can own those roles.</p>
+<p>A minimal shape:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">agents/bots/
 </span></span><span class="line"><span class="cl">  AGENTS.md       # how an agent edits this roster
-</span></span><span class="line"><span class="cl">  README.md       # apply steps, workers, bootstrap
-</span></span><span class="line"><span class="cl">  general.md      # one role file per bot
-</span></span><span class="line"><span class="cl">  secretary.md
-</span></span><span class="line"><span class="cl">  blogger.md
-</span></span><span class="line"><span class="cl">  skills/         # background workers (not host cron polls)
-</span></span></code></pre></div><p>Each role file is YAML frontmatter, standing instructions, then a <code>### History</code> snapshot that is <strong>never</strong> applied as the live prompt. Host jobs live under <code>## Routines</code> (one <code>###</code> per job, schedule in <code>**When:**</code>). Apply is two steps:</p>
-<ol>
-<li>Instruction field = text above History, <strong>minus</strong> <code>## Routines</code>.</li>
-<li>Host jobs = each routine copied word-for-word from git (replace the old set).</li>
-</ol>
-<p>Workers (scripts under <code>agents/bots/skills/</code>) do the polling, metering, and wake posts. Prefer a script over a host job that sits signed-in all week. Role files stay host-agnostic: no vendor VM paths, no product-only URLs — those belong in the bots README. Lasting behavior changes go through git on the default branch, then pull + re-apply; chat memory is not durable state.</p>
-<p>You do not need named bots to benefit from the symlink hub. When you do add them, they become another consumer of the same instructions and skills tree — still one repo, still one installer on the Bot machine.</p>
-<h2 id="8-bootstrap-your-own-dotfiles">8. Bootstrap Your Own Dotfiles</h2>
-<p>Put the layout in <strong>your</strong> git-backed <code>~/dotfiles</code> (private is fine; public works too if you keep secrets out). Then an installer that symlinks — illustrate with example paths, not someone else’s clone URL:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ <span class="c1"># your repo already at ~/dotfiles (clone/pull however you normally do)</span>
-</span></span><span class="line"><span class="cl">➜ ~/dotfiles/install.sh
-</span></span></code></pre></div><p>A minimal <code>install.sh</code> pattern (no secrets, same idea as the full script):</p>
+</span></span><span class="line"><span class="cl">  README.md       # apply steps and workers
+</span></span><span class="line"><span class="cl">  blogger.md      # one role file per bot
+</span></span><span class="line"><span class="cl">  skills/         # background workers
+</span></span></code></pre></div><p>Each role file is YAML frontmatter, standing instructions, then a <code>### History</code> snapshot that is never applied as the live prompt. Host jobs live under <code>## Routines</code>. Apply is two steps: instruction field = text above History minus Routines; host jobs = each routine copied word-for-word from git.</p>
+<p>You do not need named bots to benefit from the symlink hub. When you add them, they become another consumer of the same tree — still one repo, still one installer.</p>
+<h2 id="8-bootstrap">8. Bootstrap</h2>
+<p>Put the layout in your git-backed <code>~/dotfiles</code> and run an installer that creates the symlinks:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ ~/dotfiles/install.sh
+</span></span></code></pre></div><p>Minimal <code>install.sh</code> pattern:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env bash
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">set</span> -euo pipefail
 </span></span><span class="line"><span class="cl"><span class="nv">REPO_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span><span class="nb">cd</span> <span class="s2">&#34;</span><span class="k">$(</span>dirname <span class="s2">&#34;</span><span class="nv">$0</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2">&#34;</span> <span class="o">&amp;&amp;</span> <span class="nb">pwd</span><span class="k">)</span><span class="s2">&#34;</span>
@@ -543,13 +457,12 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="s2">&#34;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/.cursor/skills&#34;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/.copilot/skills&#34;</span><span class="p">;</span> <span class="k">do</span>
 </span></span><span class="line"><span class="cl">  link_path <span class="s2">&#34;</span><span class="nv">$SKILLS_SRC</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$home</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="k">done</span>
-</span></span></code></pre></div><p>The script stays deliberately simple: for each destination it either creates a symlink, replaces an existing symlink, or moves a real file/dir out of the way to a timestamped <code>.bak.…</code> backup before linking. Missing sources should fail loudly instead of half-installing. Host overlays are optional — link them only when the file exists.</p>
-<p>After it finishes you should see a short report of what was linked (instructions hub, optional host overlays, skills homes, shell helpers, a couple of app configs).</p>
+</span></span></code></pre></div><p>The script either creates a symlink, replaces an existing one, or moves a real file aside to a timestamped backup before linking. Host overlays link only when the file exists.</p>
 <blockquote>
-<p><strong>Note:</strong> Keep secrets out of plaintext git. Token files belong under something like an encrypted tree or a local env file the installer never symlinks into the world. Bot wake URLs and sender keys stay in <code>~/.env</code> (chmod 600), never in the role files.</p>
+<p><strong>Note:</strong> Keep secrets out of plaintext git. Token files and wake URLs belong in a local env file the installer never publishes — never in role files.</p>
 </blockquote>
-<h2 id="9-edit-once-propagate-everywhere">9. Edit Once, Propagate Everywhere</h2>
-<p>Because the destinations are links, you edit the repo (or any symlink path into it) and every tool that reads that path sees the change on the next session:</p>
+<h2 id="9-edit-once">9. Edit Once</h2>
+<p>Because the destinations are links, you edit the repo and every tool that reads that path sees the change on the next session:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ <span class="nv">$EDITOR</span> ~/dotfiles/agents/AGENTS.md
 </span></span><span class="line"><span class="cl">➜ <span class="nb">cd</span> ~/dotfiles
 </span></span><span class="line"><span class="cl">➜ git add -p
@@ -558,19 +471,16 @@
 </span></span></code></pre></div><p>On another machine:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ <span class="nb">cd</span> ~/dotfiles <span class="o">&amp;&amp;</span> git pull origin main
 </span></span><span class="line"><span class="cl">➜ ~/dotfiles/install.sh
-</span></span></code></pre></div><p>Re-running the installer is cheap. Existing symlinks are refreshed with <code>ln -sfn</code>; you only get a backup when something real is sitting where a link should be.</p>
-<p>Skills follow the same rule. Drop a folder under <code>~/dotfiles/agents/skills/&lt;name&gt;/</code> with a <code>SKILL.md</code>, re-run <code>install.sh</code>, and every linked tool picks up the same skill tree without a per-tool copy step. Product-only lessons go in <code>agents/hosts/</code>, not in the shared host-blind file. Bot role or routine changes go through the same push; on a Bot machine a <code>watch-dotfiles</code>-style worker can pull and wake the representative to re-apply instruction fields and host jobs from git.</p>
-<h2 id="10-new-machine-checklist">10. New Machine Checklist</h2>
-<p>A practical bootstrap order:</p>
+</span></span></code></pre></div><p>Re-running the installer is cheap. Existing symlinks refresh with <code>ln -sfn</code>; you only get a backup when something real sits where a link should be. Skills and bot roles follow the same push-then-pull path.</p>
+<h2 id="10-new-machine">10. New Machine</h2>
 <ol>
-<li><strong>Get your repo and link</strong> — clone or pull <strong>your</strong> <code>~/dotfiles</code>, then run <code>~/dotfiles/install.sh</code>.</li>
-<li><strong>Shell</strong> — make sure your <code>~/.zshrc</code> (or equivalent) sources the linked aliases/functions and puts any CLI you care about on <code>PATH</code>.</li>
-<li><strong>Tool logins</strong> — install and authenticate each agent CLI / IDE the official way. Re-run <code>install.sh</code> if a Dock or launcher step was skipped because a binary was not on <code>PATH</code> yet.</li>
-<li><strong>Workspace</strong> — keep project checkouts under something like <code>~/Projects</code>. Global rules come from the dotfiles hub; per-repo nuance lives in that project&rsquo;s own <code>AGENTS.md</code> (and optional <code>agents/repos/&lt;basename&gt;.md</code> for remote-wide exceptions).</li>
-<li><strong>Optional bots</strong> — if you run named bots, apply role files in two steps (instructions, then routines), start worker scripts from the clone, and keep wake secrets in <code>~/.env</code>.</li>
-<li><strong>Optional extras</strong> — phone bridges, Dock shortcuts, and similar live beside the installer; only run them if you need them.</li>
+<li>Clone or pull your <code>~/dotfiles</code>, then run <code>~/dotfiles/install.sh</code>.</li>
+<li>Source the linked aliases and functions from your shell rc, and put CLIs you care about on <code>PATH</code>.</li>
+<li>Install and authenticate each agent tool the official way; re-run <code>install.sh</code> if a binary was missing earlier.</li>
+<li>Keep project checkouts under something like <code>~/Projects</code> — global rules from the hub, per-repo nuance in that project&rsquo;s own <code>AGENTS.md</code>.</li>
+<li>Optional bots — apply role files in two steps (instructions, then routines) and keep wake secrets in <code>~/.env</code>.</li>
 </ol>
-<p>In short: one repo for the files you maintain, one installer that creates the symlinks, many tools (and optional bots) reading the same content. Next time you add an agent, check whether it already has a home in <code>install.sh</code> — and if not, add one symlink instead of another pasted instructions file.</p>
+<p>In short: one repo for the files you maintain, one installer that creates the symlinks, and many tools reading the same content. Next time you add an agent, add one symlink instead of another pasted instructions file.</p>
 
 </div>
 
