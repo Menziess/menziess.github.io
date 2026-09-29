@@ -25,6 +25,9 @@ body {
 .content {
   max-width: 100%;
   min-width: 0;
+  /* Scroll here so thead and tbody stay one table (column widths match). */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .content .highlight,
@@ -40,18 +43,10 @@ body {
   display: block;
 }
 
-/* Scroll wide markdown tables inside the column. */
 .content table {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.content table thead,
-.content table tbody {
   display: table;
-  width: 100%;
+  width: max-content;
   min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
 }
