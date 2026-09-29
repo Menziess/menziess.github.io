@@ -1,0 +1,222 @@
+/* System color scheme only — no toggle.
+   Light: page stays as theme. Borders on images/code are transparent.
+   Dark: true black page chrome; subtle borders so code/images lift off black. */
+
+:root {
+  color-scheme: light dark;
+}
+
+/* Feedback-loop diagram: dark strokes on transparent — give a neutral plate. */
+.content img[src*="feedback.png"] {
+  background-color: #e8eaed;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* Shared frame for images + code (visible only when border-color is not transparent). */
+.content img,
+.content .highlight,
+.content pre {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.content img {
+  padding: 0;
+}
+
+/* Brand marks: no frame (recolored assets stay visible on both themes). */
+.content img[src*="#logo"] {
+  border-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: #000000 !important;
+  }
+
+  body,
+  .page,
+  .wrapper {
+    background-color: #000000;
+    color: #e8e8e8;
+  }
+
+  .header {
+    background-color: #000000;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .footer {
+    background: #0a0a0a;
+    border-top: 1px solid #2a2a2a;
+  }
+
+  .footer ul.footer-menu li,
+  .footer ul.footer-menu li a,
+  .footer ul.footer-menu li.copyright {
+    color: #c8c8c8;
+  }
+
+  .sub-footer {
+    background: #000000;
+  }
+
+  .sub-footer .sub-footer-inner ul li,
+  .sub-footer .sub-footer-inner ul li a,
+  .sub-footer .sub-footer-inner ul li.zerostatic a,
+  .sub-footer .sub-footer-inner ul li span {
+    color: #e0e0e0;
+  }
+
+  .sub-footer .sub-footer-inner ul li a:hover {
+    color: #ffffff;
+  }
+
+  .employer p {
+    color: #e0e0e0;
+  }
+
+  .content p,
+  .content li,
+  .title,
+  .post-date,
+  .post-date time {
+    color: #e8e8e8;
+  }
+
+  .content h1,
+  .content h2,
+  .content h3,
+  .content h4,
+  .content h5,
+  .content h6,
+  h1.title {
+    color: #f2f2f2;
+  }
+
+  .content a {
+    color: #ff6b6b;
+  }
+
+  .docs-menu h4 {
+    color: #f2f2f2;
+  }
+
+  .docs-menu ul li a {
+    color: #d0d0d0;
+  }
+
+  .docs-menu ul li a:hover,
+  .docs-menu ul li.active a {
+    color: #ff6b6b;
+  }
+
+  .main-menu > ul > li > a {
+    color: #ff6b6b;
+  }
+
+  /* Inline code (not inside pre) */
+  .content code {
+    background: #1a1a1a;
+    color: #e8e8e8;
+  }
+
+  .content pre code {
+    background: none;
+  }
+
+  .content blockquote {
+    background: #111111;
+    border-left-color: #444444;
+  }
+
+  .whitebox,
+  .overview {
+    background: #111111;
+    color: #e8e8e8;
+  }
+
+  /* Soft graphite rim — readable on pure black without shouting */
+  .content img,
+  .content .highlight,
+  .content pre {
+    border-color: #3a3a3a;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  .content img[src*="#logo"] {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+
+  .content .highlight {
+    background: #000000;
+  }
+
+  /* Chroma .err light pink square is harsh on dark pages */
+  .content .highlight .err {
+    background-color: transparent;
+    color: #f48771;
+  }
+
+  .strip-white,
+  .strip-grey {
+    background-color: #000000;
+  }
+
+  /* Homepage / cards */
+  .page-home p {
+    color: #d0d0d0;
+  }
+
+
+  /* Tables: light text; no cell grid; same graphite frame as images */
+  .content table,
+  .content .table {
+    color: #f2f2f2;
+    background-color: transparent;
+    border: 1px solid #3a3a3a;
+    border-radius: 6px;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+  }
+
+  .content table th,
+  .content table td,
+  .content .table th,
+  .content .table td {
+    color: #f2f2f2;
+    border: none !important;
+  }
+
+  .content table thead th,
+  .content .table thead th {
+    color: #ffffff;
+    border: none !important;
+  }
+
+  .content table.table-bordered,
+  .content .table-bordered {
+    border: 1px solid #3a3a3a;
+  }
+
+  .content table.table-striped tbody tr:nth-of-type(odd),
+  .content .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Mobile menu panel */
+  .main-menu-mobile {
+    background: #111111;
+  }
+
+}
